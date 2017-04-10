@@ -3,5 +3,5 @@
     - TreeMaps ou HashMaps
 - Como diferenciar entre Motoristas e Carros de empresas ou individuais
 - se é possivel ter o cliente e o motorista a partilhar a mesma viagem em memoria e nao quebrar o encapsulamento
-  - criamos a viagem e adicionamos ao cliente, ao adiciona-la ao motorista tambem adicionamos o mesmo apontador, para nao gastar mais memoria, mas quando e preciso devolve-la com um get devolvemos um clone.
+  - criamos a viagem e adicionamos ao cliente, ao adiciona-la ao motorista tambem adicionamos o mesmo apontador, para poupar memoria, mas quando e preciso devolve-la com um get devolvemos um clone.
   - quando passamos para ficheiro, e obtemos do ficheiro, como conjugar isso
