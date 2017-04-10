@@ -1,0 +1,6 @@
+*.class
+*.TXT
+*.ctxt
+*.bluej
+
+.DS_Store
