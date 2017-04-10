@@ -1,2 +1,5 @@
 - necessidade de ter uma class para a interface 
 - tipo de dados a usar para oragnizar os utilizadores
+    - TreeMaps ou HashMaps
+- Como diferenciar entre Motoristas e Carros de empresas ou individuais
+ 
