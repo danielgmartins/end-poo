@@ -30,6 +30,7 @@ Classe Atores:
 -password
 |-metodos de superclasse:
   - Registar ator: (Metodo declarado em Atores, mas só implementado na classe de clientes e motoristas)
+  // no caso de implementarmos os metodos relativos a emails e passwords a esta classe, então é preciso adicionar isso aqui
 
 ---
 
