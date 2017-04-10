@@ -1,0 +1,94 @@
+---
+Classes:
+
+(abstract) Atores:
+|-Cliente
+|-Motorista (Há diferença entre individuais e de empresa)
+
+(abstract) Veiculos:
+|-Carro
+|-Carrinha
+|-Moto
+
+Viagem
+Morada
+Password (Ou então pode estar na classe Atores)
+Email (tal como as passwords deve poder ficar na class atores)
+Coordenadas
+
+static UMeR - Classe da empresa, com informação sobre carros, clientes,etc.
+static Main - É o programa em si com interface
+static Interface - Imprime interface
+---
+
+---
+Classe Atores:
+-nome
+-morada
+-data de nascimento
+-email
+-password
+|-metodos de superclasse:
+  - Registar ator: (Metodo declarado em Atores, mas só implementado na classe de clientes e motoristas)
+
+---
+
+|- Clientes:
+    - Coordenadas
+    - Viagens Feitas (LinkedList)
+    |- metodos:
+        - atualizar coordenadas
+        - adicionar viagens feitas
+
+|- Motorista:
+    - Grau Cumprimento: 0-100
+    - Classificacao: 0-100
+    - Historico de Viagens Linked List
+    - Kms realizados
+    - Estado de disponibilidade
+    |- metodos:
+        - atualizar cumprimento
+        - atualizar classficacao
+        - adicionar a historico de viagens
+        - atualizar kms
+        - mudar estado de disponibilidade
+---
+
+---
+Classe Veiculos
+- Velocidade media
+- preço por km
+- fator de fiabilidade
+- localizacao
+- Fila de espera de maracacoes FIFO
+|-metodos:
+  - atualiza velocidade media
+  - atualiza preco
+  - atualiza fator de fiabilidade
+  - atualiza localizacao
+  - adiciona à fila de espera
+
+|- Carro:
+
+|- Carrinha
+
+|- Moto
+---
+
+---
+Viagem
+- cliente que soliciotou
+- motorista
+- carro
+- hora de solicitacao
+- Tempo estimado para chegar ao cliente
+- tempo estimado até ao destino
+- custo estimado da viagem
+- tempo real da viagem
+|-metodos:
+  - estimar tempo de chegada,
+  - estimar tempo até destino
+  - estimar custo
+  - calcular tempo real
+  - calcular custo efetivo
+---
