@@ -1,6 +1,6 @@
 *.class
 README.TXT
 *.ctxt
-
+*.bluej
 
 .DS_Store
