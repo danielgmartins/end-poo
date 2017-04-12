@@ -2,5 +2,7 @@
 README.TXT
 *.ctxt
 *.bluej
+*.json
 
+end-poo/doc/
 .DS_Store
