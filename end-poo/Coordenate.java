@@ -1,23 +1,23 @@
-public  class Coordenada {
+public  class Coordenates {
   private int x;
   private int y;
 
 
 /*
-Constructors of class Coordenada.
+Constructors of class Coordenates.
 
 */
-  public Coordenada(int nx,int ny){
+  public Coordenates(int nx,int ny){
     this.x=nx;
     this.y=ny;
   }
 
-  public Coordenada(){
+  public Coordenates(){
     this.x=0;
     this.y=0;
   }
 
-public Coordenada(Coordenada ref){
+public Coordenates(Coordenates ref){
   this.x=ref.getx();
   this.y=ref.gety();
 }
@@ -43,10 +43,6 @@ public int sety (int ny){
 
 //Clone
 
-public Coordenada clone (){
-  return Coordenada(this)
-}
-
-public boolean equals (Coordenada p){
-
+public Coordenates clone (){
+  return Coordenates(this)
 }
