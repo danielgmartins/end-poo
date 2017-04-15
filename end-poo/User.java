@@ -26,6 +26,7 @@ public abstract class User {
 
     /**
      * Contructor with all the arguments
+     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -56,8 +57,7 @@ public abstract class User {
     }
 
     /**
-     * Clone method for class User
-     * @return Copy of this User instance
+     * Abstract method for cloning objects with super class User.
      */
     public abstract User clone ();
 
