@@ -40,7 +40,7 @@ public class Address implements Serializable {
 
     /**
      * Create a clone of this object
-     * @return returns new object Address, clone of this instance of Address
+     * @return Returns new object Address, clone of this instance of Address
      */
     public Address clone (){
         return new Address(this.city, this.country);
