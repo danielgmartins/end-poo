@@ -5,28 +5,27 @@
 */
 
 public  class Coordenate {
-  private int x;
-  private int y;
-
+    private int x;
+    private int y;
 
 /**
 *Constructors of class Coordenate (including empty and copy Constructors).
 *
 */
-  public Coordenate(int nx,int ny){
-    this.x = nx;
-    this.y = ny;
-  }
+    public Coordenate(int nx,int ny){
+        this.x = nx;
+        this.y = ny;
+    }
 
-  public Coordenate(){
-    this.x = 0;
-    this.y = 0;
-  }
+    public Coordenate(){
+        this.x = 0;
+        this.y = 0;
+    }
 
-  public Coordenate(Coordenate ref){
-    this.x = ref.getx();
-    this.y = ref.gety();
-  }
+    public Coordenate(Coordenate ref){
+        this.x = ref.getx();
+        this.y = ref.gety();
+    }
 
 //Getters e setters
 
@@ -36,9 +35,9 @@ public  class Coordenate {
  * @return    the x coordenate of the object
  */
 
-public int getx (){
-  return this.x;
-}
+    public int getx (){
+        return this.x;
+    }
 
 /**
  * gety returns the y coordenate of the Coordenate object.
@@ -46,9 +45,9 @@ public int getx (){
  * @return  y  the y coordenate of the object
  */
 
-public int gety(){
-  return this.y;
-}
+    public int gety() {
+        return this.y;
+    }
 
 /**
  * setx changes the x value of the Coordenate object to the value it receives.
@@ -56,9 +55,9 @@ public int gety(){
  *
  */
 
-public void setx (int nx){
-  this.x = nx;
-}
+    public void setx (int nx){
+        this.x = nx;
+    }
 
 /**
  * sety changes the y value of the Coordenate object to the value it receives.
@@ -66,9 +65,9 @@ public void setx (int nx){
  *
  */
 
-public void sety (int ny){
-  this.y = ny;
-}
+    public void sety (int ny){
+        this.y = ny;
+    }
 
 //Clone
 
@@ -78,10 +77,10 @@ public void sety (int ny){
  *
  */
 
-public Coordenate clone (){
-  Coordenate res = new Coordenate(this);
-  return res;
-}
+    public Coordenate clone (){
+        Coordenate res = new Coordenate(this);
+        return res;
+    }
 
 /**
  * Equals tests if two objects are equal to each other through their instance variables.
@@ -91,12 +90,10 @@ public Coordenate clone (){
  */
 
 
-public boolean equals (Object ref){
-  if (ref==this) return true;
-  if ((ref==null)|| (ref.getClass()!=this.getClass())) return false;
-  Coordenate l = (Coordenate) ref;
-  return ((l.getx() == this.x) && (l.gety() == this.y));
-  }
-
-
+    public boolean equals (Object ref){
+        if (ref==this) return true;
+        if ((ref==null)|| (ref.getClass()!=this.getClass())) return false;
+        Coordenate l = (Coordenate) ref;
+        return ((l.getx() == this.x) && (l.gety() == this.y));
+    }
 }
