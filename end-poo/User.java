@@ -75,6 +75,7 @@ public abstract class User {
              user.getBirthday(), 
              user.getEmail(), 
              user.getPassword()
+             user.getTripHistory(),
              );
     }
 
