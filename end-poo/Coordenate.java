@@ -1,8 +1,10 @@
 /**
 * Class Coordenate is a 2D point system to map every object location and their moves through space.
-*@author Nuno Silva
+*@author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
 *@version 13/4/2017
 */
+
+import java.lang.StringBuilder;
 
 public  class Coordenate {
     private int x;
@@ -48,13 +50,28 @@ public  class Coordenate {
     *
     */
 
-
     public boolean equals (Object ref){
         if (ref==this) return true;
         if ((ref==null)|| (ref.getClass()!=this.getClass())) return false;
         Coordenate l = (Coordenate) ref;
         return ((l.getx() == this.x) && (l.gety() == this.y));
     }
+
+    /**
+    * toString returns a string cointaining the instance variables of a Coordenate object.
+    * @param obj the Coordenate object we want to apply the ToString method;
+    * @return String containing the objects instance variables
+    */
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" x = ");
+        sb.append(this.x);
+        sb.append(" y = ");
+        sb.append(this.y);
+        return sb.toString();
+    }
+
     //Getters e setters
 
     /**
