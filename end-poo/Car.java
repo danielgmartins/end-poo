@@ -9,22 +9,15 @@
 import java.util.Random;
 import java.lang.StringBuilder;
 
-public abstract class Vehicle{
-    private double averageSpeed;
-    private double fare;
-    private double reliability;
-    //private boolean queue;
-    private boolean available;
-    //private Coordinates location;
+public class Car extends Vehicle{
+    private boolean queue;
 
     /**
      * Empty constructor
      */
-    private Vehicle (){
-      this.averageSpeed = -1;
-      this.fare = -1;
-      this.reliability = -1;
-      this.available = false;
+    private Car (){
+      super();
+      this.queue = false;
     }
 
     /**
@@ -34,44 +27,38 @@ public abstract class Vehicle{
      * @param double    Reliability
      * @param boolean   Availability
      */
-    private Vehicle (double averageSpeed, double fare, double reliability, boolean availability){
-        this.setAverageSpeed(averageSpeed);
-        this.setFare(fare);
-        this.setReliability(reliability);
-        this.setAvailability(availability);
+    private Car (double averageSpeed, double fare, double reliability, boolean availability){
+        super (averageSpeed, fare, reliability, availability);
+        this.queue = false;
     }
 
     /**
      * Constructor with Vehicle parameter
      * @param Vehicle   Vehicle
      */
-    private Vehicle (Vehicle v){
-        this.averageSpeed = v.getAverageSpeed();
-        this.fare = v.getFare();
-        this.reliability = v.getReliability();
-        this.available = v.getAvailability();
+    private Car (Car c){
+        this.averageSpeed = c.getAverageSpeed();
+        this.fare = c.getFare();
+        this.reliability = c.getReliability();
+        this.available = c.getAvailability();
+        this.queue = c.getQueue();
     }
 
     /**
      * Makes copy of the vehicle
      * @return Vehicle  Vehicle
      */
-    public abstract Vehicle clone ();
+    public Car clone ();
 
     /**
      * Creates a string of every parameter
-     * @return String   Description of vehicle
+     * @return String   Description of car
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("Vehicle: Average speed");
+        StringBuilder res = new StringBuilder();
 
-        res.append(this.averageSpeed);
-        res.append(" Fare: ");
-        res.append(this.fare);
-        res.append(" Reliability: ");
-        res.append(this.reliability);
-        res.append(" Available: ");
-        res.append(this.available);
+        res.append(super.toString());
+        res.append("Queue" + this.queue);
 
         return res.toString();
     }
