@@ -14,6 +14,7 @@ public  class Coordenate {
     *Constructors of class Coordenate (including empty and copy Constructors).
     *
     */
+    
     public Coordenate(int nx,int ny){
         this.x = nx;
         this.y = ny;
