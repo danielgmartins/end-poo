@@ -13,7 +13,6 @@ public class Driver extends User {
 
     private int performance;
     private int classification;
-    private List<Trip> tripHistory;
     private int kmsDriven;
     private boolean availability;
     
@@ -34,7 +33,7 @@ public class Driver extends User {
      * @param password  User password
      */
     public Driver (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, 100, 100, new LinkedList<Trip>(), 0, true);
+        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), 100, 100, 0, true);
     }
 
     /**
@@ -45,17 +44,16 @@ public class Driver extends User {
      * @param birthday       User birthday
      * @param email          User email
      * @param password       User password
+     * @param tripHistory    User trip history
      * @param performance    Driver performance
      * @param classification Driver classification
-     * @param tripHistory    Driver trip history
      * @param kmsDriven      Driver kms driven
      * @param availability   Driver availability
      */
-    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password, int performance, int classification, LinkedList<Trip> tripHistory, int kmsDriven, boolean availability){
-        super(id, name, address, birthday, email, password);
+    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
+        super(id, name, address, birthday, email, password, tripHistory);
         this.setPerformance(performance);
         this.setClassification(classification);
-        this.setTripHistory(tripHistory);
         this.setKmsDriven(kmsDriven);
         this.setAvailability(availability);
     }
@@ -65,10 +63,9 @@ public class Driver extends User {
      * @param driver Instance driver to build another instance from
      */
     public Driver (Driver driver){
-        super((User) driver);
+        super(driver);
         this.setPerformance(driver.getPerformance());
         this.setClassification(driver.getClassification());
-        this.setTripHistory(driver.getTripHistory());
         this.setKmsDriven(driver.getKmsDriven());
         this.setAvailability(driver.getAvailability());
     }
@@ -92,9 +89,6 @@ public class Driver extends User {
         sb.append(this.performance);
         sb.append(", classification: ");
         sb.append(this.classification);
-        sb.append(", tripHistory( \n");
-        // Uses forEach iterator to add each trip in tripHistory to the string builder 
-        this.tripHistory.forEach( (Trip trip) -> {sb.append(trip.toString());} );
         sb.append(")\n");
         sb.append(", kmsDriven: ");
         sb.append(this.kmsDriven);
@@ -114,10 +108,9 @@ public class Driver extends User {
         if(o != null && o.getClass() != this.getClass()) return false;
 
         Driver aux = (Driver) o;
-        return super.equals((User) aux)                         &&
+        return super.equals(aux)                                &&
                this.performance == aux.getPerformance()         &&
                this.classification == aux.getClassification()   &&
-               this.tripHistory.equals(aux.getTripHistory())    &&
                this.kmsDriven == aux.getKmsDriven()             &&
                this.availability == aux.getAvailability()       ;
     }
@@ -138,26 +131,6 @@ public class Driver extends User {
      */
     public int getClassification(){
         return this.classification;
-    }
-
-    /**
-     * Gets Driver trip history
-     * @return Returns List with this intance Driver's Trip History
-     */
-    public LinkedList<Trip> getTripHistory(){
-        return this.tripHistory;
-    }
-
-    /**
-     * Gets copy of this instance Driver's trip history
-     * @return Returns List that's a copy of this instance of Driver's Trip History
-     */
-    public LinkedList<Trip> getTripHistoryCopy(){
-        List<Trip> aux = new LinkedList<Trip>();
-        
-        this.tripHistory.forEach((Trip) trip -> {aux.add(trip.clone());});
-
-        return aux;
     }
 
     /**
@@ -195,16 +168,6 @@ public class Driver extends User {
     }
 
     /**
-     * Sets new trip history, by replacing it
-     * @param history New trip hisotory to update to
-     */
-    public void setTripHistory(LinkedList<Trip> tripHistory){
-        List<Trip> this.location = new LinkedList<List>();
-
-        history.forEach( (Trip) trip -> {this.location.add(trip.clone());} );
-    }
-
-    /**
      * Sets kms driven this Driver
      * @param kms Int with new amount of kms driven by this Driver
      */
@@ -220,15 +183,7 @@ public class Driver extends User {
         this.availability = availability;
     }
 
-    // Other class methods
-
-    /**
-     * Adds new trip to trip history
-     * @param trip Trip to be added to trip history
-     */
-    public void addTripToHistory (Trip trip){
-        this.location.addFirst(trip.clone());
-    }
+    //    ----------    Instance Methods    ----------    //
 
     /**
      * Adds kms to kms driven by this Driver
@@ -245,7 +200,5 @@ public class Driver extends User {
     public void switchAvailability(){
         this.availability = !this.availability;
     }
-
-
 
 }

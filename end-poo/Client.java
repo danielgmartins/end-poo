@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.StringBuilder;
 
 public class Client extends User {
+
     private Coordinate location;
-    private List<Trip> tripHistory;
 
     /**
      * Empty Contructor
@@ -31,7 +31,7 @@ public class Client extends User {
      * @param password  User password
      */
     public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, new Coordinate(), new LinkedList<Trip>());
+        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), new Coordinate());
     }
 
     /**
@@ -46,7 +46,7 @@ public class Client extends User {
      * @param location  Client location
      */
     public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinate location){
-        super(id, name, address, birthday, email, password, location, new LinkedList<Trip>());
+        super(id, name, address, birthday, email, password, new LinkedList<Trip>(), location);
     }
 
     /**
@@ -57,11 +57,12 @@ public class Client extends User {
      * @param birthday  User birthday
      * @param email     User email
      * @param password  User password
+     * @param history   User trip history
      * @param location  Client location
-     * @param history   Client trip history
      */
-    public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinate location, LinkedList<Viagem>() history){
-        super(id, name, address, birthday, email, password, location, history);
+    public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Viagem>() history, Coordinate location){
+        super(id, name, address, birthday, email, password, history);
+        this.setLocation(location);
     }
 
     /**
@@ -69,9 +70,8 @@ public class Client extends User {
      * @param Client Client instance to be used for creating new instance of Client
      */
     public Cliente (Client client){
-        super((User) client);
+        super(client);
         this.setLocation(client.getLocation());
-        this.setTripHistory(client.getTripHistory());
     }
 
     /**
@@ -88,14 +88,10 @@ public class Client extends User {
      */
     public String toString (){
         StringBuilder sb = new StringBuilder("Client (");
-        sb.append(super.toString);
+        sb.append(super.toString());
         sb.append(", ");
         sb.append("location: ");
         sb.append(this.location.toString());
-        sb.append(", ");
-        sb.append("trip history: (\n");
-        // Uses forEach iterator to add each trip in tripHistory to the string builder 
-        this.tripHistory.forEach( (Trip trip) -> {sb.append(trip.toString());} );
         sb.append("))\n");
 
         return sb.toString();
@@ -111,9 +107,8 @@ public class Client extends User {
         if(o != null && o.getClass() != this.getClass()) return false
 
         Client aux = (Client) o;
-        return super.equals((User) aux)                     &&
-               this.location.equals(aux.getLocation())      &&
-               this.tripHistory.equals(aux.getTripHistory());
+        return super.equals(aux)                            &&
+               this.location.equals(aux.getLocation())      ;
     }
 
     // Getters
@@ -126,26 +121,6 @@ public class Client extends User {
         return this.location;
     }
 
-    /**
-     * Gets client's trip history
-     * @return List with client's trip history
-     */
-    public LinkedList<Trip> getTripHistory (){
-        return this.tripHistory;
-    }
-
-    /**
-     * Gets copy of client's trip history
-     * @return List with copy of client's trip history
-     */
-    public LinkedList<Trip> getTripHistoryCopy (){
-        List<Trip> aux = new LinkedList<List>();
-
-        this.tripHistory.forEach((Trip) trip -> {aux.add(trip.clone());});
-
-        return aux;
-    }
-
     // Setters
 
     /**
@@ -156,24 +131,6 @@ public class Client extends User {
         this.location = new Coordinate(location);
     }
 
-    /**
-     * Sets new trip history, by replacing it
-     * @param history New trip hisotory to update to
-     */
-    public void setTripHistory (LinkedList<Trip> history){
-        List<Trip> this.location = new LinkedList<List>();
-
-        history.forEach((Trip) trip -> {this.location.add(trip.clone());});
-    }
-
-    // Other class methods
-
-    /**
-     * Adds new trip to trip history. Always adds to the begining to 
-     * @param trip Trip to be added to trip history
-     */
-    public void addTripToHistory (Trip trip){
-        this.location.addFirst(trip.clone());
-    }
+    //    ----------    Instance Methods    ----------    //
 
 }

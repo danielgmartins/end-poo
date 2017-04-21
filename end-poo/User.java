@@ -16,6 +16,7 @@ public abstract class User {
     private LocalDate birthday;
     private String email;
     private String password;
+    private List<Trip> tripHistory;
 
     /**
      * Empty contructor for User
@@ -25,7 +26,7 @@ public abstract class User {
     }
 
     /**
-     * Contructor with all the arguments
+     * Contructor with all the arguments except trip history
      * @param id        User id
      * @param name      User name
      * @param Address   User address
@@ -40,6 +41,27 @@ public abstract class User {
         this.setBirthday(birthday);
         this.setEmail(email);
         this.setPassword(password);
+        this.setTripHistory(new LinkedList<Trip>());
+    }
+
+    /**
+     * Contructor with all the arguments
+     * @param id        User id
+     * @param name      User name
+     * @param Address   User address
+     * @param birthday  User birthday
+     * @param email     User email
+     * @param password  User password
+     * @param tripHistory    User trip history
+     */
+    public User (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> history){
+        this.setId(id);
+        this.setName(name);
+        this.setAddress(address);
+        this.setBirthday(birthday);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setTripHistory(history);
     }
 
     /**
@@ -84,6 +106,9 @@ public abstract class User {
         sb.append(", ");
         sb.append("password: ");
         sb.append(password);
+        sb.append(", tripHistory( \n");
+        // Uses forEach iterator to add each trip in tripHistory to the string builder 
+        this.tripHistory.forEach( (Trip trip) -> {sb.append(trip.toString());} );
         sb.append(")\n");
 
         return sb.toString();
@@ -99,12 +124,13 @@ public abstract class User {
         if(o != null && o.getClass() != this.getClass()) return false;
 
         User user = (User) o;
-        return this.id == user.getId()                  &&
-               this.name.equals(user.getName())         &&
-               this.address.equals(user.getAddress())   &&
-               this.birthday.equals(user.getBirthday()) &&
-               this.email.equals(user.getEmail())       &&
-               this.password.equals(user.getPassword()) ;
+        return this.id == user.getId()                          &&
+               this.name.equals(user.getName())                 &&
+               this.address.equals(user.getAddress())           &&
+               this.birthday.equals(user.getBirthday())         &&
+               this.email.equals(user.getEmail())               &&
+               this.password.equals(user.getPassword())         &&
+               this.tripHistory.equals(user.getTripHistory())   ;
     }
 
     // Getters
@@ -176,6 +202,26 @@ public abstract class User {
     }
 
     /**
+     * Gets User trip history
+     * @return Returns List with this intance User's Trip History
+     */
+    public LinkedList<Trip> getTripHistory(){
+        return this.tripHistory;
+    }
+
+    /**
+     * Gets copy of this instance User's trip history
+     * @return Returns List that's a copy of this instance of User's Trip History
+     */
+    public LinkedList<Trip> getTripHistoryCopy(){
+        List<Trip> aux = new LinkedList<Trip>();
+        
+        this.tripHistory.forEach((Trip) trip -> {aux.add(trip.clone());});
+
+        return aux;
+    }
+
+    /**
      * Changes user's address
      * @param address User's address
      */
@@ -210,8 +256,24 @@ public abstract class User {
         this.password = new String(password);
     }
 
+    /**
+     * Sets new trip history, by replacing it
+     * @param history New trip hisotory to update to
+     */
+    public void setTripHistory(LinkedList<Trip> tripHistory){
+        List<Trip> this.location = new LinkedList<List>();
+
+        history.forEach( (Trip) trip -> {this.tripHistory.add(trip.clone());} );
+    }
     
     //    ----------    Instance Methods    ----------    //
 
+    /**
+     * Adds new trip to trip history
+     * @param trip Trip to be added to trip history
+     */
+    public void addTripToHistory (Trip trip){
+        this.location.addFirst(trip.clone());
+    }
     
 }
