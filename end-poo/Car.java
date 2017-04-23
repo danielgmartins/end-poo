@@ -25,13 +25,16 @@ public class Car extends Vehicle{
 
     /**
      * Constructor with indiviual parameters
-     * @param double    Average speed per km
-     * @param double    Fare per km
-     * @param double    Reliability
-     * @param boolean   Availability
+     * @param averageSpeed    Average speed per km
+     * @param fare            Fare per km
+     * @param reliability     Reliability
+     * @param availability    Availability
+     * @param queue           Queue setting
+     * @param x               x coordinate
+     * @param y               y coordinate
      */
-    public Car (double averageSpeed, double fare, double reliability, boolean availability, boolean queue){
-        super(averageSpeed, fare, reliability, availability, queue);
+    public Car (double averageSpeed, double fare, double reliability, boolean availability, boolean queue, double x, double y){
+        super(averageSpeed, fare, reliability, availability, queue, x, y);
     }
 
     /**
@@ -39,7 +42,7 @@ public class Car extends Vehicle{
      * @param Car   Car object
      */
     public Car (Car c){
-        super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getQueueValue());
+        super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getQueueValue(), c.getX(), c.getY());
 
         if (this.getQueueValue()){
             this.queueList = new LinkedList<Integer>();
@@ -63,7 +66,8 @@ public class Car extends Vehicle{
         StringBuilder res = new StringBuilder();
 
         res.append(super.toString());
-        //res.append("Queue" + this.queue);
+        res.append("Queue" + this.queueList.stream()
+                             .map(Trip::toString).map(append("; ")));
 
         return res.toString();
     }

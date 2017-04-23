@@ -15,7 +15,7 @@ public abstract class Vehicle{
     private double reliability;
     private boolean available;
     private boolean queue;
-    //private Coordinates location;
+    private Coordinates location;
 
     /**
      * Empty constructor
@@ -26,21 +26,26 @@ public abstract class Vehicle{
       this.reliability = -1;
       this.available = false;
       this.queue = false;
+      location = new Coordinates();
     }
 
     /**
      * Constructor with indiviual parameters
-     * @param double    Average speed per km
-     * @param double    Fare per km
-     * @param double    Reliability
-     * @param boolean   Availability
+     * @param averageSpeed      Average speed per km
+     * @param fare              Fare per km
+     * @param reliability       Reliability
+     * @param availability      Availability from 0 to 1
+     * @param queue             Queue setting
+     * @param x                 x coordinate
+     * @param y                 y coordinate
      */
-    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, boolean queue){
+    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, boolean queue, double x, double y){
         this.averageSpeed = averageSpeed;
         this.setFare(fare);
         this.reliability = reliability;
         this.setAvailability(availability);
         this.setQueueValue(queue);
+        this.coordinates = new Coordinates(x, y);
     }
 
     /**
@@ -53,6 +58,7 @@ public abstract class Vehicle{
         this.reliability = v.getReliability();
         this.available = v.getAvailability();
         this.queue = v.getQueueValue();
+        this.coordinates = v.getCoordinates();
     }
 
     /**
@@ -77,13 +83,14 @@ public abstract class Vehicle{
         res.append(this.available);
         res.append(" Queue: ");
         res.append(this.queue);
+        res.append(this.coordinates.toString());
 
         return res.toString();
     }
 
     /**
      * Compares vehicles
-     * @return boolean   True if equal; False if Different
+     * @return boolean   True if equal. False if Different
      */
     public boolean equals (Object o){
         if (o == this) return true;
@@ -96,6 +103,7 @@ public abstract class Vehicle{
             this.reliability == v.getReliability()         &&
             this.available == v.getAvailability()          &&
             this.queue == v.getQueueValue();
+            this.location.getCoordinates().equals(v.getCoordinates());
     }
 
     /**
@@ -139,8 +147,16 @@ public abstract class Vehicle{
     }
 
     /**
+     * Gets vehicle's location
+     * @return Coordinates  Vehicle's queue value. True if supports queue; False if does not support queue
+     */
+    public Coordinates getLocation (){
+        return this.location.getCoordinates();
+    }
+
+    /**
      * Changes vehicle's average speed in km
-     * @param double    Average speed
+     * @param averageSpeed    Average speed
      */
     public void setAverageSpeed (double averageSpeed){
         this.averageSpeed = averageSpeed;
@@ -148,7 +164,7 @@ public abstract class Vehicle{
 
     /**
      * Changes vehicle's fare per km
-     * @param double    Vehicle's fare per km
+     * @param fare    Vehicle's fare per km
      */
     public void setFare (double fare){
         this.fare = fare;
@@ -156,7 +172,7 @@ public abstract class Vehicle{
 
     /**
      * Updates vehicle's reliability
-     * @param double    Vehicle's reliability
+     * @param reliability    Vehicle's reliability
      */
     public void updateReliability (double reliability){
         Random rand = new Random();
@@ -165,7 +181,7 @@ public abstract class Vehicle{
 
     /**
      * Changes vehicle's availability
-     * @param boolean   Vehicle's availability
+     * @param availability   Vehicle's availability. True if available; False if not
      */
     public void setAvailability (boolean availability){
         this.available = availability;
@@ -173,9 +189,17 @@ public abstract class Vehicle{
 
     /**
      * Changes vehicle's queue value
-     * @param boolean   Vehicle's queue boolean value
+     * @param queueValue   Vehicle's queue boolean. True if supports queue. False it does not support queue
      */
     public void setQueueValue (boolean queueValue){
         this.queue = queueValue;
+    }
+
+    /**
+     * Changes vehicle's coordinates
+     * @param coordinates   Vehicle's queue boolean. True if supports queue. False it does not support queue
+     */
+    public void updateLocation (Coordinates coordinates){
+        this.location.setCoordinates(coordinates);
     }
 }
