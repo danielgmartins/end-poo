@@ -6,18 +6,21 @@
  * @version 12/04/2017
  */
 
-import java.util.Random;
 import java.lang.StringBuilder;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.stream. Stream;;
+import java.util.stream.Collectors;
 
 public class Car extends Vehicle{
-    private boolean queue;
+    private Queue<Trip> queueList;
 
     /**
      * Empty constructor
      */
-    private Car (){
+    public Car (){
       super();
-      this.queue = false;
+      this.queueList = null;
     }
 
     /**
@@ -27,28 +30,30 @@ public class Car extends Vehicle{
      * @param double    Reliability
      * @param boolean   Availability
      */
-    private Car (double averageSpeed, double fare, double reliability, boolean availability){
-        super (averageSpeed, fare, reliability, availability);
-        this.queue = false;
+    public Car (double averageSpeed, double fare, double reliability, boolean availability, boolean queue){
+        super(averageSpeed, fare, reliability, availability, queue);
     }
 
     /**
-     * Constructor with Vehicle parameter
-     * @param Vehicle   Vehicle
+     * Constructor with Car parameter
+     * @param Car   Car object
      */
-    private Car (Car c){
-        this.averageSpeed = c.getAverageSpeed();
-        this.fare = c.getFare();
-        this.reliability = c.getReliability();
-        this.available = c.getAvailability();
-        this.queue = c.getQueue();
+    public Car (Car c){
+        super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getQueueValue());
+
+        if (this.getQueueValue()){
+            this.queueList = new LinkedList<Integer>();
+            this.queueList = c.getQueueList();
+        }
     }
 
     /**
-     * Makes copy of the vehicle
-     * @return Vehicle  Vehicle
+     * Makes copy of the car
+     * @return Vehicle  Car
      */
-    public Car clone ();
+    public Car clone (){
+        return new Car(this);
+    };
 
     /**
      * Creates a string of every parameter
@@ -58,7 +63,7 @@ public class Car extends Vehicle{
         StringBuilder res = new StringBuilder();
 
         res.append(super.toString());
-        res.append("Queue" + this.queue);
+        //res.append("Queue" + this.queue);
 
         return res.toString();
     }
@@ -71,75 +76,19 @@ public class Car extends Vehicle{
         if (o == this) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
 
-        Vehicle v = (Vehicle) o;
+        Car c = (Car) o;
 
-        return this.averageSpeed == v.getAverageSpeed()    &&
-            this.fare == v.getFare()                       &&
-            this.reliability == v.getReliability()         &&
-            this.available == v.getAvailability();
+        return super.equals(c) && this.getQueueList().equals(c.getQueueList());
     }
 
     /**
-     * Gets vehicle's average speed in km
-     * @return double average speed
+     * Gets car's queue list's copy
+     * @return double   Average speed
      */
-    public double getAverageSpeed (){
-        return this.averageSpeed;
+    public Queue<Trip> getQueueList (){
+        if (this.getQueueValue())
+            return this.queueList.stream().map(Trip::clone)
+                .collect(Collectors.toList());
     }
 
-    /**
-     * Gets vehicle's fare per km
-     * @return double vehicle's fare per km
-     */
-    public double getFare (){
-        return this.fare;
-    }
-
-    /**
-     * Gets vehicle's reliability
-     * @return double vehicle's reliability
-     */
-    public double getReliability (){
-        return this.reliability;
-    }
-
-    /**
-     * Gets vehicle's availability
-     * @return boolean vehicle's availability
-     */
-    public boolean getAvailability (){
-        return this.available;
-    }
-
-    /**
-     * Changes vehicle's average speed in km
-     * @param double average speed
-     */
-    public void setAverageSpeed (double averageSpeed){
-        this.averageSpeed = averageSpeed;
-    }
-
-    /**
-     * Changes vehicle's fare per km
-     * @param double vehicle's fare per km
-     */
-    public void setFare (double fare){
-        this.fare = fare;
-    }
-
-    /**
-     * Changes vehicle's reliability
-     * @param double vehicle's reliability
-     */
-    public void setReliability (double reliability){
-        this.reliability = reliability;
-    }
-
-    /**
-     * Changes vehicle's availability
-     * @param boolean vehicle's availability
-     */
-    public void setAvailability (boolean availability){
-        this.available = availability;
-    }
 }
