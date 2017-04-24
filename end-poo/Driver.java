@@ -7,7 +7,8 @@
 
 import java.util.List;
 import java.util.LinkedList;
-import java.util.StringBuilder;
+import java.lang.StringBuilder;
+import java.time.LocalDate;
 
 public class Driver extends User {
 
@@ -100,8 +101,9 @@ public class Driver extends User {
     }
 
     /**
-     * Method that clones this instace Driver
-     * @return Returns new instance of Driver equal to this instance of Driver
+     * Equals method that compares this intance of driver to another object
+     * @param o Object to compare with this instance of client
+     * @return Returns true if both objects are equal, false otherwise
      */
     public boolean equals(Object o){
         if(this == o) return true;

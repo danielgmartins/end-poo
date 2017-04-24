@@ -6,6 +6,8 @@
  * @version 12/04/2017
  */
 
+import java.util.List;
+import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
 
@@ -16,7 +18,7 @@ public abstract class User {
     private LocalDate birthday;
     private String email;
     private String password;
-    private List<Trip> tripHistory;
+    private LinkedList<Trip> tripHistory;
 
     /**
      * Empty contructor for User
@@ -74,8 +76,8 @@ public abstract class User {
              user.getAddress(), 
              user.getBirthday(), 
              user.getEmail(), 
-             user.getPassword()
-             user.getTripHistory(),
+             user.getPassword(),
+             user.getTripHistory()
              );
     }
 
@@ -204,7 +206,7 @@ public abstract class User {
 
     /**
      * Gets User trip history
-     * @return Returns List with this intance User's Trip History
+     * @return Returns LinkedList with this intance User's Trip History
      */
     public LinkedList<Trip> getTripHistory(){
         return this.tripHistory;
@@ -212,10 +214,10 @@ public abstract class User {
 
     /**
      * Gets copy of this instance User's trip history
-     * @return Returns List that's a copy of this instance of User's Trip History
+     * @return Returns LinkedList that's a copy of this instance of User's Trip History
      */
     public LinkedList<Trip> getTripHistoryCopy(){
-        List<Trip> aux = new LinkedList<Trip>();
+        LinkedList<Trip> aux = new LinkedList<Trip>();
         
         this.tripHistory.forEach((Trip) trip -> {aux.add(trip.clone());});
 
@@ -262,9 +264,10 @@ public abstract class User {
      * @param history New trip hisotory to update to
      */
     public void setTripHistory(LinkedList<Trip> tripHistory){
-        List<Trip> this.location = new LinkedList<List>();
+        LinkedList<Trip> history = new LinkedList(tripHistory);
+        this.tripHistory = new LinkedList<Trip>();
 
-        history.forEach( (Trip) trip -> {this.tripHistory.add(trip.clone());} );
+        history.forEach( (Trip) trip -> {this.tripHistory.add(trip);} );
     }
     
     //    ----------    Instance Methods    ----------    //
@@ -274,7 +277,7 @@ public abstract class User {
      * @param trip Trip to be added to trip history
      */
     public void addTripToHistory (Trip trip){
-        this.location.addFirst(trip.clone());
+        this.tripHistory.addFirst(trip);
     }
     
 }

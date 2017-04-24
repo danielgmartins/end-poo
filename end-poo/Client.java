@@ -7,11 +7,12 @@
 
 import java.util.List;
 import java.util.LinkedList;
-import java.util.StringBuilder;
+import java.lang.StringBuilder;
+import java.time.LocalDate;
 
 public class Client extends User {
 
-    private Coordinate location;
+    private Coordinates location;
 
     /**
      * Empty Contructor
@@ -21,7 +22,7 @@ public class Client extends User {
     }
 
     /**
-     * Contructor with every variable for Cliente User except for location and history of trips.
+     * Contructor with every variable for Client User except for location and history of trips.
      * Starts Client with empty trip history, and location is set to a default location
      * @param id        User id
      * @param name      User name
@@ -30,13 +31,13 @@ public class Client extends User {
      * @param email     User email
      * @param password  User password
      */
-    public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), new Coordinate());
+    public Client (int id, String name, Address address, LocalDate birthday, String email, String password){
+        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), new Coordinates());
     }
 
     /**
-     * Contructor with every variable for Cliente except for trip history.
-     * Starts Cliente with empty trip history
+     * Contructor with every variable for Client except for trip history.
+     * Starts Client with empty trip history
      * @param id        User id
      * @param name      User name
      * @param Address   User address
@@ -45,12 +46,12 @@ public class Client extends User {
      * @param password  User password
      * @param location  Client location
      */
-    public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinate location){
+    public Client (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinates location){
         super(id, name, address, birthday, email, password, new LinkedList<Trip>(), location);
     }
 
     /**
-     * Contructor with every variable for Cliente.
+     * Contructor with every variable for Client.
      * @param id        User id
      * @param name      User name
      * @param Address   User address
@@ -60,16 +61,16 @@ public class Client extends User {
      * @param history   User trip history
      * @param location  Client location
      */
-    public Cliente (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Viagem>() history, Coordinate location){
+    public Client (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> history, Coordinates location){
         super(id, name, address, birthday, email, password, history);
         this.setLocation(location);
     }
 
     /**
-     * Contructor with every variable for Cliente.
+     * Contructor with every variable for Client.
      * @param Client Client instance to be used for creating new instance of Client
      */
-    public Cliente (Client client){
+    public Client (Client client){
         super(client);
         this.setLocation(client.getLocation());
     }
@@ -79,7 +80,7 @@ public class Client extends User {
      * @return Returns new instance of Client equal to this instance of Client
      */
     public Client clone (){
-        return new Client(this)
+        return new Client(this);
     }
 
     /**
@@ -103,8 +104,8 @@ public class Client extends User {
      * @return Returns true if both objects are equal, false otherwise
      */
     public boolean equals (Object o){
-        if(this == o) return True
-        if(o != null && o.getClass() != this.getClass()) return false
+        if(this == o) return true;
+        if(o != null && o.getClass() != this.getClass()) return false;
 
         Client aux = (Client) o;
         return super.equals(aux)                            &&
@@ -114,10 +115,10 @@ public class Client extends User {
     // Getters
 
     /**
-     * Gets client's location Coordinate
-     * @return Coordinate with Client location
+     * Gets client's location Coordinates
+     * @return Coordinates with Client location
      */
-    public Coordinate getLocation (){
+    public Coordinates getLocation (){
         return this.location;
     }
 
@@ -127,8 +128,8 @@ public class Client extends User {
      * Sets new location to this instance of Client
      * @param location New location to update to
      */
-    public void setLocation (Coordinate location){
-        this.location = new Coordinate(location);
+    public void setLocation (Coordinates location){
+        this.location = new Coordinates(location);
     }
 
     //    ----------    Instance Methods    ----------    //
