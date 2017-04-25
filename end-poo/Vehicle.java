@@ -63,13 +63,13 @@ public abstract class Vehicle{
 
     /**
      * Makes copy of the vehicle
-     * @return  Vehicle  Vehicle
+     * @return  Vehicle copy
      */
     public abstract Vehicle clone ();
 
     /**
      * Creates a string of every parameter
-     * @return String   Description of vehicle
+     * @return   Description of vehicle
      */
     public String toString (){
         StringBuilder res = new StringBuilder("Vehicle: Average speed");
@@ -90,7 +90,7 @@ public abstract class Vehicle{
 
     /**
      * Compares vehicles
-     * @return boolean   True if equal. False if Different
+     * @return   True if equal. False if Different
      */
     public boolean equals (Object o){
         if (o == this) return true;
@@ -108,7 +108,7 @@ public abstract class Vehicle{
 
     /**
      * Gets vehicle's average speed in km
-     * @return double   Average speed
+     * @return   Average speed
      */
     public double getAverageSpeed (){
         return this.averageSpeed;
@@ -116,7 +116,7 @@ public abstract class Vehicle{
 
     /**
      * Gets vehicle's fare per km
-     * @return double   Vehicle's fare per km
+     * @return   Vehicle's fare per km
      */
     public double getFare (){
         return this.fare;
@@ -124,7 +124,7 @@ public abstract class Vehicle{
 
     /**
      * Gets vehicle's reliability
-     * @return double   Vehicle's reliability
+     * @return   Vehicle's reliability
      */
     public double getReliability (){
         return this.reliability;
@@ -148,7 +148,7 @@ public abstract class Vehicle{
 
     /**
      * Gets vehicle's location
-     * @return Coordinates  Vehicle's queue value. True if supports queue; False if does not support queue
+     * @return  Vehicle's queue value. True if supports queue. False if does not support queue
      */
     public Coordinates getLocation (){
         return this.location.getCoordinates();

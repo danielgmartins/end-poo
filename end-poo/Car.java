@@ -45,14 +45,15 @@ public class Car extends Vehicle{
         super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getQueueValue(), c.getX(), c.getY());
 
         if (this.getQueueValue()){
-            this.queueList = new LinkedList<Integer>();
+            this.queueList = new LinkedList<Trip>();
             this.queueList = c.getQueueList();
         }
+        else this.queueList = null;
     }
 
     /**
      * Makes copy of the car
-     * @return Vehicle  Car
+     * @return  Car copy
      */
     public Car clone (){
         return new Car(this);
@@ -60,7 +61,7 @@ public class Car extends Vehicle{
 
     /**
      * Creates a string of every parameter
-     * @return String   Description of car
+     * @return  Description of car
      */
     public String toString (){
         StringBuilder res = new StringBuilder();
@@ -74,7 +75,7 @@ public class Car extends Vehicle{
 
     /**
      * Compares vehicles
-     * @return boolean   True if equal; False if Different
+     * @return  True if equal; False if Different
      */
     public boolean equals (Object o){
         if (o == this) return true;
@@ -87,7 +88,7 @@ public class Car extends Vehicle{
 
     /**
      * Gets car's queue list's copy
-     * @return double   Average speed
+     * @return   Average speed
      */
     public Queue<Trip> getQueueList (){
         if (this.getQueueValue())
