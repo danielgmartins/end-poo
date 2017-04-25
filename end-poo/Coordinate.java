@@ -1,32 +1,34 @@
 /**
-* Class Coordenate is a 2D point system to map every object location and their moves through space.
+* Class Coordinate is a 2D point system to map every object location and their moves through space.
 *@author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
 *@version 13/4/2017
 */
 
 import java.lang.StringBuilder;
+import java.lang.Math;
 
-public  class Coordenate {
+public  class Coordinate {
     private int x;
     private int y;
 
     /**
-    *Constructors of class Coordenate (including empty and copy Constructors).
+    *Constructors of class Coordinate (including empty and copy Constructors).
     *
     */
-    public Coordenate(int nx,int ny){
+
+    public Coordinate(int nx,int ny){
         this.x = nx;
         this.y = ny;
     }
 
-    public Coordenate(){
+    public Coordinate(){
         this.x = 0;
         this.y = 0;
     }
 
-    public Coordenate(Coordenate ref){
-        this.x = ref.getx();
-        this.y = ref.gety();
+    public Coordinate(Coordinate ref){
+        this.x = ref.getX();
+        this.y = ref.getY();
     }
 
 
@@ -38,8 +40,8 @@ public  class Coordenate {
     *
     */
 
-    public Coordenate clone (){
-        Coordenate res = new Coordenate(this);
+    public Coordinate clone (){
+        Coordinate res = new Coordinate(this);
         return res;
     }
 
@@ -53,21 +55,21 @@ public  class Coordenate {
     public boolean equals (Object ref){
         if (ref==this) return true;
         if ((ref==null)|| (ref.getClass()!=this.getClass())) return false;
-        Coordenate l = (Coordenate) ref;
-        return ((l.getx() == this.x) && (l.gety() == this.y));
+        Coordinate l = (Coordinate) ref;
+        return ((l.getX() == this.x) && (l.getY() == this.y));
     }
 
     /**
-    * toString returns a string cointaining the instance variables of a Coordenate object.
-    * @param obj the Coordenate object we want to apply the ToString method;
+    * toString returns a string cointaining the instance variables of a Coordinate object.
+    * @param obj the Coordinate object we want to apply the ToString method;
     * @return String containing the objects instance variables
     */
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" x = ");
+        sb.append(" X = ");
         sb.append(this.x);
-        sb.append(" y = ");
+        sb.append(" Y = ");
         sb.append(this.y);
         return sb.toString();
     }
@@ -75,43 +77,56 @@ public  class Coordenate {
     //Getters e setters
 
     /**
-     * getx returns the x coordenate of the Coordenate object.
+     * getx returns the x coordenate of the Coordinate object.
      *
      * @return    the x coordenate of the object
      */
 
-        public int getx (){
+        public int getX (){
             return this.x;
         }
 
     /**
-     * gety returns the y coordenate of the Coordenate object.
+     * gety returns the y coordenate of the Coordinate object.
      *
      * @return  y  the y coordenate of the object
      */
 
-        public int gety() {
+        public int getY() {
             return this.y;
         }
 
     /**
-     * setx changes the x value of the Coordenate object to the value it receives.
+     * setx changes the x value of the Coordinate object to the value it receives.
      * @param nx the new x
      *
      */
 
-        public void setx (int nx){
+        public void setX (int nx){
             this.x = nx;
         }
 
     /**
-     * sety changes the y value of the Coordenate object to the value it receives.
+     * sety changes the y value of the Coordinate object to the value it receives.
      * @param ny the new y
      *
      */
 
-        public void sety (int ny){
+        public void setY (int ny){
             this.y = ny;
         }
+
+        //Other methods ...
+
+        /**
+        *
+        *
+        */
+
+        public double distance (Coordinate p1){
+            double squaredistance = Math.pow(this.x + p1.getX(),2) + Math.pow(this.y + p1.getY(),2);
+            return Math.sqrt(squaredistance);
+        }
+
 
 }
