@@ -16,7 +16,7 @@ public class Trip {
 	private Coordinate clientLocation;
 	private Coordinate destination;
 	private int realTripTime;
-	private int cost;
+	private int tripCost;
 
 	/**
 	*Constructors of class Trip (including empty and copy Constructors).
@@ -28,7 +28,7 @@ public class Trip {
 	* @param clientloc Coordinate object with client's location
 	* @param dest Coordinate object with the trip's destination
 	* @param realtript time of the trip
-	* @param cost1 cost of trip
+	* @param tripCost1 cost of trip
 	*/
 
 	public Trip(Client c1, Driver d1, LocalDateTime date1, Car tax1, Coordinate taxiloc, Coordinate clientloc, Coordinate dest,int realtript,int cost1){
@@ -40,7 +40,7 @@ public class Trip {
 		this.clientLocation = clientloc;
 		this.destination = dest;
 		this.realTripTime = realtript;
-		this.cost = cost1;
+		this.tripCost = cost1;
     }
 
 	public Trip(){
@@ -52,7 +52,7 @@ public class Trip {
 		this.clientLocation = null;
 		this.destination = null;
 		this.realTripTime = -1;
-		this.cost = -1;
+		this.tripCost = -1;
 	}
 
 	public Trip(Trip ref){
@@ -64,10 +64,8 @@ public class Trip {
 		this.clientLocation = ref.getClientLocation();
 		this.destination = ref.getDestination();
 		this.realTripTime = ref.getRealTripTime();
-		this.cost = ref.getCost();
+		this.tripCost = ref.getTripCost();
 	}
-
-	//Clone
 
     /**
     * Clone creates an equal object and returns it in order to protect it's original reference/pointer (Encapsulation)
@@ -99,7 +97,7 @@ public class Trip {
 														&& (this.clientLocation == ref.getClientLocation())
 														&& (this.destination == ref.getDestination())
 														&& (this.realTripTime == ref.getRealTripTime())
-														&& (this.cost == ref.getCost()));
+														&& (this.tripCost == ref.getTripCost()));
     }
 
 	/**
@@ -126,11 +124,11 @@ public class Trip {
 		sb.append(" Real trip time : ");
         sb.append(this.realTripTime);
 		sb.append(" Cost : ");
-		sb.append(this.cost);
+		sb.append(this.tripCost);
         return sb.toString();
     }
 
-	//Getters e setters
+	//Getters and setters
 
 	/**
      * getclient returns the client who requested the Trip.
@@ -187,26 +185,45 @@ public class Trip {
 		   return res;
   	   }
 
+	    /**
+   	   * getClientLocation returns the Coordinate object containing the client's location.
+   	   *
+   	   * @return Coordinate object with client's location.
+   	   */
 
+   	   public Coordinate getClientLocation(){
+   		   Coordinate res = this.clientLocation.clone();
+ 		   return res;
+   	   }
 
+	   /**
+	  * getDestination returns the Coordinate object containing the Trip's destination.
+	  *
+	  * @return Coordinate object with Trip's destination.
+	  */
 
+	  public Coordinate getDestination(){
+		  Coordinate res = this.destination.clone();
+		  return res;
+	  }
 
+	  /**
+	  * getRealTripTime returns the Trip's time.
+	  *
+	  * @return int with duration of the Trip.
+	  */
 
+	  public int getRealTripTime(){
+		  return this.realTripTime;
+	  }
 
+	  /**
+	  * getTripCost returns the Trip's tripCost.
+	  *
+	  * @return int with tripCost of the Trip.
+	  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	  public int getTripCost(){
+		  return this.tripCost;
+	  }
 }

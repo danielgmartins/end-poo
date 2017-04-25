@@ -5,6 +5,7 @@
 */
 
 import java.lang.StringBuilder;
+import java.lang.Math;
 
 public  class Coordinate {
     private int x;
@@ -101,7 +102,7 @@ public  class Coordinate {
      *
      */
 
-        public void setx (int nx){
+        public void setX (int nx){
             this.x = nx;
         }
 
@@ -111,8 +112,21 @@ public  class Coordinate {
      *
      */
 
-        public void sety (int ny){
+        public void setY (int ny){
             this.y = ny;
         }
+
+        //Other methods ...
+
+        /**
+        *
+        *
+        */
+
+        public double distance (Coordinate p1){
+            double squaredistance = Math.pow(this.x + p1.getX(),2) + Math.pow(this.y + p1.getY(),2);
+            return Math.sqrt(squaredistance);
+        }
+
 
 }
