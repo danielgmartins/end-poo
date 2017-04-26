@@ -1,6 +1,6 @@
 
 /**
- * Abstract class Vehicle - PArent class for vehicles with associated methods
+ * Abstract class Vehicle - Parent class for vehicles with associated methods
  *
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
@@ -20,7 +20,7 @@ public abstract class Vehicle{
     /**
      * Empty constructor
      */
-    public Vehicle (){
+    private Vehicle (){
       this.averageSpeed = -1;
       this.fare = -1;
       this.reliability = -1;

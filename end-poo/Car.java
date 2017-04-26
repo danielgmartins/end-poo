@@ -1,6 +1,6 @@
 
 /**
- * Abstract class Vehicle - PArent class for vehicles with associated methods
+ * Class Car - Subclas of Vehicle with associated methods
  *
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
@@ -18,7 +18,7 @@ public class Car extends Vehicle{
     /**
      * Empty constructor
      */
-    public Car (){
+    private Car (){
       super();
       this.queueList = null;
     }
@@ -74,7 +74,7 @@ public class Car extends Vehicle{
     }
 
     /**
-     * Compares vehicles
+     * Compares cars
      * @return  True if equal; False if Different
      */
     public boolean equals (Object o){
