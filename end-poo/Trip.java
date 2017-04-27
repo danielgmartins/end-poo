@@ -86,7 +86,7 @@ public class Trip {
         if (ref == this) return true;
         if ((ref == null)|| (ref.getClass()!= this.getClass())) return false;
         Trip l = (Trip) ref;
-        return this.client.equals(ref.getRequester()    		&&
+        return this.client.equals(ref.getRequester())  			&&
 			this.driver.equals(ref.getDriver())         		&&
 			this.date.equals(ref.getDate())             		&&
 			this.taxi.equals(ref.getTaxi())             		&&
