@@ -20,7 +20,7 @@ public class Car extends Vehicle{
      */
     private Car (){
       super();
-      this.queueList = null;
+      this.queueList = new LinkedList<Trip>();
     }
 
     /**
