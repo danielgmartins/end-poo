@@ -11,9 +11,8 @@ import java.util.Queue;
 import java.lang.StringBuilder;
 import java.util.LinkedList;
 import java.util.stream. Stream;
-import java.util.stream.Collectors;
-//import java.util.stream.Collectors.toList;
 import java.util.*;
+// import java.util.stream.Collectors.toList;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
@@ -247,7 +246,7 @@ public abstract class Vehicle {
      * @param Coordinates   New coordinates
      */
     public void setLocation (int x, int y){
-        return this.location = new Coordinates(x, y);
+        this.location = new Coordinates(x, y);
     }
 
     /**
@@ -262,8 +261,9 @@ public abstract class Vehicle {
      * Changes vehicle's queue value
      * @param queueValue   Vehicle's queue boolean. True if supports queue. False it does not support queue
      */
-    public void setQueueList (Queue queueListIn){
-        this.queueList = queueListIn.stream().map(Trip::clone).collect(Collectors(toList() ));
+    public void setQueueList (Queue<Trip> queueListIn){
+        this.queueList = (Queue<Trip>) queueListIn.stream()
+                                    .map(Trip::clone).collect(Collectors.toList() );
     }
 
 

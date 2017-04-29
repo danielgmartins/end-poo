@@ -33,7 +33,7 @@ public class Car extends Vehicle implements Serializable {
      * @param x               x coordinate
      * @param y               y coordinate
      */
-    public Car (double averageSpeed, double fare, double reliability, boolean availability, int seats, double x, double y, boolean queue, Queue<Trip> queueListIn){
+    public Car (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, Queue<Trip> queueListIn){
         super(averageSpeed, fare, reliability, availability, seats, x, y, queue, queueListIn);
     }
 
@@ -42,7 +42,7 @@ public class Car extends Vehicle implements Serializable {
      * @param Car   Car object
      */
     public Car (Car c){
-        super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getSeats(), c.getX(), c.getY(), c.getQueueValue(), c.getQueueList());
+        super(c.getAverageSpeed(), c.getFare(), c.getReliability(), c.getAvailability(), c.getSeats(), c.getLocation().getX(), c.getLocation().getY(), c.getQueueValue(), c.getQueueList());
 
         // if (this.getQueueValue()){
         //     this.queueList = new LinkedList<Trip>();
