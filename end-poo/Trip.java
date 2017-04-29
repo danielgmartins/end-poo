@@ -6,15 +6,16 @@
 
 import java.lang.StringBuilder;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
-public class Trip {
+public class Trip implements Serializable{
 	private Client client;
 	private Driver driver;
 	private LocalDateTime date;
-	private Car taxi;
-	private Coordinate taxiLocation;
-	private Coordinate clientLocation;
-	private Coordinate destination;
+	private Vehicle taxi;
+	private Coordinates taxiLocation;
+	private Coordinates clientLocation;
+	private Coordinates destination;
 	private int realTripTime;
 	private int tripCost;
 
@@ -24,13 +25,13 @@ public class Trip {
 	* @param driver			Driver object who performs the trip
 	* @param date			LocalDateTime object with date and time of trip
 	* @param taxi 			Car object who performs the trip
-	* @param taxiLocation 	Coordinate object with taxi's location
-	* @param clientLocation Coordinate object with client's location
-	* @param destination 	Coordinate object with the trip's destination
+	* @param taxiLocation 	Coordinates object with taxi's location
+	* @param clientLocation Coordinates object with client's location
+	* @param destination 	Coordinates object with the trip's destination
 	* @param realTripTime 	time of the trip
 	* @param tripCost 		cost of trip
 	*/
-	public Trip(Client client, Driver driver, LocalDateTime date, Car taxi, Coordinate taxiLocation, Coordinate clientLocation, Coordinate destination,int realTripTime,int tripCost){
+	public Trip(Client client, Driver driver, LocalDateTime date, Car taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
         this.setClient(client);
         this.setDriver(driver);
 		this.setDate(date);
@@ -42,6 +43,9 @@ public class Trip {
 		this.setTripCost(tripCost);
     }
 
+	/** Empty constructor for Trip object
+	*
+	*/
 	private Trip(){
 		this.client = null;
 		this.driver = null;
@@ -54,6 +58,9 @@ public class Trip {
 		this.tripCost = -1;
 	}
 
+	/** Copy constructor for Trip object.
+	* @param ref	the Trip object that will be used as a reference for the creation of a new Trip object that is equal to ref object.
+	*/
 	public Trip(Trip ref){
 		this.client = ref.getClient();
 		this.driver = ref.getDriver();
@@ -68,7 +75,7 @@ public class Trip {
 
     /**
     * Clone creates an equal object and returns it in order to protect it's original reference/pointer (Encapsulation)
-    * @return A new object with the same instance variables
+    * @return 	A new object with the same instance variables
     *
     */
 	public Trip clone (){
@@ -82,31 +89,31 @@ public class Trip {
     * @return boolean true or false, if objects are equal or not.
     *
     */
-    public boolean equals (Object ref){
-        if (ref == this) return true;
-        if ((ref == null)|| (ref.getClass()!= this.getClass())) return false;
-        Trip l = (Trip) ref;
-        return this.client.equals(ref.getRequester())  			&&
-			this.driver.equals(ref.getDriver())         		&&
-			this.date.equals(ref.getDate())             		&&
-			this.taxi.equals(ref.getTaxi())             		&&
-			this.taxiLocation.equals(ref.getTaxiLocation()) 	&&
-			this.clientLocation.equals(ref.getClientLocation()) &&
-			this.destination.equals(ref.getDestination())  		&&
-			this.realTripTime == ref.getRealTripTime() 			&&
+    public boolean equals (Object l){
+        if (l == this) return true;
+        if ((l == null)|| (l.getClass()!= this.getClass())) return false;
+        Trip ref = (Trip) l;
+        return this.client.equals(ref.getClient())  				&&
+			this.driver.equals(ref.getDriver())         			&&
+			this.date.equals(ref.getDate())             			&&
+			this.taxi.equals(ref.getTaxi())             			&&
+			this.taxiLocation.equals(ref.getTaxiLocation()) 		&&
+			this.clientLocation.equals(ref.getClientLocation())		&&
+			this.destination.equals(ref.getDestination())  			&&
+			this.realTripTime == ref.getRealTripTime() 				&&
 			this.tripCost == ref.getTripCost();
     }
 
 	/**
     * toString returns a string cointaining the instance variables of a Trip object.
-    * @return String containing the objects instance variablesaxiLocation = taxiloc;
+    * @return 	String containing the objects instance variablesaxiLocation = taxiloc;
     */
 	public String toString () {
 		StringBuilder sb = new StringBuilder();
         sb.append(" Client : ");
-        sb.append(this.client.toString());
+        sb.append(this.client.getName().toString());
         sb.append(" Driver : ");
-        sb.append(this.driver.toString());
+        sb.append(this.driver.getName().toString());
 		sb.append(" date : ");
         sb.append(this.date.toString());
 		sb.append(" Taxi : ");
@@ -131,8 +138,7 @@ public class Trip {
 	* @return    the client object who requested the Trip.
 	*/
 	public Client getClient(){
-		Client res = this.client.clone();
-		return res;
+		return this.client.clone();
 	}
 
 	/**
@@ -141,18 +147,16 @@ public class Trip {
 	* @return    the driver object who performed the Trip.
 	*/
 	public Driver getDriver(){
-		Driver res = this.driver.clone();
-		return res;
+		return this.driver.clone();
 	}
 
 	/**
-	* getDriver returns the LocalDateTime object containing temporal data of the Trip.
+	* getDate  returns the LocalDateTime object containing temporal data of the Trip.
 	*
 	* @return    LocalDateTime object with date and time of Trip
 	*/
 	public LocalDateTime getDate(){
-		LocalDateTime res = this.date.clone();
-		return res;
+		return this.date;
 	}
 
 	/**
@@ -161,44 +165,40 @@ public class Trip {
 	* @return    the Car object who performed the Trip.
 	*/
 	public Car getTaxi(){
-		Car res = this.taxi.clone();
-		return res;
+		return this.taxi.clone();
 	}
 
 	/**
-	* getTaxiLocation returns the Coordinate object containing taxi location.
+	* getTaxiLocation returns the Coordinates object containing taxi location.
 	*
-	* @return Coordinate object with taxi location.
+	* @return 	Coordinates object with taxi location.
 	*/
-	public Coordinate getTaxiLocation(){
-		Coordinate res = this.taxiLocation.clone();
-		return res;
+	public Coordinates getTaxiLocation(){
+		return this.taxiLocation.clone();
 	}
 
 	/**
-	* getClientLocation returns the Coordinate object containing the client's location.
+	* getClientLocation returns the Coordinates object containing the client's location.
 	*
-	* @return Coordinate object with client's location.
+	* @return 	Coordinates object with client's location.
 	*/
-	public Coordinate getClientLocation(){
-		Coordinate res = this.clientLocation.clone();
-		return res;
+	public Coordinates getClientLocation(){
+		return this.clientLocation.clone();
 	}
 
 	/**
-	* getDestination returns the Coordinate object containing the Trip's destination.
+	* getDestination returns the Coordinates object containing the Trip's destination.
 	*
-	* @return Coordinate object with Trip's destination.
+	* @return 	Coordinates object with Trip's destination.
 	*/
-	public Coordinate getDestination(){
-		Coordinate res = this.destination.clone();
-		return res;
+	public Coordinates getDestination(){
+		return this.destination.clone();
 	}
 
 	/**
 	* getRealTripTime returns the Trip's time.
 	*
-	* @return int with duration of the Trip.
+	* @return 	int with duration of the Trip.
 	*/
 	public int getRealTripTime(){
 		return this.realTripTime;
@@ -207,7 +207,7 @@ public class Trip {
 	/**
 	* getTripCost returns the Trip's tripCost.
 	*
-	* @return int with tripCost of the Trip.
+	* @return 	int with tripCost of the Trip.
 	*/
 	public int getTripCost(){
 		return this.tripCost;
@@ -236,7 +236,7 @@ public class Trip {
 	*@param date	the date object to atribute as the date's instance variable on Trip object.
 	*/
 	public void setDate( LocalDateTime date){
-		this.date = date.clone();
+		this.date=date;
 	}
 
 	/**
@@ -249,31 +249,31 @@ public class Trip {
 
 	/**
 	* setTaxiLocation changes the taxiLocation's instance variable object to the object passed as a variable.
-	*@param taxiLocation		the Coordinate object to atribute as the taxiLocation's instance variable on Trip object.
+	*@param taxiLocation	the Coordinates object to atribute as the taxiLocation's instance variable on Trip object.
 	*/
-	public void setTaxiLocation( Coordinate taxiLocation){
+	public void setTaxiLocation( Coordinates taxiLocation){
 		this.taxiLocation = taxiLocation.clone();
 	}
 
 	/**
 	* setClientLocation changes the clientLocation's instance variable object to the object passed as a variable.
-	*@param clientLocation		the Coordinate object to atribute as the clientLocation's instance variable on Trip object.
+	*@param clientLocation		the Coordinates object to atribute as the clientLocation's instance variable on Trip object.
 	*/
-	public void setClientLocation( Coordinate clientLocation){
+	public void setClientLocation( Coordinates clientLocation){
 		this.clientLocation = clientLocation.clone();
 	}
 
 	/**
 	* setDestination changes the destination's instance variable object to the object passed as a variable.
-	*@param destination		the Coordinate object to atribute as the destination's instance variable on Trip object.
+	*@param destination		the Coordinates object to atribute as the destination's instance variable on Trip object.
 	*/
-	public void setDestination( Coordinate destination){
+	public void setDestination( Coordinates destination){
 		this.destination = destination.clone();
 	}
 
 	/**
 	* setRealTripTime changes the realTripTime's instance variable to the value passed as a variable.
-	*@param realTripTime		the value (int) to atribute as the realTripTime's instance variable on Trip object.
+	*@param realTripTime	the value (int) to atribute as the realTripTime's instance variable on Trip object.
 	*/
 	public void setRealTripTime( int realTripTime){
 		this.realTripTime = realTripTime;
@@ -286,9 +286,4 @@ public class Trip {
 	public void setTripCost( int tripCost){
 		this.tripCost = tripCost;
 	}
-
-
-
-
-
 }
