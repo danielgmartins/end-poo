@@ -1,0 +1,44 @@
+• tab = 4 espaços
+• this. -  usar sempre que faça sentido
+• espaços entre/depois: 
+	⁃ ,  ;  :
+	⁃ < , > , <= , >= , =
+	⁃ || , &&
+	⁃ : :
+• linhas grandes: 
+	- mudar de linha convenientemente, por ex, depois de “ . “ em streams, “ || “, “ && “
+
+• documentação:
+    /**
+     * Descrição do que é que a função faz
+     * @param lat Latitude // tipo da variável + nome da mesma 
+     * @param long Longitude // repetir para todas os parâmetros
+     * @return Coordinates latitude // tipo da variável + nome da mesma 
+     */
+
+• organização dos métodos:
+
+Uma linha entre o fim do método e o inicio do comentário do método seguinte
+
+public class …{
+	// variáveis
+	…
+	
+	// construtores
+	…
+
+	// métodos
+	//// clone()
+	//// toString()
+	//// equals()
+	
+	// getters, setters
+	…
+
+	// outros métodos
+	…
+
+
+}
+
+• utilizar iteradores internos

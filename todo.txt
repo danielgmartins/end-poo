@@ -93,3 +93,12 @@ Viagem
   - calcular tempo real
   - calcular custo efetivo
 ---
+
+---
+Classe Main
+
+- Navegação pela aplicação
+- Metodo de registar Cliente
+- Metodo de registar Veiculos
+- Metodo de Log In 
+- Metodo de Log Out
