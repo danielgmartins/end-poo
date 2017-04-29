@@ -23,13 +23,13 @@ public class Trip implements Serializable{
 	 *Constructors of class Trip (including empty and copy Constructors).
 	 * @param client			Client object who requests the trip
 	 * @param driver			Driver object who performs the trip
-	 * @param date			LocalDateTime object with date and time of trip
-	 * @param taxi 			Car object who performs the trip
-	 * @param taxiLocation 	Coordinates object with taxi's location
-	 * @param clientLocation Coordinates object with client's location
-	 * @param destination 	Coordinates object with the trip's destination
-	 * @param realTripTime 	time of the trip
-	 * @param tripCost 		cost of trip
+	 * @param date				LocalDateTime object with date and time of trip
+	 * @param taxi 				Car object who performs the trip
+	 * @param taxiLocation 		Coordinates object with taxi's location
+	 * @param clientLocation 	Coordinates object with client's location
+	 * @param destination 		Coordinates object with the trip's destination
+	 * @param realTripTime 		time of the trip
+	 * @param tripCost 			cost of trip
 	 */
 	public Trip(Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
         this.setClient(client);
@@ -63,6 +63,22 @@ public class Trip implements Serializable{
 			 ref.getDestination(),
 			 ref.getRealTripTime(),
 			 ref.getTripCost());
+	}
+
+	/**
+	 * A more useful constructor for Trip objects, should be called before the trip and updated with tripCost and realTripTime.
+	 * Initializes tripCost to -1 and realTripTime to -1.
+	 * @param client				Client object who requests the trip
+	 * @param driver				Driver object who performs the trip
+	 * @param date					LocalDateTime object with date and time of trip
+	 * @param taxi 					Car object who performs the trip
+	 * @param taxiLocation 			Coordinates object with taxi's location
+	 * @param clientLocation 		Coordinates object with client's location
+	 * @param x						x coordinate of trip's destination
+	 * @param y 					y coordinate of trip's destination
+	 */
+	public Trip (Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y ){
+		this(client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y),0,0);
 	}
 
     /**
