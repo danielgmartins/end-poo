@@ -101,24 +101,24 @@ public class Trip implements Serializable{
      * @return 	String containing the objects instance variablesaxiLocation = taxiloc;
      */
 	public String toString () {
-		StringBuilder sb = new StringBuilder("Trip");
-        sb.append(" Client : ");
+		StringBuilder sb = new StringBuilder("Trip ---");
+        sb.append("\nClient : ");
         sb.append(this.client.getName().toString());
-        sb.append(", Driver : ");
+        sb.append("\nDriver : ");
         sb.append(this.driver.getName().toString());
-		sb.append(", date : ");
+		sb.append("\nDate : ");
         sb.append(this.date.toString());
-		sb.append(", Taxi : ");
+		sb.append("\nTaxi : ");
         sb.append(this.taxi.toString());
-		sb.append(", Taxi's initial position : ");
+		sb.append("\nTaxi's initial position : ");
         sb.append(this.taxiLocation.toString());
-		sb.append(", Client's initial location : ");
+		sb.append("\nClient's initial location : ");
         sb.append(this.clientLocation.toString());
-		sb.append(", Destination : ");
+		sb.append("\nDestination : ");
 		sb.append(this.destination.toString());
-		sb.append(", Real trip time : ");
+		sb.append("\nReal trip time : ");
         sb.append(this.realTripTime);
-		sb.append(", Cost : ");
+		sb.append("\nCost : ");
 		sb.append(this.tripCost);
 		sb.append("\n");
         return sb.toString();
