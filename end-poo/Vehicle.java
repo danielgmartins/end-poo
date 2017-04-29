@@ -7,15 +7,26 @@
  */
 
 import java.util.Random;
+import java.util.Queue;
 import java.lang.StringBuilder;
+import java.util.LinkedList;
+import java.util.stream. Stream;
+import java.util.stream.Collectors;
+//import java.util.stream.Collectors.toList;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.io.Serializable;
 
-public abstract class Vehicle{
+public abstract class Vehicle {
     private double averageSpeed;
     private double fare;
     private double reliability;
     private boolean available;
-    private boolean queue;
+    private int seats;
     private Coordinates location;
+    private boolean queue;
+    private Queue<Trip> queueList;
+
 
     /**
      * Empty constructor
@@ -25,8 +36,10 @@ public abstract class Vehicle{
       this.fare = -1;
       this.reliability = -1;
       this.available = false;
+      this.seats = -1;
+      this.location = new Coordinates();
       this.queue = false;
-      location = new Coordinates();
+      this.queueList = new LinkedList<Trip>();
     }
 
     /**
@@ -39,13 +52,19 @@ public abstract class Vehicle{
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, boolean queue, double x, double y){
-        this.averageSpeed = averageSpeed;
+    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, Queue<Trip> queueList){
+        this.setAverageSpeed(averageSpeed);
         this.setFare(fare);
-        this.reliability = reliability;
+        this.setReliability(reliability);
         this.setAvailability(availability);
+        this.setSeats(seats);
+        this.setLocation(x, y);
         this.setQueueValue(queue);
-        this.coordinates = new Coordinates(x, y);
+        if (this.queue){
+            this.setQueueList(queueList);
+        }
+        else this.queueList = new LinkedList<Trip>();
+
     }
 
     /**
@@ -57,8 +76,10 @@ public abstract class Vehicle{
         this.fare = v.getFare();
         this.reliability = v.getReliability();
         this.available = v.getAvailability();
+        this.seats = v.getSeats();
+        this.location = v.location.clone();
         this.queue = v.getQueueValue();
-        this.coordinates = v.getCoordinates();
+        this.queueList = v.getQueueList ();
     }
 
     /**
@@ -72,7 +93,7 @@ public abstract class Vehicle{
      * @return   Description of vehicle
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("Vehicle: Average speed");
+        StringBuilder res = new StringBuilder("Average speed");
 
         res.append(this.averageSpeed);
         res.append(" Fare: ");
@@ -81,9 +102,13 @@ public abstract class Vehicle{
         res.append(this.reliability);
         res.append(" Available: ");
         res.append(this.available);
+        res.append(" Seats: ");
+        res.append(this.seats);
+        res.append(this.location.toString());
         res.append(" Queue: ");
         res.append(this.queue);
-        res.append(this.coordinates.toString());
+        for(Trip t: this.queueList)
+            res.append( t.toString()).append("; ");
 
         return res.toString();
     }
@@ -98,12 +123,16 @@ public abstract class Vehicle{
 
         Vehicle v = (Vehicle) o;
 
-        return this.averageSpeed == v.getAverageSpeed()    &&
-            this.fare == v.getFare()                       &&
-            this.reliability == v.getReliability()         &&
-            this.available == v.getAvailability()          &&
-            this.queue == v.getQueueValue();
-            this.location.getCoordinates().equals(v.getCoordinates());
+        return this.averageSpeed == v.getAverageSpeed()                     &&
+               this.fare == v.getFare()                                     &&
+               this.reliability == v.getReliability()                       &&
+               this.available == v.getAvailability()                        &&
+               this.seats == v.getSeats()                                   &&
+               this.location.equals(v.getLocation())                        &&
+               this.queue == v.getQueueValue()                              &&
+               this.getQueueList().equals(v.getQueueList());
+
+               // && this.getQueueList().equals(c.getQueueList()
     }
 
     /**
@@ -139,6 +168,22 @@ public abstract class Vehicle{
     }
 
     /**
+     * Gets vehicle's seat number
+     * @return int  Vehicle's number of seats
+     */
+    public int getSeats (){
+        return this.seats;
+    }
+
+    /**
+     * Gets vehicle's location
+     * @return  Vehicle's queue value. True if supports queue. False if does not support queue
+     */
+    public Coordinates getLocation (){
+        return this.location.clone();
+    }
+
+    /**
      * Gets vehicle's queue setting
      * @return boolean  Vehicle's queue value. True if supports queue; False if does not support queue
      */
@@ -147,11 +192,13 @@ public abstract class Vehicle{
     }
 
     /**
-     * Gets vehicle's location
-     * @return  Vehicle's queue value. True if supports queue. False if does not support queue
+     * Gets vehicle's queue list's copy
+     * @return   List with queue copy
      */
-    public Coordinates getLocation (){
-        return this.location.getCoordinates();
+    public Queue<Trip> getQueueList (){
+        if (this.getQueueValue())
+            return (Queue<Trip>) this.queueList.stream().map(Trip::clone)
+                                 .collect(Collectors.toList());
     }
 
     /**
@@ -171,10 +218,10 @@ public abstract class Vehicle{
     }
 
     /**
-     * Updates vehicle's reliability
+     * Sets vehicle's reliability
      * @param reliability    Vehicle's reliability
      */
-    public void updateReliability (double reliability){
+    public void setReliability (double reliability){
         Random rand = new Random();
         this.reliability = rand.nextDouble();
     }
@@ -188,6 +235,22 @@ public abstract class Vehicle{
     }
 
     /**
+     * Changes vehicle's seat number
+     * @param availability   Vehicle's availability. True if available; False if not
+     */
+    public void setSeats (int seats){
+        this.seats = seats;
+    }
+
+    /**
+     * Changes vehicle's location
+     * @param Coordinates   New coordinates
+     */
+    public void setLocation (int x, int y){
+        return this.location = new Coordinates(x, y);
+    }
+
+    /**
      * Changes vehicle's queue value
      * @param queueValue   Vehicle's queue boolean. True if supports queue. False it does not support queue
      */
@@ -196,10 +259,20 @@ public abstract class Vehicle{
     }
 
     /**
-     * Changes vehicle's coordinates
-     * @param coordinates   Vehicle's queue boolean. True if supports queue. False it does not support queue
+     * Changes vehicle's queue value
+     * @param queueValue   Vehicle's queue boolean. True if supports queue. False it does not support queue
      */
-    public void updateLocation (Coordinates coordinates){
-        this.location.setCoordinates(coordinates);
+    public void setQueueList (Queue queueListIn){
+        this.queueList = queueListIn.stream().map(Trip::clone).collect(Collectors(toList() ));
     }
+
+
+// nao e necesssario pois tenho o metodo da propria classe Coordinates
+    // /**
+    //  * Changes vehicle's coordinates
+    //  * @param coordinates   Vehicle's queue boolean. True if supports queue. False it does not support queue
+    //  */
+    // public void setLocation (Coordinates coordinates){
+    //     this.location.setCoordinates(coordinates);
+    // }
 }
