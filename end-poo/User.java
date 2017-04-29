@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public abstract class User {
+public abstract class User implements Serializable {
     private int id;
     private String name;
     private Address address;
     private LocalDate birthday;
     private String email;
     private String password;
-    private LinkedList<Trip> tripHistory;
+    private List<Trip> tripHistory;
 
     /**
      * Empty contructor for User
@@ -56,7 +57,7 @@ public abstract class User {
      * @param password  User password
      * @param tripHistory    User trip history
      */
-    public User (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> history){
+    public User (int id, String name, Address address, LocalDate birthday, String email, String password, List<Trip> history){
         this.setId(id);
         this.setName(name);
         this.setAddress(address);
@@ -91,28 +92,30 @@ public abstract class User {
      * @return String of this User instance
      */
     public String toString (){
-        StringBuilder sb = new StringBuilder("User (");
-        sb.append("id: ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Id: ");
         sb.append(id);
-        sb.append(", ");
-        sb.append("name: ");
+        sb.append("\n");
+        sb.append("Name: ");
         sb.append(name);
+        sb.append("\n");
+        sb.append("Address: ");
+        sb.append(address.getCity());
         sb.append(", ");
-        sb.append("address: ");
-        sb.append(address.toString());
-        sb.append(", ");
-        sb.append("birthday: ");
+        sb.append(address.getCountry());
+        sb.append("\n");
+        sb.append("Birthday: ");
         sb.append(birthday.toString());
-        sb.append(", ");
-        sb.append("email: ");
+        sb.append("\n");
+        sb.append("Email: ");
         sb.append(email);
-        sb.append(", ");
-        sb.append("password: ");
-        sb.append(password);
-        sb.append(", tripHistory( \n");
+        sb.append("\n");
+        // sb.append("password: ");
+        // sb.append(password);
+        sb.append("\n TripHistory: \n");
         // Uses forEach iterator to add each trip in tripHistory to the string builder 
         this.tripHistory.forEach( (Trip trip) -> {sb.append(trip.toString());} );
-        sb.append(")\n");
+        sb.append("\n");
 
         return sb.toString();
     }
@@ -208,7 +211,7 @@ public abstract class User {
      * Gets User trip history
      * @return Returns LinkedList with this intance User's Trip History
      */
-    public LinkedList<Trip> getTripHistory(){
+    public List<Trip> getTripHistory(){
         return this.tripHistory;
     }
 
@@ -216,10 +219,10 @@ public abstract class User {
      * Gets copy of this instance User's trip history
      * @return Returns LinkedList that's a copy of this instance of User's Trip History
      */
-    public LinkedList<Trip> getTripHistoryCopy(){
-        LinkedList<Trip> aux = new LinkedList<Trip>();
+    public List<Trip> getTripHistoryCopy(){
+        List<Trip> aux = new LinkedList<Trip>();
         
-        this.tripHistory.forEach((Trip) trip -> {aux.add(trip.clone());});
+        this.tripHistory.forEach(trip -> {aux.add(trip.clone());});
 
         return aux;
     }
@@ -263,11 +266,11 @@ public abstract class User {
      * Sets new trip history, by replacing it
      * @param history New trip hisotory to update to
      */
-    public void setTripHistory(LinkedList<Trip> tripHistory){
-        LinkedList<Trip> history = new LinkedList(tripHistory);
+    private void setTripHistory(List<Trip> tripHistory){
+        //List<Trip> history = new LinkedList<Trip>(tripHistory);
+        
         this.tripHistory = new LinkedList<Trip>();
-
-        history.forEach( (Trip) trip -> {this.tripHistory.add(trip);} );
+        tripHistory.forEach(trip -> {this.tripHistory.add(trip);} );
     }
     
     //    ----------    Instance Methods    ----------    //
@@ -277,7 +280,7 @@ public abstract class User {
      * @param trip Trip to be added to trip history
      */
     public void addTripToHistory (Trip trip){
-        this.tripHistory.addFirst(trip);
+        ( (LinkedList<Trip>) this.tripHistory).addFirst(trip);
     }
     
 }

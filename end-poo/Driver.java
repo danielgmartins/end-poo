@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Driver extends User {
+public class Driver extends User implements Serializable {
 
     private int performance;
     private int classification;
@@ -84,18 +85,17 @@ public class Driver extends User {
      * @return Returns string with Driver info
      */
     public String toString(){
-        StringBuilder sb = new StringBuilder("Driver(");
+        StringBuilder sb = new StringBuilder("Driver ---\n");
         sb.append(super.toString());
-        sb.append(", performance: ");
+        sb.append("\nPerformance: ");
         sb.append(this.performance);
-        sb.append(", classification: ");
+        sb.append("\n Classification: ");
         sb.append(this.classification);
-        sb.append(")\n");
-        sb.append(", kmsDriven: ");
+        sb.append("\n Kms Driven: ");
         sb.append(this.kmsDriven);
-        sb.append(", availability: ");
+        sb.append("\n Availability: ");
         sb.append(this.availability);
-        sb.append(")\n");
+        sb.append("\n---\n");
 
         return sb.toString();
     }

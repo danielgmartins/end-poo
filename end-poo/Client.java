@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Client extends User {
+public class Client extends User implements Serializable {
 
     private Coordinates location;
 
@@ -88,12 +89,14 @@ public class Client extends User {
      * @return String with this client instance information
      */
     public String toString (){
-        StringBuilder sb = new StringBuilder("Client (");
+        StringBuilder sb = new StringBuilder("Client ---\n");
         sb.append(super.toString());
+        sb.append("\n");
+        sb.append("Location: ");
+        sb.append(this.location.getX());
         sb.append(", ");
-        sb.append("location: ");
-        sb.append(this.location.toString());
-        sb.append("))\n");
+        sb.append(this.location.getY());
+        sb.append("\n---\n");
 
         return sb.toString();
     }
@@ -119,7 +122,7 @@ public class Client extends User {
      * @return Coordinates with Client location
      */
     public Coordinates getLocation (){
-        return this.location;
+        return this.location.clone();
     }
 
     // Setters
@@ -130,6 +133,15 @@ public class Client extends User {
      */
     public void setLocation (Coordinates location){
         this.location = new Coordinates(location);
+    }
+
+    /**
+     * Sets new location to this instance of Client using x, y
+     * @param x Int with x coordinate
+     * @param y Int with y coordinate
+     */
+    public void setLocation (int x, int y){
+        this.location = new Coordinates(x,y);
     }
 
     //    ----------    Instance Methods    ----------    //
