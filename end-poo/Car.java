@@ -1,6 +1,6 @@
 
 /**
- * Class Car - Subclas of Vehicle with associated methods
+ * Class Car - Subclass of Vehicle with associated methods
  *
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
@@ -21,23 +21,25 @@ public class Car extends Vehicle implements Serializable {
      * Empty constructor
      */
     private Car (){
-      super(-1.0, -1.0, -1.0, false, -1, -1, -1, false, (List<Trip>) null);
+        super("na", -1.0, -1.0, -1.0, false, -1, -1, -1, false, (List<Trip>) null);
     }
 
     /**
      * Constructor with indiviual parameters
+     * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
      * @param fare            Fare per km
-     * @param reliability     Reliability
      * @param availability    Availability
-     * @param queue           Queue setting
+     * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
+     * @param queue           Queue setting
+     * @param queueListIn     Queue list
      */
-    public Car (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
-        super(averageSpeed,
+    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
+        super(licensePlate,
+              averageSpeed,
               fare,
-              reliability,
               availability,
               seats,
               x,
@@ -47,11 +49,56 @@ public class Car extends Vehicle implements Serializable {
     }
 
     /**
+     * Constructor with indiviual parameters
+     * @param licensePlate    License plate
+     * @param averageSpeed    Average speed per km
+     * @param fare            Fare per km
+     * @param availability    Availability
+     * @param seats           Number of seats
+     * @param x               x coordinate
+     * @param y               y coordinate
+     * @param queueListIn     Queue list
+     */
+    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, List<Trip> queueListIn){
+        super(licensePlate,
+              averageSpeed,
+              fare,
+              availability,
+              seats,
+              x,
+              y,
+              true,
+              queueListIn);
+    }
+
+    /**
+     * Constructor with indiviual parameters
+     * @param licensePlate    License plate
+     * @param averageSpeed    Average speed per km
+     * @param fare            Fare per km
+     * @param availability    Availability
+     * @param seats           Number of seats
+     * @param x               x coordinate
+     * @param y               y coordinate
+     */
+    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y){
+        super(licensePlate,
+              averageSpeed,
+              fare,
+              availability,
+              seats,
+              x,
+              y,
+              false,
+              (List<Trip>) null);
+    }
+    /**
      * Constructor with Car parameter
      * @param Car   Car object
      */
     public Car (Car c){
-        super(c.getAverageSpeed(),
+        super(c.getLicensePlate(),
+              c.getAverageSpeed(),
               c.getFare(),
               c.getReliability(),
               c.getAvailability(),
@@ -81,7 +128,7 @@ public class Car extends Vehicle implements Serializable {
      * @return  Description of car
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("---\nCar: ");
+        StringBuilder res = new StringBuilder("---\nCar\n");
 
         res.append(super.toString());
 

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import java.io.Serializable;
 
 public abstract class Vehicle {
+    private String licensePlate;
     private double averageSpeed;
     private double fare;
     private double reliability;
@@ -32,18 +33,20 @@ public abstract class Vehicle {
      * Empty constructor
      */
     private Vehicle (){
-      this.averageSpeed = -1;
-      this.fare = -1;
-      this.reliability = -1;
-      this.available = false;
-      this.seats = -1;
-      this.location = new Coordinates();
-      this.queue = false;
-      this.queueList = new LinkedList<Trip>();
+        this.licensePlate = "na";
+        this.averageSpeed = -1;
+        this.fare = -1;
+        this.reliability = -1;
+        this.available = false;
+        this.seats = -1;
+        this.location = new Coordinates();
+        this.queue = false;
+        this.queueList = new LinkedList<Trip>();
     }
 
     /**
      * Constructor with indiviual parameters
+     * @param licensePlate      License plate
      * @param averageSpeed      Average speed per km
      * @param fare              Fare per km
      * @param reliability       Reliability
@@ -52,10 +55,37 @@ public abstract class Vehicle {
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
+    public Vehicle (String licensePlate, double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
+        this.setLicensePlate(licensePlate);
         this.setAverageSpeed(averageSpeed);
         this.setFare(fare);
-        this.setReliability(reliability);
+        this.reliability = reliability;
+        this.setAvailability(availability);
+        this.setSeats(seats);
+        this.setLocation(x, y);
+        this.setQueueValue(queue);
+        if (this.queue){
+            this.setQueueList(queueList);
+        }
+        else this.queueList = new LinkedList<Trip>();
+
+    }
+
+    /**
+     * Constructor with indiviual parameters
+     * @param licensePlate      License plate
+     * @param averageSpeed      Average speed per km
+     * @param fare              Fare per km
+     * @param availability      Availability from 0 to 1
+     * @param queue             Queue setting
+     * @param x                 x coordinate
+     * @param y                 y coordinate
+     */
+    public Vehicle (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
+        this.setLicensePlate(licensePlate);
+        this.setAverageSpeed(averageSpeed);
+        this.setFare(fare);
+        this.setReliability();
         this.setAvailability(availability);
         this.setSeats(seats);
         this.setLocation(x, y);
@@ -72,7 +102,7 @@ public abstract class Vehicle {
      * @param Vehicle   Vehicle
      */
     public Vehicle (Vehicle v){
-        this(v.getAverageSpeed(),
+        this(v.getLicensePlate(), v.getAverageSpeed(),
              v.getFare(),
              v.getReliability(),
              v.getAvailability(),
@@ -94,19 +124,21 @@ public abstract class Vehicle {
      * @return   Description of vehicle
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("Average speed");
+        StringBuilder res = new StringBuilder("License Plate: ");
 
+        res.append(this.licensePlate);
+        res.append("\nAverage speed: ");
         res.append(this.averageSpeed);
-        res.append(" Fare: ");
+        res.append("\nFare: ");
         res.append(this.fare);
-        res.append(" Reliability: ");
+        res.append("\nReliability: ");
         res.append(this.reliability);
-        res.append(" Available: ");
+        res.append("\nAvailable: ");
         res.append(this.available);
-        res.append(" Seats: ");
+        res.append("\nSeats: ");
         res.append(this.seats);
         res.append(this.location.toString());
-        res.append(" Queue: ");
+        res.append("\nQueue: ");
         res.append(this.queue);
         for(Trip t: this.queueList)
             res.append(t.toString()).append("; ");
@@ -124,7 +156,8 @@ public abstract class Vehicle {
 
         Vehicle v = (Vehicle) o;
 
-        return this.averageSpeed == v.getAverageSpeed()                     &&
+        return this.licensePlate == v.getLicensePlate()                     &&
+               this.averageSpeed == v.getAverageSpeed()                     &&
                this.fare == v.getFare()                                     &&
                this.reliability == v.getReliability()                       &&
                this.available == v.getAvailability()                        &&
@@ -134,6 +167,14 @@ public abstract class Vehicle {
                this.getQueueList().equals(v.getQueueList());
 
                // && this.getQueueList().equals(c.getQueueList()
+    }
+
+    /**
+     * Gets vehicle's license plate
+     * @return   Average speed
+     */
+    public String getLicensePlate (){
+        return this.licensePlate;
     }
 
     /**
@@ -204,8 +245,16 @@ public abstract class Vehicle {
     }
 
     /**
+     * Gets vehicle's license plate
+     * @param licensePlate  License plate
+     */
+    public void setLicensePlate (String licensePlate){
+        this.licensePlate = licensePlate;
+    }
+
+    /**
      * Changes vehicle's average speed in km
-     * @param averageSpeed    Average speed
+     * @param averageSpeed  Average speed
      */
     public void setAverageSpeed (double averageSpeed){
         this.averageSpeed = averageSpeed;
@@ -213,7 +262,7 @@ public abstract class Vehicle {
 
     /**
      * Changes vehicle's fare per km
-     * @param fare    Vehicle's fare per km
+     * @param fare  Vehicle's fare per km
      */
     public void setFare (double fare){
         this.fare = fare;
@@ -221,9 +270,9 @@ public abstract class Vehicle {
 
     /**
      * Sets vehicle's reliability
-     * @param reliability    Vehicle's reliability
+     * @param reliability   Vehicle's reliability
      */
-    public void setReliability (double reliability){
+    public void setReliability (){
         Random rand = new Random();
         this.reliability = rand.nextDouble();
     }
