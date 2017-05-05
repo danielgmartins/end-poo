@@ -57,6 +57,7 @@ public class Trip implements Serializable{
 		this(ref.getClient(),
 			 ref.getDriver(),
 			 ref.getDate(),
+
 			 ref.getTaxi(),
 			 ref.getTaxiLocation(),
 			 ref.getClientLocation(),
@@ -124,9 +125,8 @@ public class Trip implements Serializable{
         sb.append(this.driver.getName().toString());
 		sb.append("\nDate : ");
         sb.append(this.date.toString());
-		sb.append("\nTaxi : ");
-        sb.append(this.taxi.toString());
-		sb.append("\nTaxi's initial position : ");
+		sb.append(", Taxi : ");
+		sb.append(", Taxi's initial position : ");
         sb.append(this.taxiLocation.toString());
 		sb.append("\nClient's initial location : ");
         sb.append(this.clientLocation.toString());
