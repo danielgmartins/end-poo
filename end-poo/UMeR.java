@@ -8,8 +8,11 @@
 
 import java.util.Map;
 import java.util.HashMap;
+import java.lang.StringBuilder;
+import java.time.LocalDate;
+import java.io.Serializable;
 
-public class UMeR
+public class UMeR implements Serializable
 {
     private HashMap<int, Client> clientList;
     private HashMap<int, Driver> driverList;
@@ -17,6 +20,6 @@ public class UMeR
     private HashMap<int, Trip> tripList;
 
     public static UMeR(){
-        
+
     }
 }
