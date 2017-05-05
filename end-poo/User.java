@@ -247,6 +247,14 @@ public abstract class User implements Serializable {
     }
 
     /**
+     * Changes user's birthday
+     * @param date User's birthdate
+     */
+    public void setBirthday (int year, int month, int day){
+        this.birthday = LocalDate.of(year,month,day);
+    }
+
+    /**
      * Changes user's email
      * @param email User's email
      */

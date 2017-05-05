@@ -89,11 +89,11 @@ public class Driver extends User implements Serializable {
         sb.append(super.toString());
         sb.append("\nPerformance: ");
         sb.append(this.performance);
-        sb.append("\n Classification: ");
+        sb.append("\nClassification: ");
         sb.append(this.classification);
-        sb.append("\n Kms Driven: ");
+        sb.append("\nKms Driven: ");
         sb.append(this.kmsDriven);
-        sb.append("\n Availability: ");
+        sb.append("\nAvailability: ");
         sb.append(this.availability);
         sb.append("\n---\n");
 

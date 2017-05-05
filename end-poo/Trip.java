@@ -23,13 +23,13 @@ public class Trip implements Serializable{
 	 *Constructors of class Trip (including empty and copy Constructors).
 	 * @param client			Client object who requests the trip
 	 * @param driver			Driver object who performs the trip
-	 * @param date			LocalDateTime object with date and time of trip
-	 * @param taxi 			Car object who performs the trip
-	 * @param taxiLocation 	Coordinates object with taxi's location
-	 * @param clientLocation Coordinates object with client's location
-	 * @param destination 	Coordinates object with the trip's destination
-	 * @param realTripTime 	time of the trip
-	 * @param tripCost 		cost of trip
+	 * @param date				LocalDateTime object with date and time of trip
+	 * @param taxi 				Car object who performs the trip
+	 * @param taxiLocation 		Coordinates object with taxi's location
+	 * @param clientLocation 	Coordinates object with client's location
+	 * @param destination 		Coordinates object with the trip's destination
+	 * @param realTripTime 		time of the trip
+	 * @param tripCost 			cost of trip
 	 */
 	public Trip(Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
         this.setClient(client);
@@ -63,6 +63,22 @@ public class Trip implements Serializable{
 			 ref.getDestination(),
 			 ref.getRealTripTime(),
 			 ref.getTripCost());
+	}
+
+	/**
+	 * A more useful constructor for Trip objects, should be called before the trip and updated with tripCost and realTripTime.
+	 * Initializes tripCost to -1 and realTripTime to -1.
+	 * @param client				Client object who requests the trip
+	 * @param driver				Driver object who performs the trip
+	 * @param date					LocalDateTime object with date and time of trip
+	 * @param taxi 					Car object who performs the trip
+	 * @param taxiLocation 			Coordinates object with taxi's location
+	 * @param clientLocation 		Coordinates object with client's location
+	 * @param x						x coordinate of trip's destination
+	 * @param y 					y coordinate of trip's destination
+	 */
+	public Trip (Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y ){
+		this(client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y),0,0);
 	}
 
     /**
@@ -101,24 +117,24 @@ public class Trip implements Serializable{
      * @return 	String containing the objects instance variablesaxiLocation = taxiloc;
      */
 	public String toString () {
-		StringBuilder sb = new StringBuilder("Trip");
-        sb.append(" Client : ");
+		StringBuilder sb = new StringBuilder("Trip ---");
+        sb.append("\nClient : ");
         sb.append(this.client.getName().toString());
-        sb.append(", Driver : ");
+        sb.append("\nDriver : ");
         sb.append(this.driver.getName().toString());
-		sb.append(", date : ");
+		sb.append("\nDate : ");
         sb.append(this.date.toString());
-		sb.append(", Taxi : ");
+		sb.append("\nTaxi : ");
         sb.append(this.taxi.toString());
-		sb.append(", Taxi's initial position : ");
+		sb.append("\nTaxi's initial position : ");
         sb.append(this.taxiLocation.toString());
-		sb.append(", Client's initial location : ");
+		sb.append("\nClient's initial location : ");
         sb.append(this.clientLocation.toString());
-		sb.append(", Destination : ");
+		sb.append("\nDestination : ");
 		sb.append(this.destination.toString());
-		sb.append(", Real trip time : ");
+		sb.append("\nReal trip time : ");
         sb.append(this.realTripTime);
-		sb.append(", Cost : ");
+		sb.append("\nCost : ");
 		sb.append(this.tripCost);
 		sb.append("\n");
         return sb.toString();
