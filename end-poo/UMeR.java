@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 public class UMeR implements Serializable
 {
+    /*
     private HashMap<int, Client> clientList;
     private HashMap<int, Driver> driverList;
     private HashMap<String, ? extends Vehicle> vehicleList;
@@ -22,4 +23,5 @@ public class UMeR implements Serializable
     public static UMeR(){
 
     }
+    */
 }
