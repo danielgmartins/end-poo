@@ -17,23 +17,25 @@ public class Trip implements Serializable {
 	private Coordinates taxiLocation;
 	private Coordinates clientLocation;
 	private Coordinates destination;
+	private int estimatedTripTime;
 	private int realTripTime;
 	private int tripCost;
 
 	/**
 	 *Constructors of class Trip (including empty and copy Constructors).
-	 * @param id				Integer that identifies the Trip
-	 * @param client			Client object who requests the trip
-	 * @param driver			Driver object who performs the trip
-	 * @param date				LocalDateTime object with date and time of trip
-	 * @param taxi 				Car object who performs the trip
-	 * @param taxiLocation 		Coordinates object with taxi's location
-	 * @param clientLocation 	Coordinates object with client's location
-	 * @param destination 		Coordinates object with the trip's destination
-	 * @param realTripTime 		time of the trip
-	 * @param tripCost 			cost of trip
+	 * @param id					Integer that identifies the Trip
+	 * @param client				Client object who requests the trip
+	 * @param driver				Driver object who performs the trip
+	 * @param date					LocalDateTime object with date and time of trip
+	 * @param taxi 					Car object who performs the trip
+	 * @param taxiLocation 			Coordinates object with taxi's location
+	 * @param clientLocation 		Coordinates object with client's location
+	 * @param destination 			Coordinates object with the trip's destination
+	 * @param estimatedTripTime 	estimated time of the trip
+	 * @param realTripTime 			time of the trip
+	 * @param tripCost 				cost of trip
 	 */
-	public Trip(int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
+	public Trip(int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,int tripCost){
 		this.setId(id);
 		this.setClient(client);
         this.setDriver(driver);
@@ -42,6 +44,7 @@ public class Trip implements Serializable {
 		this.setTaxiLocation(taxiLocation);
 		this.setClientLocation(clientLocation);
 		this.setDestination(destination);
+		this.setEstimatedTripTime(estimatedTripTime);
 		this.setRealTripTime(realTripTime);
 		this.setTripCost(tripCost);
     }
@@ -65,6 +68,7 @@ public class Trip implements Serializable {
 			 ref.getTaxiLocation(),
 			 ref.getClientLocation(),
 			 ref.getDestination(),
+			 ref.getEstimatedTripTime(),
 			 ref.getRealTripTime(),
 			 ref.getTripCost());
 	}
@@ -81,9 +85,10 @@ public class Trip implements Serializable {
 	 * @param clientLocation 		Coordinates object with client's location
 	 * @param x						x coordinate of trip's destination
 	 * @param y 					y coordinate of trip's destination
+	 * @param estimatedTripTime		estimated time of trip
 	 */
-	public Trip (int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y ){
-		this(client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y),0,0);
+	public Trip (int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y, int estimatedTripTime){
+		this(id,client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y), estimatedTripTime,0,0);
 	}
 
     /**
@@ -114,6 +119,7 @@ public class Trip implements Serializable {
 			this.taxiLocation.equals(ref.getTaxiLocation()) 		&&
 			this.clientLocation.equals(ref.getClientLocation())		&&
 			this.destination.equals(ref.getDestination())  			&&
+			this.estimatedTripTime == ref.getRealTripTime()			&&
 			this.realTripTime == ref.getRealTripTime() 				&&
 			this.tripCost == ref.getTripCost();
     }
@@ -139,6 +145,8 @@ public class Trip implements Serializable {
         sb.append(this.clientLocation.toString());
 		sb.append(", Destination : ");
 		sb.append(this.destination.toString());
+		sb.append(" Estimated Trip Time : ");
+		sb.append(this.estimatedTripTime)
 		sb.append(", Real trip time : ");
         sb.append(this.realTripTime);
 		sb.append(", Cost : ");
@@ -217,6 +225,15 @@ public class Trip implements Serializable {
 	 */
 	public Coordinates getDestination(){
 		return this.destination.clone();
+	}
+
+	/**
+	 * getEstimatedTripTime returns the Trip's estimated time.
+	 *
+	 * @return 	int with estimated duration of the Trip.
+	 */
+	public int getEstimatedTripTime(){
+		return this.estimatedTripTime;
 	}
 
 	/**
@@ -301,6 +318,14 @@ public class Trip implements Serializable {
 	 */
 	public void setDestination( Coordinates destination){
 		this.destination = destination.clone();
+	}
+
+	/**
+	 * setEstimatedTripTime changes the estimatedTripTime's instance variable to the value passed as a variable.
+	 * @param estimatedTripTime		the value (int) to atribute as the realTripTime's instance variable on Trip object.
+	 */
+	public void setEstimatedTripTime( int estimatedTripTime){
+		this.estimatedTripTime = estimatedTripTime;
 	}
 
 	/**
