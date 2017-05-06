@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 public class Trip implements Serializable {
-	private int code;
+	private int id;
 	private Client client;
 	private Driver driver;
 	private LocalDateTime date;
@@ -53,7 +53,7 @@ public class Trip implements Serializable {
 	 *
 	 */
 	private Trip(){
-		this(-1,null,null,null,null,null,null,null,-1,-1);
+		this(-1,null,null,null,null,null,null,null,-1,-1,-1);
 	}
 
 	/** Copy constructor for Trip object.
@@ -146,7 +146,7 @@ public class Trip implements Serializable {
 		sb.append(", Destination : ");
 		sb.append(this.destination.toString());
 		sb.append(" Estimated Trip Time : ");
-		sb.append(this.estimatedTripTime)
+		sb.append(this.estimatedTripTime);
 		sb.append(", Real trip time : ");
         sb.append(this.realTripTime);
 		sb.append(", Cost : ");
@@ -343,4 +343,16 @@ public class Trip implements Serializable {
 	public void setTripCost( int tripCost){
 		this.tripCost = tripCost;
 	}
+
+	/**
+	 * compareTo implements the natural order between two Trip objects
+	 * @param  Trip t 	Trip to compare with the object that receives the message
+	 * @return      	int value containing 1,-1 or 0
+	 */
+
+	public int compareTo(Trip t) {
+     if (this.id < t.getId()) return 1;
+     if( this.id > t.getId() ) return -1;
+	 else return 0;
+   }
 }

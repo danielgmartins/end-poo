@@ -3,6 +3,7 @@ README.TXT
 *.ctxt
 *.bluej
 *.json
+*.pdf
 
 end-poo/doc/
 .DS_Store
