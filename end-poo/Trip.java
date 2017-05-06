@@ -8,7 +8,8 @@ import java.lang.StringBuilder;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-public class Trip implements Serializable{
+public class Trip implements Serializable {
+	private int code;
 	private Client client;
 	private Driver driver;
 	private LocalDateTime date;
@@ -21,6 +22,7 @@ public class Trip implements Serializable{
 
 	/**
 	 *Constructors of class Trip (including empty and copy Constructors).
+	 * @param id				Integer that identifies the Trip
 	 * @param client			Client object who requests the trip
 	 * @param driver			Driver object who performs the trip
 	 * @param date				LocalDateTime object with date and time of trip
@@ -31,8 +33,9 @@ public class Trip implements Serializable{
 	 * @param realTripTime 		time of the trip
 	 * @param tripCost 			cost of trip
 	 */
-	public Trip(Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
-        this.setClient(client);
+	public Trip(int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination,int realTripTime,int tripCost){
+		this.setId(id);
+		this.setClient(client);
         this.setDriver(driver);
 		this.setDate(date);
 		this.setTaxi(taxi);
@@ -47,17 +50,17 @@ public class Trip implements Serializable{
 	 *
 	 */
 	private Trip(){
-		this(null,null,null,null,null,null,null,-1,-1);
+		this(-1,null,null,null,null,null,null,null,-1,-1);
 	}
 
 	/** Copy constructor for Trip object.
 	 * @param ref	the Trip object that will be used as a reference for the creation of a new Trip object that is equal to ref object.
 	 */
 	public Trip(Trip ref){
-		this(ref.getClient(),
+		this(ref.getId(),
+			 ref.getClient(),
 			 ref.getDriver(),
 			 ref.getDate(),
-
 			 ref.getTaxi(),
 			 ref.getTaxiLocation(),
 			 ref.getClientLocation(),
@@ -69,6 +72,7 @@ public class Trip implements Serializable{
 	/**
 	 * A more useful constructor for Trip objects, should be called before the trip and updated with tripCost and realTripTime.
 	 * Initializes tripCost to -1 and realTripTime to -1.
+	 * @param id 					Integer that identifies the Trip
 	 * @param client				Client object who requests the trip
 	 * @param driver				Driver object who performs the trip
 	 * @param date					LocalDateTime object with date and time of trip
@@ -78,7 +82,7 @@ public class Trip implements Serializable{
 	 * @param x						x coordinate of trip's destination
 	 * @param y 					y coordinate of trip's destination
 	 */
-	public Trip (Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y ){
+	public Trip (int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y ){
 		this(client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y),0,0);
 	}
 
@@ -102,7 +106,8 @@ public class Trip implements Serializable{
         if ((l == null)|| (l.getClass()!= this.getClass())) return false;
 
         Trip ref = (Trip) l;
-        return this.client.equals(ref.getClient())  				&&
+        return this.id == ref.getId()                               &&
+			this.client.equals(ref.getClient())  				    &&
 			this.driver.equals(ref.getDriver())         			&&
 			this.date.equals(ref.getDate())             			&&
 			this.taxi.equals(ref.getTaxi())             			&&
@@ -119,7 +124,9 @@ public class Trip implements Serializable{
      */
 	public String toString () {
 		StringBuilder sb = new StringBuilder("Trip");
-        sb.append(" Client : ");
+		sb.append(" Trip id : ");
+		sb.append(this.id);
+		sb.append(" Client : ");
         sb.append(this.client.getName().toString());
         sb.append(", Driver : ");
         sb.append(this.driver.getName().toString());
@@ -141,6 +148,14 @@ public class Trip implements Serializable{
 	}
 
 	//Getters
+	/**
+	 * getId returns the id field of the Trip
+	 * @return    int with the identification number of the trip
+	 */
+	public int getId(){
+		return this.id;
+	}
+
 	/**
      * getclient returns the client who requested the Trip.
 	 *
@@ -223,6 +238,14 @@ public class Trip implements Serializable{
 	}
 
 	//Setters
+
+	/**
+	 * setId changes the Trip's id to the value it receives as a parameter
+	 * @param id		the new id to attribute to the Trip
+	 */
+	public void setId(int id){
+		this.id=id;
+	}
 
 	/**
 	 * setClient changes the client's instance variable object to the object passed as a variable.
