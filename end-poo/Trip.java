@@ -119,7 +119,7 @@ public class Trip implements Serializable {
 			this.taxiLocation.equals(ref.getTaxiLocation()) 		&&
 			this.clientLocation.equals(ref.getClientLocation())		&&
 			this.destination.equals(ref.getDestination())  			&&
-			this.estimatedTripTime == ref.getRealTripTime()			&&
+			this.estimatedTripTime == ref.getEstimatedTripTime()	&&
 			this.realTripTime == ref.getRealTripTime() 				&&
 			this.tripCost == ref.getTripCost();
     }
