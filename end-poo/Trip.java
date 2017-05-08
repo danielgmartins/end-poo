@@ -1,7 +1,7 @@
 /**
  * Class Trip is a class that keeps track of the trips that every cab and driver/client have made, including time,fare and other aspects.
- *@author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
- *@version 13/4/2017
+ * @author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
+ * @version 13/4/2017
  */
 
 import java.lang.StringBuilder;
@@ -347,11 +347,11 @@ public class Trip implements Serializable {
 	/**
 	 * compareTo implements the natural order between two Trip objects
 	 * @param  	t 		Trip to compare with the object that receives the message
-	 * @return      	int value containing -1 if our object is "lower" than t, 1 if is "bigger" and 0 if equal
+	 * @return      	int value containing -1 if our object is "lower" than t, 1 if it is "bigger" and 0 if equal.
 	 */
 	public int compareTo(Trip t) {
-     if (this.id < t.getId()) return 1;
-     if( this.id > t.getId() ) return -1;
+     if (this.id < t.getId()) return -1;
+     if( this.id > t.getId() ) return 1;
 	 else return 0;
    }
 }
