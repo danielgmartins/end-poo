@@ -8,7 +8,7 @@ import java.lang.StringBuilder;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-public class Trip implements Serializable {
+public class Trip implements Comparable <Trip> ,Serializable {
 	private int id;
 	private Client client;
 	private Driver driver;
@@ -346,12 +346,12 @@ public class Trip implements Serializable {
 
 	/**
 	 * compareTo implements the natural order between two Trip objects
-	 * @param  	t 		Trip to compare with the object that receives the message
+	 * @param	t		Trip object to compare with the object that receives the message
 	 * @return      	int value containing -1 if our object is "lower" than t, 1 if it is "bigger" and 0 if equal.
 	 */
 	public int compareTo(Trip t) {
-     if (this.id < t.getId()) return -1;
-     if( this.id > t.getId() ) return 1;
-	 else return 0;
+		if (this.id < t.getId()) return -1;
+		if( this.id > t.getId() ) return 1;
+		else return 0;
    }
 }
