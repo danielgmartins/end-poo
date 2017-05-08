@@ -346,10 +346,9 @@ public class Trip implements Serializable {
 
 	/**
 	 * compareTo implements the natural order between two Trip objects
-	 * @param  Trip t 	Trip to compare with the object that receives the message
-	 * @return      	int value containing 1,-1 or 0
+	 * @param  	t 		Trip to compare with the object that receives the message
+	 * @return      	int value containing -1 if our object is "lower" than t, 1 if is "bigger" and 0 if equal
 	 */
-
 	public int compareTo(Trip t) {
      if (this.id < t.getId()) return 1;
      if( this.id > t.getId() ) return -1;
