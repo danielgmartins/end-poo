@@ -17,9 +17,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
-public abstract class Vehicle {
+public abstract class Vehicle extends Exception {
     private String licensePlate;
     private double averageSpeed;
+    private double kmTotal;
     private double fare;
     private double reliability;
     private boolean available;
@@ -35,6 +36,7 @@ public abstract class Vehicle {
     private Vehicle (){
         this.licensePlate = "na";
         this.averageSpeed = -1;
+        this.kmTotal = -1;
         this.fare = -1;
         this.reliability = -1;
         this.available = false;
@@ -47,6 +49,7 @@ public abstract class Vehicle {
     /**
      * Constructor with indiviual parameters
      * @param licensePlate      License plate
+     * @param averageSpeed      Average speed per km
      * @param averageSpeed      Average speed per km
      * @param fare              Fare per km
      * @param reliability       Reliability
@@ -167,6 +170,15 @@ public abstract class Vehicle {
                this.getQueueList().equals(v.getQueueList());
 
                // && this.getQueueList().equals(c.getQueueList()
+    }
+
+    /**
+     * Compares vehicles with natural order
+     * @param V Vehicle used for comparison
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo (Vehicle v){
+        return this.licensePlate.equals(v.getLicensePlate());
     }
 
     /**
