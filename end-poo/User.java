@@ -13,43 +13,34 @@ import java.time.LocalDate;
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
-    private int id;
     private String name;
     private Address address;
     private LocalDate birthday;
     private String email;
     private String password;
-    private List<Trip> tripHistory;
-
+    private List<Integer> tripHistory;
+    private double totalTripCost;
     /**
      * Empty contructor for User
      */
     private User (){
-        this(0,"N/A",null,null,"N/A","N/A");
+        this("N/A",null,null,"N/A","N/A");
     }
 
     /**
      * Contructor with all the arguments except trip history
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
      * @param email     User email
      * @param password  User password
      */
-    public User (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this.setId(id);
-        this.setName(name);
-        this.setAddress(address);
-        this.setBirthday(birthday);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setTripHistory(new LinkedList<Trip>());
+    public User (String name, Address address, LocalDate birthday, String email, String password){
+        this(name, address, birthday, email, password, new LinkedList<Integer>(),0);
     }
 
     /**
      * Contructor with all the arguments
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -57,14 +48,14 @@ public abstract class User implements Serializable {
      * @param password  User password
      * @param tripHistory    User trip history
      */
-    public User (int id, String name, Address address, LocalDate birthday, String email, String password, List<Trip> history){
-        this.setId(id);
+    public User (String name, Address address, LocalDate birthday, String email, String password, List<Integer> history, double totalTripCost){
         this.setName(name);
         this.setAddress(address);
         this.setBirthday(birthday);
         this.setEmail(email);
         this.setPassword(password);
         this.setTripHistory(history);
+        this.setTotalTripCost(totalTripCost);
     }
 
     /**
@@ -72,13 +63,13 @@ public abstract class User implements Serializable {
      * @param user  User object to use as reference
      */
     public User (User user){
-        this(user.getId(),
-             user.getName(), 
+        this(user.getName(), 
              user.getAddress(), 
              user.getBirthday(), 
              user.getEmail(), 
              user.getPassword(),
-             user.getTripHistory()
+             user.getTripHistory(),
+             user.getTotalTripCost()
              );
     }
 
@@ -93,28 +84,27 @@ public abstract class User implements Serializable {
      */
     public String toString (){
         StringBuilder sb = new StringBuilder();
-        sb.append("Id: ");
-        sb.append(id);
-        sb.append("\n");
         sb.append("Name: ");
-        sb.append(name);
+        sb.append(this.name);
         sb.append("\n");
         sb.append("Address: ");
-        sb.append(address.getCity());
+        sb.append(this.address.getCity());
         sb.append(", ");
-        sb.append(address.getCountry());
+        sb.append(this.address.getCountry());
         sb.append("\n");
         sb.append("Birthday: ");
-        sb.append(birthday.toString());
+        sb.append(this.birthday.toString());
         sb.append("\n");
         sb.append("Email: ");
-        sb.append(email);
+        sb.append(this.email);
+        sb.append("\n Total Trip Cost:");
+        sb.append(this.totalTripCost);
         sb.append("\n");
         // sb.append("password: ");
         // sb.append(password);
-        sb.append("\n TripHistory: \n");
+        sb.append("TripHistory: \n");
         // Uses forEach iterator to add each trip in tripHistory to the string builder 
-        this.tripHistory.forEach( (Trip trip) -> {sb.append(trip.toString());} );
+        this.tripHistory.forEach( (Integer trip) -> {sb.append(trip);} );
         sb.append("\n");
 
         return sb.toString();
@@ -130,8 +120,7 @@ public abstract class User implements Serializable {
         if(o != null && o.getClass() != this.getClass()) return false;
 
         User user = (User) o;
-        return this.id == user.getId()                          &&
-               this.name.equals(user.getName())                 &&
+        return this.name.equals(user.getName())                 &&
                this.address.equals(user.getAddress())           &&
                this.birthday.equals(user.getBirthday())         &&
                this.email.equals(user.getEmail())               &&
@@ -140,14 +129,6 @@ public abstract class User implements Serializable {
     }
 
     // Getters
-
-    /**
-     * Gets user's id number
-     * @return Int with user's id number
-     */
-    public int getId (){
-        return this.id;
-    }
 
     /**
      * Gets user's name
@@ -189,15 +170,14 @@ public abstract class User implements Serializable {
         return this.password;
     }
 
-    // Setters
-
     /**
-     * Changes user's id number
-     * @param id Id number
+     * 
      */
-    public void setId (int id){
-        this.id = id;
+    public double getTotalTripCost (){
+        return this.totalTripCost;
     }
+
+    // Setters
 
     /**
      * Changes user's name
@@ -211,7 +191,7 @@ public abstract class User implements Serializable {
      * Gets User trip history
      * @return Returns LinkedList with this intance User's Trip History
      */
-    public List<Trip> getTripHistory(){
+    public List<Integer> getTripHistory(){
         return this.tripHistory;
     }
 
@@ -219,10 +199,10 @@ public abstract class User implements Serializable {
      * Gets copy of this instance User's trip history
      * @return Returns LinkedList that's a copy of this instance of User's Trip History
      */
-    public List<Trip> getTripHistoryCopy(){
-        List<Trip> aux = new LinkedList<Trip>();
+    public List<Integer> getTripHistoryCopy(){
+        List<Integer> aux = new LinkedList<Integer>();
         
-        this.tripHistory.forEach(trip -> {aux.add(trip.clone());});
+        this.tripHistory.forEach(trip -> {aux.add(trip);});
 
         return aux;
     }
@@ -272,15 +252,23 @@ public abstract class User implements Serializable {
 
     /**
      * Sets new trip history, by replacing it
-     * @param history New trip hisotory to update to
+     * @param history New trip history to update to
      */
-    private void setTripHistory(List<Trip> tripHistory){
+    private void setTripHistory(List<Integer> tripHistory){
         //List<Trip> history = new LinkedList<Trip>(tripHistory);
         
-        this.tripHistory = new LinkedList<Trip>();
+        this.tripHistory = new LinkedList<Integer>();
         tripHistory.forEach(trip -> {this.tripHistory.add(trip);} );
     }
     
+    /**
+     * Set's new cost to the total of trip cost
+     * @param cost double with total cost of trips in history
+     */
+    private void setTotalTripCost(double cost){
+        this.totalTripCost = cost;
+    }
+
     //    ----------    Instance Methods    ----------    //
 
     /**
@@ -288,7 +276,7 @@ public abstract class User implements Serializable {
      * @param trip Trip to be added to trip history
      */
     public void addTripToHistory (Trip trip){
-        ( (LinkedList<Trip>) this.tripHistory).addFirst(trip);
+        ( (LinkedList<Integer>) this.tripHistory).addFirst(trip.getId());
+        this.totalTripCost += trip.getRealTripCost();
     }
-    
 }

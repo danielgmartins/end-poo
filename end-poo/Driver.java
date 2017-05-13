@@ -13,6 +13,7 @@ import java.io.Serializable;
 
 public class Driver extends User implements Serializable {
 
+    
     private int performance;
     private int classification;
     private int kmsDriven;
@@ -22,7 +23,7 @@ public class Driver extends User implements Serializable {
      * Empty constructor
      */
     private Driver (){
-        this(0,"N/A",null,null,"N/A","N/A");
+        this("N/A",null,null,"N/A","N/A");
     }
 
     /**
@@ -34,13 +35,12 @@ public class Driver extends User implements Serializable {
      * @param email     User email
      * @param password  User password
      */
-    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), 100, 100, 0, true);
+    public Driver (String name, Address address, LocalDate birthday, String email, String password){
+        this(name, address, birthday, email, password, new LinkedList<Trip>(), 100, 100, 0, true);
     }
 
     /**
      * Constructor with every parameter for class Driver
-     * @param id             User id
      * @param name           User name
      * @param Address        User address
      * @param birthday       User birthday
@@ -52,8 +52,8 @@ public class Driver extends User implements Serializable {
      * @param kmsDriven      Driver kms driven
      * @param availability   Driver availability
      */
-    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
-        super(id, name, address, birthday, email, password, tripHistory);
+    public Driver (String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
+        super(name, address, birthday, email, password, tripHistory);
         this.setPerformance(performance);
         this.setClassification(classification);
         this.setKmsDriven(kmsDriven);

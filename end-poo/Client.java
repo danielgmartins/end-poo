@@ -19,27 +19,25 @@ public class Client extends User implements Serializable {
      * Empty Contructor
      */
     private Client (){
-        this(0,"N/A",null,null,"N/A","N/A");
+        this("N/A",null,null,"N/A","N/A");
     }
 
     /**
      * Contructor with every variable for Client User except for location and history of trips.
      * Starts Client with empty trip history, and location is set to a default location
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
      * @param email     User email
      * @param password  User password
      */
-    public Client (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), new Coordinates());
+    public Client (String name, Address address, LocalDate birthday, String email, String password){
+        this(name, address, birthday, email, password, new LinkedList<Trip>(), new Coordinates());
     }
 
     /**
      * Contructor with every variable for Client User except for location and history of trips. And Client birthday is set with day, month, year with independant parameters parameters.
      * Starts Client with empty trip history, and location is set to a default location
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param day       User birthday day
@@ -48,14 +46,13 @@ public class Client extends User implements Serializable {
      * @param email     User email
      * @param password  User password
      */
-    public Client (int id, String name, Address address, int day, int month, int year, String email, String password){
-        this(id, name, address, LocalDate.of(year, month, day), email, password, new LinkedList<Trip>(), new Coordinates());
+    public Client (String name, Address address, int day, int month, int year, String email, String password){
+        this(name, address, LocalDate.of(year, month, day), email, password, new LinkedList<Trip>(), new Coordinates());
     }
 
     /**
      * Contructor with every variable for Client except for trip history.
      * Starts Client with empty trip history
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -64,13 +61,12 @@ public class Client extends User implements Serializable {
      * @param location  Client location
      */
     public Client (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinates location){
-        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), location);
+        this(name, address, birthday, email, password, new LinkedList<Trip>(), location);
     }
 
     /**
      * Contructor with every variable for Client User except for history of trips. And Client birthday is set with day, month, year with independant parameters parameters.
      * Starts Client with empty trip history, and location is set to a default location
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param day       User birthday day
@@ -81,12 +77,11 @@ public class Client extends User implements Serializable {
      * @param location  Client location
      */
     public Client (int id, String name, Address address, int day, int month, int year, String email, String password, Coordinates location){
-        this(id, name, address, LocalDate.of(year, month, day), email, password, new LinkedList<Trip>(), location);
+        this(name, address, LocalDate.of(year, month, day), email, password, new LinkedList<Trip>(), location);
     }
 
     /**
      * Contructor with every variable for Client.
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -95,15 +90,14 @@ public class Client extends User implements Serializable {
      * @param history   User trip history
      * @param location  Client location
      */
-    public Client (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> history, Coordinates location){
-        super(id, name, address, birthday, email, password, history);
+    public Client (String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> history, Coordinates location){
+        super(name, address, birthday, email, password, history);
         this.setLocation(location);
     }
 
     /**
      * Contructor with every variable for Client User. Client birthday is set with day, month, year with independant parameters parameters.
      * Starts Client with empty trip history, and location is set to a default location
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param day       User birthday day
@@ -114,8 +108,8 @@ public class Client extends User implements Serializable {
      * @param history   User trip history
      * @param location  Client location
      */
-    public Client (int id, String name, Address address, int day, int month, int year, String email, String password, LinkedList<Trip> history, Coordinates location){
-        this(id, name, address, LocalDate.of(year, month, day), email, password, history, location);
+    public Client (String name, Address address, int day, int month, int year, String email, String password, LinkedList<Trip> history, Coordinates location){
+        this(name, address, LocalDate.of(year, month, day), email, password, history, location);
     }
 
     /**
