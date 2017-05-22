@@ -6,8 +6,10 @@
  * @version 12/04/2017
  */
 
+import java.util.Random;
 import java.lang.StringBuilder;
 import java.util.List;
+import java.lang.Math;
 
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -28,6 +30,7 @@ public class Car extends Vehicle implements Serializable {
      * Constructor with indiviual parameters
      * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
+     * @param kmsTotal        Total of kms
      * @param fare            Fare per km
      * @param availability    Availability
      * @param seats           Number of seats
@@ -36,9 +39,10 @@ public class Car extends Vehicle implements Serializable {
      * @param queue           Queue setting
      * @param queueListIn     Queue list
      */
-    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
+    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
         super(licensePlate,
               averageSpeed,
+              kmsTotal,
               fare,
               availability,
               seats,
@@ -52,6 +56,7 @@ public class Car extends Vehicle implements Serializable {
      * Constructor with indiviual parameters
      * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
+     * @param kmsTotal        Total of kms
      * @param fare            Fare per km
      * @param availability    Availability
      * @param seats           Number of seats
@@ -59,9 +64,10 @@ public class Car extends Vehicle implements Serializable {
      * @param y               y coordinate
      * @param queueListIn     Queue list
      */
-    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, List<Trip> queueListIn){
+    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y, List<Trip> queueListIn){
         super(licensePlate,
               averageSpeed,
+              kmsTotal,
               fare,
               availability,
               seats,
@@ -75,15 +81,17 @@ public class Car extends Vehicle implements Serializable {
      * Constructor with indiviual parameters
      * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
+     * @param kmsTotal        Total of kms
      * @param fare            Fare per km
      * @param availability    Availability
      * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
      */
-    public Car (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y){
+    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y){
         super(licensePlate,
               averageSpeed,
+              kmsTotal,
               fare,
               availability,
               seats,
@@ -99,6 +107,7 @@ public class Car extends Vehicle implements Serializable {
     public Car (Car c){
         super(c.getLicensePlate(),
               c.getAverageSpeed(),
+              c.getKmsTotal(),
               c.getFare(),
               c.getReliability(),
               c.getAvailability(),
@@ -148,6 +157,20 @@ public class Car extends Vehicle implements Serializable {
         return super.equals(c);
     }
 
+    /**
+     * Sets car's reliability bearing in mind the randomability of weather, traffic conditions and the fact that a car is pretty unreliable itself
+     * @param reliability   Vehicle's reliability
+     */
+    public void setReliability (){
+        Random rand = new Random();
+        Random randWeather = new Random();
+        Random randTraffic = new Random();
+
+        double reliable = Math.abs(rand.nextDouble() * randWeather.nextDouble() * randTraffic.nextDouble() - 0.005);
+
+        if (reliable > 1) super.setReliability(1.0);
+        else super.setReliability(reliable);
+    }
 
 
 }

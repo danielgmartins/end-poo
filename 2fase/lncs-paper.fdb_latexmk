@@ -1,0 +1,11 @@
+# Fdb version 3
+["pdflatex"] 1494076793 "lncs-paper.tex" "lncs-paper.pdf" "lncs-paper" 1494076793
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1494074530 3873396 9603ba51285ba35326ccc6598373628d ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "llncs.cls" 0 -1 0 ""
+  "lncs-paper.aux" 1494076793 8 a94a2480d3289e625eea47cd1b285758 ""
+  "lncs-paper.tex" 1494076793 2717 fa5dbbd06ef0a6cb4490752cc416bdd3 ""
+  (generated)
+  "lncs-paper.log"
+  "lncs-paper.pdf"

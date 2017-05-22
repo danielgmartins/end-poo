@@ -1,4 +1,3 @@
-
 /**
  * Abstract class Vehicle - Parent class for vehicles with associated methods
  *
@@ -17,9 +16,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
-public abstract class Vehicle {
+public abstract class Vehicle extends Exception implements Comparable<Vehicle> {
     private String licensePlate;
     private double averageSpeed;
+    private double kmsTotal;
     private double fare;
     private double reliability;
     private boolean available;
@@ -35,6 +35,7 @@ public abstract class Vehicle {
     private Vehicle (){
         this.licensePlate = "na";
         this.averageSpeed = -1;
+        this.kmsTotal = -1;
         this.fare = -1;
         this.reliability = -1;
         this.available = false;
@@ -48,16 +49,18 @@ public abstract class Vehicle {
      * Constructor with indiviual parameters
      * @param licensePlate      License plate
      * @param averageSpeed      Average speed per km
-     * @param fare              Fare per km
+     * @param kmsTotal          Total of kms
+     * @param fare              Fare per kms
      * @param reliability       Reliability
      * @param availability      Availability from 0 to 1
      * @param queue             Queue setting
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (String licensePlate, double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
+    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
         this.setLicensePlate(licensePlate);
         this.setAverageSpeed(averageSpeed);
+        this.setKmsTotal(kmsTotal);
         this.setFare(fare);
         this.reliability = reliability;
         this.setAvailability(availability);
@@ -75,17 +78,19 @@ public abstract class Vehicle {
      * Constructor with indiviual parameters
      * @param licensePlate      License plate
      * @param averageSpeed      Average speed per km
-     * @param fare              Fare per km
+     * @param kmsTotal          Total of kms
+     * @param fare              Fare per kms
      * @param availability      Availability from 0 to 1
      * @param queue             Queue setting
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
+    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
         this.setLicensePlate(licensePlate);
         this.setAverageSpeed(averageSpeed);
+        this.setKmsTotal(kmsTotal);
         this.setFare(fare);
-        this.setReliability();
+        this.setReliability(1.0);
         this.setAvailability(availability);
         this.setSeats(seats);
         this.setLocation(x, y);
@@ -102,7 +107,9 @@ public abstract class Vehicle {
      * @param Vehicle   Vehicle
      */
     public Vehicle (Vehicle v){
-        this(v.getLicensePlate(), v.getAverageSpeed(),
+        this(v.getLicensePlate(),
+             v.getAverageSpeed(),
+             v.getKmsTotal(),
              v.getFare(),
              v.getReliability(),
              v.getAvailability(),
@@ -129,6 +136,8 @@ public abstract class Vehicle {
         res.append(this.licensePlate);
         res.append("\nAverage speed: ");
         res.append(this.averageSpeed);
+        res.append("\nTotal Kms:");
+        res.append(this.kmsTotal);
         res.append("\nFare: ");
         res.append(this.fare);
         res.append("\nReliability: ");
@@ -158,6 +167,7 @@ public abstract class Vehicle {
 
         return this.licensePlate == v.getLicensePlate()                     &&
                this.averageSpeed == v.getAverageSpeed()                     &&
+               this.kmsTotal == v.getKmsTotal()                             &&
                this.fare == v.getFare()                                     &&
                this.reliability == v.getReliability()                       &&
                this.available == v.getAvailability()                        &&
@@ -167,6 +177,15 @@ public abstract class Vehicle {
                this.getQueueList().equals(v.getQueueList());
 
                // && this.getQueueList().equals(c.getQueueList()
+    }
+
+    /**
+     * Compares vehicles with natural order
+     * @param V Vehicle used for comparison
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo (Vehicle v){
+        return this.licensePlate.compareTo(v.getLicensePlate());
     }
 
     /**
@@ -185,6 +204,13 @@ public abstract class Vehicle {
         return this.averageSpeed;
     }
 
+    /**
+     * Gets total number of kilometers made by the car
+     * @return returns total number of kilometeres
+     */
+    public double getKmsTotal (){
+        return this.kmsTotal;
+    }
     /**
      * Gets vehicle's fare per km
      * @return   Vehicle's fare per km
@@ -260,6 +286,9 @@ public abstract class Vehicle {
         this.averageSpeed = averageSpeed;
     }
 
+    public void setKmsTotal (double kmsTotal){
+        this.kmsTotal = kmsTotal;
+    }
     /**
      * Changes vehicle's fare per km
      * @param fare  Vehicle's fare per km
@@ -272,9 +301,8 @@ public abstract class Vehicle {
      * Sets vehicle's reliability
      * @param reliability   Vehicle's reliability
      */
-    public void setReliability (){
-        Random rand = new Random();
-        this.reliability = rand.nextDouble();
+    public void setReliability(double reliability){
+        this.reliability = reliability;
     }
 
     /**

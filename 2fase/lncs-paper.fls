@@ -1,0 +1,6 @@
+PWD /Users/elif/Dropbox/LCC/2ano/POO/end-poo/2fase
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT lncs-paper.tex
+OUTPUT lncs-paper.log
