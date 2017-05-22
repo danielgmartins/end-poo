@@ -10,10 +10,10 @@ import java.util.Random;
 import java.util.Queue;
 import java.lang.StringBuilder;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream. Stream;
-import java.util.stream.Collectors;
-//import java.util.stream.Collectors.toList;
 import java.util.*;
+// import java.util.stream.Collectors.toList;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
@@ -52,7 +52,7 @@ public abstract class Vehicle {
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, Queue<Trip> queueList){
+    public Vehicle (double averageSpeed, double fare, double reliability, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueList){
         this.setAverageSpeed(averageSpeed);
         this.setFare(fare);
         this.setReliability(reliability);
@@ -72,14 +72,15 @@ public abstract class Vehicle {
      * @param Vehicle   Vehicle
      */
     public Vehicle (Vehicle v){
-        this.averageSpeed = v.getAverageSpeed();
-        this.fare = v.getFare();
-        this.reliability = v.getReliability();
-        this.available = v.getAvailability();
-        this.seats = v.getSeats();
-        this.location = v.location.clone();
-        this.queue = v.getQueueValue();
-        this.queueList = v.getQueueList ();
+        this(v.getAverageSpeed(),
+             v.getFare(),
+             v.getReliability(),
+             v.getAvailability(),
+             v.getSeats(),
+             v.location.getX(),
+             v.location.getY(),
+             v.getQueueValue(),
+             v.getQueueList () );
     }
 
     /**
@@ -108,7 +109,7 @@ public abstract class Vehicle {
         res.append(" Queue: ");
         res.append(this.queue);
         for(Trip t: this.queueList)
-            res.append( t.toString()).append("; ");
+            res.append(t.toString()).append("; ");
 
         return res.toString();
     }
@@ -195,10 +196,11 @@ public abstract class Vehicle {
      * Gets vehicle's queue list's copy
      * @return   List with queue copy
      */
-    public Queue<Trip> getQueueList (){
+    public List<Trip> getQueueList (){
         if (this.getQueueValue())
-            return (Queue<Trip>) this.queueList.stream().map(Trip::clone)
+            return (List<Trip>) this.queueList.stream().map(Trip::clone)
                                  .collect(Collectors.toList());
+        return new LinkedList<Trip>();
     }
 
     /**
@@ -247,7 +249,7 @@ public abstract class Vehicle {
      * @param Coordinates   New coordinates
      */
     public void setLocation (int x, int y){
-        return this.location = new Coordinates(x, y);
+        this.location = new Coordinates(x, y);
     }
 
     /**
@@ -262,8 +264,9 @@ public abstract class Vehicle {
      * Changes vehicle's queue value
      * @param queueValue   Vehicle's queue boolean. True if supports queue. False it does not support queue
      */
-    public void setQueueList (Queue queueListIn){
-        this.queueList = queueListIn.stream().map(Trip::clone).collect(Collectors(toList() ));
+    public void setQueueList (List<Trip> queueListIn){
+        this.queueList = (Queue<Trip>) queueListIn.stream()
+                                    .map(Trip::clone).collect(Collectors.toList() );
     }
 
 

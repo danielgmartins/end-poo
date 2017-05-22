@@ -48,7 +48,7 @@ public class Client extends User implements Serializable {
      * @param location  Client location
      */
     public Client (int id, String name, Address address, LocalDate birthday, String email, String password, Coordinates location){
-        super(id, name, address, birthday, email, password, new LinkedList<Trip>(), location);
+        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), location);
     }
 
     /**
