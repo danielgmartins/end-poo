@@ -4,5 +4,6 @@ README.TXT
 *.bluej
 *.json
 test.*
+*.pdf
 end-poo/doc/
 .DS_Store
