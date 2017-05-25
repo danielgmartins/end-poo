@@ -8,7 +8,7 @@ import java.lang.StringBuilder;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-public class Trip implements Comparable <Trip> ,Serializable {
+public class Trip implements Comparable<Trip>, Serializable {
 	private int id;
 	private Client client;
 	private Driver driver;
@@ -19,7 +19,8 @@ public class Trip implements Comparable <Trip> ,Serializable {
 	private Coordinates destination;
 	private int estimatedTripTime;
 	private int realTripTime;
-	private int tripCost;
+	private double expectedTripCost;
+	private double realTripCost;
 
 	/**
 	 *Constructors of class Trip (including empty and copy Constructors).
@@ -33,9 +34,9 @@ public class Trip implements Comparable <Trip> ,Serializable {
 	 * @param destination 			Coordinates object with the trip's destination
 	 * @param estimatedTripTime 	estimated time of the trip
 	 * @param realTripTime 			time of the trip
-	 * @param tripCost 				cost of trip
+	 * @param expectedTripCost 				cost of trip
 	 */
-	public Trip(int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,int tripCost){
+	public Trip(int id, Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost){
 		this.setId(id);
 		this.setClient(client);
         this.setDriver(driver);
@@ -46,14 +47,15 @@ public class Trip implements Comparable <Trip> ,Serializable {
 		this.setDestination(destination);
 		this.setEstimatedTripTime(estimatedTripTime);
 		this.setRealTripTime(realTripTime);
-		this.setTripCost(tripCost);
+		this.setExpectedTripCost(expectedTripCost);
+		this.setRealTripCost(realTripCost);
     }
 
 	/** Empty constructor for Trip object
 	 *
 	 */
 	private Trip(){
-		this(-1,null,null,null,null,null,null,null,-1,-1,-1);
+		this(-1,null,null,null,null,null,null,null,-1,-1,-1.0,-1.0);
 	}
 
 	/** Copy constructor for Trip object.
@@ -70,12 +72,13 @@ public class Trip implements Comparable <Trip> ,Serializable {
 			 ref.getDestination(),
 			 ref.getEstimatedTripTime(),
 			 ref.getRealTripTime(),
-			 ref.getTripCost());
+			 ref.getExpectedTripCost(),
+			 ref.getRealTripCost());
 	}
 
 	/**
-	 * A more useful constructor for Trip objects, should be called before the trip and updated with tripCost and realTripTime.
-	 * Initializes tripCost to -1 and realTripTime to -1.
+	 * A more useful constructor for Trip objects, should be called before the trip and updated with expectedTripCost and realTripTime.
+	 * Initializes expectedTripCost to -1 and realTripTime to -1.
 	 * @param id 					Integer that identifies the Trip
 	 * @param client				Client object who requests the trip
 	 * @param driver				Driver object who performs the trip
@@ -88,7 +91,7 @@ public class Trip implements Comparable <Trip> ,Serializable {
 	 * @param estimatedTripTime		estimated time of trip
 	 */
 	public Trip (int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y, int estimatedTripTime){
-		this(id,client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y), estimatedTripTime,0,0);
+		this(id,client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y), estimatedTripTime,0,0.0,0.0);
 	}
 
     /**
@@ -121,7 +124,8 @@ public class Trip implements Comparable <Trip> ,Serializable {
 			this.destination.equals(ref.getDestination())  			&&
 			this.estimatedTripTime == ref.getEstimatedTripTime()	&&
 			this.realTripTime == ref.getRealTripTime() 				&&
-			this.tripCost == ref.getTripCost();
+			this.expectedTripCost == ref.getExpectedTripCost()		&&
+			this.realTripCost == ref.getRealTripCost()				;
     }
 
 	/**
@@ -130,27 +134,29 @@ public class Trip implements Comparable <Trip> ,Serializable {
      */
 	public String toString () {
 		StringBuilder sb = new StringBuilder("Trip");
-		sb.append(" Trip id : ");
+		sb.append("\nTrip id : ");
 		sb.append(this.id);
-		sb.append(" Client : ");
+		sb.append("\nClient : ");
         sb.append(this.client.getName().toString());
         sb.append("\nDriver : ");
         sb.append(this.driver.getName().toString());
 		sb.append("\nDate : ");
         sb.append(this.date.toString());
-		sb.append(", Taxi : ");
-		sb.append(", Taxi's initial position : ");
+		sb.append("\nTaxi : ");
+		sb.append("\nTaxi's initial position : ");
         sb.append(this.taxiLocation.toString());
 		sb.append("\nClient's initial location : ");
         sb.append(this.clientLocation.toString());
 		sb.append("\nDestination : ");
 		sb.append(this.destination.toString());
-		sb.append(" Estimated Trip Time : ");
+		sb.append("\nEstimated Trip Time : ");
 		sb.append(this.estimatedTripTime);
-		sb.append(", Real trip time : ");
+		sb.append("\nReal trip time : ");
         sb.append(this.realTripTime);
-		sb.append("\nCost : ");
-		sb.append(this.tripCost);
+		sb.append("\nExpected Cost : ");
+		sb.append(this.expectedTripCost);
+		sb.append("\nReal Cost : ");
+		sb.append(this.realTripCost);
 		sb.append("\n");
         return sb.toString();
 	}
@@ -246,12 +252,21 @@ public class Trip implements Comparable <Trip> ,Serializable {
 	}
 
 	/**
-	 * getTripCost returns the Trip's tripCost.
+	 * getExpectedTripCost returns the Trip's expectedTripCost.
 	 *
-	 * @return 	int with tripCost of the Trip.
+	 * @return 	double with expectedTripCost of the Trip.
 	 */
-	public int getTripCost(){
-		return this.tripCost;
+	public double getExpectedTripCost(){
+		return this.expectedTripCost;
+	}
+
+	/**
+	 * getExpectedTripCost returns the Trip's real trip cost.
+	 * 
+	 * @return double with real trip cost
+	 */
+	public double getRealTripCost(){
+		return this.realTripCost;
 	}
 
 	//Setters
@@ -337,11 +352,19 @@ public class Trip implements Comparable <Trip> ,Serializable {
 	}
 
 	/**
-	 * setTripCost changes the tripCost's instance variable to the value passed as a variable.
-	 * @param tripCost		the value (int) to atribute as the tripCost's instance variable on Trip object.
+	 * setExpectedTripCost changes the expectedTripCost's instance variable to the value passed as a variable.
+	 * @param expectedTripCost		the value (int) to atribute as the expectedTripCost's instance variable on Trip object.
 	 */
-	public void setTripCost( int tripCost){
-		this.tripCost = tripCost;
+	public void setExpectedTripCost( double expectedTripCost){
+		this.expectedTripCost = expectedTripCost;
+	}
+
+	/**
+	 * setRealTripCost changes the realTripCost's instance variable to the value passed as a variable.
+	 * @param realTripCost		the value (int) to atribute as the realTripCost's instance variable on Trip object.
+	 */
+	public void setRealTripCost( double realTripCost){
+		this.realTripCost = realTripCost;
 	}
 
 	/**

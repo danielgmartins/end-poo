@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.util.Comparator;
 
 public abstract class User implements Serializable {
     private String name;
@@ -20,6 +21,7 @@ public abstract class User implements Serializable {
     private String password;
     private List<Integer> tripHistory;
     private double totalTripCost;
+    
     /**
      * Empty contructor for User
      */
@@ -28,7 +30,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Contructor with all the arguments except trip history
+     * Contructor with all the arguments except trip history and total trip cost
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -74,7 +76,8 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Abstract method for cloning objects with super class User.
+     * Abstract method for cloning objects with super class User. Needs to be implemented by subclasses
+     * @return Returns a User object
      */
     public abstract User clone ();
 
@@ -97,7 +100,7 @@ public abstract class User implements Serializable {
         sb.append("\n");
         sb.append("Email: ");
         sb.append(this.email);
-        sb.append("\n Total Trip Cost:");
+        sb.append("\nTotal Trip Cost: ");
         sb.append(this.totalTripCost);
         sb.append("\n");
         // sb.append("password: ");
@@ -188,24 +191,18 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Gets User trip history
-     * @return Returns LinkedList with this intance User's Trip History
-     */
-    public List<Integer> getTripHistory(){
-        return this.tripHistory;
-    }
-
-    /**
      * Gets copy of this instance User's trip history
      * @return Returns LinkedList that's a copy of this instance of User's Trip History
      */
-    public List<Integer> getTripHistoryCopy(){
+    public List<Integer> getTripHistory(){
         List<Integer> aux = new LinkedList<Integer>();
         
-        this.tripHistory.forEach(trip -> {aux.add(trip);});
+        ((LinkedList<Integer>) this.tripHistory).forEach(trip -> {aux.add(trip);});
 
         return aux;
     }
+
+    
 
     /**
      * Changes user's address
@@ -255,17 +252,19 @@ public abstract class User implements Serializable {
      * @param history New trip history to update to
      */
     private void setTripHistory(List<Integer> tripHistory){
-        //List<Trip> history = new LinkedList<Trip>(tripHistory);
+        //List<Trip> history = new LinkedList<Integer>(tripHistory);
         
         this.tripHistory = new LinkedList<Integer>();
-        tripHistory.forEach(trip -> {this.tripHistory.add(trip);} );
+        List<Integer> aux = new LinkedList<Integer>(tripHistory);
+
+        aux.forEach(trip -> {this.tripHistory.add(trip);} );
     }
     
     /**
      * Set's new cost to the total of trip cost
      * @param cost double with total cost of trips in history
      */
-    private void setTotalTripCost(double cost){
+    public void setTotalTripCost(double cost){
         this.totalTripCost = cost;
     }
 
@@ -277,6 +276,36 @@ public abstract class User implements Serializable {
      */
     public void addTripToHistory (Trip trip){
         ( (LinkedList<Integer>) this.tripHistory).addFirst(trip.getId());
+
         this.totalTripCost += trip.getRealTripCost();
+    }
+
+    /**
+     * Confirm if the given password is equal to the one stored
+     * @param pass
+     */
+    public boolean confirmPass (String password) throws NullPointerException, IllegalStateException {
+        if (password == null)
+            throw new NullPointerException("Password can't be null!");
+        if (password.trim() == "")
+            throw new IllegalStateException("Password can't be empty!");
+        
+        if (this.getPassword().equals(password)) return true;
+        else return false;
+    }
+
+    /**
+     * 
+     */
+    public int hashCode(){
+        return this.email.hashCode();
+    }
+
+    /** 
+     * Counts number of trips done.
+     * @return int with number of trips done
+     */
+    public long countTripsDone(){
+        return this.tripHistory.stream().count();
     }
 }

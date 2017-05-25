@@ -1,11 +1,8 @@
 
-
-
-
 import java.util.Comparator;
 
-public class ComparatorUserTripCost implements Comparator<User> {
 
+public class ComparatorUserTotalTripCost implements Comparator<User> {
     /**
      * Compares to users by their total Trip cost
      * @param user1 User to compare
@@ -17,7 +14,7 @@ public class ComparatorUserTripCost implements Comparator<User> {
         double cost2 = user2.getTotalTripCost();
 
         if (cost1 == cost2) return 0;
-        if (cost1 > cost2) return 1;
-        return -1;
+        if (cost1 > cost2) return -1;
+        return 1;
     }
 }

@@ -28,7 +28,6 @@ public class Driver extends User implements Serializable {
 
     /**
      * Constructor with every parameter for super class User
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
@@ -36,7 +35,7 @@ public class Driver extends User implements Serializable {
      * @param password  User password
      */
     public Driver (String name, Address address, LocalDate birthday, String email, String password){
-        this(name, address, birthday, email, password, new LinkedList<Trip>(), 100, 100, 0, true);
+        this(name, address, birthday, email, password, new LinkedList<Integer>(), 100, 100, 0, true);
     }
 
     /**
@@ -52,8 +51,8 @@ public class Driver extends User implements Serializable {
      * @param kmsDriven      Driver kms driven
      * @param availability   Driver availability
      */
-    public Driver (String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
-        super(name, address, birthday, email, password, tripHistory);
+    public Driver (String name, Address address, LocalDate birthday, String email, String password, LinkedList<Integer> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
+        super(name, address, birthday, email, password, tripHistory, 0);
         this.setPerformance(performance);
         this.setClassification(classification);
         this.setKmsDriven(kmsDriven);
@@ -202,5 +201,7 @@ public class Driver extends User implements Serializable {
     public void switchAvailability(){
         this.availability = !this.availability;
     }
+
+    //  ----------  Other Methods   ----------  //
 
 }

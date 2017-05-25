@@ -7,6 +7,7 @@
 
 import java.lang.StringBuilder;
 import java.io.Serializable;
+import Exceptions.*;
 
 public class Address implements Serializable {
     private String city;
@@ -100,7 +101,7 @@ public class Address implements Serializable {
      * Change city in the address
      * @param city City for the address
      */
-    public void setCity (String city){
+    public void setCity (String city) throws NullPointerException, IllegalStateException {
         if (city == null)
             throw new NullPointerException("City can't be null");
         if (city.trim() == "")
@@ -113,7 +114,7 @@ public class Address implements Serializable {
      * Change country in the address
      * @param country Country for the adress
      */
-    public void setCountry (String country){
+    public void setCountry (String country) throws NullPointerException, IllegalStateException {
         if (country == null)
             throw new NullPointerException("Country can't be null");
         if (country.trim() == "")

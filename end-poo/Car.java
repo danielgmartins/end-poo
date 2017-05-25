@@ -9,6 +9,7 @@
 import java.util.Random;
 import java.lang.StringBuilder;
 import java.util.List;
+import java.util.LinkedList;
 import java.lang.Math;
 
 import java.util.stream.Stream;
@@ -23,62 +24,20 @@ public class Car extends Vehicle implements Serializable {
      * Empty constructor
      */
     private Car (){
-        super("na", -1.0, -1.0, -1.0, false, -1, -1, -1, false, (List<Trip>) null);
+        super("N/A", 4);
     }
 
     /**
-     * Constructor with indiviual parameters
-     * @param licensePlate    License plate
-     * @param averageSpeed    Average speed per km
-     * @param kmsTotal        Total of kms
-     * @param fare            Fare per km
-     * @param availability    Availability
-     * @param seats           Number of seats
-     * @param x               x coordinate
-     * @param y               y coordinate
-     * @param queue           Queue setting
-     * @param queueListIn     Queue list
+     * Car constructor just receiveng a licence plate. Sets 4 seats as default
+     * @param licensePlate  String with license plate
      */
-    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
-        super(licensePlate,
-              averageSpeed,
-              kmsTotal,
-              fare,
-              availability,
-              seats,
-              x,
-              y,
-              queue,
-              queueListIn);
+    public Car (String licensePlate){
+        super(licensePlate, 4);
     }
 
     /**
      * Constructor with indiviual parameters
-     * @param licensePlate    License plate
-     * @param averageSpeed    Average speed per km
-     * @param kmsTotal        Total of kms
-     * @param fare            Fare per km
-     * @param availability    Availability
-     * @param seats           Number of seats
-     * @param x               x coordinate
-     * @param y               y coordinate
-     * @param queueListIn     Queue list
-     */
-    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y, List<Trip> queueListIn){
-        super(licensePlate,
-              averageSpeed,
-              kmsTotal,
-              fare,
-              availability,
-              seats,
-              x,
-              y,
-              true,
-              queueListIn);
-    }
-
-    /**
-     * Constructor with indiviual parameters
+     * Sets Reliablity to 1 as default
      * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
      * @param kmsTotal        Total of kms
@@ -93,13 +52,13 @@ public class Car extends Vehicle implements Serializable {
               averageSpeed,
               kmsTotal,
               fare,
+              1.0,
               availability,
               seats,
               x,
-              y,
-              false,
-              (List<Trip>) null);
+              y);
     }
+    
     /**
      * Constructor with Car parameter
      * @param Car   Car object
@@ -112,16 +71,7 @@ public class Car extends Vehicle implements Serializable {
               c.getReliability(),
               c.getAvailability(),
               c.getSeats(),
-              c.getLocation().getX(),
-              c.getLocation().getY(),
-              c.getQueueValue(),
-              c.getQueueList());
-
-        // if (this.getQueueValue()){
-        //     this.queueList = new LinkedList<Trip>();
-        //     this.queueList = c.getQueueList();
-        // }
-        // else this.queueList = null;
+              c.getLocation());
     }
 
     /**
@@ -159,7 +109,6 @@ public class Car extends Vehicle implements Serializable {
 
     /**
      * Sets car's reliability bearing in mind the randomability of weather, traffic conditions and the fact that a car is pretty unreliable itself
-     * @param reliability   Vehicle's reliability
      */
     public void setReliability (){
         Random rand = new Random();
