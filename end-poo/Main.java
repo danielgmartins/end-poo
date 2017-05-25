@@ -196,8 +196,10 @@ public class Main
                         validInput = true;
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
+                    validInput = false;
                     continue;
                 }
+                
             }while(!validInput);
 
             validInput = false;
@@ -222,7 +224,10 @@ public class Main
                 password = sc.nextLine().replaceAll("[\n\r]","");
 
                 if(password.equals("0")) return; // breaks in case of 0.
-                if(password.length() <= 6) continue; // does not accept password with less then 6 char
+                if(password.length() <= 6) {
+                    System.out.println("Password must be 6 characters long, or higher");
+                    continue; // does not accept password with less then 6 char
+                }
                 try{
                     password = hashPassword(password);
                     validInput = true;
