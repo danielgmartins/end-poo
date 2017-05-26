@@ -24,7 +24,7 @@ import Exceptions.*;
 
 public class Main
 {   
-    private static Console console = System.console();
+    //private static Console console = System.console();
     private static UMeR umer;
     private static boolean running;
 
@@ -55,11 +55,13 @@ public class Main
         Interface.mainMenuForClient(umer.getUserLogged());
         try{
             switch(sc.nextInt()){
-                case 1: umer.logOut();         return; // Log Out
-                case 2: requestTrip();         break;  // Request Trip
-                case 3: viewProfile();         break;  // View Profile
-                case 99: umer.printString();   System.exit(0);
-                case 0: exit();                return; // Exit application
+                case 1: umer.logOut();          return; // Log Out
+                case 2: requestTrip();          break;  // Request Trip
+                case 3: viewProfile();          break;  // View Profile
+                case 4:                         break;  // View Statistics
+                case 5: saveSession();          return;  // Save Session
+                case 99: umer.printString();    System.exit(0);
+                case 0: exit();                 return; // Exit application
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
@@ -77,9 +79,12 @@ public class Main
         Interface.mainMenuForDriver(umer.getUserLogged());
         try{
             switch(sc.nextInt()){
-                case 1: umer.logOut();     return; // Log Out
-                case 2: viewProfile();     break;  // View Profile
-                case 3: registerVehicle(); break;  // Register Vehicle
+                case 1: umer.logOut();      return; // Log Out
+                case 2: viewProfile();      break;  // View Profile
+                case 3: registerVehicle();  break;  // Register Vehicle
+                case 4:                     break;  // Set Location
+                case 5:                     break;  // View Statistics
+                case 6: saveSession();      return; // Save Session
                 case 99: umer.printString(); System.exit(0);
                 case 0: exit();            return; // Exit application
                 default: System.out.println("Invalid option, try again.");
@@ -99,11 +104,13 @@ public class Main
         Interface.mainMenuNotLogged();
         try{
             switch(sc.nextInt()){
-                case 1: logIn();               break;  // Log In
-                case 2: signUp();              break;  // Sign Up
-                case 3: loadSession();         break;  // Load Session
-                case 99: umer.printString();   System.exit(0);
-                case 0: exit();                return; // Exit application
+                case 1: logIn();                break;  // Log In
+                case 2: signUp();               break;  // Sign Up
+                case 3: loadSession();          break;  // Load Session
+                case 4:                         break;  // View Statistics
+                case 5: saveSession();          return; // Load Session
+                case 99: umer.printString();    System.exit(0);
+                case 0: exit();                 return; // Exit application
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
@@ -112,20 +119,21 @@ public class Main
     }
 
     /**
-     * 
+     * Method for logging in
      */
     public static void logIn(){
         Scanner sc = new Scanner(System.in);
         String email = new String();
         String password = new String();
         boolean validInput = false;
+        int inp = -1;
 
         clean();
-        System.out.println("0. Go back");
         EmailValidator eval = new EmailValidator();
         
 
         do { // getting info for logIn
+            System.out.println("0. Go back");
 
             do{ // getting email
                 System.out.print("Email: ");
@@ -139,6 +147,8 @@ public class Main
                     System.out.println("Email not valid. Try again.");
                 }
             } while (!validInput);
+
+             
 
             do{ // getting password
                 System.out.print("Password: ");
@@ -156,19 +166,38 @@ public class Main
                 }
             } while(!validInput);
 
+             
+
             try{ // attempts log in
                 umer.logIn(email,password);
+                validInput = true;
             }
             catch(WrongEmailOrPassword e){
                 System.out.println(e.getMessage());
-                continue;
+                validInput = false;
+                clean();
+                System.out.println("Log In unsuccessful. Try again.");
             }
-            validInput = true;
         }while(!validInput);
+
+        do{ // Going back
+            System.out.println("Log In successful. Hello " + umer.getUserLogged());
+            System.out.println("0. Go Back");
+
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
     /**
-     * 
+     * Method for signing up user
      */
     public static void signUp(){
         Scanner sc  = new Scanner(System.in);
@@ -179,7 +208,7 @@ public class Main
         User newUser;
         int userType = 0; // 1 = Client, 2 = Driver
         String name, email, password, city, country;
-        int bday, bmonth, byear;
+        int bday=0, bmonth=0, byear=0, inp =-1;
         Address address = new Address();
         LocalDate birthday = LocalDate.now();
         EmailValidator eval = new EmailValidator();
@@ -188,19 +217,23 @@ public class Main
 
             do{ // signing up as Cliente or Driver?
                 System.out.println("1. Sign Up as Client");
-                System.out.println("1. Sign Up as Driber");
+                System.out.println("2. Sign Up as Driver");
+
                 try{
                     userType = sc.nextInt();
                     if(userType == 0) return;
                     if(userType == 1 || userType == 2)
                         validInput = true;
-                }catch(NoSuchElementException | IllegalStateException e){
+                }catch(InputMismatchException | IllegalStateException e){
+                    e.getMessage();
                     System.out.println("You must enter a number.");
                     validInput = false;
-                    continue;
                 }
-                
+
+                sc.nextLine().replaceAll("[\n\r]","");;
             }while(!validInput);
+
+             
 
             validInput = false;
             do{ //getting email
@@ -218,13 +251,15 @@ public class Main
                 }
             }while(!validInput);
 
+             
+
             validInput = false;
             do{                         // getting password
                 System.out.print("Password: ");
                 password = sc.nextLine().replaceAll("[\n\r]","");
 
                 if(password.equals("0")) return; // breaks in case of 0.
-                if(password.length() <= 6) {
+                if(password.length() < 6) {
                     System.out.println("Password must be 6 characters long, or higher");
                     continue; // does not accept password with less then 6 char
                 }
@@ -238,6 +273,8 @@ public class Main
                 }
             }while(!validInput);
 
+             
+
             validInput = false;
             do{                         // getting name
                 System.out.print("Name: ");
@@ -250,6 +287,8 @@ public class Main
                 }
             }while(!validInput);
 
+             
+
             validInput = false;
             do{                         // getting birthday
                 System.out.println("Birthday");
@@ -257,22 +296,28 @@ public class Main
                     System.out.print("Day: ");
                     bday = sc.nextInt();
                     if(bday == 0) return;
+                     
                     System.out.print("Month: ");
                     bmonth = sc.nextInt();
                     if(bmonth == 0) return;
+                     
                     System.out.print("Year: ");
                     byear = sc.nextInt();
                     if(byear == 0) return;
+                    validInput = true;
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
-                    continue;
-                }
-                try{
-                    birthday = LocalDate.of(byear,bmonth,bday);
-                    validInput = true;
-                }catch(DateTimeException e){
-                    System.out.println("Not a valid date.");
                     validInput = false;
+                }
+                sc.nextLine().replaceAll("[\n\r]","");;
+                if(validInput){
+                    try{
+                        birthday = LocalDate.of(byear,bmonth,bday);
+                        validInput = true;
+                    }catch(DateTimeException e){
+                        System.out.println("Not a valid date.");
+                        validInput = false;
+                    }
                 }
             }while(!validInput);
 
@@ -280,9 +325,8 @@ public class Main
             do{                         // getting address
                 System.out.print("Address\nCity: ");
 
-                city = sc.nextLine().replaceAll("[\n\r]","");
-                //city = sc.nextLine().replaceAll("[\n\r]","");
-
+                city = sc.nextLine().replaceAll("[\n\r]","");;
+                 
                 if(city.equals("0")) return;
                 try{
                     address.setCity(city);
@@ -291,7 +335,8 @@ public class Main
                     continue;
                 }
                 System.out.print("Country: ");
-                country = sc.nextLine().replaceAll("[\n\r]","");
+                country = sc.nextLine().replaceAll("[\n\r]","");;
+                 
                 if(country.equals("0")) return;
                 try{
                     address.setCountry(country);
@@ -315,10 +360,27 @@ public class Main
                     validInput = true;
                 }
             } catch(EmailUnavailable e){
+                clean();
                 System.out.println("This email is already in user.");
                 validInput = false;
+                System.out.println("Sign Up unsuccessful. Try again.");
             }
         }while(!validInput);
+
+        do{ // Going back
+            System.out.println("\nSign Up successful.");
+            System.out.println("0. Go Back");
+
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
 
@@ -330,7 +392,11 @@ public class Main
 
         clean();
         if(umer.isClient()){   // CLIENT PROFILE
-            System.out.println( umer.getThisClientProfileString() );
+            try{
+                System.out.println( umer.getThisClientProfileString() );
+            }catch(NoUserLoggedException | UserIsNotClientException e){
+                System.out.println("NoUserLoggedException | UserIsNotClientException");
+            }
             System.out.println("1. View Trip History");
             System.out.println("2. Change password");
             System.out.println("3. View Favorites");
@@ -384,14 +450,14 @@ public class Main
         
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
-        int vehicleType = -1;
+        int vehicleType = -1, inp = -1;
         Vehicle newVehicle;
         String lincesePlate;
 
         clean();
-        System.out.println("0. Go Back");
 
         do{
+            System.out.println("0. Go Back");
             System.out.println("1. Register Car");
             System.out.println("2. Register Motorcycle");
             System.out.println("3. Register Van");
@@ -407,7 +473,9 @@ public class Main
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
+                    validInput = false;
                 }
+                sc.nextLine().replaceAll("[\n\r]","");;
             }while(!validInput);
 
             do {    // Get lincese plate
@@ -417,22 +485,39 @@ public class Main
                 validInput = true;
             }while(!validInput);
 
-            switch(vehicleType){
-                case 1:
-                    newVehicle = new Car(lincesePlate);
-                    try{
+            try{
+                switch(vehicleType){
+                    case 1:
+                        newVehicle = new Car(lincesePlate);
                         umer.addVehicle(newVehicle);
-                    }catch(LicensePlateUnavailable e){
-                        System.out.println("License plate already in use.");
-                    }
-                case 2: break;
-                
-                case 3: break;
+                        
+                    case 2: break;
+                    
+                    case 3: break;
 
-                default: break;
+                    default: break;
+                }
+            }catch(LicensePlateUnavailable e){
+                clean();
+                System.out.println("License plate already in use.");
+                System.out.println("Could not register Vehicle. Try Again");
             }
-
         }while(!validInput);
+
+        do{ // Going back
+            System.out.println("\n Registered Vechicle succsessfully");
+            System.out.println("0. Go Back");
+
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
     /**
@@ -481,6 +566,7 @@ public class Main
     public static void exit(){
         running = false;
         if(umer.isLogged()) umer.logOut();
+        //clean();
     }
 
     /**
@@ -514,7 +600,7 @@ public class Main
      * Clean the terminal view
      */
     private static void clean(){
-        if (console != null) System.out.print("\u001b[2J" + "\u001b[H");
+        System.out.print("\u001b[2J" + "\u001b[H");
     }
 
     /*--------------------- APPLICATION STATE -----------------------*/
@@ -522,17 +608,34 @@ public class Main
     /**
      * Save the application state to an object file named 'geocaching'
      */
-    private static void saveState () {
+    private static void saveSession () {
+        Scanner sc = new Scanner(System.in);
+        int inp = -1;
+
         try {
             FileOutputStream fos = new FileOutputStream("UMeR_savefile");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(umer);
+            oos.flush();
             oos.close();
-            System.out.println("Saved!");
-            if (console != null) console.readLine();
+            System.out.println("\nSuccessfully saved session.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        do{ // Going back
+            System.out.println("0. Go Back");
+
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
     /**
@@ -540,16 +643,31 @@ public class Main
      * is not in the directory the state will not be loaded
      */
     private static void loadSession () {
+        Scanner sc = new Scanner(System.in);
+        int inp = -1;
         try {
             FileInputStream fis = new FileInputStream("UMeR_savefile");
             ObjectInputStream ois = new ObjectInputStream(fis);
             umer = (UMeR) ois.readObject();
             ois.close();
-            System.out.println("Successfully loaded state.");
-            if (console != null) console.readLine();
+            System.out.println("\nSuccessfully loaded session.");             
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        do{ // Going back
+            System.out.println("0. Go Back");
+
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
 }

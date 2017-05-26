@@ -293,11 +293,11 @@ public class UMeR implements Serializable
     /**
      * 
      */
-    public String getThisClientProfileString (){
-        if (this.loggedUserEmail != null)
-            return "";  // Este caso nunca acontece
-        if (!(this.userList.get(loggedUserEmail) instanceof Client))
-            return "";  // Este caso nunca acontece
+    public String getThisClientProfileString () throws NoUserLoggedException, UserIsNotClientException {
+        if (this.loggedUserEmail == null)
+            throw new NoUserLoggedException();      // Este caso nunca acontece
+        if (!isClient() )
+            throw new UserIsNotClientException();   // Este caso nunca acontece
         
         Client user = (Client) this.userList.get(loggedUserEmail);
         
@@ -307,7 +307,9 @@ public class UMeR implements Serializable
         sb.append("\nEmail: ");
         sb.append(user.getEmail());
         sb.append("\nAddress: ");
-        sb.append(user.getAddress().toString());
+        sb.append(user.getAddress().getCity());
+        sb.append(", ");
+        sb.append(user.getAddress().getCountry());
         sb.append("\nBirthday: ");
         sb.append(user.getBirthday().toString());
         sb.append("\n");
@@ -319,9 +321,9 @@ public class UMeR implements Serializable
      * 
      */
     public String getThisDriverProfileString () throws NoUserLoggedException, UserIsNotClientException{
-        if (this.loggedUserEmail != null)
+        if (this.loggedUserEmail == null)
             throw new NoUserLoggedException();      // Este caso nunca acontece
-        if ( !(this.userList.get(loggedUserEmail) instanceof Driver))
+        if (! isDriver() )
             throw new UserIsNotClientException();   // Este caso nunca acontece
         
         Driver user = (Driver) this.userList.get(loggedUserEmail);
@@ -332,7 +334,9 @@ public class UMeR implements Serializable
         sb.append("\nEmail: ");
         sb.append(user.getEmail());
         sb.append("\nAddress: ");
-        sb.append(user.getAddress().toString());
+        sb.append(user.getAddress().getCity());
+        sb.append(" ,");
+        sb.append(user.getAddress().getCountry());
         sb.append("\nBirthday: ");
         sb.append(user.getBirthday().toString());
         sb.append("\nTotal revenue:");

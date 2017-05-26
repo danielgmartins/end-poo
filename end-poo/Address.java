@@ -104,7 +104,7 @@ public class Address implements Serializable {
     public void setCity (String city) throws NullPointerException, IllegalStateException {
         if (city == null)
             throw new NullPointerException("City can't be null");
-        if (city.trim() == "")
+        if (city.trim().equals(""))
             throw new IllegalStateException("City must have content");
 
         this.city = city;
@@ -117,7 +117,7 @@ public class Address implements Serializable {
     public void setCountry (String country) throws NullPointerException, IllegalStateException {
         if (country == null)
             throw new NullPointerException("Country can't be null");
-        if (country.trim() == "")
+        if (country.trim().equals(""))
             throw new IllegalStateException("Country must have content");
 
         this.country = country;
