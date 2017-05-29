@@ -35,7 +35,8 @@ public interface Interface
         System.out.println("3. Register Vehicle");
         System.out.println("4. Set location");
         System.out.println("5. View Statistics");
-        System.out.println("6. Save Session");
+        System.out.println("6. Switch Availability");
+        System.out.println("7. Save Session");
         System.out.println("0. Exit");
     }
 

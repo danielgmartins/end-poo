@@ -42,7 +42,7 @@ public class UMeR implements Serializable
     /**
      * 
      */
-    public void printString(){
+    public String toString(){
         StringBuilder sb = new StringBuilder();
 
         sb.append("\nisLogged: ");
@@ -60,7 +60,14 @@ public class UMeR implements Serializable
         sb.append("\ntripNumber: ");
         sb.append(this.tripNumber);
 
-        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    /**
+     * 
+     */
+    public void printString(){
+        System.out.println(this.toString());
     }
 
     //  ----------  GETTERS  -----------  //
@@ -120,7 +127,7 @@ public class UMeR implements Serializable
     /**
      * Gets the user ojvect of a given driver email
      */
-    public User getDriverObejct(String driverEmail){
+    public User getDriverObject(String driverEmail){
         // check if exists
         // check it driver
         return this.userList.get( driverEmail ).clone();
@@ -132,7 +139,7 @@ public class UMeR implements Serializable
     /**
      * Set's user location
      */
-    private void setUserLocation(Coordinates coord){
+    public void setUserLocation(Coordinates coord){
         ( (Client) this.userList.get(this.loggedUserEmail) ).setLocation(coord);
     }
     /** Sets logged variable to true or false
@@ -168,6 +175,13 @@ public class UMeR implements Serializable
      */
     private void setDriverVehicle(HashMap<String, String> list){
         this.driverVehicle = list;
+    }
+    
+    /**
+     * 
+     */
+    public void setDriverAvailability(String driver, boolean available){
+        ((Driver) this.userList.get(driver)).setAvailability(available);
     }
 
     /**

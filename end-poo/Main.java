@@ -56,11 +56,11 @@ public class Main implements Serializable, Interface
         Interface.mainMenuForClient(umer.getUserLogged());
         try{
             switch(sc.nextInt()){
-                case 1: umer.logOut();          return; // Log Out
-                case 2: requestTrip();          break;  // Request Trip
-                case 3: viewProfile();          break;  // View Profile
-                case 4:                         break;  // View Statistics
-                case 5: saveSession();          break;  // Save Session
+                case 1: umer.logOut();      return; // Log Out
+                case 2: requestTrip();      break;  // Request Trip
+                case 3: viewProfile();      break;  // View Profile
+                case 4:                     break;  // View Statistics
+                case 5: saveSession();      break;  // Save Session
                 case 99: umer.printString();    System.exit(0);
                 case 0: exit();                 return; // Exit application
                 default: System.out.println("Invalid option, try again.");
@@ -85,8 +85,8 @@ public class Main implements Serializable, Interface
                 case 3: registerVehicle();  break;  // Register Vehicle
                 case 4:                     break;  // Set Location
                 case 5:                     break;  // Change Availability
-                case 5:                     break;  // View Statistics
-                case 6: saveSession();      break;  // Save Session
+                case 6:                     break;  // View Statistics
+                case 7: saveSession();      break;  // Save Session
                 case 99: umer.printString(); System.exit(0);
                 case 0: exit();            return; // Exit application
                 default: System.out.println("Invalid option, try again.");
@@ -106,11 +106,11 @@ public class Main implements Serializable, Interface
         Interface.mainMenuNotLogged();
         try{
             switch(sc.nextInt()){
-                case 1: logIn();                break;  // Log In
-                case 2: signUp();               break;  // Sign Up
-                case 3: loadSession();          return; // Load Session
-                case 4: viewStatistics();       break;  // View Statistics
-                case 5: saveSession();          break;  // Load Session
+                case 1: logIn();                    break;  // Log In
+                case 2: signUp();                   break;  // Sign Up
+                case 3: loadSession();              return; // Load Session
+                case 4: viewStatistics();           break;  // View Statistics
+                case 5: saveSession();              break;  // Load Session
                 case 99: umer.printString();    System.exit(0);
                 case 0: exit();                 return; // Exit application
                 default: System.out.println("Invalid option, try again.");
@@ -637,20 +637,21 @@ public class Main implements Serializable, Interface
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
         int inp = -1;
-        String driverEmail;
+        String driverEmail = "";
         Driver driver;
         Vehicle vehicle;
-        int xcoordinate, ycoordinate, timeToClient, timeToDestination, realTripTime, classification;
-        LocalDate userLocation;
-        double realTripCost, estimatedTripCost, vehicleReliability, paidPrice;
-        Coordinates userLocation, destination;
+        int xcoordinate, ycoordinate, timeToClient, timeToDestination, realTripTime, classification=100;
+        double realTripCost, estimatedTripCost, vehicleReliability, paidPrice=0;
+        Coordinates userLocation=null, destination=null;
         Trip newTrip;
         
         do{
             do{     //Get User Location     THIS IS THE ONLY TIME YOU CANNONT ENTER 0 TO GO BACK
                 System.out.println("Please enter your location. Enter 'C' to cancel.");
                 try{
+                    System.out.print("Coordenada x: ");
                     xcoordinate = sc.nextInt();
+                    System.out.print("Coordenada y: ");
                     ycoordinate = sc.nextInt();
                     userLocation = new Coordinates(xcoordinate, ycoordinate);
                     umer.setUserLocation(userLocation);
@@ -667,7 +668,9 @@ public class Main implements Serializable, Interface
             do{     //Get User Location     THIS IS THE ONLY TIME YOU CANNONT ENTER 0 TO GO BACK
                 System.out.println("Please enter your destination. Enter 'C' to cancel.");
                 try{
+                    System.out.print("Coordenada x: ");
                     xcoordinate = sc.nextInt();
+                    System.out.print("Coordenada y: ");
                     ycoordinate = sc.nextInt();
                     destination = new Coordinates(xcoordinate, ycoordinate);
                     validInput = true;
@@ -707,7 +710,7 @@ public class Main implements Serializable, Interface
             validInput = false;
 
             //      Calculate trip values
-            driver = umer.getDriverObject(driverEmail);
+            driver = (Driver) umer.getDriverObject(driverEmail);
             vehicle = umer.getDriversVehicle(driverEmail);
 
             timeToClient = (int) ( vehicle.getAverageSpeed()
@@ -735,15 +738,16 @@ public class Main implements Serializable, Interface
             System.out.print("Total estimated trip time: ");
             System.out.println(timeToClient + timeToDestination);
             System.out.print("Estimated Cost: ");
-            System.out.print(estimatedTripCost);
+            System.out.println(estimatedTripCost);
 
             do{     // Checks if client wnats to request the trip
                 try{
                     System.out.println("Do you want to request this trip?");
                     System.out.println("1. Request Trip");
                     System.out.println("0. Cancel and go back");
-                    switch(sc.nextLine()){
+                    switch(sc.nextInt()){
                         case 1:
+                            umer.setDriverAvailability(driverEmail, false);
                             validInput = true;
                             break;
                         case 0:
@@ -820,6 +824,8 @@ public class Main implements Serializable, Interface
             validInput= false;       
         }
 
+        umer.setDriverAvailability(driverEmail, true);
+
         // GET DRIVER CLASSIFICATION
         clean();
         System.out.println("How would you rate this driver from 0 to 100");
@@ -849,54 +855,17 @@ public class Main implements Serializable, Interface
                       realTripCost
                     );
         umer.giveClassification(driverEmail,classification);
-
-        /*
-        get user location
-        Ask if what kind of vehicle the user wants, or if they want to request a specific vehicl
-        
-        If Specific Vehicle
-            get vehicle license plate
-            check availability
-            if not available    go back
-            else                continue
-
-        If any vehicle of given type
-            get the closest vehicle
-        
-        calculate time taken to arrival 
-        calculate time taken to destination
-        calcutale total time
-        calculate expected price
-        print all this info allong with vehicle and driver info
-        check if driver wants to make request
-
-        set driver to unavailable
-
-        calculate real time
-        if realtime > time estimated * 125% || realtime < time estimated * 125%
-            get how much client wants to pay
-        else
-            calculate real price
-        
-        get reating 0 - 100
-        
-        make object trip
-            (when creating trip, in UMeR we have to update the vehicle location to the trip destination)
-        
-        set driver to available
-
-        */
         return;
     }
 
     /**
      * Request the closest vehicles available, depending on the type of vehicle.
      */
-    private String requestClosestVehicle(){
+    private static String requestClosestVehicle(){
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
         int inp = -1;
-        String driverEmail;
+        String driverEmail = null;
 
         do{
             clean();
@@ -911,15 +880,15 @@ public class Main implements Serializable, Interface
                 inp = sc.nextInt();
                 switch(inp){
                     case 1: 
-                        driverEmail = getNearestDriver(inp); 
+                        driverEmail = umer.getNearestDriver(inp); 
                         validInput = true;
                         break;
                     case 2: 
-                        driverEmail = getNearestDriver(inp);
+                        driverEmail = umer.getNearestDriver(inp);
                         validInput = true;
                         break;
                     case 3: 
-                        driverEmail = getNearestDriver(inp);
+                        driverEmail = umer.getNearestDriver(inp);
                         validInput = true;
                     case 0: return null;
                 }
@@ -935,7 +904,7 @@ public class Main implements Serializable, Interface
     /**
      * Request the closest vehicles available, depending on the type of vehicle.
      */
-    private String requestSpecificVehicle(){
+    private static String requestSpecificVehicle(){
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
         int inp = -1;
@@ -1092,7 +1061,7 @@ public class Main implements Serializable, Interface
         try {
             FileOutputStream fos = new FileOutputStream("UMeR_savefile");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject((UMeR) umer);
+            oos.writeObject(umer);
             oos.flush();
             oos.close();
             System.out.println("\nSuccessfully saved session.");

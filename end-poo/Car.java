@@ -33,6 +33,7 @@ public class Car extends Vehicle implements Serializable {
      */
     public Car (String licensePlate){
         super(licensePlate, 4);
+        this.setAverageSpeed(60.0);
     }
 
     /**
