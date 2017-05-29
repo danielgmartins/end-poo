@@ -6,7 +6,7 @@
  * @version (a version number or a date)
  */
 
-public class Interface
+public interface Interface
 {
     public static void mainMenuNotLogged(){
         System.out.println("Main Menu   -   You are not logged in");
@@ -37,5 +37,12 @@ public class Interface
         System.out.println("5. View Statistics");
         System.out.println("6. Save Session");
         System.out.println("0. Exit");
+    }
+
+    public static void profileMenu(String profile){
+        System.out.println(profile);
+        System.out.println("1. View Trip History");
+        System.out.println("2. Change password");
+        System.out.println("0. Go Back");
     }
 }

@@ -175,7 +175,7 @@ public class Client extends User implements Serializable {
     //    ----------    Other Methods    ----------    //
 
     /**
-     * Adds new trip to trip history
+     * Adds new trip to trip history. Updates Clients location.
      * @param trip Trip to be added to trip history
      */
     public void addTripToHistory (Trip trip){

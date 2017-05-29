@@ -204,4 +204,46 @@ public class Driver extends User implements Serializable {
 
     //  ----------  Other Methods   ----------  //
 
+
+
+    /**
+     * Updates a driver's classification when given a new classification from a trip.
+     * This must be done ONLY after the trip has been added to this user's trip History.
+     * In case this is the first classification a driver receives, it replaces the previous classification
+     * @param classification    new classification given to driver.
+     */
+    public void addClassification(int classification){
+        long number_of_trips = this.countTrips();
+
+        if(number_of_trips == 0) this.setClassification(classification);
+        else this.setClassification( (int) ( ((long) ( number_of_trips * this.classification + classification)) /  (number_of_trips +1) ));
+    }
+
+    /**
+     * Adds new trip to trip history
+     * Updates totalTripCost
+     * Updates kmsDriven
+     * Updates performance
+     * @param trip Trip to be added to trip history
+     */
+    public void addTripToHistory (Trip trip){
+        long number_of_trips = this.countTrips();
+        super.addTripToHistory(trip);
+        
+        this.kmsDriven += trip.getDestination().distance(trip.getTaxiLocation()) 
+                        + trip.getDestination().distance(trip.getClientLocation());
+        
+        if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){
+            if(number_of_trips == 0) this.performance = 50; 
+            this.performance -= (1/number_of_trips)*25;
+            if(this.performance < 0) this.performance = 0;
+        }else{
+            if(number_of_trips != 0){
+                this.performance += (1/number_of_trips)*50;
+                if(this.performance > 100) this.performance = 100;
+            }
+        }
+        this.availability = true;
+    }
+
 }

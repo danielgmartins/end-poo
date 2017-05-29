@@ -3,8 +3,8 @@
 
 
 import java.util.Comparator;
-
-public class ComparatorUserName implements Comparator<User> {
+import java.io.Serializable;
+public class ComparatorUserName implements Comparator<User>, Serializable {
 
     /**
      * Compares to users alphabetically by their name

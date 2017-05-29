@@ -3,8 +3,8 @@
 
 
 import java.util.Comparator;
-
-public class ComparatorUserTripCost implements Comparator<User> {
+import java.io.Serializable;
+public class ComparatorUserTripCost implements Comparator<User>, Serializable{
 
     /**
      * Compares to users by their total Trip cost

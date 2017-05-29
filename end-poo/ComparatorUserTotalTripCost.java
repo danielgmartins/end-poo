@@ -1,8 +1,8 @@
 
 import java.util.Comparator;
+import java.io.Serializable;
 
-
-public class ComparatorUserTotalTripCost implements Comparator<User> {
+public class ComparatorUserTotalTripCost implements Comparator<User>, Serializable  {
     /**
      * Compares to users by their total Trip cost
      * @param user1 User to compare

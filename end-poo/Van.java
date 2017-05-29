@@ -23,15 +23,15 @@ public class Van extends Vehicle implements Serializable {
      * Empty constructor
      */
     private Van (){
-        super("N/A", 4);
+        super("N/A", 7);
     }
 
     /**
      * Van constructor just receiveng a licence plate. Sets 6 seats as default
      * @param licensePlate  String with license plate
      */
-    private Van (String licensePlate){
-        super(licensePlate, 6);
+    public Van (String licensePlate){
+        super(licensePlate, 7);
     }
 
     /**
@@ -41,18 +41,16 @@ public class Van extends Vehicle implements Serializable {
      * @param averageSpeed    Average speed per km
      * @param kmsTotal        Total of kms
      * @param fare            Fare per km
-     * @param availability    Availability
      * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
      */
-    public Van (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y){
+    public Van (String licensePlate, double averageSpeed, double kmsTotal, double fare, int seats, int x, int y){
         super(licensePlate,
               averageSpeed,
               kmsTotal,
               fare,
               1.0,
-              availability,
               seats,
               x,
               y);
@@ -68,7 +66,6 @@ public class Van extends Vehicle implements Serializable {
               c.getKmsTotal(),
               c.getFare(),
               c.getReliability(),
-              c.getAvailability(),
               c.getSeats(),
               c.getLocation());
     }

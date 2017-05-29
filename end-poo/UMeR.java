@@ -9,6 +9,7 @@
 import java.util.*;
 import java.lang.StringBuilder;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -107,42 +108,75 @@ public class UMeR implements Serializable
             throw new NoUserLoggedException();
     }
 
+    /**
+     * Gets the vehicle of a given driver
+     */
+    public Vehicle getDriversVehicle(String driverEmail){
+        // check if driver exists
+        // check if has vehicle
+        return this.vehicleList.get( this.driverVehicle.get(driverEmail) ).clone();
+    }
+
+    /**
+     * Gets the user ojvect of a given driver email
+     */
+    public User getDriverObejct(String driverEmail){
+        // check if exists
+        // check it driver
+        return this.userList.get( driverEmail ).clone();
+    }
+
 
     //  ----------  SETTERS  -----------  //
 
+    /**
+     * Set's user location
+     */
+    private void setUserLocation(Coordinates coord){
+        ( (Client) this.userList.get(this.loggedUserEmail) ).setLocation(coord);
+    }
     /** Sets logged variable to true or false
      * @param logged boolean value to set Logged state
      */
-    public void setLogged(boolean logged){
+    private void setLogged(boolean logged){
         this.isLogged = logged;
     }
 
     /** 
      * 
      */
-    public void setUserList(HashMap<String, User> list){
+    private void setUserList(HashMap<String, User> list){
         this.userList = list;
     }
 
     /**
      * 
      */
-    public void setVehicleList(HashMap<String, Vehicle> list){
+    private void setVehicleList(HashMap<String, Vehicle> list){
         this.vehicleList = list;
     }
 
     /**
      * 
      */
-    public void setTripList(TreeMap<Integer, Trip> list){
+    private void setTripList(TreeMap<Integer, Trip> list){
         this.tripList = list;
     }
 
     /**
      * 
      */
-    public void setDriverVehicle(HashMap<String, String> list){
+    private void setDriverVehicle(HashMap<String, String> list){
         this.driverVehicle = list;
+    }
+
+    /**
+     * 
+     */
+    public void giveClassification(String driverEmail, int classification){
+        // check if driver exists
+        // check classification value
+        ((Driver) this.userList.get(driverEmail)).addClassification(classification);
     }
 
     //  ----------  QUESTIONING  ----------  //
@@ -178,6 +212,8 @@ public class UMeR implements Serializable
 
     /**
      * 
+     * @param
+     * @return 
      */
     public boolean isLicensePlateAvailable (String license) {
         if (this.vehicleList.containsKey(license))
@@ -187,17 +223,28 @@ public class UMeR implements Serializable
     }
 
     /**
-     * 
+     * Check if a given driver's is available for request
+     * @param driverEmail  Strind with driver's email
+     * @return boolean true if the driver with that email is available, false otherwise.
+     * @throws UserNonExistent if no such user exists.
      */
-    public boolean isVehicleAvailable (String licensePlate) throws LicensePlateUnavailable{
-        if(!this.isLicensePlateAvailable(licensePlate))
-            throw new LicensePlateUnavailable();
+    public boolean isDriverAvailable (String driverEmail) throws UserNonExistent{
+        if(this.isEmailAvailable(driverEmail))
+            throw new UserNonExistent("No such user\n");
         
-        return this.vehicleList.get(licensePlate).getAvailability();
+        return ((Driver) this.userList.get(driverEmail)).getAvailability();
     }
 
     /**
-     * 
+     * Checks if driver with given email has a vehicle
+     */
+    public boolean checkDriverHasVehicle (String driverEmail){
+        return this.driverVehicle.containsKey(driverEmail);
+    }
+
+    /**
+     * Check if the currently logged user is a Client
+     * @return boolean with true currently logged user is Client, false otherwise.
      */
     public boolean isClient(){
         return this.userList.get(this.loggedUserEmail) instanceof Client;
@@ -205,17 +252,28 @@ public class UMeR implements Serializable
 
 
     /**
-     * 
+     * Check if the currently logged user is a Driver
+     * @return boolean with true currently logged user is Driver, false otherwise.
      */
     public boolean isDriver(){
         return this.userList.get(this.loggedUserEmail) instanceof Driver;
     }
 
+    /**
+     * Checks if a driver already has a vehicle associated to him.
+     * @return boolean with true if driver already has vehicle, false otherwise.
+     */
+    public boolean alreadyHasVehicle(){
+        return this.driverVehicle.containsKey(this.loggedUserEmail);
+    }
+
     //  ----------  ADD DATA  -----------  //
 
     /**
+     * Adds new user to database.
+     * @param user  User to be added to database.
      * 
-     * @throws 
+     * @throws EmailUnavailable if this user's email is already in use.
      */
     public void addUser (User user) throws EmailUnavailable {
         if ( !this.isEmailAvailable(user.getEmail()) )
@@ -238,13 +296,16 @@ public class UMeR implements Serializable
     }
 
     /**
-     * 
+     * Adds new Trip to date base.
+     * Updates the corresponding driver and client's trip history.
+     * Updates Vehicle locations
+     * @param trip  Trip do add
      */
     public void addTrip (Trip trip){
         this.tripList.put(trip.getId(), trip.clone());
-        this.userList.get(trip.getDriver().getEmail()).addTripToHistory(trip);
-        this.userList.get(trip.getClient().getEmail()).addTripToHistory(trip);
-        this.vehicleList.get(trip.getTaxi().getLicensePlate()).setLocation(trip.getDestination());
+        ((Driver) this.userList.get(trip.getDriver())).addTripToHistory(trip);
+        ((Client) this.userList.get(trip.getClient())).addTripToHistory(trip);
+        this.vehicleList.get(trip.getTaxi()).setLocation(trip.getDestination());
     }
 
     //  ----------  SESSION METHODS  ---------- //
@@ -288,10 +349,10 @@ public class UMeR implements Serializable
         this.userList.get(loggedUserEmail).setAddress(address);
     }
     
-    //  ----------  QUERY  ----------  //
+    //  ----------  INFORMATION STRINGS  ----------  //
 
     /**
-     * 
+     * Gives out string with information about the logged user, if it's a client.
      */
     public String getThisClientProfileString () throws NoUserLoggedException, UserIsNotClientException {
         if (this.loggedUserEmail == null)
@@ -318,7 +379,7 @@ public class UMeR implements Serializable
     }
 
     /**
-     * 
+     * Gives out string with information about the logged user, if it's a driver.
      */
     public String getThisDriverProfileString () throws NoUserLoggedException, UserIsNotClientException{
         if (this.loggedUserEmail == null)
@@ -362,8 +423,10 @@ public class UMeR implements Serializable
                 //newList.add(trip.clone());
                 sb.append("\nDate:\n");
                 sb.append(trip.getDate().toString());
+                sb.append("\nClient: ");
+                sb.append(trip.getClient());
                 sb.append("\nDriver: ");
-                sb.append(trip.getDriver().getName());
+                sb.append(trip.getDriver());
                 sb.append("\nDestination: ");
                 sb.append(trip.getDestination());
                 sb.append("\nTrip duration: ");
@@ -376,6 +439,9 @@ public class UMeR implements Serializable
 
         return sb.toString();
     }
+
+
+    // ----------  QUERIES ----------  //
 
     /**
      * 
@@ -396,42 +462,6 @@ public class UMeR implements Serializable
     }
 
     /**
-     * 
-     */
-    public Vehicle getNearestVehicle(){
-        if(this.isDriver()) return null;
-        Coordinates userLocation = ( (Client) this.userList.get(this.loggedUserEmail) ).getLocation();
-        
-        TreeMap<Double,Vehicle> treeVehicles = new TreeMap<Double, Vehicle>();
-        this.vehicleList.values().forEach( v -> treeVehicles.put( userLocation.distance(v.getLocation()), v ) );
-        
-        return treeVehicles.get(treeVehicles.firstKey());
-    }
-
-    /**
-     * Makes a trip With nearest vehicle available
-     */
-    public void makeTrip(Coordinates clientCoordinates){
-
-    }
-
-    /**
-     * Makes a trip using a vehicle requeste by a given license plate
-     * @param clientCoordinates     Client's coordinates
-     * @param licensePlate          Requested vehicles's license plate
-     * 
-     * @throws VehicleNotAvailableException if no vehicle exists with that license plate
-     * @throws NoSuchVehicleException       if
-     */
-    public void requestTrip(Coordinates clientCoordinates, String licensePlate) throws VehicleNotAvailable, NoSuchVehicleException, VehicleNotAvailable, LicensePlateUnavailable{
-        if(!this.isLicensePlateAvailable(licensePlate))
-            throw new NoSuchVehicleException();
-        
-        if(!this.isVehicleAvailable(licensePlate))
-            throw new VehicleNotAvailable();
-    }
-
-    /**
      * Top 5 driveres with the most deviation of Real Trip time to Estimated Trip Time
      * @return string with a list of names an emails of the drivers and number of deviations
      */
@@ -446,7 +476,7 @@ public class UMeR implements Serializable
                                                 );
         
         // Gets a map of drivers in the last list, and how many bad trips they had
-        Map<Driver,Integer> driverPerformance = new HashMap<Driver,Integer>();
+        Map<String,Integer> driverPerformance = new HashMap<String,Integer>();
 
         tripsBadPerformance.forEach( 
             trip -> 
@@ -458,7 +488,7 @@ public class UMeR implements Serializable
             } );
         
         // Gets a list of the top five worst perfromers
-        List<Driver> topFive = new LinkedList<Driver>( driverPerformance.entrySet()
+        List<String> topFive = new LinkedList<String>( driverPerformance.entrySet()
                                                                         .stream()
                                                                         .sorted((e1, e2) -> e1.getValue()
                                                                                               .compareTo(e1.getValue()))
@@ -468,17 +498,158 @@ public class UMeR implements Serializable
                                                      );
         // Gets a String of the previous list
         StringBuilder sb = new StringBuilder();
-        for(Driver d : topFive){
+        User d;
+        for(String email : topFive){
+            d = this.userList.get(email);
             sb.append("\nName: ");
             sb.append(d.getName());
             sb.append("\nEmail: ");
-            sb.append(d.getEmail());
+            sb.append(email);
             sb.append("Number of deviations: ");
             sb.append(driverPerformance.get(d));
             sb.append("\n");
         }
         
         return sb.toString();
+    }
+
+    
+
+    /**
+     * Get's email of nearest driver available
+     * @param vehicleType   1 for car, 2 for Van, 3 for Motorcycle
+     * @return
+     */
+    public String getNearestDriver(int vehicleType){
+
+        SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
+        Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
+        User auxDriver;
+        Vehicle auxVehicle;
+        double distance;
+
+        for(String driverEmail : this.userList.keySet()){
+            auxDriver = this.userList.get(driverEmail);
+
+            if(auxDriver instanceof Driver){
+                if(((Driver) auxDriver).getAvailability()){
+                    auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
+                    switch(vehicleType){
+                        case 1:
+                            if(auxVehicle instanceof Car){
+                                distance = userLocation.distance( auxVehicle.getLocation() );
+                                driversOrderedByDistance.put(distance, driverEmail);
+                            }
+                            break;
+                        case 2:
+                            if(auxVehicle instanceof Van){
+                                distance = userLocation.distance( auxVehicle.getLocation() );
+                                driversOrderedByDistance.put(distance, driverEmail);
+                            }
+                            break;
+                        case 3:
+                            if(auxVehicle instanceof Motorcycle){
+                                distance = userLocation.distance( auxVehicle.getLocation() );
+                                driversOrderedByDistance.put(distance, driverEmail);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        return driversOrderedByDistance.get( driversOrderedByDistance.firstKey());
+    }
+
+    /**
+     * 
+     */
+    public String getNearestVehiclesString(){
+        StringBuilder sb = new StringBuilder();
+        SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
+        Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
+        User auxUser;
+        Vehicle auxVehicle;
+        double distance;
+
+        for(String driverEmail : this.userList.keySet()){
+            auxUser = this.userList.get(driverEmail);
+
+            if(auxUser instanceof Driver){
+                if(((Driver) auxUser).getAvailability()){
+                    auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
+                    distance = userLocation.distance( auxVehicle.getLocation() );
+                    driversOrderedByDistance.put(distance, driverEmail);
+                }
+            }
+        }
+
+
+        
+        String driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
+        Driver auxDriver = (Driver) this.userList.get(driverEmail);
+        while(auxDriver != null){
+            auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail));
+            sb.append("\nDriver - Name: ");
+            sb.append(auxDriver.getName());
+            sb.append("Email: ");
+            sb.append(auxDriver.getEmail());
+            sb.append("\nClassifications: ");
+            sb.append(auxDriver.getClassification());
+            sb.append("\nPerformance: ");
+            sb.append(auxDriver.getPerformance());
+            sb.append("\nVehicle - License Plate: ");
+            sb.append(auxVehicle.getLicensePlate());
+            sb.append("\nFare: ");
+            sb.append(auxVehicle.getFare());
+            sb.append("\nReliability");
+            sb.append(auxVehicle.getReliability());
+            sb.append("\n");
+
+            driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
+            auxDriver = (Driver) this.userList.get(driverEmail);
+        }
+        
+        return sb.toString();
+    }
+    
+
+    /**
+     * Makes a trip With nearest vehicle available
+     */
+    public void makeTrip(String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost){
+
+        this.tripNumber +=1;
+        Trip newTrip = new Trip(this.tripNumber,
+                                this.loggedUserEmail,
+                                driver,
+                                date,
+                                taxi,
+                                taxiLocation,
+                                clientLocation,
+                                destination,
+                                estimatedTripTime,
+                                realTripTime,
+                                expectedTripCost,
+                                realTripCost
+                                );
+        this.addTrip(newTrip);
+    }
+
+    /**
+     * Makes a trip using a vehicle requeste by a given license plate
+     * @param clientCoordinates     Client's coordinates
+     * @param licensePlate          Requested vehicles's license plate
+     * 
+     * @throws VehicleNotAvailableException if no vehicle exists with that license plate
+     * @throws NoSuchVehicleException       if
+     */
+    public void requestTrip(Coordinates clientCoordinates, String licensePlate) throws VehicleNotAvailable, NoSuchVehicleException, VehicleNotAvailable, LicensePlateUnavailable{
+        if(!this.isLicensePlateAvailable(licensePlate))
+            throw new NoSuchVehicleException();
+        
     }
 
 }

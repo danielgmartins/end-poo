@@ -305,7 +305,8 @@ public abstract class User implements Serializable {
      * Counts number of trips done.
      * @return int with number of trips done
      */
-    public long countTripsDone(){
+    public long countTrips(){
         return this.tripHistory.stream().count();
     }
+
 }

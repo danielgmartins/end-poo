@@ -31,7 +31,7 @@ public class Motorcycle extends Vehicle implements Serializable {
      * Motorcycle constructor just receiveng a licence plate. Sets 1 seats as default
      * @param licensePlate  String with license plate
      */
-    private Motorcycle (String licensePlate){
+    public Motorcycle (String licensePlate){
         super(licensePlate, 1);
     }
 
@@ -42,18 +42,16 @@ public class Motorcycle extends Vehicle implements Serializable {
      * @param averageSpeed    Average speed per km
      * @param kmsTotal        Total of kms
      * @param fare            Fare per km
-     * @param availability    Availability
      * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
      */
-    public Motorcycle (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y){
+    public Motorcycle (String licensePlate, double averageSpeed, double kmsTotal, double fare, int seats, int x, int y){
         super(licensePlate,
               averageSpeed,
               kmsTotal,
               fare,
               1.0,
-              availability,
               seats,
               x,
               y);
@@ -64,14 +62,7 @@ public class Motorcycle extends Vehicle implements Serializable {
      * @param Motorcycle   Motorcycle object
      */
     public Motorcycle (Motorcycle c){
-        super(c.getLicensePlate(),
-              c.getAverageSpeed(),
-              c.getKmsTotal(),
-              c.getFare(),
-              c.getReliability(),
-              c.getAvailability(),
-              c.getSeats(),
-              c.getLocation());
+        super(c);
     }
 
     /**

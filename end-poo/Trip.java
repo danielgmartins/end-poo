@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 public class Trip implements Comparable<Trip>, Serializable {
 	private int id;
-	private Client client;
-	private Driver driver;
+	private String client;
+	private String driver;
 	private LocalDateTime date;
-	private Vehicle taxi;
+	private String taxi;
 	private Coordinates taxiLocation;
 	private Coordinates clientLocation;
 	private Coordinates destination;
@@ -25,18 +25,18 @@ public class Trip implements Comparable<Trip>, Serializable {
 	/**
 	 *Constructors of class Trip (including empty and copy Constructors).
 	 * @param id					Integer that identifies the Trip
-	 * @param client				Client object who requests the trip
-	 * @param driver				Driver object who performs the trip
+	 * @param client				String with email of client who requests the trip
+	 * @param driver				String with email of Driver who performs the trip
 	 * @param date					LocalDateTime object with date and time of trip
-	 * @param taxi 					Car object who performs the trip
+	 * @param taxi 					String of vehicle licensePlate who performs the trip
 	 * @param taxiLocation 			Coordinates object with taxi's location
 	 * @param clientLocation 		Coordinates object with client's location
 	 * @param destination 			Coordinates object with the trip's destination
 	 * @param estimatedTripTime 	estimated time of the trip
 	 * @param realTripTime 			time of the trip
-	 * @param expectedTripCost 				cost of trip
+	 * @param expectedTripCost 		cost of trip
 	 */
-	public Trip(int id, Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost){
+	public Trip(int id, String client, String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost){
 		this.setId(id);
 		this.setClient(client);
         this.setDriver(driver);
@@ -80,17 +80,17 @@ public class Trip implements Comparable<Trip>, Serializable {
 	 * A more useful constructor for Trip objects, should be called before the trip and updated with expectedTripCost and realTripTime.
 	 * Initializes expectedTripCost to -1 and realTripTime to -1.
 	 * @param id 					Integer that identifies the Trip
-	 * @param client				Client object who requests the trip
-	 * @param driver				Driver object who performs the trip
+	 * @param client				String with email of client who requests the trip
+	 * @param driver				String with email of Driver who performs the trip
 	 * @param date					LocalDateTime object with date and time of trip
-	 * @param taxi 					Car object who performs the trip
+	 * @param taxi 					String of vehicle licensePlate who performs the trip
 	 * @param taxiLocation 			Coordinates object with taxi's location
 	 * @param clientLocation 		Coordinates object with client's location
 	 * @param x						x coordinate of trip's destination
 	 * @param y 					y coordinate of trip's destination
 	 * @param estimatedTripTime		estimated time of trip
 	 */
-	public Trip (int id,Client client, Driver driver, LocalDateTime date, Vehicle taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y, int estimatedTripTime){
+	public Trip (int id,String client, String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, int x,int y, int estimatedTripTime){
 		this(id,client,driver,date,taxi,taxiLocation,clientLocation,new Coordinates(x,y), estimatedTripTime,0,0.0,0.0);
 	}
 
@@ -137,12 +137,13 @@ public class Trip implements Comparable<Trip>, Serializable {
 		sb.append("\nTrip id : ");
 		sb.append(this.id);
 		sb.append("\nClient : ");
-        sb.append(this.client.getName().toString());
+        sb.append(this.client);
         sb.append("\nDriver : ");
-        sb.append(this.driver.getName().toString());
+        sb.append(this.driver);
 		sb.append("\nDate : ");
         sb.append(this.date.toString());
 		sb.append("\nTaxi : ");
+		sb.append(this.taxi);
 		sb.append("\nTaxi's initial position : ");
         sb.append(this.taxiLocation.toString());
 		sb.append("\nClient's initial location : ");
@@ -175,8 +176,8 @@ public class Trip implements Comparable<Trip>, Serializable {
 	 *
 	 * @return    the client object who requested the Trip.
 	 */
-	public Client getClient(){
-		return this.client.clone();
+	public String getClient(){
+		return new String(this.client);
 	}
 
 	/**
@@ -184,8 +185,8 @@ public class Trip implements Comparable<Trip>, Serializable {
 	 *
 	 * @return    the driver object who performed the Trip.
 	 */
-	public Driver getDriver(){
-		return this.driver.clone();
+	public String getDriver(){
+		return new String(this.driver);
 	}
 
 	/**
@@ -200,10 +201,10 @@ public class Trip implements Comparable<Trip>, Serializable {
 	/**
 	 * getTaxi returns the Car in which the Trip was made.
 	 *
-	 * @return    the Car object who performed the Trip.
+	 * @return	String of LicensePlate of vehicle who performed the Trip.
 	 */
-	public Vehicle getTaxi(){
-		return this.taxi.clone();
+	public String getTaxi(){
+		return new String(this.taxi);
 	}
 
 	/**
@@ -280,19 +281,19 @@ public class Trip implements Comparable<Trip>, Serializable {
 	}
 
 	/**
-	 * setClient changes the client's instance variable object to the object passed as a variable.
-	 * @param client	the client object to atribute as the client's instance variable on Trip object.
+	 * setClient changes the client's instance variable object to the email passed as a variable.
+	 * @param client	the client email to atribute as the client's instance variable on Trip object.
 	 */
-	public void setClient( Client client){
-		this.client = client.clone();
+	public void setClient( String client){
+		this.client = new String(client);
 	}
 
 	/**
-	 * setDriver changes the driver's instance variable object to the object passed as a variable.
-	 * @param driver	the driver object to atribute as the driver's instance variable on Trip object.
+	 * setDriver changes the driver's instance variable object to the email passed as a variable.
+	 * @param driver	the driver oemailbject to atribute as the driver's instance variable on Trip object.
 	 */
-	public void setDriver (Driver driver){
-		this.driver = driver.clone();
+	public void setDriver (String driver){
+		this.driver = new String(driver);
 	}
 
 	/**
@@ -307,8 +308,8 @@ public class Trip implements Comparable<Trip>, Serializable {
 	 * setTaxi changes the taxi's instance variable object to the object passed as a variable.
 	 * @param taxi	the vehicle object to atribute as the taxi's instance variable on Trip object.
 	 */
-	public void setTaxi( Vehicle taxi){
-		this.taxi = taxi.clone();
+	public void setTaxi( String taxi){
+		this.taxi = new String(taxi);
 	}
 
 	/**
@@ -377,4 +378,13 @@ public class Trip implements Comparable<Trip>, Serializable {
 		if( this.id > t.getId() ) return 1;
 		else return 0;
    }
+
+   /**
+    * 
+    */
+    public int hashCode(){
+        return ((Integer) this.id).hashCode();
+    }
+
+
 }

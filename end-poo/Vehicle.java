@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 import java.io.Serializable;
 
 public abstract class Vehicle extends Exception implements Comparable<Vehicle>, Serializable {
+    
     private String licensePlate;
     private double averageSpeed;
     private double kmsTotal;
     private double fare;
     private double reliability;
-    private boolean available;
     private int seats;
     private Coordinates location;
 
@@ -41,7 +41,7 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
      * @param seats         number of seats available in the vehicle
      */
     public Vehicle(String licensePlate, int seats){
-        this(licensePlate, 0.0, 0.0, 3.0, 1.0, true, seats, 0, 0);
+        this(licensePlate, 0.0, 0.0, 3.0, 1.0, seats, 0, 0);
     }
 
     /**
@@ -51,11 +51,10 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
      * @param kmsTotal          Total of kms
      * @param fare              Fare per kms
      * @param reliability       Reliability
-     * @param availability      Availability from 0 to 1
      * @param coordinates       location
      */
-    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, double reliability, boolean availability, int seats, Coordinates location){
-        this(licensePlate, averageSpeed, kmsTotal, fare, reliability, availability, seats, location.getX(), location.getY());
+    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, double reliability, int seats, Coordinates location){
+        this(licensePlate, averageSpeed, kmsTotal, fare, reliability, seats, location.getX(), location.getY());
     }
 
 
@@ -70,13 +69,12 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
      * @param x                 x coordinate
      * @param y                 y coordinate
      */
-    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, double reliability, boolean availability, int seats, int x, int y){
+    public Vehicle (String licensePlate, double averageSpeed, double kmsTotal, double fare, double reliability, int seats, int x, int y){
         this.setLicensePlate(licensePlate);
         this.setAverageSpeed(averageSpeed);
         this.setKmsTotal(kmsTotal);
         this.setFare(fare);
         this.setReliability(reliability);
-        this.setAvailability(availability);
         this.setSeats(seats);
         this.setLocation(x, y);
     }
@@ -91,7 +89,6 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
              v.getKmsTotal(),
              v.getFare(),
              v.getReliability(),
-             v.getAvailability(),
              v.getSeats(),
              v.getLocation()     );
     }
@@ -118,8 +115,6 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
         res.append(this.fare);
         res.append("\nReliability: ");
         res.append(this.reliability);
-        res.append("\nAvailable: ");
-        res.append(this.available);
         res.append("\nSeats: ");
         res.append(this.seats);
         res.append(this.location.toString());
@@ -142,7 +137,6 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
                this.kmsTotal == v.getKmsTotal()                             &&
                this.fare == v.getFare()                                     &&
                this.reliability == v.getReliability()                       &&
-               this.available == v.getAvailability()                        &&
                this.seats == v.getSeats()                                   &&
                this.location.equals(v.getLocation())                        ;
     }
@@ -186,14 +180,6 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
      */
     public double getReliability (){
         return this.reliability;
-    }
-
-    /**
-     * Gets vehicle's availability
-     * @return boolean  Vehicle's availability. True if available; False if unavailable
-     */
-    public boolean getAvailability (){
-        return this.available;
     }
 
     /**
@@ -258,14 +244,6 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
     public abstract void setReliability ();
 
     /**
-     * Changes vehicle's availability
-     * @param availability   Vehicle's availability. True if available; False if not
-     */
-    public void setAvailability (boolean availability){
-        this.available = availability;
-    }
-
-    /**
      * Changes vehicle's seat number
      * @param availability   Vehicle's availability. True if available; False if not
      */
@@ -300,5 +278,13 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
     public int compareTo (Vehicle v){
         return this.licensePlate.compareTo(v.getLicensePlate());
     }
+
+    /**
+     * 
+     */
+    public int hashCode(){
+        return this.licensePlate.hashCode();
+    }
+
 
 }

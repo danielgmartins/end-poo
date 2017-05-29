@@ -42,18 +42,16 @@ public class Car extends Vehicle implements Serializable {
      * @param averageSpeed    Average speed per km
      * @param kmsTotal        Total of kms
      * @param fare            Fare per km
-     * @param availability    Availability
      * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
      */
-    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, boolean availability, int seats, int x, int y){
+    public Car (String licensePlate, double averageSpeed, double kmsTotal, double fare, int seats, int x, int y){
         super(licensePlate,
               averageSpeed,
               kmsTotal,
               fare,
               1.0,
-              availability,
               seats,
               x,
               y);
@@ -64,14 +62,7 @@ public class Car extends Vehicle implements Serializable {
      * @param Car   Car object
      */
     public Car (Car c){
-        super(c.getLicensePlate(),
-              c.getAverageSpeed(),
-              c.getKmsTotal(),
-              c.getFare(),
-              c.getReliability(),
-              c.getAvailability(),
-              c.getSeats(),
-              c.getLocation());
+        super(c);
     }
 
     /**
@@ -120,6 +111,5 @@ public class Car extends Vehicle implements Serializable {
         if (reliable > 1) super.setReliability(1.0);
         else super.setReliability(reliable);
     }
-
 
 }
