@@ -13,10 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.io.Console;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -579,7 +582,7 @@ public class Main implements Serializable, Interface
                 }while(!validInput);
 
                 do {    // Get lincese plate
-                    System.out.println("lincese Plate: ");
+                    System.out.println("Lincese Plate: ");
                     licensePlate = sc.nextLine().replaceAll("[\n\r]","");
                     if(licensePlate.equals("0")) return;
                     validInput = true;
@@ -610,7 +613,7 @@ public class Main implements Serializable, Interface
                     System.out.println("Could not register Vehicle. Try Again");
                     validInput = false;
                 }
-                if(validInput) System.out.println("\n Registered Vechicle succsessfully");
+                if(validInput) System.out.println("\nRegistered Vechicle succsessfully");
             }while(!validInput);
         }
         else{
@@ -1064,6 +1067,7 @@ public class Main implements Serializable, Interface
             oos.writeObject(umer);
             oos.flush();
             oos.close();
+            fos.close();
             System.out.println("\nSuccessfully saved session.");
         } catch (Exception e) {
             System.out.println("\nCould not save session.");
@@ -1097,6 +1101,7 @@ public class Main implements Serializable, Interface
             ObjectInputStream ois = new ObjectInputStream(fis);
             umer = (UMeR) ois.readObject();
             ois.close();
+            fis.close();
             System.out.println("\nSuccessfully loaded session.");
         } catch (Exception e) {
             System.out.println("\nCould not load session.");

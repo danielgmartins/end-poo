@@ -230,7 +230,7 @@ public class Driver extends User implements Serializable {
         long number_of_trips = this.countTrips();
         super.addTripToHistory(trip);
         
-        this.kmsDriven += trip.getDestination().distance(trip.getTaxiLocation()) 
+        this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation()) 
                         + trip.getDestination().distance(trip.getClientLocation());
         
         if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){
