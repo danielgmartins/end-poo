@@ -696,6 +696,22 @@ public class UMeR implements Serializable
     }
 
     /**
+     * 
+     */
+    public void setReliability(String licensePlate){
+        // check license plate existence
+        this.vehicleList.get(licensePlate).setReliability();
+    }
+
+    /**
+     * 
+     */
+    public double getReliabilityOfVehicle(String licensePlate){
+        // check license plate existence
+        return this.vehicleList.get(licensePlate).getReliability();
+    }
+
+    /**
      * Makes a trip using a vehicle requeste by a given license plate
      * @param clientCoordinates     Client's coordinates
      * @param licensePlate          Requested vehicles's license plate

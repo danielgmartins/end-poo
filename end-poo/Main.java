@@ -722,13 +722,16 @@ public class Main implements Interface
             }
             vehicle = umer.getDriversVehicle(driverEmail);
 
+            umer.setReliability(vehicle.getLicensePlate());
+            vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
+            vehicle = umer.getDriversVehicle(driverEmail);
+
             totalDistance       = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
             timeToClient        = (int) ( (double)( userLocation.distance(vehicle.getLocation()) * 60 ) / vehicle.getAverageSpeed() ) ;
             timeToDestination   = (int) ( (double) (userLocation.distance(destination) * 60) / vehicle.getAverageSpeed() );
             estimatedTripCost   = (int) ( (timeToClient + timeToDestination) * (vehicle.getFare()/10) );
 
-            vehicle.setReliability();
-            vehicleReliability = vehicle.getReliability();
+            
 
 
             clean();
