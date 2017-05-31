@@ -137,7 +137,7 @@ public  class Coordinates implements Serializable{
      */
 
     public double distance (Coordinates p1){
-        double squaredistance = Math.pow(this.x + p1.getX(),2) + Math.pow(this.y + p1.getY(),2);
+        double squaredistance = Math.pow(  Math.abs(this.x - p1.getX()) ,2) + Math.pow(Math.abs(this.y - p1.getY()),2);
         return Math.sqrt(squaredistance);
     }
     /**

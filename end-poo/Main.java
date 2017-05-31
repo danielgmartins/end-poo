@@ -25,7 +25,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import Exceptions.*;
 
-public class Main implements Serializable, Interface
+public class Main implements Interface
 {   
     //private static Console console = System.console();
     private static UMeR umer;
@@ -722,13 +722,11 @@ public class Main implements Serializable, Interface
             }
             vehicle = umer.getDriversVehicle(driverEmail);
 
-            totalDistance = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
+            totalDistance       = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
+            timeToClient        = (int) ( (double)( userLocation.distance(vehicle.getLocation()) * 60 ) / vehicle.getAverageSpeed() ) ;
+            timeToDestination   = (int) ( (double) (userLocation.distance(destination) * 60) / vehicle.getAverageSpeed() );
+            estimatedTripCost   = (int) ( (timeToClient + timeToDestination) * (vehicle.getFare()/10) );
 
-            timeToClient = (int) ( ( userLocation.distance(vehicle.getLocation()) * 60 ) / vehicle.getAverageSpeed() ) ;
-
-            timeToDestination = (int) ( (userLocation.distance(destination) * 60) / vehicle.getAverageSpeed() );
-
-            estimatedTripCost = (int) ( (timeToClient + timeToDestination) * (vehicle.getFare()/10) );
             vehicle.setReliability();
             vehicleReliability = vehicle.getReliability();
 
@@ -780,11 +778,11 @@ public class Main implements Serializable, Interface
 
         /*
         realTripTime is calculated by taking the time estimate and multiplying by
-        a value determined by the vehicle Reliability ( 100% + ((75%)- reliability/2) )
-        if reliability is 100% (1.0) then  it will it take 75% of the estimated time to arrive to destination
-        if reliability is 0% (0.0) the it will take 175% of the estimated time to arrive to destination
+        a value determined by the vehicle Reliability ( 100% + ((50%)- reliability/2) )
+        if reliability is 100% (1.0) then  it will it take 50% of the estimated time to arrive to destination
+        if reliability is 0% (0.0) the it will take 150% of the estimated time to arrive to destination
         */
-        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.75)-vehicleReliability/2)) );
+        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.5)-vehicleReliability/2)) );
         realTripCost = realTripTime * (vehicle.getFare()/10);
 
 

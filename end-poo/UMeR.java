@@ -399,6 +399,8 @@ public class UMeR implements Serializable
         sb.append(user.getAddress().getCountry());
         sb.append("\nBirthday: ");
         sb.append(user.getBirthday().toString());
+        sb.append("\nLocation: ");
+        sb.append(user.getLocation());
         sb.append("\n");
 
         return sb.toString();
@@ -450,6 +452,8 @@ public class UMeR implements Serializable
         sb.append(vehicle.getAverageSpeed());
         sb.append("\nKms total: ");
         sb.append(vehicle.getKmsTotal());
+        sb.append("\nLocation: ");
+        sb.append(vehicle.getLocation());
         sb.append("\n");
 
         return sb.toString();
@@ -516,9 +520,10 @@ public class UMeR implements Serializable
         List<Trip> tripsBadPerformance 
                     = new LinkedList<Trip>( this.tripList.values()
                                                 .stream()
-                                                .filter( trip -> trip.getRealTripTime() * 1.25 > trip.getEstimatedTripTime() )
+                                                .filter( trip -> trip.getExpectedTripCost() * 1.25 > trip.getRealTripCost() )
                                                 .collect(Collectors.toList())
                                                 );
+
         
         // Gets a map of drivers in the last list, and how many bad trips they had
         Map<String,Integer> driverPerformance = new HashMap<String,Integer>();
@@ -531,6 +536,7 @@ public class UMeR implements Serializable
                 driverPerformance.put(trip.getDriver(), 1);
                 }
             } );
+
         
         // Gets a list of the top five worst perfromers
         List<String> topFive = new LinkedList<String>( driverPerformance.entrySet()
@@ -541,6 +547,7 @@ public class UMeR implements Serializable
                                                                         .map(Map.Entry :: getKey)
                                                                         .collect(Collectors.toList())
                                                      );
+
         // Gets a String of the previous list
         StringBuilder sb = new StringBuilder();
         User d;
@@ -550,15 +557,14 @@ public class UMeR implements Serializable
             sb.append(d.getName());
             sb.append("\nEmail: ");
             sb.append(email);
-            sb.append("Number of deviations: ");
-            sb.append(driverPerformance.get(d));
+            sb.append("\nNumber of deviations: ");
+            sb.append(driverPerformance.get(email));
             sb.append("\n");
         }
         
         return sb.toString();
     }
 
-    
 
     /**
      * Get's email of nearest driver available
