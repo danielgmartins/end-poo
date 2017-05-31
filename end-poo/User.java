@@ -107,7 +107,7 @@ public abstract class User implements Serializable {
         // sb.append(password);
         sb.append("TripHistory: \n");
         // Uses forEach iterator to add each trip in tripHistory to the string builder 
-        this.tripHistory.forEach( (Integer trip) -> {sb.append(trip);} );
+        this.tripHistory.forEach( (Integer trip) -> {sb.append(trip+", ");} );
         sb.append("\n");
 
         return sb.toString();

@@ -133,7 +133,7 @@ public class Trip implements Comparable<Trip>, Serializable {
      * @return 	String containing the objects instance variablesaxiLocation = taxiloc;
      */
 	public String toString () {
-		StringBuilder sb = new StringBuilder("Trip");
+		StringBuilder sb = new StringBuilder("\n--- Trip");
 		sb.append("\nTrip id : ");
 		sb.append(this.id);
 		sb.append("\nClient : ");
@@ -158,7 +158,7 @@ public class Trip implements Comparable<Trip>, Serializable {
 		sb.append(this.expectedTripCost);
 		sb.append("\nReal Cost : ");
 		sb.append(this.realTripCost);
-		sb.append("\n");
+		sb.append("\n----");
         return sb.toString();
 	}
 

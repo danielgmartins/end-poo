@@ -32,6 +32,7 @@ public class Van extends Vehicle implements Serializable {
      */
     public Van (String licensePlate){
         super(licensePlate, 7);
+        this.setAverageSpeed(70);
     }
 
     /**

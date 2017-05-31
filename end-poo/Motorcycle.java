@@ -33,6 +33,7 @@ public class Motorcycle extends Vehicle implements Serializable {
      */
     public Motorcycle (String licensePlate){
         super(licensePlate, 1);
+        this.setAverageSpeed(40);
     }
 
     /**

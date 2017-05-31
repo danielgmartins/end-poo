@@ -18,13 +18,13 @@ import Exceptions.*;
 
 public class UMeR implements Serializable
 {
-    private static boolean isLogged;
-    private static String loggedUserEmail;
-    private static HashMap<String, User> userList;
-    private static HashMap<String, Vehicle> vehicleList;
-    private static TreeMap<Integer, Trip> tripList;
-    private static HashMap<String, String> driverVehicle;
-    private static int tripNumber;
+    private boolean isLogged;
+    private String loggedUserEmail;
+    private HashMap<String, User> userList;
+    private HashMap<String, Vehicle> vehicleList;
+    private TreeMap<Integer, Trip> tripList;
+    private HashMap<String, String> driverVehicle;
+    private int tripNumber;
 
     /** 
      * Initializes UMeR
@@ -45,19 +45,19 @@ public class UMeR implements Serializable
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("\nisLogged: ");
+        sb.append("\nIS_LOGGED: ");
         sb.append(this.isLogged);
-        sb.append("\nloggedUserEmail: ");
+        sb.append("\nLOGGED_USER_EMAIL: ");
         sb.append(this.loggedUserEmail);
-        sb.append("\nuserList: ");
+        sb.append("\n\nUSER_LIST: ");
         sb.append(this.userList.toString());
-        sb.append("\nvehiclList: ");
+        sb.append("\n\nVEHICLE_LIST: ");
         sb.append(this.vehicleList.toString());
-        sb.append("\ntripList: ");
+        sb.append("\n\nTRIP_LIST: ");
         sb.append(this.tripList.toString());
-        sb.append("\ndriverVehicle: ");
+        sb.append("\n\nDRIVER_VEHICLE: ");
         sb.append(this.driverVehicle.toString());
-        sb.append("\ntripNumber: ");
+        sb.append("\n\nTRIP_NUMBER: ");
         sb.append(this.tripNumber);
 
         return sb.toString();
@@ -127,9 +127,12 @@ public class UMeR implements Serializable
     /**
      * Gets the user ojvect of a given driver email
      */
-    public User getDriverObject(String driverEmail){
-        // check if exists
-        // check it driver
+    public User getDriverObject(String driverEmail) throws UserNonExistent, UserIsNotDriverException{
+        if(! this.userList.containsKey(driverEmail))
+            throw new UserNonExistent();
+        if(! (this.userList.get(driverEmail) instanceof Driver))
+            throw new UserIsNotDriverException();
+        
         return this.userList.get( driverEmail ).clone();
     }
 
@@ -142,6 +145,15 @@ public class UMeR implements Serializable
     public void setUserLocation(Coordinates coord){
         ( (Client) this.userList.get(this.loggedUserEmail) ).setLocation(coord);
     }
+
+    /**
+     * Set's user location
+     */
+    public void setDriverVehicleLocation (Coordinates coord){
+        this.vehicleList.get(this.driverVehicle.get(this.loggedUserEmail)).setLocation(coord);
+    }
+
+
     /** Sets logged variable to true or false
      * @param logged boolean value to set Logged state
      */
@@ -417,9 +429,31 @@ public class UMeR implements Serializable
         sb.append("\nTotal revenue:");
         sb.append(user.getTotalTripCost());
         sb.append("\n");
-
+        if(this.driverVehicle.containsKey(this.loggedUserEmail))
+            sb.append(this.getThisDriverVehicleProfile());
         return sb.toString();
     }    
+
+    /**
+     * 
+     */
+    private String getThisDriverVehicleProfile(){
+        StringBuilder sb = new StringBuilder();
+
+        Vehicle vehicle = this.vehicleList.get(this.driverVehicle.get(this.loggedUserEmail));
+
+        sb.append("\nVehicle ");
+        sb.append(vehicle.getClass().getName());
+        sb.append("\nLicense Plate: ");
+        sb.append(vehicle.getLicensePlate());
+        sb.append("\nAverage Speed: ");
+        sb.append(vehicle.getAverageSpeed());
+        sb.append("\nKms total: ");
+        sb.append(vehicle.getKmsTotal());
+        sb.append("\n");
+
+        return sb.toString();
+    }
 
     /**
      * 
@@ -430,10 +464,7 @@ public class UMeR implements Serializable
 
         for(int id: this.userList.get(loggedUserEmail).getTripHistory()){
             trip = this.tripList.get(id);
-            if(trip.getDate().toLocalDate().isBefore(lastDate)){
-                break;
-            }
-            if( trip.getDate().toLocalDate().isAfter(firstDate) ){
+            if( trip.getDate().toLocalDate().isBefore(lastDate) && trip.getDate().toLocalDate().isAfter(firstDate) ){
                 //newList.add(trip.clone());
                 sb.append("\nDate:\n");
                 sb.append(trip.getDate().toString());
@@ -534,7 +565,7 @@ public class UMeR implements Serializable
      * @param vehicleType   1 for car, 2 for Van, 3 for Motorcycle
      * @return
      */
-    public String getNearestDriver(int vehicleType){
+    public String getNearestDriver(int vehicleType) throws NoVehicleAvailableException {
 
         SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
@@ -574,6 +605,12 @@ public class UMeR implements Serializable
             }
         }
 
+        if(driversOrderedByDistance.size() == 0)
+            throw new NoVehicleAvailableException();
+
+        if( driversOrderedByDistance.get( driversOrderedByDistance.firstKey()) == null)
+            throw new NoVehicleAvailableException();
+            
         return driversOrderedByDistance.get( driversOrderedByDistance.firstKey());
     }
 

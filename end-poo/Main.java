@@ -62,10 +62,10 @@ public class Main implements Serializable, Interface
                 case 1: umer.logOut();      return; // Log Out
                 case 2: requestTrip();      break;  // Request Trip
                 case 3: viewProfile();      break;  // View Profile
-                case 4:                     break;  // View Statistics
+                case 4: viewStatistics();   break;  // View Statistics
                 case 5: saveSession();      break;  // Save Session
-                case 99: umer.printString();    System.exit(0);
-                case 0: exit();                 return; // Exit application
+                case 99: umer.printString();System.exit(0);
+                case 0: exit();             return; // Exit application
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
@@ -83,15 +83,15 @@ public class Main implements Serializable, Interface
         Interface.mainMenuForDriver(umer.getUserLogged());
         try{
             switch(sc.nextInt()){
-                case 1: umer.logOut();      return; // Log Out
-                case 2: viewProfile();      break;  // View Profile
-                case 3: registerVehicle();  break;  // Register Vehicle
-                case 4:                     break;  // Set Location
-                case 5:                     break;  // Change Availability
-                case 6:                     break;  // View Statistics
-                case 7: saveSession();      break;  // Save Session
-                case 99: umer.printString(); System.exit(0);
-                case 0: exit();            return; // Exit application
+                case 1: umer.logOut();          return; // Log Out
+                case 2: viewProfile();          break;  // View Profile
+                case 3: registerVehicle();      break;  // Register Vehicle
+                case 4: setLocation();          break;  // Set Location
+                case 5: switchAvailability();   break;  // Change Availability
+                case 6: viewStatistics();       break;  // View Statistics
+                case 7: saveSession();          break;  // Save Session
+                case 99: umer.printString();    System.exit(0);
+                case 0: exit();                 return; // Exit application
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
@@ -186,7 +186,7 @@ public class Main implements Serializable, Interface
         }while(!validInput);
 
         do{ // Going back
-            System.out.println("Log In successful. Hello " + umer.getUserLogged());
+            System.out.println("\nLog In successful. Hello " + umer.getUserLogged());
             System.out.println("0. Go Back");
 
             try{
@@ -562,8 +562,8 @@ public class Main implements Serializable, Interface
             do{
                 System.out.println("0. Go Back");
                 System.out.println("1. Register Car");
-                System.out.println("2. Register Motorcycle");
-                System.out.println("3. Register Van");
+                System.out.println("2. Register Van");
+                System.out.println("3. Register Motorcycle");
                     
                 do{ // Selects Vechicle type
                     try{
@@ -595,13 +595,13 @@ public class Main implements Serializable, Interface
                             umer.addVehicle(newVehicle);
                             validInput = true;
                             break;
-                        case 2: 
-                            newVehicle = new Motorcycle( licensePlate );
+                        case 2:
+                            newVehicle = new Van( licensePlate );
                             umer.addVehicle(newVehicle);
                             validInput = true;
                             break;
-                        case 3:
-                            newVehicle = new Van( licensePlate );
+                        case 3: 
+                            newVehicle = new Motorcycle( licensePlate );
                             umer.addVehicle(newVehicle);
                             validInput = true;
                             break;
@@ -641,12 +641,13 @@ public class Main implements Serializable, Interface
         boolean validInput = false;
         int inp = -1;
         String driverEmail = "";
-        Driver driver;
-        Vehicle vehicle;
-        int xcoordinate, ycoordinate, timeToClient, timeToDestination, realTripTime, classification=100;
-        double realTripCost, estimatedTripCost, vehicleReliability, paidPrice=0;
+        Driver driver = null;
+        Vehicle vehicle = null;
+        int xcoordinate, ycoordinate, timeToClient=-1, timeToDestination=-1, realTripTime=-1, classification=100;
+        double realTripCost, estimatedTripCost=0.0, vehicleReliability=0.0, paidPrice=0, totalDistance = 0;
         Coordinates userLocation=null, destination=null;
         Trip newTrip;
+        clean();
         
         do{
             do{     //Get User Location     THIS IS THE ONLY TIME YOU CANNONT ENTER 0 TO GO BACK
@@ -713,14 +714,21 @@ public class Main implements Serializable, Interface
             validInput = false;
 
             //      Calculate trip values
-            driver = (Driver) umer.getDriverObject(driverEmail);
+            try{
+                driver = (Driver) umer.getDriverObject(driverEmail);
+            }catch(UserNonExistent | UserIsNotDriverException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
             vehicle = umer.getDriversVehicle(driverEmail);
 
+            totalDistance = userLocation.distance(vehicle.getLocation() + userLocation.distance(destination)
+
             timeToClient = (int) ( vehicle.getAverageSpeed()
-                                    / userLocation.distance(vehicle.getLocation()) );
+                                    / userLocation.distance(vehicle.getLocation()) )*60;
             timeToDestination = (int) ( vehicle.getAverageSpeed()
-                                        / userLocation.distance(destination) );
-            estimatedTripCost = (int) ((timeToClient + timeToDestination) * vehicle.getFare());
+                                        / userLocation.distance(destination) )*60;
+            estimatedTripCost = (int) ( totalDistance * (vehicle.getFare()/10) );
             vehicle.setReliability();
             vehicleReliability = vehicle.getReliability();
 
@@ -740,6 +748,8 @@ public class Main implements Serializable, Interface
             System.out.println(timeToDestination);
             System.out.print("Total estimated trip time: ");
             System.out.println(timeToClient + timeToDestination);
+            System.out.print("Total Distance: ");
+            System.out.println(totaDistance);
             System.out.print("Estimated Cost: ");
             System.out.println(estimatedTripCost);
 
@@ -869,9 +879,8 @@ public class Main implements Serializable, Interface
         boolean validInput = false;
         int inp = -1;
         String driverEmail = null;
-
-        do{
-            clean();
+        clean();
+        do{ 
             System.out.println("What kind of vehicle do you want o request?");
             System.out.println("1. Car        (4 seats)");
             System.out.println("2. Van        (7 seats)");
@@ -893,12 +902,20 @@ public class Main implements Serializable, Interface
                     case 3: 
                         driverEmail = umer.getNearestDriver(inp);
                         validInput = true;
+                        break;
                     case 0: return null;
+                    default: 
+                        System.out.println("Not a valid option.");
+                        validInput = false;
                 }
             }catch(NoSuchElementException | IllegalStateException e){
                 System.out.println("You must enter a number.");
                 validInput = false;
+            }catch(NoVehicleAvailableException e){
+                System.out.println("There are no vehicles of this kind available right now.");
+                validInput = false;
             }
+            sc.nextLine();
         }while(!validInput);
 
         return driverEmail;
@@ -932,6 +949,92 @@ public class Main implements Serializable, Interface
         }while(!validInput);
 
         return driverEmail;
+    }
+
+    /**
+     * 
+     */
+    private static void switchAvailability(){
+        Scanner sc = new Scanner(System.in);
+        int inp = -1;
+        String userEmail=null;
+        try{
+            userEmail = umer.getUserLogged();
+        }catch(Exception e){
+            System.out.println("User must be logged");
+            System.exit(0);
+        }
+
+        do{
+            clean();
+            System.out.print("Availability is now set to: ");
+            try{
+                System.out.println(umer.isDriverAvailable(userEmail));
+            }catch(UserNonExistent e){
+                System.out.println("User must be logged");
+                System.exit(0);
+            }
+            System.out.println("1. Switch availability");
+            System.out.println("0. Go Back");
+            try{
+                switch(sc.nextInt()){
+                    case 1:
+                        try{
+                            umer.setDriverAvailability(umer.getUserLogged(), !umer.isDriverAvailable(userEmail));
+                        }catch(UserNonExistent e){
+                            System.out.println("User must be logged");
+                            System.exit(0);
+                        } 
+                        break;
+                    case 0: 
+                        return;
+                    default:
+                        System.out.println("Not a valid option.");
+                        break;
+                }
+            }catch(NoSuchElementException | IllegalStateException e){
+                System.out.println("You must enter a number.");
+            }
+        }while(true);
+    }
+
+    /**
+     * 
+     */
+    private static void setLocation(){
+        Scanner sc = new Scanner(System.in);
+        boolean validInput = false;
+        int xcoordinate, ycoordinate, inp;
+
+        do{     //Get User Location     THIS IS THE ONLY TIME YOU CANNONT ENTER 0 TO GO BACK
+            clean();
+            System.out.println("Please enter your location. Enter 'C' to cancel.");
+            try{
+                System.out.print("Coordenada x: ");
+                xcoordinate = sc.nextInt();
+                System.out.print("Coordenada y: ");
+                ycoordinate = sc.nextInt();
+                umer.setDriverVehicleLocation(new Coordinates(xcoordinate, ycoordinate));
+                validInput = true;
+                System.out.println("Location set successfully.");
+            }catch(NoSuchElementException | IllegalStateException e){
+                if(sc.nextLine().equals("C")) return;
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine();
+        }while(!validInput);
+
+        do{ // Going back
+            System.out.println("0. Go Back");
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                else System.out.println("Not a valid option");
+            }catch(InputMismatchException | IllegalStateException e){
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine().replaceAll("[\n\r]","");;
+        }while(true);
     }
 
     /** 
