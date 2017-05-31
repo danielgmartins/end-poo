@@ -724,11 +724,11 @@ public class Main implements Serializable, Interface
 
             totalDistance = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
 
-            timeToClient = (int) ( vehicle.getAverageSpeed()
-                                    / userLocation.distance(vehicle.getLocation()) )*60;
-            timeToDestination = (int) ( vehicle.getAverageSpeed()
-                                        / userLocation.distance(destination) )*60;
-            estimatedTripCost = (int) ( totalDistance * (vehicle.getFare()/10) );
+            timeToClient = (int) ( ( userLocation.distance(vehicle.getLocation()) * 60 ) / vehicle.getAverageSpeed() ) ;
+
+            timeToDestination = (int) ( (userLocation.distance(destination) * 60) / vehicle.getAverageSpeed() );
+
+            estimatedTripCost = (int) ( (timeToClient + timeToDestination) * (vehicle.getFare()/10) );
             vehicle.setReliability();
             vehicleReliability = vehicle.getReliability();
 
@@ -753,7 +753,7 @@ public class Main implements Serializable, Interface
             System.out.print("Estimated Cost: ");
             System.out.println(estimatedTripCost);
 
-            do{     // Checks if client wnats to request the trip
+            do{     // Checks if client wants to request the trip
                 try{
                     System.out.println("Do you want to request this trip?");
                     System.out.println("1. Request Trip");
@@ -784,8 +784,8 @@ public class Main implements Serializable, Interface
         if reliability is 100% (1.0) then  it will it take 75% of the estimated time to arrive to destination
         if reliability is 0% (0.0) the it will take 175% of the estimated time to arrive to destination
         */
-        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.75)-vehicleReliability)) );
-        realTripCost = realTripTime * vehicle.getFare();
+        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.75)-vehicleReliability/2)) );
+        realTripCost = realTripTime * (vehicle.getFare()/10);
 
 
         // Trip has finished. 
