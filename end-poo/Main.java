@@ -722,7 +722,7 @@ public class Main implements Serializable, Interface
             }
             vehicle = umer.getDriversVehicle(driverEmail);
 
-            totalDistance = userLocation.distance(vehicle.getLocation() + userLocation.distance(destination)
+            totalDistance = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
 
             timeToClient = (int) ( vehicle.getAverageSpeed()
                                     / userLocation.distance(vehicle.getLocation()) )*60;
@@ -749,7 +749,7 @@ public class Main implements Serializable, Interface
             System.out.print("Total estimated trip time: ");
             System.out.println(timeToClient + timeToDestination);
             System.out.print("Total Distance: ");
-            System.out.println(totaDistance);
+            System.out.println(totalDistance);
             System.out.print("Estimated Cost: ");
             System.out.println(estimatedTripCost);
 
