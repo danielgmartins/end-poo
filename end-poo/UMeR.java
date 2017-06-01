@@ -140,6 +140,24 @@ public class UMeR implements Serializable
     //  ----------  SETTERS  -----------  //
 
     /**
+     * 
+     */
+    public void setAverageSpeed(String licensePlate, double newSpeed){
+        // check if vehicle exists
+        // check if vehicle is owned by current user
+        this.vehicleList.get(licensePlate).setAverageSpeed(newSpeed);
+    }
+
+    /**
+     * 
+     */
+    public void setFare(String licensePlate, double fare){
+        // check if vehicle exists
+        // check if vehicle is owned by current user
+        this.vehicleList.get(licensePlate).setFare(fare);
+    }
+
+    /**
      * Set's user location
      */
     public void setUserLocation(Coordinates coord){
@@ -206,6 +224,14 @@ public class UMeR implements Serializable
     }
 
     //  ----------  QUESTIONING  ----------  //
+
+    /**
+     * Checks if the driver currently logged has a vehile
+     */
+    public boolean hasVehicle(){
+        // check if driver is logged in
+        return this.driverVehicle.containsKey(this.loggedUserEmail);
+    }
 
     /**
      * Says if someone is logged in
@@ -571,7 +597,7 @@ public class UMeR implements Serializable
      * @param vehicleType   1 for car, 2 for Van, 3 for Motorcycle
      * @return
      */
-    public String getNearestDriver(int vehicleType) throws NoVehicleAvailableException {
+    public String getNearestDriver(String vehicleType) throws NoVehicleAvailableException {
 
         SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
@@ -585,27 +611,10 @@ public class UMeR implements Serializable
             if(auxDriver instanceof Driver){
                 if(((Driver) auxDriver).getAvailability()){
                     auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
-                    switch(vehicleType){
-                        case 1:
-                            if(auxVehicle instanceof Car){
-                                distance = userLocation.distance( auxVehicle.getLocation() );
-                                driversOrderedByDistance.put(distance, driverEmail);
-                            }
-                            break;
-                        case 2:
-                            if(auxVehicle instanceof Van){
-                                distance = userLocation.distance( auxVehicle.getLocation() );
-                                driversOrderedByDistance.put(distance, driverEmail);
-                            }
-                            break;
-                        case 3:
-                            if(auxVehicle instanceof Motorcycle){
-                                distance = userLocation.distance( auxVehicle.getLocation() );
-                                driversOrderedByDistance.put(distance, driverEmail);
-                            }
-                            break;
-                        default:
-                            break;
+                    
+                    if(auxVehicle.getClass().getSimpleName().equals(vehicleType)){
+                        distance = userLocation.distance( auxVehicle.getLocation() );
+                        driversOrderedByDistance.put(distance, driverEmail);
                     }
                 }
             }

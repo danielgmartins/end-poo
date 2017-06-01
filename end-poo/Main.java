@@ -235,7 +235,7 @@ public class Main implements Interface
                     validInput = false;
                 }
 
-                sc.nextLine().replaceAll("[\n\r]","");;
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
 
              
@@ -399,14 +399,14 @@ public class Main implements Interface
             do{
                 try{
                     clean();
-                    Interface.profileMenu( umer.getThisClientProfileString() );
+                    Interface.profileMenuClient( umer.getThisClientProfileString() );
                 }catch(NoUserLoggedException | UserIsNotClientException e){
                     System.out.println("NoUserLoggedException | UserIsNotClientException");
                 }
                 try{
                     switch (sc.nextInt()){
                         case 1 : viewTripHistory(); break;
-                        case 2 : // changePassword();  break;
+                        case 2 : changePassword();  break;
                         case 0 : return;
                         default: System.out.println("Not valid input."); continue;
                     }
@@ -419,7 +419,7 @@ public class Main implements Interface
             do{
                 try{
                     clean();
-                    Interface.profileMenu( umer.getThisDriverProfileString() );
+                    Interface.profileMenuDriver( umer.getThisDriverProfileString() );
                 }catch(NoUserLoggedException | UserIsNotClientException e){
                     System.out.println("NoUserLoggedException | UserIsNotClientException");
                 }
@@ -427,7 +427,8 @@ public class Main implements Interface
                 try{
                     switch (sc.nextInt()){
                         case 1 : viewTripHistory(); break;
-                        case 2 : // changePassword();  break;
+                        case 2 : changePassword();  break;
+                        case 3 : vehicleProfile();  break;
                         case 0 : return;
                         default: System.out.println("Not valid input."); continue;
                     }
@@ -539,6 +540,156 @@ public class Main implements Interface
         }while(!validInput);
 
         
+    }
+
+    /**
+     * Change password
+     */
+    private static void changePassword(){
+        Scanner sc = new Scanner(System.in);
+        String newPassword = null;
+        boolean validInput = false;
+        int inp = -1;
+        clean();
+        System.out.println("Change Password.");
+        System.out.println("0. Go Back");
+
+        do{
+            System.out.print("Password: ");
+            newPassword = sc.nextLine().replaceAll("[\n\r]","");
+            if(newPassword.equals("0")) return;
+            if(newPassword.length() < 6) {
+                System.out.println("Password must be 6 characters long, or higher");
+                continue; // does not accept password with less then 6 char
+            }
+            try{
+                newPassword = hashPassword(newPassword);
+                validInput = true;
+            }
+            catch(NullPointerException | IllegalStateException e){
+                System.out.println(e.getMessage());
+                validInput= false;
+            }
+        }while(!validInput);
+
+        umer.changePassword(newPassword);
+
+        do{
+            System.out.println("\nChanged password successfully.");
+            System.out.println("0. Go Back");
+            try{
+                inp = sc.nextInt();
+                if(inp == 0) return;
+                System.out.println("Not a valid option.");
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+        }while(true);
+    }
+
+    /**
+     * View Vehicle Profile
+     */
+    private static void vehicleProfile () {
+        Scanner sc = new Scanner(System.in);
+        //boolean validInpur = false;
+        int inp = -1;
+
+        // in case the driver does not have a vehicle
+        if(!umer.hasVehicle()){
+            System.out.println("You do not have a vehicle.");
+            System.out.println("0. Go back");
+            do{
+                try{
+                    inp = sc.nextInt();
+                    if(inp == 0) return;
+                    else System.out.println("Not a valid input.");
+                }catch(InputMismatchException | IllegalStateException e){
+                    e.getMessage();
+                    System.out.println("You must enter a number.");
+                }
+            }while(true);
+        }
+
+        do{
+            clean();
+            Vehicle vehicle = umer.getDriversVehicle(umer.getUserLogged());
+            System.out.println("Vehicle profile\n");
+            System.out.println(vehicle.toString());
+            System.out.println("\n1. Change Average Speed");
+            System.out.println("2. Change Fare");
+            System.out.println("0. Go Back");
+
+            try{
+                switch(sc.nextInt()){
+                    case 1: changeVehicleAvgSpeed(vehicle.getLicensePlate(), vehicle.getAverageSpeed());    break;
+                    case 2: changeVehicleFare(vehicle.getLicensePlate(), vehicle.getFare());                break;
+                    case 0: return; 
+                    default:
+                        System.out.println("Not valid input.");
+                }
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+            sc.nextLine();
+        }while(true);
+    }
+
+    /**
+     * 
+     */
+    private static void changeVehicleAvgSpeed(String licensePlate, double currentSpeed) {
+        Scanner sc = new Scanner(System.in);
+        double inp = -1;
+
+        clean();
+        System.out.println("Current average speed: " + currentSpeed);
+        do{
+            System.out.println("0. Go Back");
+            System.out.print("New speed: ");
+            try{
+                inp = sc.nextDouble();
+                if(inp == 0) return;
+                if(inp < 0) System.out.println("Not a valid value.");
+                else{
+                    umer.setAverageSpeed(licensePlate,inp);
+                    return;
+                }
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+        }while(true);
+    }
+
+    /**
+     * 
+     */
+    private static void changeVehicleFare(String licensePlate, double fare) {
+        Scanner sc = new Scanner(System.in);
+        double inp = -1;
+
+        clean();
+        System.out.println("Current fare: " + fare);
+        do{
+            System.out.println("0. Go Back");
+            System.out.print("New fare: ");
+            try{
+                inp = sc.nextDouble();
+                if(inp == 0) return;
+                if(inp < 0) System.out.println("Not a valid value.");
+                else{
+                    umer.setFare(licensePlate,inp);
+                    return;
+                }
+            }catch(InputMismatchException | IllegalStateException e){
+                e.getMessage();
+                System.out.println("You must enter a number.");
+            }
+        }while(true);
+
     }
 
     /**
@@ -893,15 +1044,15 @@ public class Main implements Interface
                 inp = sc.nextInt();
                 switch(inp){
                     case 1: 
-                        driverEmail = umer.getNearestDriver(inp); 
+                        driverEmail = umer.getNearestDriver("Car"); 
                         validInput = true;
                         break;
                     case 2: 
-                        driverEmail = umer.getNearestDriver(inp);
+                        driverEmail = umer.getNearestDriver("Van");
                         validInput = true;
                         break;
                     case 3: 
-                        driverEmail = umer.getNearestDriver(inp);
+                        driverEmail = umer.getNearestDriver("Motorcycle");
                         validInput = true;
                         break;
                     case 0: return null;

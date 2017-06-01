@@ -40,10 +40,20 @@ public interface Interface
         System.out.println("0. Exit");
     }
 
-    public static void profileMenu(String profile){
+    public static void profileMenuClient(String profile){
         System.out.println(profile);
         System.out.println("1. View Trip History");
         System.out.println("2. Change password");
         System.out.println("0. Go Back");
     }
+
+    public static void profileMenuDriver(String profile){
+        System.out.println(profile);
+        System.out.println("1. View Trip History");
+        System.out.println("2. Change password");
+        System.out.println("3. Vehicle profile");
+        System.out.println("0. Go Back");
+    }
+
+
 }
