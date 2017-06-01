@@ -8,6 +8,9 @@
 
 public interface Interface
 {
+    /**
+     * Prints Main menu when no user is logged
+     */
     public static void mainMenuNotLogged(){
         System.out.println("Main Menu   -   You are not logged in");
         System.out.println("1. Log In");
@@ -18,6 +21,9 @@ public interface Interface
         System.out.println("0. Exit");
     }
 
+    /**
+     * Prints Main menu when client is logged
+     */
     public static void mainMenuForClient(String email){
         System.out.println("Main Menu   -   Logged in as " + email);
         System.out.println("1. Log Out");
@@ -28,6 +34,10 @@ public interface Interface
         System.out.println("0. Exit");
 
     }
+
+    /**
+     * Prints Main menu when driver is logged
+     */
     public static void mainMenuForDriver(String email){
         System.out.println("Main Menu   -   Logged in as " + email);
         System.out.println("1. Log Out");
@@ -40,6 +50,9 @@ public interface Interface
         System.out.println("0. Exit");
     }
 
+    /**
+     * Prints profile and menu for client
+     */
     public static void profileMenuClient(String profile){
         System.out.println(profile);
         System.out.println("1. View Trip History");
@@ -47,6 +60,9 @@ public interface Interface
         System.out.println("0. Go Back");
     }
 
+    /**
+     * Prints profile and menu for driver
+     */
     public static void profileMenuDriver(String profile){
         System.out.println(profile);
         System.out.println("1. View Trip History");

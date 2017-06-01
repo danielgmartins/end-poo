@@ -281,7 +281,8 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
     }
 
     /**
-     * 
+     * Vehicle hashCode
+     * @return int hash code of vehicle license plate
      */
     public int hashCode(){
         return this.licensePlate.hashCode();

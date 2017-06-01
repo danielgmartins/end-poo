@@ -381,7 +381,8 @@ public class Trip implements Comparable<Trip>, Serializable {
    }
 
    /**
-    * 
+    * Hash code of trip
+	* @return int hash code of trip id
     */
     public int hashCode(){
         return ((Integer) this.id).hashCode();

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public abstract class User implements Serializable {
+public abstract class User implements Comparable<User>, Serializable {
     private String name;
     private Address address;
     private LocalDate birthday;
@@ -295,7 +295,17 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * 
+     * CompareTo, compares by email
+     * @param u User used for comparison
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo(User u){
+        return this.email.compareTo(u.getEmail());
+    }
+
+    /**
+     * Hash code of User
+     * @return int with hashcode of user email
      */
     public int hashCode(){
         return this.email.hashCode();

@@ -27,7 +27,7 @@ public class UMeR implements Serializable
     private int tripNumber;                     /* Numeber og trips in tripList, used for setting trip id */
 
     /** 
-     * Initializes UMeR
+     * Empty UMeR Contstructor
      */
     public UMeR (){
         this.tripNumber = 0;
@@ -37,6 +37,69 @@ public class UMeR implements Serializable
         this.setVehicleList(new HashMap<String, Vehicle>());
         this.setTripList(new TreeMap<Integer, Trip>());
         this.setDriverVehicle(new HashMap<String,String>());
+    }
+
+    /** 
+     * UMeR Contstructor every variable
+     * @param isLogged          boolean of logged state
+     * @param loggedUserEmail   String with logged user email
+     * @param userList          Map of user list
+     * @param vehicleList       Map of vehicle List
+     * @param tripList          Map of Trip List
+     * @param driverVehicle     Map of driver Vehicle
+     * @param tripNumber        int with trip number
+     */
+    public UMeR (boolean isLogged, String loggedUserEmail, Map<String, User> userList, Map<String,Vehicle> vehicleList, Map<Integer, Trip> tripList, Map<String, String> driverVehicle, int tripNumber){
+        this.setLogged(isLogged);
+        this.setLoggedUserEmail(loggedUserEmail);
+        this.setUserList(userList);
+        this.setVehicleList(vehicleList);
+        this.setTripList(tripList);
+        this.setDriverVehicle(driverVehicle);
+        this.setTripNumber(tripNumber);
+    }
+
+    /**
+     * Constructor from object UMeR
+     * @param umer Objecto fo construct from
+     */
+    public UMeR(UMeR umer){
+        this(umer.isLogged(),
+             umer.getUserLogged(),
+             umer.getUserList(),
+             umer.getVehicleList(),
+             umer.getTripList(),
+             umer.getDriverVehicle(),
+             umer.getTripNumber()
+            );
+    }
+
+    /**
+     * Clone this umer instance
+     * @return copy of this UMeR instance
+     */
+    public UMeR clone(){
+        return new UMeR(this);
+    }
+
+    /**
+     * equals. Compares UMeR to another object
+     * @param o Object to be compared againsy
+     * @return true if equal, false otherwise
+     */
+    public boolean equals(Object o){
+        if(o == this) return true;
+        if(o == null || o.getClass() != this.getClass())
+            return false;
+        
+        UMeR aux = (UMeR) o;
+        return this.isLogged == aux.isLogged()                      &&
+               this.loggedUserEmail == aux.getUserLogged()          &&
+               this.userList.equals(aux.getUserList())              &&
+               this.vehicleList.equals(aux.getVehicleList())        &&
+               this.tripList.equals(aux.getTripList())              &&
+               this.driverVehicle.equals(aux.getDriverVehicle())    &&
+               this.tripNumber == aux.getTripNumber()               ;
     }
 
     /**
@@ -78,6 +141,66 @@ public class UMeR implements Serializable
      */
     public String getUserLogged(){
         return new String(this.loggedUserEmail);
+    }
+
+    /**
+     * Gets this UMeR user List
+     * @return map copy of user list
+     */
+    public Map<String,User> getUserList(){
+        Map<String,User> aux = new HashMap<String,User>();
+
+        for(String key : this.userList.keySet()){
+            aux.put(new String(key), this.userList.get(key).clone());
+        }
+        return aux;
+    }
+
+    /**
+     * Gets this UMeR vehicle List
+     * @return map copy of vehicle list
+     */
+    public Map<String, Vehicle> getVehicleList(){
+        Map<String, Vehicle> aux = new HashMap<String,Vehicle>();
+
+        for(String key : this.vehicleList.keySet()){
+            aux.put(new String(key), this.vehicleList.get(key).clone());
+        }
+        return aux;
+    }
+
+    /**
+     * Gets this UMeR trip List
+     * @return map copy of trip list
+     */
+    public Map<Integer, Trip> getTripList(){
+        Map<Integer, Trip> aux = new TreeMap<Integer,Trip>();
+
+        for(Integer key : this.tripList.keySet()){
+            aux.put(key, this.tripList.get(key).clone());
+        }
+        return aux;
+    }
+
+    /**
+     * Gets this UMeR driver-vehicle List
+     * @return map copy of driver-vehicle list
+     */
+    public Map<String, String> getDriverVehicle(){
+        Map<String, String> aux = new HashMap<String,String>();
+
+        for(String key : this.driverVehicle.keySet()){
+            aux.put(new String(key), new String(this.driverVehicle.get(key)) );
+        }
+        return aux;
+    }
+
+    /**
+     * Gets this UMeR trip number
+     * @return int with this trip number
+     */
+    public int getTripNumber(){
+        return this.tripNumber;
     }
 
     /**
@@ -207,6 +330,15 @@ public class UMeR implements Serializable
     }
 
     /** 
+     * Sets logged user email
+     * @param email String with email to be set
+     */
+    private void setLoggedUserEmail(String email){
+        this.loggedUserEmail = new String(email);
+    }
+
+
+    /** 
      * Set user list
      * @param list  Map to set UserList to
      */
@@ -232,10 +364,11 @@ public class UMeR implements Serializable
      * Set trip list
      * @param list  Map to set trip list to
      */
-    private void setTripList(TreeMap<Integer, Trip> list){
-        this.tripList = list;
-        for(Integer key : list.keySet()){
-            this.tripList.put(key, list.get(key).clone());
+    private void setTripList(Map<Integer, Trip> list){
+        Map<Integer, Trip> aux = new TreeMap<Integer, Trip>(list);
+        this.tripList = new TreeMap<Integer, Trip>();
+        for(Integer key : aux.keySet()){
+            this.tripList.put(key, aux.get(key).clone());
         }
     }
 
@@ -243,11 +376,20 @@ public class UMeR implements Serializable
      * Set driver vehicle map
      * @param list  Map to set driverVehicle to
      */
-    private void setDriverVehicle(HashMap<String, String> list){
-        this.driverVehicle = list;
-        for(String key : list.keySet()){
-            this.driverVehicle.put(new String(key), new String(list.get(key)));
+    private void setDriverVehicle(Map<String, String> list){
+        Map<String,String> aux = new HashMap<String,String>(list);
+        this.driverVehicle = new HashMap<String,String>();
+        for(String key : aux.keySet()){
+            this.driverVehicle.put(new String(key), new String(aux.get(key)));
         }
+    }
+
+    /** 
+     * Sets trip number
+     * @param number Int with trip number
+     */
+    private void setTripNumber(int number){
+        this.tripNumber = number;
     }
     
     /**

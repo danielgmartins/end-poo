@@ -9,7 +9,7 @@ import java.lang.StringBuilder;
 import java.io.Serializable;
 import Exceptions.*;
 
-public class Address implements Serializable {
+public class Address implements Comparable<Address>, Serializable {
     private String city;
     private String country;
 
@@ -121,6 +121,28 @@ public class Address implements Serializable {
             throw new IllegalStateException("Country must have content");
 
         this.country = country;
+    }
+
+    /**
+     * Compares address to another address
+     * Compares by city then by country
+     * @param ad    Address to be compared against
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo(Address ad){
+        int aux = this.city.compareTo(ad.getCity());
+        if(aux != 0) return aux;
+        
+        aux = this.country.compareTo(ad.getCountry());
+        return aux;
+    }
+
+    /**
+     * Hash code
+     * @return int of code
+     */
+    public int hashCode(){
+        return this.city.hashCode() * 1000000000 + this.country.hashCode();
     }
 
 }
