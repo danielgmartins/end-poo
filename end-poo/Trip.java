@@ -34,7 +34,8 @@ public class Trip implements Comparable<Trip>, Serializable {
 	 * @param destination 			Coordinates object with the trip's destination
 	 * @param estimatedTripTime 	estimated time of the trip
 	 * @param realTripTime 			time of the trip
-	 * @param expectedTripCost 		cost of trip
+	 * @param expectedTripCost 		expected cost of trip
+	 * @param realTripCost			real cost of trip
 	 */
 	public Trip(int id, String client, String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost){
 		this.setId(id);
