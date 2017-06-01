@@ -638,7 +638,7 @@ public class Main implements Interface
     }
 
     /**
-     * 
+     * Change Vehicle Average Speed menu
      */
     private static void changeVehicleAvgSpeed(String licensePlate, double currentSpeed) {
         Scanner sc = new Scanner(System.in);
@@ -665,7 +665,7 @@ public class Main implements Interface
     }
 
     /**
-     * 
+     * Change Vehicle Fare menu
      */
     private static void changeVehicleFare(String licensePlate, double fare) {
         Scanner sc = new Scanner(System.in);
@@ -866,7 +866,7 @@ public class Main implements Interface
 
             //      Calculate trip values
             try{
-                driver = (Driver) umer.getDriverObject(driverEmail);
+                driver = (Driver) umer.getUserObject(driverEmail);
             }catch(UserNonExistent | UserIsNotDriverException e){
                 System.out.println(e.getMessage());
                 continue;
@@ -1025,6 +1025,7 @@ public class Main implements Interface
 
     /**
      * Request the closest vehicles available, depending on the type of vehicle.
+     * @return String with a closest available vehicle license plate. If null is returned it means user wants to go back
      */
     private static String requestClosestVehicle(){
         Scanner sc = new Scanner(System.in);
@@ -1075,6 +1076,7 @@ public class Main implements Interface
 
     /**
      * Request the closest vehicles available, depending on the type of vehicle.
+     * @return String with a specific vehicle license plate. If null is returned it means user wants to go back
      */
     private static String requestSpecificVehicle(){
         Scanner sc = new Scanner(System.in);
@@ -1104,7 +1106,7 @@ public class Main implements Interface
     }
 
     /**
-     * 
+     * Switch availability of logged driver menu
      */
     private static void switchAvailability(){
         Scanner sc = new Scanner(System.in);
@@ -1151,7 +1153,7 @@ public class Main implements Interface
     }
 
     /**
-     * 
+     * Set new location to logged driver menu
      */
     private static void setLocation(){
         Scanner sc = new Scanner(System.in);
@@ -1276,6 +1278,7 @@ public class Main implements Interface
     /**
      * Function to encrypt password when creating user
      * @param pass Password to be encrypted
+     * @return  String with hashed password
      */
     private static String hashPassword(String password) throws NullPointerException, IllegalStateException {
         if(password == null)
