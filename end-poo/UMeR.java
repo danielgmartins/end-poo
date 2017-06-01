@@ -552,7 +552,7 @@ public class UMeR implements Serializable
      * @throws licensePlateUnavailable  if a vehicle with this license plate already exists
      */
     public void addVehicle (Vehicle vehicle) throws LicensePlateUnavailable {
-        if( !this.isLicensePlateAvailable(vehicle.getLicensePlate()) )
+        if( this.vehicleList.containsKey(vehicle.getLicensePlate()) )
             throw new LicensePlateUnavailable("License plate already in use");
         
         this.vehicleList.put(vehicle.getLicensePlate(), vehicle.clone() );

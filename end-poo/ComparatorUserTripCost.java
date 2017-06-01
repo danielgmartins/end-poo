@@ -3,6 +3,7 @@
 
 
 import java.util.Comparator;
+import java.io.Serializable;
 
 public class ComparatorUserTripCost implements Comparator<User>, Serializable{
 

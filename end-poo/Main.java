@@ -728,7 +728,6 @@ public class Main implements Interface
         if(!umer.isDriver())
             return;
         
-        
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
         int vehicleType = -1, inp = -1;
@@ -864,9 +863,10 @@ public class Main implements Interface
                 }
                 sc.nextLine();
             }while(!validInput);
+            validInput = false;
 
+            clean();
             do{     // Request Closest OR Specific vehicle
-                clean();
                 System.out.println("1. Request closest vehicle");
                 System.out.println("2. Request specific vehicle");
                 System.out.println("0. Go Back");
@@ -882,10 +882,12 @@ public class Main implements Interface
                             break;
                         case 0: return;
                         default:
+                            clean();
                             System.out.println("Not a valid option");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
+                    clean();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
