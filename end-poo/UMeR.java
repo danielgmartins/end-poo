@@ -536,7 +536,7 @@ public class UMeR implements Serializable
      * @throws NoUserLoggedException    if no user is logged
      * @throws UserIsNotClientException if currently logged user is not a driver
      */
-    public String getThisDriverProfileString () throws NoUserLoggedException, UserIsNotClientException{
+    public String getThisDriverProfileString () throws DriverHasNoVehicleException, UserIsNotDriverException, NoUserLoggedException, UserIsNotClientException{
         if (this.loggedUserEmail == null)
             throw new NoUserLoggedException();      // Este caso nunca acontece
         if (! isDriver() )
@@ -575,7 +575,7 @@ public class UMeR implements Serializable
         if (this.loggedUserEmail == null)
             throw new NoUserLoggedException();      // Este caso nunca acontece
         if (! isDriver() )
-            throw new UserIsNotClientException();   // Este caso nunca acontece
+            throw new UserIsNotDriverException();   // Este caso nunca acontece
         if(!this.driverVehicle.containsKey(this.loggedUserEmail))
             throw new DriverHasNoVehicleException();
 
@@ -839,7 +839,7 @@ public class UMeR implements Serializable
      * @throws NoUserLoggedException        if no user is logged
      * @throws UserIsNotClientException     if currently logged user is not a client
      */
-    public void makeTrip(String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost) throws NoUserLoggedException, UserIsNotClientException {
+    public void makeTrip(String driver, LocalDateTime date, String taxi, Coordinates taxiLocation, Coordinates clientLocation, Coordinates destination, int estimatedTripTime,int realTripTime,double expectedTripCost, double realTripCost) throws DriverNotAuthorized, VehicleNonExistent, UserIsNotDriverException, UserNonExistent, NoUserLoggedException, UserIsNotClientException {
 
         if(this.loggedUserEmail == null)
             throw new NoUserLoggedException();

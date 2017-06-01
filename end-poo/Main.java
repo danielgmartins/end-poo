@@ -420,8 +420,9 @@ public class Main implements Interface
                 try{
                     clean();
                     Interface.profileMenuDriver( umer.getThisDriverProfileString() );
-                }catch(NoUserLoggedException | UserIsNotClientException e){
-                    System.out.println("NoUserLoggedException | UserIsNotClientException");
+                }catch(Exception e){
+                    System.out.println("View profile" + e.getMessage());
+                    System.exit(1);
                 }
             
                 try{
@@ -519,8 +520,12 @@ public class Main implements Interface
                     }
                 }
             }while(!validInput);
-
-            System.out.println(umer.getTripHistoryString(first_date, second_date));
+            try{
+                System.out.println(umer.getTripHistoryString(first_date, second_date));
+            }catch(NoUserLoggedException e){
+                System.out.println("viewTripHistory\n" + e.getMessage());
+                System.exit(0);
+            }
 
             do{ // Going back
                 System.out.println("1. View Other Dates");
@@ -572,7 +577,12 @@ public class Main implements Interface
             }
         }while(!validInput);
 
-        umer.changePassword(newPassword);
+        try{
+            umer.changePassword(newPassword);
+        }catch(NoUserLoggedException e){
+            System.out.println("changePassword" + e.getMessage());
+            System.exit(0);
+        }
 
         do{
             System.out.println("\nChanged password successfully.");
@@ -595,8 +605,10 @@ public class Main implements Interface
         Scanner sc = new Scanner(System.in);
         //boolean validInpur = false;
         int inp = -1;
+        Vehicle vehicle = null;
 
         // in case the driver does not have a vehicle
+        try{
         if(!umer.hasVehicle()){
             System.out.println("You do not have a vehicle.");
             System.out.println("0. Go back");
@@ -611,10 +623,19 @@ public class Main implements Interface
                 }
             }while(true);
         }
+        }catch( UserIsNotDriverException | NoUserLoggedException e){ 
+            System.out.println("vehicleProfile\n" + e.getMessage());
+            System.exit(1);
+        }
 
         do{
             clean();
-            Vehicle vehicle = umer.getDriversVehicle(umer.getUserLogged());
+            try{
+            vehicle = umer.getDriversVehicle(umer.getUserLogged());
+            }catch(Exception e){
+                System.out.println("vehicleProfile\n" + e.getMessage());
+                System.exit(1);
+            }
             System.out.println("Vehicle profile\n");
             System.out.println(vehicle.toString());
             System.out.println("\n1. Change Average Speed");
@@ -654,7 +675,12 @@ public class Main implements Interface
                 if(inp == 0) return;
                 if(inp < 0) System.out.println("Not a valid value.");
                 else{
+                    try{
                     umer.setAverageSpeed(licensePlate,inp);
+                    }catch(VehicleNonExistent | DriverNotAuthorized e){
+                        System.out.println("changeVehicleAvgSpeed\n"+e.getMessage());
+                        System.exit(0);
+                    }// never happens
                     return;
                 }
             }catch(InputMismatchException | IllegalStateException e){
@@ -681,7 +707,9 @@ public class Main implements Interface
                 if(inp == 0) return;
                 if(inp < 0) System.out.println("Not a valid value.");
                 else{
+                    try{
                     umer.setFare(licensePlate,inp);
+                    }catch(VehicleNonExistent | DriverNotAuthorized e){ return;}// never happens
                     return;
                 }
             }catch(InputMismatchException | IllegalStateException e){
@@ -867,15 +895,25 @@ public class Main implements Interface
             //      Calculate trip values
             try{
                 driver = (Driver) umer.getUserObject(driverEmail);
-            }catch(UserNonExistent | UserIsNotDriverException e){
+            }catch(UserNonExistent e){
                 System.out.println(e.getMessage());
                 continue;
             }
+            try{
             vehicle = umer.getDriversVehicle(driverEmail);
-
+            }catch(UserNonExistent | UserIsNotDriverException | DriverHasNoVehicleException e){
+                System.out.println("requestTrip\n" + e.getMessage());
+                System.exit(1);
+            }
+            
+            try{
             umer.setReliability(vehicle.getLicensePlate());
             vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
             vehicle = umer.getDriversVehicle(driverEmail);
+            }catch(UserIsNotDriverException | DriverHasNoVehicleException | UserNonExistent | VehicleNonExistent e){
+                System.out.println("requestTrip\n" + e.getMessage());
+                System.exit(0);
+            }
 
             totalDistance       = userLocation.distance(vehicle.getLocation()) + userLocation.distance(destination);
             timeToClient        = (int) ( (double)( userLocation.distance(vehicle.getLocation()) * 60 ) / vehicle.getAverageSpeed() ) ;
@@ -912,7 +950,12 @@ public class Main implements Interface
                     System.out.println("0. Cancel and go back");
                     switch(sc.nextInt()){
                         case 1:
+                            try{
                             umer.setDriverAvailability(driverEmail, false);
+                            }catch(UserNonExistent | UserIsNotDriverException e){
+                                System.out.println("requestTrip\n" + e.getMessage());
+                                System.exit(0);
+                            }
                             validInput = true;
                             break;
                         case 0:
@@ -989,7 +1032,12 @@ public class Main implements Interface
             validInput= false;       
         }
 
+        try{
         umer.setDriverAvailability(driverEmail, true);
+        }catch(Exception e){
+            System.out.println("requestTrip\n" + e.getMessage());
+            System.exit(0);
+        }
 
         // GET DRIVER CLASSIFICATION
         clean();
@@ -1007,7 +1055,7 @@ public class Main implements Interface
             }
         }while(!validInput);
 
-
+        try{
         umer.makeTrip(driverEmail,
                       LocalDateTime.now(),
                       vehicle.getLicensePlate(),
@@ -1019,7 +1067,12 @@ public class Main implements Interface
                       estimatedTripCost,
                       realTripCost
                     );
+        
         umer.giveClassification(driverEmail,classification);
+        }catch(Exception e){
+            System.out.println("requestTrip\n" + e.getMessage());
+            System.exit(0);
+        }
         return;
     }
 
@@ -1067,6 +1120,9 @@ public class Main implements Interface
             }catch(NoVehicleAvailableException e){
                 System.out.println("There are no vehicles of this kind available right now.");
                 validInput = false;
+            }catch(UserIsNotClientException | NoUserLoggedException e){
+                System.out.println("requestClosestVehicle\n" + e.getMessage());
+                System.exit(1);
             }
             sc.nextLine();
         }while(!validInput);
@@ -1087,7 +1143,12 @@ public class Main implements Interface
         do{
             clean();
             System.out.println("Here's a list of the closest vehicles available.");
+            try{
             System.out.println(umer.getNearestVehiclesString());
+            }catch(UserIsNotClientException | NoUserLoggedException e){ // never happens
+                System.out.println("requestSpecificVehicle\n" + e.getMessage());
+                System.exit(1);
+            }
             System.out.println("Write the email of the driver you want to request.");
             driverEmail = sc.nextLine();
             if(driverEmail.equals("0")) return null;
@@ -1096,7 +1157,7 @@ public class Main implements Interface
                     validInput = true;
                 else
                     System.out.println("Not a valid option.");
-            }catch(UserNonExistent e){
+            }catch(UserNonExistent | UserIsNotDriverException e){
                 System.out.println("Not a valid option.");
                 validInput = false;
             }
@@ -1124,7 +1185,7 @@ public class Main implements Interface
             System.out.print("Availability is now set to: ");
             try{
                 System.out.println(umer.isDriverAvailable(userEmail));
-            }catch(UserNonExistent e){
+            }catch(UserIsNotDriverException | UserNonExistent e){
                 System.out.println("User must be logged");
                 System.exit(0);
             }
@@ -1135,7 +1196,7 @@ public class Main implements Interface
                     case 1:
                         try{
                             umer.setDriverAvailability(umer.getUserLogged(), !umer.isDriverAvailable(userEmail));
-                        }catch(UserNonExistent e){
+                        }catch(UserIsNotDriverException | UserNonExistent e){
                             System.out.println("User must be logged");
                             System.exit(0);
                         } 
