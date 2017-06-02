@@ -4,7 +4,6 @@
 %\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-
 % Comentar para not MAC Users
 \usepackage[applemac]{inputenc}
 
@@ -18,7 +17,7 @@
 
 \begin{document}
 \mainmatter
-\title{Relatório do Trabalho Prático de\\Programação Orientada a Objetos}
+\title{Relatório do Trabalho Prático de\\Programação Orientada a Objetos\\GrupoXX POO2017}
 
 \titlerunning{Relatório do Trabalho TP de POO}
 
@@ -28,39 +27,79 @@
 
 \institute{
 Universidade do Minho, Departamento de Informática, 4710-057 Braga, Portugal\\
-e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt
-}
+e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt}
 
 \date{}
 \bibliographystyle{splncs}
 
 \maketitle
+
+\begin {figure}[h]
+	%\begin{center}
+		\includegraphics [width=20mm] {elisio}
+		\\ Elísio Freitas Fernandes \{$55617$\}
+	%\end {center}
+	\label{elisio}
+\end {figure}
+
+\begin {figure}[h]
+	%\begin{center}
+		\includegraphics [width=20mm] {elisio}
+		\\ Daniel Gonçalves Martins \{$73175$\}
+	%\end {center}
+	\label{daniel}
+\end {figure}
+
+\begin {figure}[h]
+	%\begin{center}
+		\includegraphics [width=20mm] {elisio}
+		\\ Nuno José Ribeiro da Silva \{$78879$\}
+	%\end {center}
+	\label{nuno}
+\end {figure}
+
 \begin{abstract}
 Serve o presente como relatório do projeto elaborado no âmbito da unidade curricular de Programação Orientada a Objetos. Projeto esse no qual se previa a elaboração de um programa para a empresa UMeR, o qual fosse capaz de garantir a prestação continua do seu serviço. Os requisitos de tal programa incluem a criação e manutenção da base de dados que inclui os dados dos clientes, bem como as informações dos seus colaboradores e das suas viaturas, utilizadas para a prestação do serviço em questão. Mais ainda, está incluída a criação de uma interface de interação com os utilizadores com várias opções, como: criação de conta; posterior acesso e atualização dos dados da conta; consulta de histórico de serviços requeridos/prestados.
 \end{abstract}
 
-\section{Introdução}
 
-%Não esquecer de referenciar apropriadamente...
- Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, no seguimento da UC de programação Orientada aos Objetos. Neste  
+
+\section{Introdução}
+ Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando java, temos recorrido maioritariamente ao Atom como editor de texto e o Terminal como compilador, bem como o ***** e a consola do linux para windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
 
 
 \section{Arquitetura}
-Nesta proposta utilizamos vários tipos de classe com diferentes atributos. Desde classes concretas a classes abstratas, class com e sem implementações de interfaces e subclasses de classes abstratas.\\Por questões de necessidade de gravação do estado da aplicação, todas as classes tem em comum a implementação da interface Serializable, oferecendo, assim, um método simples de gravação dos objetos com todos os seus estados atuais em ficheiro, para posterior consulta.2.1. Classe UmeR
+Nesta proposta foram utilizados vários tipos de classes com diferentes atributos. Desde classes concretas a classes abstratas, classes com e sem implementações de interfaces e subclasses de classes abstratas.\\
+Por questões de necessidade de gravação do estado da aplicação, todas as classes tem em comum a implementação da interface \textit{Serializable}, oferecendo, assim, um método simples de gravação dos objetos com todos os seus estados atuais em ficheiro, para posterior consulta.
+
+\subsection{Classe UmeR}
+Utiliza Maps e tipos primitivos para guardar os seus dados. Possui um registo de toda a informação necessária para o bom funcionamento da empresa. Contém quatro estruturas de dados Map onde se encontram guardados 1. User como \textit{value} e email como \textit{key}, para guardar todos os utilizadores registados na empresa, quer clientes, quer condutores ; 2. Vehicle como \textit{value} e licensePlate como \textit{key}, para guardar a informação da viaturas ao serviço da empresa; 3. Trip como \textit{value} e id de viagem como \textit{key}, para manter um histórico de todas as viagens efetuadas através da empresa; 4. Email como \textit{value} e licensePlate como \textit{key}, para manter um registo do veículo associado a cada condutor. Existe ainda a variável isLogged,  do tipo \textit{boolean}, que indica se existe um utilizador "logado". Se sim, então o seu e-mail estará presente na variável loggedUserEmail, do tipo \textit{String}. Por último, existe na classe uma variável tripNumber, do tipo \textit{Integer}, responsável por garantir a sequencialização dos identificadores únicos da viagem, utilizados no Map das Trips.\\
+Foram aglomerados todos os dados do tipo user, respetivamente, todos os dados de tipo Trip e veiculo, num só Map, uma vez que eram compatíveis, de maneira a ser possível efetuar operações sobre todos os utilizadores de uma só vez, bem como para facilitar a adição de novos tipo de utilizadores.
 
 \subsection{One subsection}
 abdc...
 \subsection{One more...}
+\section{Hierarquia}
+Genericamente, como pode ser visto na figura ******, temos a ligação 
+
+\section{Tipos de dados usados}
+por fotos dos dados usados e justificar o uso de maps e lists generalista - abstração
+
+
+\section{Manual de utilização}
+
+fotos e indicações de navegação
+
 
 %UNCOMMENT se necessário
 %De acordo com o ilustrado na Figura~\ref{fig:controller}
 %% Exemplo para inserção de uma figura
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.1]{collections.jpg} 
-\end{center}
-\caption{\label{fig:controller}Architecture of the unified QoS metric fuzzy controller.}
-\end{figure} 
+%\begin{figure}
+%\begin{center}
+%\includegraphics[scale=0.1]{collections.jpg} 
+%\end{center}
+%\caption{\label{fig:controller}Architecture of the unified QoS metric fuzzy controller.}
+%\end{figure} 
 
 According to Table~\ref{tab:TabelaExemplo}...
 
