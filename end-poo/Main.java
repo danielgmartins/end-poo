@@ -69,6 +69,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -95,6 +96,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -119,6 +121,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -413,6 +416,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
         else if(umer.isDriver()){  // DRIVER PROFILE
@@ -436,6 +440,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
     }
@@ -520,11 +525,17 @@ public class Main implements Interface
                     }
                 }
             }while(!validInput);
-            try{
-                System.out.println(umer.getTripHistoryString(first_date, second_date));
-            }catch(NoUserLoggedException e){
-                System.out.println("viewTripHistory\n" + e.getMessage());
-                System.exit(0);
+
+            if(first_date.isAfter(second_date)){
+                System.out.println("First date must be before second date");
+            }
+            else{
+                try{
+                    System.out.println(umer.getTripHistoryString(first_date, second_date));
+                }catch(NoUserLoggedException e){
+                    System.out.println("viewTripHistory\n" + e.getMessage());
+                    System.exit(0);
+                }
             }
 
             do{ // Going back
@@ -595,6 +606,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -621,6 +633,7 @@ public class Main implements Interface
                     e.getMessage();
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
         }catch( UserIsNotDriverException | NoUserLoggedException e){ 
@@ -685,8 +698,9 @@ public class Main implements Interface
                 }
             }catch(InputMismatchException | IllegalStateException e){
                 e.getMessage();
-                System.out.println("You must enter a number.");
+                System.out.println("\nYou must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -714,8 +728,9 @@ public class Main implements Interface
                 }
             }catch(InputMismatchException | IllegalStateException e){
                 e.getMessage();
-                System.out.println("You must enter a number.");
+                System.out.println("\nYou must enter a number.");
             }
+            sc.nextLine();
         }while(true);
 
     }
@@ -843,7 +858,6 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
@@ -861,33 +875,34 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
-            clean();
             do{     // Request Closest OR Specific vehicle
+                clean();
                 System.out.println("1. Request closest vehicle");
                 System.out.println("2. Request specific vehicle");
                 System.out.println("0. Go Back");
                 try{
                     switch(sc.nextInt()){
                         case 1: // Requests closest Vehicle
+                            sc.nextLine();
                             driverEmail = requestClosestVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 2: 
+                            sc.nextLine();
                             driverEmail = requestSpecificVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 0: return;
                         default:
-                            clean();
+                            sc.nextLine();
                             System.out.println("Not a valid option");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
-                    clean();
+                    sc.nextLine();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
@@ -909,9 +924,9 @@ public class Main implements Interface
             }
             
             try{
-            umer.setReliability(vehicle.getLicensePlate());
-            vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
-            vehicle = umer.getDriversVehicle(driverEmail);
+                umer.setReliability(vehicle.getLicensePlate());
+                vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
+                vehicle = umer.getDriversVehicle(driverEmail);
             }catch(UserIsNotDriverException | DriverHasNoVehicleException | UserNonExistent | VehicleNonExistent e){
                 System.out.println("requestTrip\n" + e.getMessage());
                 System.exit(0);
@@ -924,28 +939,26 @@ public class Main implements Interface
 
             
 
-
             clean();
-            System.out.print("Your driver: ");
-            System.out.println(driver.getName());
-            System.out.print("Driver classification: ");
-            System.out.println(driver.getClassification());
-            System.out.print("Vehicle License Plate: ");
-            System.out.println(vehicle.getLicensePlate());
-            System.out.print("Vehicle reliability: ");
-            System.out.println(vehicleReliability);
-            System.out.print("Minutes to your location: ");
-            System.out.println(timeToClient);
-            System.out.print("Minutes from you location to destination: ");
-            System.out.println(timeToDestination);
-            System.out.print("Total estimated trip time: ");
-            System.out.println(timeToClient + timeToDestination);
-            System.out.print("Total Distance: ");
-            System.out.println(totalDistance);
-            System.out.print("Estimated Cost: ");
-            System.out.println(estimatedTripCost);
-
             do{     // Checks if client wants to request the trip
+                System.out.print("Your driver: ");
+                System.out.println(driver.getName());
+                System.out.print("Driver classification: ");
+                System.out.println(driver.getClassification());
+                System.out.print("Vehicle License Plate: ");
+                System.out.println(vehicle.getLicensePlate());
+                System.out.print("Vehicle reliability: ");
+                System.out.println(vehicleReliability);
+                System.out.print("Minutes to your location: ");
+                System.out.println(timeToClient);
+                System.out.print("Minutes from you location to destination: ");
+                System.out.println(timeToDestination);
+                System.out.print("Total estimated trip time: ");
+                System.out.println(timeToClient + timeToDestination);
+                System.out.print("Total Distance: ");
+                System.out.println(totalDistance);
+                System.out.print("Estimated Cost: ");
+                System.out.println(estimatedTripCost);
                 try{
                     System.out.println("Do you want to request this trip?");
                     System.out.println("1. Request Trip");
@@ -963,10 +976,12 @@ public class Main implements Interface
                         case 0:
                             return;
                         default:
+                            clean();
                             System.out.println("Not a valid option.");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
+                    clean();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
@@ -976,12 +991,14 @@ public class Main implements Interface
         }while(!validInput);
 
         /*
-        realTripTime is calculated by taking the time estimate and multiplying by
-        a value determined by the vehicle Reliability ( 100% + ((50%)- reliability/2) )
-        if reliability is 100% (1.0) then  it will it take 50% of the estimated time to arrive to destination
-        if reliability is 0% (0.0) the it will take 150% of the estimated time to arrive to destination
+        Vehicle Reliability is a random value overtime falling in a Normal Distribution, obtained by 
+        Random.nextGaussian().
+        this vehicle reliability will hava a mean (average) of 1, with a standard deviation of 2,
+        and limited between 0.5 an 1.75
+        De big standard deviation makes it so that it's still rather likely the trip will take more 125% of
+        the estimated time, but still less likely then taking a more reasonable time.
         */
-        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.5)-vehicleReliability/2)) );
+        realTripTime = (int)( (timeToClient + timeToDestination) * (vehicleReliability) );
         realTripCost = realTripTime * (vehicle.getFare()/10);
 
 
@@ -997,6 +1014,8 @@ public class Main implements Interface
             System.out.println(estimatedTripCost);
             System.out.print("Real cost: ");
             System.out.println(realTripCost);
+            System.out.print("Total distance: ");
+            System.out.println(totalDistance);
             System.out.println("How much are you willing to pay?");
             do{
                 try{
@@ -1009,6 +1028,7 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
+                sc.nextLine();
             }while(!validInput);
             validInput= false;
 
@@ -1020,6 +1040,8 @@ public class Main implements Interface
             System.out.println(realTripTime);
             System.out.print("Real trip Cost: ");
             System.out.println(realTripCost);
+            System.out.print("Total distance: ");
+            System.out.println(totalDistance);
             do{
                 System.out.println("0. To Continue");
                 try{
@@ -1055,6 +1077,7 @@ public class Main implements Interface
                 System.out.println("You must enter a number.");
                 validInput = false;
             }
+            sc.nextLine();
         }while(!validInput);
 
         try{
@@ -1088,14 +1111,12 @@ public class Main implements Interface
         int inp = -1;
         String driverEmail = null;
         clean();
+        System.out.println("What kind of vehicle do you want o request?");
+        System.out.println("1. Car        (4 seats)");
+        System.out.println("2. Van        (7 seats)");
+        System.out.println("3. Motorcycle (1 seat)");
+        System.out.println("0. Go Back");
         do{ 
-            System.out.println("What kind of vehicle do you want o request?");
-            System.out.println("1. Car        (4 seats)");
-            System.out.println("2. Van        (7 seats)");
-            System.out.println("3. Motorcycle (1 seat)");
-            System.out.println("0. Go Back");
-
-
             try{
                 inp = sc.nextInt();
                 switch(inp){
@@ -1142,15 +1163,16 @@ public class Main implements Interface
         int inp = -1;
         String driverEmail;
 
+        clean();
         do{
-            clean();
             System.out.println("Here's a list of the closest vehicles available.");
             try{
             System.out.println(umer.getNearestVehiclesString());
             }catch(UserIsNotClientException | NoUserLoggedException e){ // never happens
                 System.out.println("requestSpecificVehicle\n" + e.getMessage());
-                System.exit(1);
+                System.exit(0);
             }
+            System.out.println("0. Go Back");
             System.out.println("Write the email of the driver you want to request.");
             driverEmail = sc.nextLine();
             if(driverEmail.equals("0")) return null;
@@ -1212,6 +1234,7 @@ public class Main implements Interface
             }catch(NoSuchElementException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1235,10 +1258,9 @@ public class Main implements Interface
                 validInput = true;
                 System.out.println("Location set successfully.");
             }catch(NoSuchElementException | IllegalStateException e){
-                if(sc.nextLine().equals("C")) return;
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            if(sc.nextLine().equals("C")) return;
         }while(!validInput);
 
         do{ // Going back
@@ -1287,6 +1309,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1314,6 +1337,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1335,6 +1359,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
