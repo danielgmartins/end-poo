@@ -3,6 +3,7 @@ README.TXT
 *.ctxt
 *.bluej
 *.json
+Test.*
 test.*
 *.pdf
 end-poo/doc/
