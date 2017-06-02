@@ -525,11 +525,17 @@ public class Main implements Interface
                     }
                 }
             }while(!validInput);
-            try{
-                System.out.println(umer.getTripHistoryString(first_date, second_date));
-            }catch(NoUserLoggedException e){
-                System.out.println("viewTripHistory\n" + e.getMessage());
-                System.exit(0);
+
+            if(first_date.isAfter(second_date)){
+                System.out.println("First date must be before second date");
+            }
+            else{
+                try{
+                    System.out.println(umer.getTripHistoryString(first_date, second_date));
+                }catch(NoUserLoggedException e){
+                    System.out.println("viewTripHistory\n" + e.getMessage());
+                    System.exit(0);
+                }
             }
 
             do{ // Going back
@@ -915,9 +921,9 @@ public class Main implements Interface
             }
             
             try{
-            umer.setReliability(vehicle.getLicensePlate());
-            vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
-            vehicle = umer.getDriversVehicle(driverEmail);
+                umer.setReliability(vehicle.getLicensePlate());
+                vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
+                vehicle = umer.getDriversVehicle(driverEmail);
             }catch(UserIsNotDriverException | DriverHasNoVehicleException | UserNonExistent | VehicleNonExistent e){
                 System.out.println("requestTrip\n" + e.getMessage());
                 System.exit(0);
@@ -982,12 +988,14 @@ public class Main implements Interface
         }while(!validInput);
 
         /*
-        realTripTime is calculated by taking the time estimate and multiplying by
-        a value determined by the vehicle Reliability ( 100% + ((50%)- reliability/2) )
-        if reliability is 100% (1.0) then  it will it take 50% of the estimated time to arrive to destination
-        if reliability is 0% (0.0) the it will take 150% of the estimated time to arrive to destination
+        Vehicle Reliability is a random value overtime falling in a Normal Distribution, obtained by 
+        Random.nextGaussian().
+        this vehicle reliability will hava a mean (average) of 1, with a standard deviation of 2,
+        and limited between 0.5 an 1.75
+        De big standard deviation makes it so that it's still rather likely the trip will take more 125% of
+        the estimated time, but still less likely then taking a more reasonable time.
         */
-        realTripTime = (int)( (timeToClient + timeToDestination) * (1 + ((0.5)-vehicleReliability/2)) );
+        realTripTime = (int)( (timeToClient + timeToDestination) * (vehicleReliability) );
         realTripCost = realTripTime * (vehicle.getFare()/10);
 
 

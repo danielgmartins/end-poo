@@ -112,10 +112,14 @@ public class Van extends Vehicle implements Serializable {
         Random randWeather = new Random();
         Random randTraffic = new Random();
 
-        double reliable = Math.abs(rand.nextDouble() * randWeather.nextDouble() * randTraffic.nextDouble() - 0.005);
+        double reliable = -1;
+        
+        while(reliable < 0.5 || reliable > 1.75) {
+            reliable = ( rand.nextGaussian() * randWeather.nextGaussian() * randTraffic.nextGaussian())*2 + 1;
+            System.out.println(reliable);
+        }
 
-        if (reliable > 1) super.setReliability(1.0);
-        else super.setReliability(reliable);
+        super.setReliability(reliable);
     }
 
 
