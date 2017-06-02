@@ -137,8 +137,6 @@ public class Main implements Interface
         int inp = -1;
 
         clean();
-        EmailValidator eval = new EmailValidator();
-        
 
         do { // getting info for logIn
             System.out.println("0. Go back");
@@ -149,7 +147,7 @@ public class Main implements Interface
 
                 if(email.equals("0")) return; // breaks in case of 0.
 
-                validInput = eval.validate(email);
+                validInput = EmailValidator.validate(email);
 
                 if(!validInput){
                     System.out.println("Email not valid. Try again.");
@@ -219,7 +217,6 @@ public class Main implements Interface
         int bday=0, bmonth=0, byear=0, inp =-1;
         Address address = new Address();
         LocalDate birthday = LocalDate.now();
-        EmailValidator eval = new EmailValidator();
 
         do {    // getting info for sign up
 
@@ -250,7 +247,7 @@ public class Main implements Interface
 
                 if(email.equals("0")) return;
                 
-                if(!eval.validate(email)){
+                if(!EmailValidator.validate(email)){
                     System.out.println("Not a valid email.");
                 }else if(!umer.isEmailAvailable(email)){
                     System.out.println("Email already in use.");
