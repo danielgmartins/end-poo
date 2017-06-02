@@ -878,11 +878,11 @@ public class Main implements Interface
             }while(!validInput);
             validInput = false;
 
-            clean();
-            System.out.println("1. Request closest vehicle");
-            System.out.println("2. Request specific vehicle");
-            System.out.println("0. Go Back");
             do{     // Request Closest OR Specific vehicle
+                clean();
+                System.out.println("1. Request closest vehicle");
+                System.out.println("2. Request specific vehicle");
+                System.out.println("0. Go Back");
                 try{
                     switch(sc.nextInt()){
                         case 1: // Requests closest Vehicle

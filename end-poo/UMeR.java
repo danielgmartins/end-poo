@@ -955,8 +955,6 @@ public class UMeR implements Serializable
             sb.append(auxVehicle.getAverageSpeed());
             sb.append("\nFare: ");
             sb.append(auxVehicle.getFare());
-            sb.append("\nReliability");
-            sb.append(auxVehicle.getReliability());
             sb.append("\n");
 
             driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
