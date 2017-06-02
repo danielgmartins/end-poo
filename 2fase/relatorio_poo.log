@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  1 JUN 2017 22:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  1 JUN 2017 23:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -411,28 +411,29 @@ File: elisio.jpg Graphic file (type jpg)
  <use elisio.jpg>
 Package pdftex.def Info: elisio.jpg used on input line 47.
 (pdftex.def)             Requested size: 56.9055pt x 85.34825pt.
-File: elisio.jpg Graphic file (type jpg)
 
-<use elisio.jpg>
-Package pdftex.def Info: elisio.jpg used on input line 55.
-(pdftex.def)             Requested size: 56.9055pt x 85.34825pt.
+<nuno.jpeg, id=2, 344.28625pt x 449.68pt>
+File: nuno.jpeg Graphic file (type jpg)
+ <use nuno.jpeg>
+Package pdftex.def Info: nuno.jpeg used on input line 55.
+(pdftex.def)             Requested size: 56.9055pt x 74.32436pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
  [1
 
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./elisi
-o.jpg>]
+o.jpg> <./nuno.jpeg>]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 67.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 75.
  [2] [3] (./relatorio_poo.aux) ) 
 Here is how much of TeX's memory you used:
- 4017 strings out of 493014
- 53674 string characters out of 6133352
+ 4024 strings out of 493014
+ 53746 string characters out of 6133352
  137506 words of memory out of 5000000
- 7489 multiletter control sequences out of 15000+600000
+ 7493 multiletter control sequences out of 15000+600000
  29924 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,7n,32p,1182b,236s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -442,10 +443,10 @@ s/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/lo
 cal/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio_poo.pdf (3 pages, 612208 bytes).
+Output written on relatorio_poo.pdf (3 pages, 699662 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
+ 37 PDF objects out of 1000 (max. 8388607)
  24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
