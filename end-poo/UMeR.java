@@ -831,7 +831,7 @@ public class UMeR implements Serializable
         // Gets a list of the top five worst perfromers
         List<String> topFive = new LinkedList<String>( driverPerformance.entrySet()
                                                                         .stream()
-                                                                        .sorted((e1, e2) -> e1.getValue()
+                                                                        .sorted((e1, e2) -> e2.getValue()
                                                                                               .compareTo(e1.getValue()))
                                                                         .limit(5)
                                                                         .map(Map.Entry :: getKey)
@@ -871,38 +871,32 @@ public class UMeR implements Serializable
         if(!isClient())
             throw new UserIsNotClientException();
 
-        SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
-        User auxDriver;
-        Vehicle auxVehicle;
-        double distance;
 
-        for(String driverEmail : this.userList.keySet()){
-            auxDriver = this.userList.get(driverEmail);
+        List<String> driversByDistance = new LinkedList<String>(this.driverVehicle.entrySet()
+                                                                                    .stream()
+                                                                                    .sorted(
+                                                                                        (e1, e2) -> {
+                                                                                            double dE1 = userLocation.distance(this.vehicleList.get(e1.getValue()).getLocation());
+                                                                                            double dE2 = userLocation.distance(this.vehicleList.get(e2.getValue()).getLocation());
 
-            if(auxDriver instanceof Driver){
-                if(((Driver) auxDriver).getAvailability()){
-                    auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
-                    
-                    if(auxVehicle.getClass().getSimpleName().equals(vehicleType)){
-                        distance = userLocation.distance( auxVehicle.getLocation() );
-                        driversOrderedByDistance.put(distance, driverEmail);
-                    }
-                }
-            }
-        }
+                                                                                            if(dE1 < dE2) return 1;
+                                                                                            else if(dE1 > dE2) return -1;
+                                                                                            return 0;
+                                                                                        })
+                                                                                    .limit(5)
+                                                                                    .map(Map.Entry::getKey)
+                                                                                    .collect(Collectors.toList())
+                                                                        );
 
-        if(driversOrderedByDistance.size() == 0)
-            throw new NoVehicleAvailableException();
-
-        if( driversOrderedByDistance.get( driversOrderedByDistance.firstKey()) == null)
+        if(driversByDistance.isEmpty())
             throw new NoVehicleAvailableException();
             
-        return driversOrderedByDistance.get( driversOrderedByDistance.firstKey());
+        return driversByDistance.get(driversByDistance.size()-1);
     }
 
     /**
-     * Gets string describing nearest vehicles, ordered by closeness
+     * Gets string describing nearest vehicles, ordered by distance (decreasing order, i.e. closest is last)
      * Writes driver name, email, classification and performance, and vehicle license plate, average speed, fare and reliability
      * @return String string describing nearest vehicles, ordered by closeness
      * @throws NoUserLoggedException    if no user is currently logged
@@ -916,32 +910,30 @@ public class UMeR implements Serializable
             throw new UserIsNotClientException();
 
         StringBuilder sb = new StringBuilder();
-        TreeMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
-        User auxUser;
+
+        List<String> driversByDistance = new LinkedList<String>(this.driverVehicle.entrySet()
+                                                                                    .stream()
+                                                                                    .sorted(
+                                                                                        (e1, e2) -> {
+                                                                                    double dE1 = userLocation.distance(this.vehicleList.get(e1.getValue()).getLocation());
+                                                                                    double dE2 = userLocation.distance(this.vehicleList.get(e2.getValue()).getLocation());
+
+                                                                                    if(dE1 < dE2) return 1;
+                                                                                    else if(dE1 > dE2) return -1;
+                                                                                    return 0;
+                                                                                        })
+                                                                                    .limit(5)
+                                                                                    .map(Map.Entry::getKey)
+                                                                                    .collect(Collectors.toList())
+                                                                        );
+
+        Driver auxDriver;
         Vehicle auxVehicle;
-        double distance;
-
-        for(String driverEmail : this.userList.keySet()){
-            auxUser = this.userList.get(driverEmail);
-
-            if(auxUser instanceof Driver){
-                if(((Driver) auxUser).getAvailability()){
-                    if( this.driverVehicle.containsKey(auxUser.getEmail()) ){
-                        auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
-                        distance = userLocation.distance( auxVehicle.getLocation() );
-                        driversOrderedByDistance.put(distance, driverEmail);
-                    }
-                }
-            }
-        }
-
-        
-        String driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
-        Driver auxDriver = (Driver) this.userList.get(driverEmail);
-        while(driversOrderedByDistance.size() > 0){
-            auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail));
-            sb.append("\nDriver - Name: ");
+        for(String driver: driversByDistance){
+            auxDriver = (Driver) this.userList.get(driver);
+            auxVehicle = this.vehicleList.get(this.driverVehicle.get(driver));
+            sb.append("\nDriver Name: ");
             sb.append(auxDriver.getName());
             sb.append("\nEmail: ");
             sb.append(auxDriver.getEmail());
@@ -949,21 +941,23 @@ public class UMeR implements Serializable
             sb.append(auxDriver.getClassification());
             sb.append("\nPerformance: ");
             sb.append(auxDriver.getPerformance());
-            sb.append("\nVehicle - License Plate: ");
+            sb.append("\nVehicle ");
+            sb.append(auxVehicle.getClass().getSimpleName());
+            sb.append("\nLicense Plate: ");
             sb.append(auxVehicle.getLicensePlate());
             sb.append("\nAverage Speed: ");
             sb.append(auxVehicle.getAverageSpeed());
+            sb.append("\nSeats: ");
+            sb.append(auxVehicle.getSeats());
             sb.append("\nFare: ");
             sb.append(auxVehicle.getFare());
+            sb.append("\nDistance to you: ");
+            sb.append(userLocation.distance(auxVehicle.getLocation()));
             sb.append("\n");
-
-            driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
-            auxDriver = (Driver) this.userList.get(driverEmail);
         }
-        System.out.println("hello");
+
         return sb.toString();
     }
-    
 
     /**
      * Makes a trip With nearest vehicle available
