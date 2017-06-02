@@ -69,6 +69,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -95,6 +96,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -119,6 +121,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
+            sc.nextLine();
             System.out.println("You must enter a number.");
         }
     }
@@ -413,6 +416,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
         else if(umer.isDriver()){  // DRIVER PROFILE
@@ -436,6 +440,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
     }
@@ -595,6 +600,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -621,6 +627,7 @@ public class Main implements Interface
                     e.getMessage();
                     System.out.println("You must enter a number.");
                 }
+                sc.nextLine();
             }while(true);
         }
         }catch( UserIsNotDriverException | NoUserLoggedException e){ 
@@ -685,8 +692,9 @@ public class Main implements Interface
                 }
             }catch(InputMismatchException | IllegalStateException e){
                 e.getMessage();
-                System.out.println("You must enter a number.");
+                System.out.println("\nYou must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -714,8 +722,9 @@ public class Main implements Interface
                 }
             }catch(InputMismatchException | IllegalStateException e){
                 e.getMessage();
-                System.out.println("You must enter a number.");
+                System.out.println("\nYou must enter a number.");
             }
+            sc.nextLine();
         }while(true);
 
     }
@@ -843,7 +852,6 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
@@ -861,15 +869,14 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
             clean();
+            System.out.println("1. Request closest vehicle");
+            System.out.println("2. Request specific vehicle");
+            System.out.println("0. Go Back");
             do{     // Request Closest OR Specific vehicle
-                System.out.println("1. Request closest vehicle");
-                System.out.println("2. Request specific vehicle");
-                System.out.println("0. Go Back");
                 try{
                     switch(sc.nextInt()){
                         case 1: // Requests closest Vehicle
@@ -882,15 +889,14 @@ public class Main implements Interface
                             break;
                         case 0: return;
                         default:
-                            clean();
                             System.out.println("Not a valid option");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
-                    clean();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
+                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
@@ -924,28 +930,26 @@ public class Main implements Interface
 
             
 
-
             clean();
-            System.out.print("Your driver: ");
-            System.out.println(driver.getName());
-            System.out.print("Driver classification: ");
-            System.out.println(driver.getClassification());
-            System.out.print("Vehicle License Plate: ");
-            System.out.println(vehicle.getLicensePlate());
-            System.out.print("Vehicle reliability: ");
-            System.out.println(vehicleReliability);
-            System.out.print("Minutes to your location: ");
-            System.out.println(timeToClient);
-            System.out.print("Minutes from you location to destination: ");
-            System.out.println(timeToDestination);
-            System.out.print("Total estimated trip time: ");
-            System.out.println(timeToClient + timeToDestination);
-            System.out.print("Total Distance: ");
-            System.out.println(totalDistance);
-            System.out.print("Estimated Cost: ");
-            System.out.println(estimatedTripCost);
-
             do{     // Checks if client wants to request the trip
+                System.out.print("Your driver: ");
+                System.out.println(driver.getName());
+                System.out.print("Driver classification: ");
+                System.out.println(driver.getClassification());
+                System.out.print("Vehicle License Plate: ");
+                System.out.println(vehicle.getLicensePlate());
+                System.out.print("Vehicle reliability: ");
+                System.out.println(vehicleReliability);
+                System.out.print("Minutes to your location: ");
+                System.out.println(timeToClient);
+                System.out.print("Minutes from you location to destination: ");
+                System.out.println(timeToDestination);
+                System.out.print("Total estimated trip time: ");
+                System.out.println(timeToClient + timeToDestination);
+                System.out.print("Total Distance: ");
+                System.out.println(totalDistance);
+                System.out.print("Estimated Cost: ");
+                System.out.println(estimatedTripCost);
                 try{
                     System.out.println("Do you want to request this trip?");
                     System.out.println("1. Request Trip");
@@ -963,10 +967,12 @@ public class Main implements Interface
                         case 0:
                             return;
                         default:
+                            clean();
                             System.out.println("Not a valid option.");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
+                    clean();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
@@ -997,6 +1003,8 @@ public class Main implements Interface
             System.out.println(estimatedTripCost);
             System.out.print("Real cost: ");
             System.out.println(realTripCost);
+            System.out.print("Total distance: ");
+            System.out.println(totalDistance);
             System.out.println("How much are you willing to pay?");
             do{
                 try{
@@ -1009,6 +1017,7 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
+                sc.nextLine();
             }while(!validInput);
             validInput= false;
 
@@ -1020,6 +1029,8 @@ public class Main implements Interface
             System.out.println(realTripTime);
             System.out.print("Real trip Cost: ");
             System.out.println(realTripCost);
+            System.out.print("Total distance: ");
+            System.out.println(totalDistance);
             do{
                 System.out.println("0. To Continue");
                 try{
@@ -1055,6 +1066,7 @@ public class Main implements Interface
                 System.out.println("You must enter a number.");
                 validInput = false;
             }
+            sc.nextLine();
         }while(!validInput);
 
         try{
@@ -1088,14 +1100,12 @@ public class Main implements Interface
         int inp = -1;
         String driverEmail = null;
         clean();
+        System.out.println("What kind of vehicle do you want o request?");
+        System.out.println("1. Car        (4 seats)");
+        System.out.println("2. Van        (7 seats)");
+        System.out.println("3. Motorcycle (1 seat)");
+        System.out.println("0. Go Back");
         do{ 
-            System.out.println("What kind of vehicle do you want o request?");
-            System.out.println("1. Car        (4 seats)");
-            System.out.println("2. Van        (7 seats)");
-            System.out.println("3. Motorcycle (1 seat)");
-            System.out.println("0. Go Back");
-
-
             try{
                 inp = sc.nextInt();
                 switch(inp){
@@ -1160,6 +1170,7 @@ public class Main implements Interface
                 else
                     System.out.println("Not a valid option.");
             }catch(UserNonExistent | UserIsNotDriverException e){
+                clean();
                 System.out.println("Not a valid option.");
                 validInput = false;
             }
@@ -1212,6 +1223,7 @@ public class Main implements Interface
             }catch(NoSuchElementException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1235,10 +1247,9 @@ public class Main implements Interface
                 validInput = true;
                 System.out.println("Location set successfully.");
             }catch(NoSuchElementException | IllegalStateException e){
-                if(sc.nextLine().equals("C")) return;
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            if(sc.nextLine().equals("C")) return;
         }while(!validInput);
 
         do{ // Going back
@@ -1287,6 +1298,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1314,6 +1326,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
@@ -1335,6 +1348,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
+            sc.nextLine();
         }while(true);
     }
 
