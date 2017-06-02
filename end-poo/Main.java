@@ -886,23 +886,26 @@ public class Main implements Interface
                 try{
                     switch(sc.nextInt()){
                         case 1: // Requests closest Vehicle
+                            sc.nextLine();
                             driverEmail = requestClosestVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 2: 
+                            sc.nextLine();
                             driverEmail = requestSpecificVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 0: return;
                         default:
+                            sc.nextLine();
                             System.out.println("Not a valid option");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
+                    sc.nextLine();
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
             }while(!validInput);
             validInput = false;
 
@@ -1160,15 +1163,16 @@ public class Main implements Interface
         int inp = -1;
         String driverEmail;
 
+        clean();
         do{
-            clean();
             System.out.println("Here's a list of the closest vehicles available.");
             try{
             System.out.println(umer.getNearestVehiclesString());
             }catch(UserIsNotClientException | NoUserLoggedException e){ // never happens
                 System.out.println("requestSpecificVehicle\n" + e.getMessage());
-                System.exit(1);
+                System.exit(0);
             }
+            System.out.println("0. Go Back");
             System.out.println("Write the email of the driver you want to request.");
             driverEmail = sc.nextLine();
             if(driverEmail.equals("0")) return null;
@@ -1178,7 +1182,6 @@ public class Main implements Interface
                 else
                     System.out.println("Not a valid option.");
             }catch(UserNonExistent | UserIsNotDriverException e){
-                clean();
                 System.out.println("Not a valid option.");
                 validInput = false;
             }

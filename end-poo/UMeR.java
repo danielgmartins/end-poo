@@ -916,7 +916,7 @@ public class UMeR implements Serializable
             throw new UserIsNotClientException();
 
         StringBuilder sb = new StringBuilder();
-        SortedMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
+        TreeMap<Double, String> driversOrderedByDistance = new TreeMap<Double,String>();
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
         User auxUser;
         Vehicle auxVehicle;
@@ -927,22 +927,23 @@ public class UMeR implements Serializable
 
             if(auxUser instanceof Driver){
                 if(((Driver) auxUser).getAvailability()){
-                    auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
-                    distance = userLocation.distance( auxVehicle.getLocation() );
-                    driversOrderedByDistance.put(distance, driverEmail);
+                    if( this.driverVehicle.containsKey(auxUser.getEmail()) ){
+                        auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail) );
+                        distance = userLocation.distance( auxVehicle.getLocation() );
+                        driversOrderedByDistance.put(distance, driverEmail);
+                    }
                 }
             }
         }
 
-
         
         String driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
         Driver auxDriver = (Driver) this.userList.get(driverEmail);
-        while(auxDriver != null){
+        while(driversOrderedByDistance.size() > 0){
             auxVehicle = this.vehicleList.get( this.driverVehicle.get(driverEmail));
             sb.append("\nDriver - Name: ");
             sb.append(auxDriver.getName());
-            sb.append("Email: ");
+            sb.append("\nEmail: ");
             sb.append(auxDriver.getEmail());
             sb.append("\nClassifications: ");
             sb.append(auxDriver.getClassification());
@@ -961,7 +962,7 @@ public class UMeR implements Serializable
             driverEmail = driversOrderedByDistance.remove(driversOrderedByDistance.firstKey());
             auxDriver = (Driver) this.userList.get(driverEmail);
         }
-        
+        System.out.println("hello");
         return sb.toString();
     }
     
