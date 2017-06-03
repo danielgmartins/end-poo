@@ -34,30 +34,20 @@ e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt}
 \bibliographystyle{splncs}
 
 \maketitle
-
-\begin {figure}[h]
-	%\begin{center}
-		\includegraphics [width=20mm] {daniel}
-		\\ Daniel Gonçalves Martins \{$73175$\}
-	%\end {center}
-	\label{elisio}
-\end {figure}
-
-\begin {figure}[h]
-	%\begin{center}
-		\includegraphics [width=20mm] {elisio}
-		\\ Elísio Freitas Fernandes \{$55617$\}
-	%\end {center}
-	\label{daniel}
-\end {figure}
-
-\begin {figure}[h]
-	%\begin{center}
-		\includegraphics [width=20mm] {nuno}
-		\\ Nuno José Ribeiro da Silva \{$78879$\}
-	%\end {center}
-	\label{nuno}
-\end {figure}
+\begin{figure}[!htb]
+	\minipage{0.31\textwidth}
+		\includegraphics[width=\linewidth]{daniel}
+		\begin{center}Daniel Gonçalves Martins \{$73175$\}\label{daniel} \end {center}
+	\endminipage\hfill
+\minipage{0.31\textwidth}
+	\includegraphics[width=\linewidth]{elisio}
+	\begin{center}Elísio Freitas Fernandes \{$55617$\}	\label{elisio} \end {center}
+\endminipage\hfill
+\minipage{0.29\textwidth}
+	\includegraphics[width=\linewidth]{nuno}
+	\begin{center}Nuno José R. da Silva \{$78879$\}\label{nuno}\end {center}
+\endminipage
+\end{figure}
 
 \begin{abstract}
 Serve o presente como relatório do projeto elaborado no âmbito da unidade curricular de Programação Orientada a Objetos. Projeto esse no qual se previa a elaboração de um programa para a empresa UMeR, o qual fosse capaz de garantir a prestação continua do seu serviço. Os requisitos de tal programa incluem a criação e manutenção da base de dados que inclui os dados dos clientes, bem como as informações dos seus colaboradores e das suas viaturas, utilizadas para a prestação do serviço em questão. Mais ainda, está incluída a criação de uma interface de interação com os utilizadores com várias opções, como: criação de conta; posterior acesso e atualização dos dados da conta; consulta de histórico de serviços requeridos/prestados.

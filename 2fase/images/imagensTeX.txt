@@ -1,0 +1,183 @@
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{1.LogInUnsuccessful} 
+	\caption{Tentativa falhada de login}
+	\label{fig:1.LogInUnsuccessful}
+\end{figure} 
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{1.Successful} 
+	\caption{Login com sucesso}
+	\label{fig:1.Successful}
+\end{figure} 
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{2.1.SignUpUser} 
+	\caption{Processo de login de um utilizador na plataforma}
+	\label{fig:2.1.SignUpUser}
+\end{figure} 
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{2.SignUpScreen} 
+	\caption{Diferentes opções de login existentes para os utilizadores}
+	\label{fig:2.SignUpScreen}
+\end{figure} 
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{3.LoadSuccessful} 
+	\caption{Notificação de login com sucesso}
+	\label{fig:3.LoadSuccessful}
+\end{figure} 
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{4.1.Stats} 
+	\caption{Visualizacao dos gastos dos diferentes utilizadores}
+	\label{fig:4.1.Stats}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{4.2.Stats} 
+	\caption{Visualizacao dos perfis dos condutores e respetivos desvios}
+	\label{fig:4.2.Stats}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{4Stats} 
+	\caption{Consulta de estatisticas de clientes e condutores}
+	\label{fig:4Stats}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{5.Save} 
+	\caption{Possibilidade de guardar a sessão atual}
+	\label{fig:5.Save}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{driverLogin} 
+	\caption{Menu principal de um condutor}
+	\label{fig:driverLogin}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{driverProfile} 
+	\caption{Perfil pessoal de um condutor}
+	\label{fig:driverProfile}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{LoggedInMenu} 
+	\caption{Menu principal de um cliente}
+	\label{fig:LoggedInMenu}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{notLoggedMenu} 
+	\caption{Menu principal antes do login}
+	\label{fig:notLoggedMenu}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip1} 
+	\caption{Processo de pedido de uma viagem na aplicação - Localização e destino}
+	\label{fig:requestTrip1}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip2} 
+	\caption{Processo de pedido de uma viagem na aplicação - Escolha do veículo}
+	\label{fig:requestTrip2}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip3} 
+	\caption{Processo de pedido de uma viagem na aplicação - Tipo de veículos disponíveis}
+	\label{fig:requestTrip3}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip4} 
+	\caption{Processo de pedido de uma viagem na aplicação - Dados da viagem e confirmação final}
+	\label{fig:requestTrip4}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip5} 
+	\caption{Final de uma viagem}
+	\label{fig:requestTrip5}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTrip6} 
+	\caption{Classificação do condutor}
+	\label{fig:requestTrip6}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTripSpecific1} 
+	\caption{Possibilidade de escolha de condutor específico}
+	\label{fig:requestTripSpecific1}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{requestTripSpecific2} 
+	\caption{Confirmação final e dados do condutor escolhido}
+	\label{fig:requestTripSpecific2}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{vehicleProfile} 
+	\caption{Perfil de um veículo}
+	\label{fig:vehicleProfile}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{viewProfile1} 
+	\caption{Perfil de um cliente}
+	\label{fig:viewProfile1}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{viewProfileChangePassword} 
+	\caption{Possibilidade de mudança de password de login}
+	\label{fig:viewProfileChangePassword}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{viewProfileTripHistory} 
+	\caption{Visualização das viagens feitas entre determinadas datas}
+	\label{fig:viewProfileTripHistory}
+\end{figure}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 21:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 22:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -332,11 +332,7 @@ Package amsmath Warning: Unable to redefine math accent \vec.
 \mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
-) (./relatorio_poo.aux
-
-LaTeX Warning: Label `fig:hierarquia' multiply defined.
-
-)
+) (./relatorio_poo.aux)
 \openout1 = `relatorio_poo.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -352,7 +348,8 @@ LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 19.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -408,60 +405,59 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
  <./images/daniel.jpg, id=1, 293.095pt x 293.095pt>
 File: ./images/daniel.jpg Graphic file (type jpg)
  <use ./images/daniel.jpg>
-Package pdftex.def Info: ./images/daniel.jpg used on input line 40.
-(pdftex.def)             Requested size: 56.9055pt x 56.90508pt.
+Package pdftex.def Info: ./images/daniel.jpg used on input line 39.
+(pdftex.def)             Requested size: 137.50824pt x 137.50421pt.
 
-<./images/elisio.jpg, id=2, 1003.75pt x 1505.625pt>
+<./images/elisio.jpg, id=2, 1352.05125pt x 1352.05125pt>
 File: ./images/elisio.jpg Graphic file (type jpg)
- <use ./images/elisio.jpg>
-Package pdftex.def Info: ./images/elisio.jpg used on input line 48.
-(pdftex.def)             Requested size: 56.9055pt x 85.34825pt.
 
-<./images/nuno.jpeg, id=3, 344.28625pt x 449.68pt>
-File: ./images/nuno.jpeg Graphic file (type jpg)
- <use ./images/nuno.jpeg>
-Package pdftex.def Info: ./images/nuno.jpeg used on input line 56.
-(pdftex.def)             Requested size: 56.9055pt x 74.32436pt.
+<use ./images/elisio.jpg>
+Package pdftex.def Info: ./images/elisio.jpg used on input line 43.
+(pdftex.def)             Requested size: 137.50824pt x 137.50304pt.
+ <./images/nuno.jpg, id=3, 344.28625pt x 344.28625pt>
+File: ./images/nuno.jpg Graphic file (type jpg)
+
+<use ./images/nuno.jpg>
+Package pdftex.def Info: ./images/nuno.jpg used on input line 47.
+(pdftex.def)             Requested size: 128.63477pt x 128.63422pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 62.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 68.
-
-[1
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 62.
+ [1
 
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/daniel.jpg> <./images/elisio.jpg> <./images/nuno.jpeg>]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 72.
-
-<./images/mapUMeR.png, id=13, 469.755pt x 229.85875pt>
+s/daniel.jpg> <./images/elisio.jpg> <./images/nuno.jpg>] <./images/mapUMeR.png,
+ id=14, 469.755pt x 229.85875pt>
 File: ./images/mapUMeR.png Graphic file (type png)
 
 <use ./images/mapUMeR.png>
-Package pdftex.def Info: ./images/mapUMeR.png used on input line 76.
+Package pdftex.def Info: ./images/mapUMeR.png used on input line 66.
 (pdftex.def)             Requested size: 227.62204pt x 111.37964pt.
 
-<./images/listUser.png, id=15, 617.30624pt x 213.79875pt>
+<./images/listUser.png, id=16, 617.30624pt x 213.79875pt>
 File: ./images/listUser.png Graphic file (type png)
 
 <use ./images/listUser.png>
-Package pdftex.def Info: ./images/listUser.png used on input line 88.
+Package pdftex.def Info: ./images/listUser.png used on input line 78.
 (pdftex.def)             Requested size: 227.62204pt x 78.83351pt.
 
-<./images/typeAbstraction.png, id=16, 715.67375pt x 252.945pt>
+<./images/typeAbstraction.png, id=17, 715.67375pt x 252.945pt>
 File: ./images/typeAbstraction.png Graphic file (type png)
 
 <use ./images/typeAbstraction.png>
-Package pdftex.def Info: ./images/typeAbstraction.png used on input line 97.
+Package pdftex.def Info: ./images/typeAbstraction.png used on input line 87.
 (pdftex.def)             Requested size: 227.62204pt x 80.44615pt.
- [2 <./images/mapUMeR.png>] [3 <./images/listUser.png> <./images/typeAbstractio
+ [2 <./images/mapUMeR.png> <./images/listUser.png>] [3 <./images/typeAbstractio
 n.png>] [4]
 <./images/hierarquia.png, id=30, 960.58875pt x 671.50874pt>
 File: ./images/hierarquia.png Graphic file (type png)
 
 <use ./images/hierarquia.png>
-Package pdftex.def Info: ./images/hierarquia.png used on input line 157.
+Package pdftex.def Info: ./images/hierarquia.png used on input line 147.
 (pdftex.def)             Requested size: 443.57848pt x 310.08635pt.
 
 
@@ -471,29 +467,25 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ./images/exceptions.png Graphic file (type png)
 
 <use ./images/exceptions.png>
-Package pdftex.def Info: ./images/exceptions.png used on input line 164.
+Package pdftex.def Info: ./images/exceptions.png used on input line 154.
 (pdftex.def)             Requested size: 227.62204pt x 217.78851pt.
  [5] [6 <./images/hierarquia.png> <./images/exceptions.png>] (./relatorio_poo.a
-ux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+ux) ) 
 Here is how much of TeX's memory you used:
- 4055 strings out of 493014
- 54577 string characters out of 6133352
- 138584 words of memory out of 5000000
+ 4053 strings out of 493014
+ 54564 string characters out of 6133352
+ 138545 words of memory out of 5000000
  7517 multiletter control sequences out of 15000+600000
  29924 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,6n,32p,1194b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio_poo.pdf (6 pages, 1074078 bytes).
+ 42i,7n,32p,1194b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on relatorio_poo.pdf (6 pages, 914515 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream
