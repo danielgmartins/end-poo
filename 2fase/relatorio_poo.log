@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 19:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 21:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -332,7 +332,11 @@ Package amsmath Warning: Unable to redefine math accent \vec.
 \mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
-) (./relatorio_poo.aux)
+) (./relatorio_poo.aux
+
+LaTeX Warning: Label `fig:hierarquia' multiply defined.
+
+)
 \openout1 = `relatorio_poo.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -348,8 +352,7 @@ LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 19.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -458,39 +461,42 @@ n.png>] [4]
 File: ./images/hierarquia.png Graphic file (type png)
 
 <use ./images/hierarquia.png>
-Package pdftex.def Info: ./images/hierarquia.png used on input line 158.
+Package pdftex.def Info: ./images/hierarquia.png used on input line 157.
 (pdftex.def)             Requested size: 443.57848pt x 310.08635pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 <./images/exceptions.png, id=31, 487.8225pt x 466.74374pt>
 File: ./images/exceptions.png Graphic file (type png)
 
 <use ./images/exceptions.png>
-Package pdftex.def Info: ./images/exceptions.png used on input line 165.
+Package pdftex.def Info: ./images/exceptions.png used on input line 164.
 (pdftex.def)             Requested size: 227.62204pt x 217.78851pt.
- [5] [6 <./images/hierarquia.png> <./images/exceptions.png>] [7] (./relatorio_p
-oo.aux)
+ [5] [6 <./images/hierarquia.png> <./images/exceptions.png>] (./relatorio_poo.a
+ux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4062 strings out of 493014
- 54669 string characters out of 6133352
- 138561 words of memory out of 5000000
- 7524 multiletter control sequences out of 15000+600000
+ 4055 strings out of 493014
+ 54577 string characters out of 6133352
+ 138584 words of memory out of 5000000
+ 7517 multiletter control sequences out of 15000+600000
  29924 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,7n,32p,1194b,266s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,6n,32p,1194b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
 e/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio_poo.pdf (7 pages, 1075404 bytes).
+Output written on relatorio_poo.pdf (6 pages, 1074078 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 58 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
