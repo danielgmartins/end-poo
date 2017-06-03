@@ -1,8 +1,7 @@
-
 /**
- * Abstract class User - Parent class for users.
  *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * Abstract class User - Parent class for users.
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
 

@@ -1,7 +1,7 @@
 /**
- * Class Driver - Inherits class User
  *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * Class Driver - Inherits class User
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 14/04/2017
  */
 
@@ -13,12 +13,12 @@ import java.io.Serializable;
 
 public class Driver extends User implements Serializable {
 
-    
+
     private int performance;
     private int classification;
     private int kmsDriven;
     private boolean availability;
-    
+
     /**
      * Empty constructor
      */
@@ -213,10 +213,10 @@ public class Driver extends User implements Serializable {
      * @param classification    new classification given to driver.
      */
     public void addClassification(int classification){
-        long number_of_trips = this.countTrips();
+        long numberOfTrips = this.countTrips();
 
-        if(number_of_trips == 0) this.setClassification(classification);
-        else this.setClassification( (int) ( ((long) ( number_of_trips * this.classification + classification)) /  (number_of_trips +1) ));
+        if(numberOfTrips == 0) this.setClassification(classification);
+        else this.setClassification( (int) ( ((long) ( numberOfTrips * this.classification + classification)) /  (numberOfTrips +1) ));
     }
 
     /**
@@ -227,19 +227,19 @@ public class Driver extends User implements Serializable {
      * @param trip Trip to be added to trip history
      */
     public void addTripToHistory (Trip trip){
-        long number_of_trips = this.countTrips();
+        long numberOfTrips = this.countTrips();
         super.addTripToHistory(trip);
-        
-        this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation()) 
+
+        this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation())
                         + trip.getDestination().distance(trip.getClientLocation());
-        
+
         if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){
-            if(number_of_trips == 0) this.performance = 50; 
-            this.performance -= (1/number_of_trips)*25;
+            if(numberOfTrips == 0) this.performance = 50;
+            this.performance -= (1/numberOfTrips)*25;
             if(this.performance < 0) this.performance = 0;
         }else{
-            if(number_of_trips != 0){
-                this.performance += (1/number_of_trips)*50;
+            if(numberOfTrips != 0){
+                this.performance += (1/numberOfTrips)*50;
                 if(this.performance > 100) this.performance = 100;
             }
         }

@@ -1,13 +1,12 @@
 
 /**
- * Write a description of class Interface here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Interface is the class which holds methods for printing menus on the screen
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
+ * @version 30/4/2017
  */
 
-public interface Interface
-{
+public interface Interface {
     /**
      * Prints Main menu when no user is logged
      */

@@ -1,7 +1,6 @@
-
 /**
- * Class Van - Subclass of Vehicle with associated methods
  *
+ * Class Van - Subclass of Vehicle with associated methods
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
@@ -56,7 +55,7 @@ public class Van extends Vehicle implements Serializable {
               x,
               y);
     }
-    
+
     /**
      * Constructor with Van parameter
      * @param Van   Van object
@@ -113,7 +112,7 @@ public class Van extends Vehicle implements Serializable {
         Random randTraffic = new Random();
 
         double reliable = -1;
-        
+
         while(reliable < 0.5 || reliable > 1.75) {
             reliable = ( rand.nextGaussian() * randWeather.nextGaussian() * randTraffic.nextGaussian())*2 + 1;
             System.out.println(reliable);

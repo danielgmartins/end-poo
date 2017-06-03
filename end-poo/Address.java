@@ -1,7 +1,7 @@
 /**
+ * 
  * Class Address - Class to represent an Address with a country and a city
- *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
 
@@ -75,7 +75,7 @@ public class Address implements Comparable<Address>, Serializable {
         Address aux = (Address) o;
         return aux.getCity().equals(this.getCity())         &&
                aux.getCountry().equals(this.getCountry())   ;
-    }    
+    }
 
     // Getters
 
@@ -132,7 +132,7 @@ public class Address implements Comparable<Address>, Serializable {
     public int compareTo(Address ad){
         int aux = this.city.compareTo(ad.getCity());
         if(aux != 0) return aux;
-        
+
         aux = this.country.compareTo(ad.getCountry());
         return aux;
     }

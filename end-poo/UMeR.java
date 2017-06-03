@@ -1,9 +1,8 @@
-
 /**
- * Write a description of class UMeR here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Class which manages the company and its data
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
+ * @version 30/4/2017
  */
 
 import java.util.*;
@@ -18,15 +17,15 @@ import Exceptions.*;
 
 public class UMeR implements Serializable
 {
-    private boolean isLogged;                   // Says if someone is logged in 
-    private String loggedUserEmail;             // String with currently logged user's email. Null if no one is logged in 
-    private Map<String, User> userList;         // Map with users, user's email (string) is the key to it's user 
-    private Map<String, Vehicle> vehicleList;   // Map with vehicles, vehicles's license plate (String) is the key to it's vehicle 
-    private Map<Integer, Trip> tripList;        // Map with trips, trip's id (int) is the key to it's trip 
-    private Map<String, String> driverVehicle;  // Map that associates a driver (email) with a vehicle (license plate) 
-    private int tripNumber;                     // Numeber og trips in tripList, used for setting trip id 
-    
-    /** 
+    private boolean isLogged;                   // Says if someone is logged in
+    private String loggedUserEmail;             // String with currently logged user's email. Null if no one is logged in
+    private Map<String, User> userList;         // Map with users, user's email (string) is the key to it's user
+    private Map<String, Vehicle> vehicleList;   // Map with vehicles, vehicles's license plate (String) is the key to it's vehicle
+    private Map<Integer, Trip> tripList;        // Map with trips, trip's id (int) is the key to it's trip
+    private Map<String, String> driverVehicle;  // Map that associates a driver (email) with a vehicle (license plate)
+    private int tripNumber;                     // Numeber og trips in tripList, used for setting trip id
+
+    /**
      * Empty UMeR Contstructor
      */
     public UMeR (){
@@ -39,7 +38,7 @@ public class UMeR implements Serializable
         this.setDriverVehicle(new HashMap<String,String>());
     }
 
-    /** 
+    /**
      * UMeR Contstructor every variable
      * @param isLogged          boolean of logged state
      * @param loggedUserEmail   String with logged user email
@@ -91,7 +90,7 @@ public class UMeR implements Serializable
         if(o == this) return true;
         if(o == null || o.getClass() != this.getClass())
             return false;
-        
+
         UMeR aux = (UMeR) o;
         return this.isLogged == aux.isLogged()                      &&
                this.loggedUserEmail == aux.getUserLogged()          &&
@@ -223,7 +222,7 @@ public class UMeR implements Serializable
         if(!this.tripList.containsKey(licensePlate))
             throw new VehicleNonExistent("Vehicle with this license plate does not exist.");
         return this.vehicleList.get(licensePlate).clone();
-    } 
+    }
 
     /**
      * Gets trip object of a trip with a given id
@@ -265,7 +264,7 @@ public class UMeR implements Serializable
             throw new UserIsNotDriverException();
         if(!this.driverVehicle.containsKey(driverEmail))
             throw new DriverHasNoVehicleException();
-        
+
         return this.vehicleList.get( this.driverVehicle.get(driverEmail) ).clone();
     }
 
@@ -321,7 +320,7 @@ public class UMeR implements Serializable
     }
 
 
-    /** 
+    /**
      * Sets logged variable to true or false
      * @param logged boolean value to set Logged state
      */
@@ -329,7 +328,7 @@ public class UMeR implements Serializable
         this.isLogged = logged;
     }
 
-    /** 
+    /**
      * Sets logged user email
      * @param email String with email to be set
      */
@@ -338,7 +337,7 @@ public class UMeR implements Serializable
     }
 
 
-    /** 
+    /**
      * Set user list
      * @param list  Map to set UserList to
      */
@@ -349,7 +348,7 @@ public class UMeR implements Serializable
         }
     }
 
-    /** 
+    /**
      * Set vehicle list
      * @param list  Map to set vehicle List to
      */
@@ -360,7 +359,7 @@ public class UMeR implements Serializable
         }
     }
 
-    /** 
+    /**
      * Set trip list
      * @param list  Map to set trip list to
      */
@@ -372,7 +371,7 @@ public class UMeR implements Serializable
         }
     }
 
-    /** 
+    /**
      * Set driver vehicle map
      * @param list  Map to set driverVehicle to
      */
@@ -384,14 +383,14 @@ public class UMeR implements Serializable
         }
     }
 
-    /** 
+    /**
      * Sets trip number
      * @param number Int with trip number
      */
     private void setTripNumber(int number){
         this.tripNumber = number;
     }
-    
+
     /**
      * Change the availability of a given driver
      * @param driver    String with email of the driver which's availability will be changed
@@ -420,7 +419,7 @@ public class UMeR implements Serializable
             throw new UserNonExistent();
         if(classification > 100 || classification < 0)
             throw new NotValidValue();
-        
+
         ((Driver) this.userList.get(driverEmail)).addClassification(classification);
     }
 
@@ -494,7 +493,7 @@ public class UMeR implements Serializable
             throw new UserNonExistent("No such user\n");
         if(! (this.userList.get(driverEmail) instanceof Driver ))
             throw new UserIsNotDriverException();
-        
+
         return ((Driver) this.userList.get(driverEmail)).getAvailability();
     }
 
@@ -554,7 +553,7 @@ public class UMeR implements Serializable
     public void addVehicle (Vehicle vehicle) throws LicensePlateUnavailable {
         if( this.vehicleList.containsKey(vehicle.getLicensePlate()) )
             throw new LicensePlateUnavailable("License plate already in use");
-        
+
         this.vehicleList.put(vehicle.getLicensePlate(), vehicle.clone() );
         this.driverVehicle.put(this.loggedUserEmail, vehicle.getLicensePlate());
     }
@@ -577,7 +576,7 @@ public class UMeR implements Serializable
             throw new UserIsNotClientException();
         if(! (this.userList.get(trip.getDriver()) instanceof Driver))
             throw new UserIsNotDriverException();
-        
+
         if(! this.vehicleList.containsKey(trip.getTaxi()))
             throw new VehicleNonExistent();
         if(! this.driverVehicle.get(trip.getDriver()).equals(trip.getTaxi()))
@@ -600,12 +599,12 @@ public class UMeR implements Serializable
     public void logIn(String email, String password) throws WrongEmailOrPassword{
         if (!this.userList.containsKey(email) || !this.isValidUser(email,password))
             throw new WrongEmailOrPassword("Wrong email or password.");
-        
+
         this.loggedUserEmail = new String(email);
         this.setLogged(true);
     }
 
-    /** 
+    /**
      * Logs out user.
      * By changing it to not logged state, and eliminating logged user info from current state
      */
@@ -635,7 +634,7 @@ public class UMeR implements Serializable
             throw new NoUserLoggedException();
         this.userList.get(loggedUserEmail).setAddress(address);
     }
-    
+
     //  ----------  INFORMATION STRINGS  ----------  //
 
     /**
@@ -650,9 +649,9 @@ public class UMeR implements Serializable
             throw new NoUserLoggedException();      // Este caso nunca acontece
         if (!isClient() )
             throw new UserIsNotClientException();   // Este caso nunca acontece
-        
+
         Client user = (Client) this.userList.get(loggedUserEmail);
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("\nName: ");
         sb.append(user.getName());
@@ -683,9 +682,9 @@ public class UMeR implements Serializable
             throw new NoUserLoggedException();      // Este caso nunca acontece
         if (! isDriver() )
             throw new UserIsNotClientException();   // Este caso nunca acontece
-        
+
         Driver user = (Driver) this.userList.get(loggedUserEmail);
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("\nName: ");
         sb.append(user.getName());
@@ -703,7 +702,7 @@ public class UMeR implements Serializable
         if(this.driverVehicle.containsKey(this.loggedUserEmail))
             sb.append(this.getThisDriverVehicleProfile());
         return sb.toString();
-    }    
+    }
 
     /**
      * Gives out string with information about the logged user's vehicle, if it's a driver.
@@ -783,10 +782,10 @@ public class UMeR implements Serializable
 
     /**
      * Gives list with copy of 10 users who spend the most ordered by spending in descending order
-     * @return list with users who spend the most ordered by spending in descending order 
+     * @return list with users who spend the most ordered by spending in descending order
      */
     public List<User> get10MostSpendingClients (){
-        Comparator<User> byTotalTripCost = (u1, u2) -> Double.compare(u2.getTotalTripCost(), 
+        Comparator<User> byTotalTripCost = (u1, u2) -> Double.compare(u2.getTotalTripCost(),
                                                                       u1.getTotalTripCost()
                                                                       );
 
@@ -797,7 +796,7 @@ public class UMeR implements Serializable
                             .limit(10)
                             .map(User::clone)
                             .collect(Collectors.toList());
-        
+
     }
 
     /**
@@ -805,21 +804,21 @@ public class UMeR implements Serializable
      * @return string with a list of names an emails of the drivers and number of deviations
      */
     public String worstPreformingDrivers() {
-        
+
         // Gets trip where trip time was >25% longer than expected
-        List<Trip> tripsBadPerformance 
+        List<Trip> tripsBadPerformance
                     = new LinkedList<Trip>( this.tripList.values()
                                                 .stream()
                                                 .filter( trip -> trip.getExpectedTripCost() * 1.25 > trip.getRealTripCost() )
                                                 .collect(Collectors.toList())
                                                 );
 
-        
+
         // Gets a map of drivers in the last list, and how many bad trips they had
         Map<String,Integer> driverPerformance = new HashMap<String,Integer>();
 
-        tripsBadPerformance.forEach( 
-            trip -> 
+        tripsBadPerformance.forEach(
+            trip ->
             { if (driverPerformance.containsKey(trip.getDriver())){
                 driverPerformance.put(trip.getDriver(), driverPerformance.get(trip.getDriver() ) +1);
                 }else {
@@ -827,7 +826,7 @@ public class UMeR implements Serializable
                 }
             } );
 
-        
+
         // Gets a list of the top five worst perfromers
         List<String> topFive = new LinkedList<String>( driverPerformance.entrySet()
                                                                         .stream()
@@ -851,7 +850,7 @@ public class UMeR implements Serializable
             sb.append(driverPerformance.get(email));
             sb.append("\n");
         }
-        
+
         return sb.toString();
     }
 
@@ -891,7 +890,7 @@ public class UMeR implements Serializable
 
         if(driversByDistance.isEmpty())
             throw new NoVehicleAvailableException();
-            
+
         return driversByDistance.get(driversByDistance.size()-1);
     }
 
@@ -1006,7 +1005,7 @@ public class UMeR implements Serializable
     public void setReliability(String licensePlate) throws VehicleNonExistent{
         if(!this.vehicleList.containsKey(licensePlate))
             throw new VehicleNonExistent();
-            
+
         this.vehicleList.get(licensePlate).setReliability();
     }
 

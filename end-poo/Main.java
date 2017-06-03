@@ -1,9 +1,8 @@
-
 /**
- * Write a description of class Main here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Main 
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
+ * @version 30/4/2017
  */
 
 import java.lang.Exception;
@@ -25,8 +24,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import Exceptions.*;
 
-public class Main implements Interface
-{   
+public class Main implements Interface {
     //private static Console console = System.console();
     private static UMeR umer;
     private static boolean running;
@@ -54,7 +52,7 @@ public class Main implements Interface
      */
     private static void clientMenu(){
         Scanner sc = new Scanner(System.in);
-        
+
         clean();
         Interface.mainMenuForClient(umer.getUserLogged());
         try{
@@ -106,7 +104,7 @@ public class Main implements Interface
      */
     private static void noUserMenu(){
         Scanner sc = new Scanner(System.in);
-        
+
         clean();
         Interface.mainMenuNotLogged();
         try{
@@ -154,14 +152,14 @@ public class Main implements Interface
                 }
             } while (!validInput);
 
-             
+
 
             do{ // getting password
                 System.out.print("Password: ");
                 password = sc.nextLine().replaceAll("[\n\r]","");
 
                 if(password.equals("0")) return; // breaks in case of 0.
-                
+
                 try{
                     password = hashPassword(password);
                     validInput = true;
@@ -172,7 +170,7 @@ public class Main implements Interface
                 }
             } while(!validInput);
 
-             
+
 
             try{ // attempts log in
                 umer.logIn(email,password);
@@ -238,7 +236,7 @@ public class Main implements Interface
                 sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
 
-             
+
 
             validInput = false;
             do{ //getting email
@@ -246,7 +244,7 @@ public class Main implements Interface
                 email = sc.nextLine().replaceAll("[\n\r]","");
 
                 if(email.equals("0")) return;
-                
+
                 if(!EmailValidator.validate(email)){
                     System.out.println("Not a valid email.");
                 }else if(!umer.isEmailAvailable(email)){
@@ -256,7 +254,7 @@ public class Main implements Interface
                 }
             }while(!validInput);
 
-             
+
 
             validInput = false;
             do{                         // getting password
@@ -278,7 +276,7 @@ public class Main implements Interface
                 }
             }while(!validInput);
 
-             
+
 
             validInput = false;
             do{                         // getting name
@@ -292,7 +290,7 @@ public class Main implements Interface
                 }
             }while(!validInput);
 
-             
+
 
             validInput = false;
             do{                         // getting birthday
@@ -301,11 +299,11 @@ public class Main implements Interface
                     System.out.print("Day: ");
                     bday = sc.nextInt();
                     if(bday == 0) return;
-                     
+
                     System.out.print("Month: ");
                     bmonth = sc.nextInt();
                     if(bmonth == 0) return;
-                     
+
                     System.out.print("Year: ");
                     byear = sc.nextInt();
                     if(byear == 0) return;
@@ -331,7 +329,7 @@ public class Main implements Interface
                 System.out.print("Address\nCity: ");
 
                 city = sc.nextLine().replaceAll("[\n\r]","");;
-                 
+
                 if(city.equals("0")) return;
                 try{
                     address.setCity(city);
@@ -341,7 +339,7 @@ public class Main implements Interface
                 }
                 System.out.print("Country: ");
                 country = sc.nextLine().replaceAll("[\n\r]","");;
-                 
+
                 if(country.equals("0")) return;
                 try{
                     address.setCountry(country);
@@ -425,7 +423,7 @@ public class Main implements Interface
                     System.out.println("View profile" + e.getMessage());
                     System.exit(1);
                 }
-            
+
                 try{
                     switch (sc.nextInt()){
                         case 1 : viewTripHistory(); break;
@@ -452,7 +450,7 @@ public class Main implements Interface
         int sday=0, smonth=0, syear=0;
         LocalDate first_date= LocalDate.now(), second_date = LocalDate.now();
         boolean validInput = false;
-        
+
         do{
             clean();
             System.out.println("View trip history.");
@@ -465,11 +463,11 @@ public class Main implements Interface
                     System.out.print("Day: ");
                     fday = sc.nextInt();
                     if(fday == 0) return;
-                    
+
                     System.out.print("Month: ");
                     fmonth = sc.nextInt();
                     if(fmonth == 0) return;
-                    
+
                     System.out.print("Year: ");
                     fyear = sc.nextInt();
                     if(fyear == 0) return;
@@ -497,11 +495,11 @@ public class Main implements Interface
                     System.out.print("Day: ");
                     sday = sc.nextInt();
                     if(sday == 0) return;
-                    
+
                     System.out.print("Month: ");
                     smonth = sc.nextInt();
                     if(smonth == 0) return;
-                    
+
                     System.out.print("Year: ");
                     syear = sc.nextInt();
                     if(syear == 0) return;
@@ -549,10 +547,10 @@ public class Main implements Interface
                 }
                 sc.nextLine().replaceAll("[\n\r]","");;
             }while(true);
-            
+
         }while(!validInput);
 
-        
+
     }
 
     /**
@@ -633,7 +631,7 @@ public class Main implements Interface
                 sc.nextLine().replaceAll("[\n\r]","");
             }while(true);
         }
-        }catch( UserIsNotDriverException | NoUserLoggedException e){ 
+        }catch( UserIsNotDriverException | NoUserLoggedException e){
             System.out.println("vehicleProfile\n" + e.getMessage());
             System.exit(1);
         }
@@ -656,7 +654,7 @@ public class Main implements Interface
                 switch(sc.nextInt()){
                     case 1: changeVehicleAvgSpeed(vehicle.getLicensePlate(), vehicle.getAverageSpeed());    break;
                     case 2: changeVehicleFare(vehicle.getLicensePlate(), vehicle.getFare());                break;
-                    case 0: return; 
+                    case 0: return;
                     default:
                         System.out.println("Not valid input.");
                 }
@@ -733,13 +731,13 @@ public class Main implements Interface
     }
 
     /**
-     * Register Vehicle. 
+     * Register Vehicle.
      * A driver is only allowed to register a vehicle if does not already have one associated.
      */
     private static void registerVehicle(){
         if(!umer.isDriver())
             return;
-        
+
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
         int vehicleType = -1, inp = -1;
@@ -754,7 +752,7 @@ public class Main implements Interface
                 System.out.println("1. Register Car");
                 System.out.println("2. Register Van");
                 System.out.println("3. Register Motorcycle");
-                    
+
                 do{ // Selects Vechicle type
                     try{
                         switch(sc.nextInt()){
@@ -790,7 +788,7 @@ public class Main implements Interface
                             umer.addVehicle(newVehicle);
                             validInput = true;
                             break;
-                        case 3: 
+                        case 3:
                             newVehicle = new Motorcycle( licensePlate );
                             umer.addVehicle(newVehicle);
                             validInput = true;
@@ -838,7 +836,7 @@ public class Main implements Interface
         Coordinates userLocation=null, destination=null;
         Trip newTrip;
         clean();
-        
+
         do{
             do{     //Get User Location     THIS IS THE ONLY TIME YOU CANNONT ENTER 0 TO GO BACK
                 System.out.println("Please enter your location. Enter 'C' to cancel.");
@@ -887,7 +885,7 @@ public class Main implements Interface
                             driverEmail = requestClosestVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
-                        case 2: 
+                        case 2:
                             sc.nextLine().replaceAll("[\n\r]","");
                             driverEmail = requestSpecificVehicle();
                             if(driverEmail != null) validInput = true;
@@ -919,7 +917,7 @@ public class Main implements Interface
                 System.out.println("requestTrip\n" + e.getMessage());
                 System.exit(1);
             }
-            
+
             try{
                 umer.setReliability(vehicle.getLicensePlate());
                 vehicleReliability = umer.getReliabilityOfVehicle(vehicle.getLicensePlate());
@@ -934,7 +932,7 @@ public class Main implements Interface
             timeToDestination   = (int) ( (double) (userLocation.distance(destination) * 60) / vehicle.getAverageSpeed() );
             estimatedTripCost   = (int) ( (timeToClient + timeToDestination) * (vehicle.getFare()/10) );
 
-            
+
 
             clean();
             do{     // Checks if client wants to request the trip
@@ -988,7 +986,7 @@ public class Main implements Interface
         }while(!validInput);
 
         /*
-        Vehicle Reliability is a random value overtime falling in a Normal Distribution, obtained by 
+        Vehicle Reliability is a random value overtime falling in a Normal Distribution, obtained by
         Random.nextGaussian().
         this vehicle reliability will hava a mean (average) of 1, with a standard deviation of 2,
         and limited between 0.5 an 1.75
@@ -999,7 +997,7 @@ public class Main implements Interface
         realTripCost = realTripTime * (vehicle.getFare()/10);
 
 
-        // Trip has finished. 
+        // Trip has finished.
         if( realTripTime >= (timeToClient + timeToDestination) * 1.25){  // The trip took over 125% the expected time
             clean();
             System.out.println("Your trip took longer than expected. We are sorry for that.");
@@ -1050,7 +1048,7 @@ public class Main implements Interface
                 }
                 sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
-            validInput= false;       
+            validInput= false;
         }
 
         try{
@@ -1089,7 +1087,7 @@ public class Main implements Interface
                       estimatedTripCost,
                       realTripCost
                     );
-        
+
         umer.giveClassification(driverEmail,classification);
         }catch(Exception e){
             System.out.println("requestTrip\n" + e.getMessage());
@@ -1113,24 +1111,24 @@ public class Main implements Interface
         System.out.println("2. Van        (7 seats)");
         System.out.println("3. Motorcycle (1 seat)");
         System.out.println("0. Go Back");
-        do{ 
+        do{
             try{
                 inp = sc.nextInt();
                 switch(inp){
-                    case 1: 
-                        driverEmail = umer.getNearestDriver("Car"); 
+                    case 1:
+                        driverEmail = umer.getNearestDriver("Car");
                         validInput = true;
                         break;
-                    case 2: 
+                    case 2:
                         driverEmail = umer.getNearestDriver("Van");
                         validInput = true;
                         break;
-                    case 3: 
+                    case 3:
                         driverEmail = umer.getNearestDriver("Motorcycle");
                         validInput = true;
                         break;
                     case 0: return null;
-                    default: 
+                    default:
                         System.out.println("Not a valid option.");
                         validInput = false;
                 }
@@ -1220,9 +1218,9 @@ public class Main implements Interface
                         }catch(UserIsNotDriverException | UserNonExistent e){
                             System.out.println("User must be logged");
                             System.exit(0);
-                        } 
+                        }
                         break;
-                    case 0: 
+                    case 0:
                         return;
                     default:
                         System.out.println("Not a valid option.");
@@ -1273,8 +1271,8 @@ public class Main implements Interface
         }while(true);
     }
 
-    /** 
-     * Exits application 
+    /**
+     * Exits application
      */
     private static void exit(){
         running = false;
@@ -1289,7 +1287,7 @@ public class Main implements Interface
     private static void viewStatistics(){
         Scanner sc = new Scanner(System.in);
         int inp = -1;
-        
+
         do{
             clean();
             System.out.println("View Statistics");
@@ -1325,7 +1323,7 @@ public class Main implements Interface
             System.out.println(u.getTotalTripCost());
             System.out.print("\n");
         }
-        
+
         System.out.println("0. Go back");
         do{
             try{
@@ -1370,7 +1368,7 @@ public class Main implements Interface
             throw new NullPointerException("Password can't be null!");
         if(password.trim() == "")
             throw new IllegalStateException("Password can't be empty!");
-        
+
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(password.getBytes());

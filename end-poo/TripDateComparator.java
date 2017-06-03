@@ -1,6 +1,7 @@
 /**
+ *
  * TripDateComparator is a class that implements a date-based comparator for class trip.
- * @author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
+ * @author	Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
  * @version 8/05/2017
  */
 import java.util.Comparator;
