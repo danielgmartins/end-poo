@@ -104,7 +104,7 @@ public abstract class Vehicle extends Exception implements Comparable<Vehicle>, 
      * @return   Description of vehicle
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("\nLicense Plate: ");
+        StringBuilder res = new StringBuilder("License Plate: ");
 
         res.append(this.licensePlate);
         res.append("\nAverage speed: ");

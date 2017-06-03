@@ -79,7 +79,7 @@ public class Motorcycle extends Vehicle implements Serializable {
      * @return  Description of Motorcycle
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("---\nMotorcycle\n");
+        StringBuilder res = new StringBuilder("\n---\nMotorcycle\n");
 
         res.append(super.toString());
 
