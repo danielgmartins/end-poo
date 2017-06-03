@@ -36,8 +36,8 @@ e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt}
 
 \begin {figure}[h]
 	%\begin{center}
-		\includegraphics [width=20mm] {elisio}
-		\\ Elísio Freitas Fernandes \{$55617$\}
+		\includegraphics [width=20mm] {daniel}
+		\\ Daniel Gonçalves Martins \{$73175$\}
 	%\end {center}
 	\label{elisio}
 \end {figure}
@@ -45,7 +45,7 @@ e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt}
 \begin {figure}[h]
 	%\begin{center}
 		\includegraphics [width=20mm] {elisio}
-		\\ Daniel Gonçalves Martins \{$73175$\}
+		\\ Elísio Freitas Fernandes \{$55617$\}
 	%\end {center}
 	\label{daniel}
 \end {figure}
@@ -67,24 +67,63 @@ Serve o presente como relatório do projeto elaborado no âmbito da unidade curric
 \section{Introdução}
  Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando java, temos recorrido maioritariamente ao Atom como editor de texto e o Terminal como compilador, bem como o ***** e a consola do linux para windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
 
+\section{Tipos de dados usados}
+No geral, as estruturas de dados usadas para o armazenamento dos dados de clientes, veículos e viagens foram os \textit{Maps} - verificar, por exemplo, \textbf{Figura \ref{fig:mapUMeR}}. Dada a sua eficácia em termos de armazenamento ordenado de dados/rapidez na procura, à sua conveniência, uma vez que permite identificar cada objecto unicamente através de um dado único. Queríamos garantir a unicidade de dados, pois não haveria razão para termos duas entradas de registo para o mesmo utilizador, assim, usamos o email do mesmo como \textit{key} de identificação no \textit{Map} e assim garantimos que o mesmo \textit{User} não se regista duas vezes. Poupamos memória e reduzimos dados duplicados nas bases de dados da empresa. O mesmo se dá para os \textit{Vehicle}, \textit{Trips} e para a associação de \textit{Driver}/\textit{Vehicle}.\\
+
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{mapUMeR} 
+	\caption{Variáveis da classe UMeR}
+	\label{fig:mapUMeR}
+\end{figure} 
+Por outro lado, usamos também dados do tipo \textit{List} em situações como na classe \textit{User}, para guardar os ids das viagens efetuadas, uma vez que o tipo de dados é só um tipo de dados primitivo. 
+
+\subsection{Metodologias de implementação dos tipos de dados}
+A nível da declaração das variáveis de instância foi usado sempre um tipo de dados com um grande nível de generalização. Com tal pretendemos facilitar a alteração dos tipos de dados específicos usados. Por exemplo, ao usar a declaração do tipo \textit{Map} invés de \textit{HashMap} permitimos que no futuro fosse fácil alterar esse tipo para um \textit{TreeMap} por exemplo, mantendo no entanto a mesma intenção de permitir uma gestão eficiente e organizada da informação.
+
+Pela mesma razão declaramos as variáveis de instância como \textit{List}, permitindo depois a escolha do tipo específico de \textit{List} pretendida - verificar, por exemplo, \textbf{Figura \ref{fig:listUser}} .
+
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{listUser} 
+	\caption{Variáveis da classe User}
+	\label{fig:listUser}
+\end{figure} 
+
+por fotos dos dados usados e justificar o uso de maps e lists generalista - abstração
+
+
+implementacao 
+
+falaar da abstracao de dados . utilizacao de treemaps quando se quer ordenar algo. 
+
+
+\section{Métodos}
+Em cada classe existem métodos que permitem a interação da empresa com a mesma, permitindo a criação, de instâncias de classe, atribuição de valores ás várias variáveis através dos \textit{set<nome da variável>}, bem como obtenção dos valores contidos nas mesmas, através dos métodos \textit{get<nome da variável>}
+
+\subsection{One more...}
+
 
 \section{Arquitetura}
 Nesta proposta foram utilizados vários tipos de classes com diferentes atributos. Desde classes concretas a classes abstratas, classes com e sem implementações de interfaces e subclasses de classes abstratas.\\
 Por questões de necessidade de gravação do estado da aplicação, todas as classes tem em comum a implementação da interface \textit{Serializable}, oferecendo, assim, um método simples de gravação dos objetos com todos os seus estados atuais em ficheiro, para posterior consulta.
 
-\subsection{Classe UmeR}
-Utiliza Maps e tipos primitivos para guardar os seus dados. Possui um registo de toda a informação necessária para o bom funcionamento da empresa. Contém quatro estruturas de dados Map onde se encontram guardados 1. User como \textit{value} e email como \textit{key}, para guardar todos os utilizadores registados na empresa, quer clientes, quer condutores ; 2. Vehicle como \textit{value} e licensePlate como \textit{key}, para guardar a informação da viaturas ao serviço da empresa; 3. Trip como \textit{value} e id de viagem como \textit{key}, para manter um histórico de todas as viagens efetuadas através da empresa; 4. Email como \textit{value} e licensePlate como \textit{key}, para manter um registo do veículo associado a cada condutor. Existe ainda a variável isLogged,  do tipo \textit{boolean}, que indica se existe um utilizador "logado". Se sim, então o seu e-mail estará presente na variável loggedUserEmail, do tipo \textit{String}. Por último, existe na classe uma variável tripNumber, do tipo \textit{Integer}, responsável por garantir a sequencialização dos identificadores únicos da viagem, utilizados no Map das Trips.\\
-Foram aglomerados todos os dados do tipo user, respetivamente, todos os dados de tipo Trip e veiculo, num só Map, uma vez que eram compatíveis, de maneira a ser possível efetuar operações sobre todos os utilizadores de uma só vez, bem como para facilitar a adição de novos tipo de utilizadores.
+\subsection{Classe UMeR}
+Utiliza Maps, e tipos primitivos para guardar os seus dados. Possui um registo de toda a informação necessária para o bom funcionamento da empresa. Contém quatro estruturas de dados Map onde se encontram guardados os dados de: 1. User como \textit{value} e email como \textit{key}, para guardar todos os utilizadores registados na empresa, quer clientes, quer condutores ; 2. Vehicle como \textit{value} e licensePlate como \textit{key}, para guardar a informação da viaturas ao serviço da empresa; 3. Trip como \textit{value} e id de viagem como \textit{key}, para manter um histórico de todas as viagens efetuadas através da empresa; 4. Email como \textit{value} e licensePlate como \textit{key}, para manter um registo do veículo associado a cada condutor. Existe ainda a variável isLogged,  do tipo \textit{boolean}, que indica se existe um utilizador "logado". Se sim, então o seu e-mail estará presente na variável loggedUserEmail, do tipo \textit{String}. Por último, existe na classe uma variável tripNumber, do tipo \textit{Integer}, responsável por garantir a sequencialização dos identificadores únicos da viagem, utilizados no Map das Trips.
 
-\subsection{One subsection}
-abdc...
-\subsection{One more...}
+Foram aglomerados todos os dados do tipo \textit{User}, respetivamente, todos os dados de tipo \textit{Trip} e \textit{Vehicle}, num só \textit{Map}, uma vez que eram compatíveis, de maneira a ser possível efetuar operações sobre todos os utilizadores de uma só vez, bem como facilitar a adição de novos tipo de utilizadores.
+
+
+
+
 \section{Hierarquia}
 Genericamente, como pode ser visto na figura ******, temos a ligação 
 
-\section{Tipos de dados usados}
-por fotos dos dados usados e justificar o uso de maps e lists generalista - abstração
 
+
+\section{Metodologia}
+
+programa inicia na main e chama as outras classes 
 
 \section{Manual de utilização}
 
