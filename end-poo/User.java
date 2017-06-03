@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 public abstract class User implements Comparable<User>, Serializable {
+
     private String name;
     private Address address;
     private LocalDate birthday;
@@ -50,7 +51,7 @@ public abstract class User implements Comparable<User>, Serializable {
      * @param password  User password
      * @param tripHistory    User trip history
      */
-    public User (String name, Address address, LocalDate birthday, String email, String password, List<Integer> history, double totalTripCost){
+    private User (String name, Address address, LocalDate birthday, String email, String password, List<Integer> history, double totalTripCost){
         this.setName(name);
         this.setAddress(address);
         this.setBirthday(birthday);
