@@ -1,6 +1,9 @@
-
-
-
+/**
+ *
+ * ComparatorUserName compares users by name
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
+ * @version 12/04/2017
+ */
 
 import java.util.Comparator;
 import java.io.Serializable;

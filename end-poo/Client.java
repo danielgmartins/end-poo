@@ -1,7 +1,7 @@
 /**
- * Class Client - Inherits class User
  *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * Class Client - Inherits class User
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 13/04/2017
  */
 

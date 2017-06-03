@@ -1,6 +1,9 @@
-
-
-
+/**
+ *
+ * ComparatorUserTripCost compares trip by their cost
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
+ * @version 13/4/2017
+ */
 
 import java.util.Comparator;
 import java.io.Serializable;

@@ -1,6 +1,7 @@
 /**
+ *
  * Class Coordinates is a 2D point system to map every object location and their moves through space.
- * @author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 13/4/2017
  */
 
@@ -8,7 +9,7 @@ import java.lang.StringBuilder;
 import java.lang.Math;
 import java.io.Serializable;
 
-public  class Coordinates implements Comparable<Coordinates>, Serializable{
+public  class Coordinates implements Comparable<Coordinates>, Serializable {
     private int x;
     private int y;
 

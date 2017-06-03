@@ -11,6 +11,7 @@
 \usepackage[margin=3cm,nohead]{geometry}
 \usepackage{epstopdf}
 \usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{fancyvrb}
 \usepackage{amsmath}
 %\renewcommand{\baselinestretch}{1.5}
@@ -68,7 +69,7 @@ Serve o presente como relatório do projeto elaborado no âmbito da unidade curric
  Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando java, temos recorrido maioritariamente ao Atom como editor de texto e o Terminal como compilador, bem como o ***** e a consola do linux para windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
 
 \section{Tipos de dados usados}
-No geral, as estruturas de dados usadas para o armazenamento dos dados de clientes, veículos e viagens foram os \textit{Maps} - verificar, por exemplo, \textbf{Figura \ref{fig:mapUMeR}}. Dada a sua eficácia em termos de armazenamento ordenado de dados/rapidez na procura, à sua conveniência, uma vez que permite identificar cada objecto unicamente através de um dado único. Queríamos garantir a unicidade de dados, pois não haveria razão para termos duas entradas de registo para o mesmo utilizador, assim, usamos o email do mesmo como \textit{key} de identificação no \textit{Map} e assim garantimos que o mesmo \textit{User} não se regista duas vezes. Poupamos memória e reduzimos dados duplicados nas bases de dados da empresa. O mesmo se dá para os \textit{Vehicle}, \textit{Trips} e para a associação de \textit{Driver}/\textit{Vehicle}.\\
+No geral, as estruturas de dados usadas para o armazenamento dos dados de clientes, veículos e viagens foram os \textit{Maps} - verificar, por exemplo, \textbf{Figura \ref{fig:mapUMeR}}. Dada a sua eficácia em termos de armazenamento ordenado de dados/rapidez na procura, à sua conveniência, uma vez que permite identificar cada objecto unicamente através de um dado único. Queríamos garantir a unicidade de dados, pois não haveria razão para termos duas entradas de registo para o mesmo utilizador, assim, usamos o email do mesmo como \textit{key} de identificação no \textit{Map} e assim garantimos que o mesmo \textit{User} não se regista duas vezes. Poupamos memória e reduzimos dados duplicados nas bases de dados da empresa. O mesmo se dá para os \textit{Vehicle}, \textit{Trips} e para a associação de \textit{Driver}/\textit{Vehicle}.
 
 \begin{figure}
 	\centering
@@ -80,8 +81,7 @@ Por outro lado, usamos também dados do tipo \textit{List} em situações como na c
 
 \subsection{Metodologias de implementação dos tipos de dados}
 A nível da declaração das variáveis de instância foi usado sempre um tipo de dados com um grande nível de generalização. Com tal pretendemos facilitar a alteração dos tipos de dados específicos usados. Por exemplo, ao usar a declaração do tipo \textit{Map} invés de \textit{HashMap} permitimos que no futuro fosse fácil alterar esse tipo para um \textit{TreeMap} por exemplo, mantendo no entanto a mesma intenção de permitir uma gestão eficiente e organizada da informação.
-
-Pela mesma razão declaramos as variáveis de instância como \textit{List}, permitindo depois a escolha do tipo específico de \textit{List} pretendida - verificar, por exemplo, \textbf{Figura \ref{fig:listUser}} .
+\par Pela mesma razão declaramos as variáveis de instância como \textit{List}, permitindo depois a escolha do tipo específico de \textit{List} pretendida - verificar, por exemplo, \textbf{Figura \ref{fig:listUser}} .
 
 \begin{figure}
 	\centering
@@ -90,36 +90,66 @@ Pela mesma razão declaramos as variáveis de instância como \textit{List}, permit
 	\label{fig:listUser}
 \end{figure} 
 
-por fotos dos dados usados e justificar o uso de maps e lists generalista - abstração
+Observando a \textbf{Figura \ref{fig:typeAbstraction}}, é visível a uniformização dos métodos das classes a esta metodologia de  abstração do tipo de dados.
 
-
-implementacao 
-
-falaar da abstracao de dados . utilizacao de treemaps quando se quer ordenar algo. 
-
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{typeAbstraction} 
+	\caption{Métodos com abstração de dados assegurada}
+	\label{fig:typeAbstraction}
+\end{figure} 
 
 \section{Métodos}
-Em cada classe existem métodos que permitem a interação da empresa com a mesma, permitindo a criação, de instâncias de classe, atribuição de valores ás várias variáveis através dos \textit{set<nome da variável>}, bem como obtenção dos valores contidos nas mesmas, através dos métodos \textit{get<nome da variável>}
+Em cada classe existem métodos que permitem a interação da empresa com a mesma, permitindo a criação, de instâncias de classe, atribuição de valores ás várias variáveis através dos métodos \textit{set<nome da variável>}, bem como obtenção dos valores contidos nas mesmas, através dos métodos \textit{get<nome da variável>}.
 
-\subsection{One more...}
+Cada classe tem em comum os métodos clone(), equals(), compareTo(), hashCode() e toString(). O método toString() e o equals() é definido na classe abstrata e redefinido nas subclasses. O método é definido na classe abstrata porque várias da variáveis são definidas nesta classe e, assim, evita-se a duplicação de código, no entanto, existem também variáveis declaradas na classe \textit{client}, pelo que é necessário chamar o \textit{super} da super classe para tratar da execução do método sobre as variáveis lá definidas e só depois é aplicado o código local ao resto das variáveis de instância. O método clone() é um método abstrato e, portanto, é totalmente definido em cada subclasse, uma vez que apenas a subclasse sabe como definir cada um dos parâmetros que compõe. O método compareTo() é o responsável pela "ordem natural" definida em cada classe para a ordenação das suas instâncias. Já o método hashCode() é um método que todas as classes têm apenas na sua superclasse abstrata, uma vez que é nela que se encontra o identificador único inerente a cada uma das subclasses que a ampliam. 
+\par Salienta-se o método \textit{setPassword (String password)} e \textit{public String getPassword ()} que na sua simplicidade, apenas guardam a password entregue pela empresa, sendo da responsabilidade e controlo da mesma garantir a segurança da mesma - nesta proposta tal método não foi implementado. Destacam-se também métodos construtores vazios da classe \textit{User}, \textit{Vehicle} e \textit{Trip} que são privados, uma vez que não pretendido que estes sejam criadas instâncias destas classes sem dados concretos. No entanto, dada a filosofia do Java, foi necessário criar os construtores, para que o Java em si não desse automaticamente essa possibilidade aos utilizadores.
+\par Para além destes métodos, cada classe dispõe dos seus métodos próprios, os quais podem ser consultados em anexo, necessários para efetuar as suas operações.
+
+
+\section{Expressão escrita}
+Ao longo do projeto foi usado um estilo restrito de regras para a criação dos seus ficheiros componentes. Para a declaração das variáveis foi definido que as mesmo deveriam ter nomes sugestivos que tornassem fácil compreender aquilo que as mesmas representavam. Mais ainda, para variáveis compostas por várias palavras, foi adotado o método lowerCamelCase, em que cada letra de cada palavra é iniciada por letra maiúscula. 
 
 
 \section{Arquitetura}
 Nesta proposta foram utilizados vários tipos de classes com diferentes atributos. Desde classes concretas a classes abstratas, classes com e sem implementações de interfaces e subclasses de classes abstratas.\\
 Por questões de necessidade de gravação do estado da aplicação, todas as classes tem em comum a implementação da interface \textit{Serializable}, oferecendo, assim, um método simples de gravação dos objetos com todos os seus estados atuais em ficheiro, para posterior consulta.
 
-\subsection{Classe UMeR}
+	\subsection{Classe UMeR}
 Utiliza Maps, e tipos primitivos para guardar os seus dados. Possui um registo de toda a informação necessária para o bom funcionamento da empresa. Contém quatro estruturas de dados Map onde se encontram guardados os dados de: 1. User como \textit{value} e email como \textit{key}, para guardar todos os utilizadores registados na empresa, quer clientes, quer condutores ; 2. Vehicle como \textit{value} e licensePlate como \textit{key}, para guardar a informação da viaturas ao serviço da empresa; 3. Trip como \textit{value} e id de viagem como \textit{key}, para manter um histórico de todas as viagens efetuadas através da empresa; 4. Email como \textit{value} e licensePlate como \textit{key}, para manter um registo do veículo associado a cada condutor. Existe ainda a variável isLogged,  do tipo \textit{boolean}, que indica se existe um utilizador "logado". Se sim, então o seu e-mail estará presente na variável loggedUserEmail, do tipo \textit{String}. Por último, existe na classe uma variável tripNumber, do tipo \textit{Integer}, responsável por garantir a sequencialização dos identificadores únicos da viagem, utilizados no Map das Trips.
 
 Foram aglomerados todos os dados do tipo \textit{User}, respetivamente, todos os dados de tipo \textit{Trip} e \textit{Vehicle}, num só \textit{Map}, uma vez que eram compatíveis, de maneira a ser possível efetuar operações sobre todos os utilizadores de uma só vez, bem como facilitar a adição de novos tipo de utilizadores.
 
+	\subsection{User}
+Não são permitidas instanciações desta classe, uma vez que se trata duma classe abstrata, que implementa comparadores. Define os dados dos utilizadores que são comuns entre as suas subclasses  e pressupões a criação de subclasses que permitirão a instanciação de objetos deste tipo. Contém variáveis de tipos primitivos e uma \textit{List} para guardar os registos da viagens efetuadas pelo utilizador.
+		
+		\subsubsection{Client}
+A classe \textit{Client} é uma subclasse de \textit{User}, tem a particularidade de possuir uma variável do tipo personalizado \textit{Coordinates} que permite guardar a localização do cliente num plano cartesiano. Esta é atualizada após ter efetuado uma viagem. 
+		
+		\subsubsection{Driver}
+A classe \textit{Driver} é uma subclasse de \textit{User}, tem a particularidade de possuir variáveis referentes ao seu performance como motorista bem como um total de km já percorridos ao serviço da empresa e a indicação da sua disponibilidade atual para efetuar um serviço. A sua disponibilidade é alterada conforme o mesmo está ou não a efetuar uma viagem.
+\par A classificação do condutor é determinada pela média das suas classificações. A performance é um valor de 0 a 100. Este valor começa por ter valor 100, sendo que caso a sua primeira viagem tenha um desvio superior a 25\% do tempo estimado, ele passa automaticamente para 50. Após estas situações concretas, este valor é alterado segundo a subtração ou soma ao valor atual de 50 / (<numero de viagens efetuadas anteriormente> + 1), dependendo de a viagem efetuada ter ou não excedido 25\% do tempo estimado. Ou seja, a sua performance vai aumentado, ou diminuindo, um valor incrementalmente pequeno conforme faz mais viagens.
 
+	\subsection{Vehicle}
+Não são permitidas instanciações desta classe, uma vez que se trata duma classe abstrata, que implementa comparadores. Define os dados de utilização dos veículos utilizados ao serviço da empresa, bem como o custo da viagem por quilómetro, \textit{fare}, a fiabilidade, \textit{reliability}, e ainda a sua localização, \textit{location}, do tipo \textit{Coordinates}, que é atualizada no fim de cada viagem. Possui os métodos abstratos clone() e setReliability().
+		\subsubsection{Car, Motorcycle e Van}
+		Estas classes são subclasses de \textit{Vehicle}, são idênticas e não possuem variáveis próprias. Cada uma das classes possui ume definição dos métodos abstratos da sua superclasse.
 
+	\subsection{Trip}
+	A classe \textit{Trip} é a responsável pela definição do parâmetros das viagens efetuadas, incluindo: o id da viagem, o id do cliente e do condutor, a data em que foi efetuada, a matricula do carro que efetuou a viagem, a localização do veículo, do cliente e do destino, o custo/tempo estimado da viagem e o custo/tempo real da mesma. Esta classe possui também comparadores para que as viagens possam ser ordenadas segundo mais do que um critério.
+	\subsection{Coordinates}
+	A classe \textit{Coordinates} é a responsável pela definição da localização de algum objeto e tratamento de do cálculo da distância entre dois pontos.
+	\subsection{Address}
+	A classe \textit{Address} é a responsável pela definição da cidade e país de um dado utilizador, contendo apenas \textit{Strings}. Implementa exceções.
+	\subsection{Interface}
+	A classe \textit{Interface} é a responsável pela impressão dos menus no ecrã, contendo apenas métodos que imprimem conjuntos de \textit{Strings} no ecrã. Cada conjunto de \textit{Strings} imprimidas é diferente de acordo com o menu que se pretende imprimir.
+	\subsection{Main}
+	A classe \textit{Main} é a principal responsável pelo funcionamento da aplicação, uma vez que é ela que continuamente recebe, interpreta e valida os comandos introduzidos pelo utilizador, imprimindo os menus solicitados e chamando as funções da UMeR necessárias para efetuar as opções solicitadas. A classe Main, a classe UMeR e o utilizador têm uma relação de repetida comunicação para solicitar, obter, introduzir e validar dados. Acima de tudo, esta classe é a responsável pelo tratamento de erros.
+	\subsection{Comparadores}
+Para além das classes mencionadas, esta proposta dispõe também de um conjunto de comparadores, os quais podem ser usados para ordenar as listas e os maps por uma ordem diferente da ordem natural determinada pelo método compareTo().
 
 \section{Hierarquia}
 Genericamente, como pode ser visto na figura ******, temos a ligação 
-
-
 
 \section{Metodologia}
 

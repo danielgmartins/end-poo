@@ -1,6 +1,6 @@
 /**
+ * 
  * Abstract class Vehicle - Parent class for vehicles with associated methods
- *
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.io.Serializable;
 
 public abstract class Vehicle extends Exception implements Comparable<Vehicle>, Serializable {
-    
+
     private String licensePlate;
     private double averageSpeed;
     private double kmsTotal;

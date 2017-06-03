@@ -1,8 +1,7 @@
-
 /**
- * Abstract class User - Parent class for users.
  *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * Abstract class User - Parent class for users.
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
 
@@ -22,12 +21,12 @@ public abstract class User implements Comparable<User>, Serializable {
     private String password;
     private List<Integer> tripHistory;
     private double totalTripCost;
-    
+
     /**
      * Empty contructor for User
      */
     private User (){
-        this("N/A",null,null,"N/A","N/A");
+        this("N/A", null, null, "N/A", "N/A");
     }
 
     /**
@@ -66,10 +65,10 @@ public abstract class User implements Comparable<User>, Serializable {
      * @param user  User object to use as reference
      */
     public User (User user){
-        this(user.getName(), 
-             user.getAddress(), 
-             user.getBirthday(), 
-             user.getEmail(), 
+        this(user.getName(),
+             user.getAddress(),
+             user.getBirthday(),
+             user.getEmail(),
              user.getPassword(),
              user.getTripHistory(),
              user.getTotalTripCost()
@@ -107,7 +106,7 @@ public abstract class User implements Comparable<User>, Serializable {
         // sb.append("password: ");
         // sb.append(password);
         sb.append("TripHistory: \n");
-        // Uses forEach iterator to add each trip in tripHistory to the string builder 
+        // Uses forEach iterator to add each trip in tripHistory to the string builder
         this.tripHistory.forEach( (Integer trip) -> {sb.append(trip+", ");} );
         sb.append("\n");
 
@@ -116,7 +115,7 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Comprares an object to this instance of User
-     * @param o Object being compared against the instance 
+     * @param o Object being compared against the instance
      * @retrun  True if both objects are equal in all parameters, false otherwise
      */
     public boolean equals (Object o){
@@ -148,7 +147,7 @@ public abstract class User implements Comparable<User>, Serializable {
      */
     public Address getAddress (){
         return this.address;
-    } 
+    }
 
     /**
      * Gets user's birthday
@@ -156,7 +155,7 @@ public abstract class User implements Comparable<User>, Serializable {
      */
     public LocalDate getBirthday (){
         return this.birthday;
-    } 
+    }
 
     /**
      * Gets user's email
@@ -175,7 +174,7 @@ public abstract class User implements Comparable<User>, Serializable {
     }
 
     /**
-     * 
+     *
      */
     public double getTotalTripCost (){
         return this.totalTripCost;
@@ -193,17 +192,17 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Gets copy of this instance User's trip history
-     * @return Returns LinkedList that's a copy of this instance of User's Trip History
+     * @return Returns List that's a copy of this instance of User's Trip History
      */
     public List<Integer> getTripHistory(){
         List<Integer> aux = new LinkedList<Integer>();
-        
+
         ((LinkedList<Integer>) this.tripHistory).forEach(trip -> {aux.add(trip);});
 
         return aux;
     }
 
-    
+
 
     /**
      * Changes user's address
@@ -242,7 +241,7 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Changes user's password
-     * @param passwors User's password
+     * @param password User's password
      */
     public void setPassword (String password){
         this.password = new String(password);
@@ -250,17 +249,17 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Sets new trip history, by replacing it
-     * @param history New trip history to update to
+     * @param history New trip history to update with
      */
     private void setTripHistory(List<Integer> tripHistory){
         //List<Trip> history = new LinkedList<Integer>(tripHistory);
-        
+
         this.tripHistory = new LinkedList<Integer>();
         List<Integer> aux = new LinkedList<Integer>(tripHistory);
 
         aux.forEach(trip -> {this.tripHistory.add(trip);} );
     }
-    
+
     /**
      * Set's new cost to the total of trip cost
      * @param cost double with total cost of trips in history
@@ -283,22 +282,22 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Confirm if the given password is equal to the one stored
-     * @param pass
+     * @param password      Password to compare with
      */
     public boolean confirmPass (String password) throws NullPointerException, IllegalStateException {
         if (password == null)
             throw new NullPointerException("Password can't be null!");
         if (password.trim() == "")
             throw new IllegalStateException("Password can't be empty!");
-        
+
         if (this.getPassword().equals(password)) return true;
         else return false;
     }
 
     /**
      * CompareTo, compares by email
-     * @param u User used for comparison
-     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     * @param u     User used for comparison
+     * @return      Returns -1 if lower, 0 if equal and 1 if higher
      */
     public int compareTo(User u){
         return this.email.compareTo(u.getEmail());
@@ -306,15 +305,15 @@ public abstract class User implements Comparable<User>, Serializable {
 
     /**
      * Hash code of User
-     * @return int with hashcode of user email
+     * @return  int with hashcode of user email
      */
     public int hashCode(){
         return this.email.hashCode();
     }
 
-    /** 
+    /**
      * Counts number of trips done.
-     * @return int with number of trips done
+     * @return  int with number of trips made
      */
     public long countTrips(){
         return this.tripHistory.stream().count();

@@ -1,7 +1,6 @@
-
 /**
- * Class Car - Subclass of Vehicle with associated methods
  *
+ * Class Car - Subclass of Vehicle with associated methods
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
@@ -10,8 +9,6 @@ import java.util.Random;
 import java.lang.StringBuilder;
 import java.util.List;
 import java.util.LinkedList;
-import java.lang.Math;
-
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.io.Serializable;
@@ -57,7 +54,7 @@ public class Car extends Vehicle implements Serializable {
               x,
               y);
     }
-    
+
     /**
      * Constructor with Car parameter
      * @param Car   Car object
@@ -108,7 +105,7 @@ public class Car extends Vehicle implements Serializable {
         Random randTraffic = new Random();
 
         double reliable = -1;
-        
+
         while(reliable < 0.5 || reliable > 1.75) {
             reliable = ( rand.nextGaussian() * randWeather.nextGaussian() * randTraffic.nextGaussian())*2 + 1;
             System.out.println(reliable);
