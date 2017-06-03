@@ -83,7 +83,7 @@ public class Van extends Vehicle implements Serializable {
      * @return  Description of Van
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("---\nVan\n");
+        StringBuilder res = new StringBuilder("\n---\nVan\n");
 
         res.append(super.toString());
 

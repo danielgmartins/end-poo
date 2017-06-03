@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.io.FileWriter;
 import Exceptions.*;
 
 public class UMeR implements Serializable
@@ -129,7 +130,17 @@ public class UMeR implements Serializable
      * Prints UMeR string to comandline
      */
     public void printString(){
-        System.out.println(this.toString());
+        String aux = this.toString();
+        try{
+            FileWriter fw = new FileWriter("output.txt", false);
+            fw.write(aux);
+            fw.flush();
+            fw.close();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(aux);
     }
 
     //  ----------  GETTERS  -----------  //
@@ -873,19 +884,19 @@ public class UMeR implements Serializable
         Coordinates userLocation = ((Client) this.userList.get(this.loggedUserEmail)).getLocation();
 
         List<String> driversByDistance = new LinkedList<String>(this.driverVehicle.entrySet()
-                                                                                    .stream()
-                                                                                    .sorted(
-                                                                                        (e1, e2) -> {
-                                                                                            double dE1 = userLocation.distance(this.vehicleList.get(e1.getValue()).getLocation());
-                                                                                            double dE2 = userLocation.distance(this.vehicleList.get(e2.getValue()).getLocation());
-
-                                                                                            if(dE1 < dE2) return 1;
-                                                                                            else if(dE1 > dE2) return -1;
-                                                                                            return 0;
-                                                                                        })
-                                                                                    .limit(5)
-                                                                                    .map(Map.Entry::getKey)
-                                                                                    .collect(Collectors.toList())
+                                                                                  .stream()
+                                                                                  .filter(e1 -> this.vehicleList.get(e1.getValue()).getClass().getSimpleName().equals(vehicleType) )
+                                                                                  .sorted(
+                                                                                      (e1, e2) -> {
+                                                                                          double dE1 = userLocation.distance(this.vehicleList.get(e1.getValue()).getLocation());
+                                                                                          double dE2 = userLocation.distance(this.vehicleList.get(e2.getValue()).getLocation());    
+                                                                                          if(dE1 < dE2) return 1;
+                                                                                          else if(dE1 > dE2) return -1;
+                                                                                          return 0;
+                                                                                      })
+                                                                                  .limit(5)
+                                                                                  .map(Map.Entry::getKey)
+                                                                                  .collect(Collectors.toList())
                                                                         );
 
         if(driversByDistance.isEmpty())

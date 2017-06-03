@@ -76,7 +76,7 @@ public class Car extends Vehicle implements Serializable {
      * @return  Description of car
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("---\nCar\n");
+        StringBuilder res = new StringBuilder("\n---\nCar\n");
 
         res.append(super.toString());
 
