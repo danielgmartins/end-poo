@@ -18,14 +18,14 @@ import Exceptions.*;
 
 public class UMeR implements Serializable
 {
-    private boolean isLogged;                   /* Says if someone is logged in */
-    private String loggedUserEmail;             /* String with currently logged user's email. Null if no one is logged in */
-    private Map<String, User> userList;         /* Map with users, user's email (string) is the key to it's user */
-    private Map<String, Vehicle> vehicleList;   /* Map with vehicles, vehicles's license plate (String) is the key to it's vehicle */
-    private Map<Integer, Trip> tripList;        /* Map with trips, trip's id (int) is the key to it's trip */
-    private Map<String, String> driverVehicle;  /* Map that associates a driver (email) with a vehicle (license plate) */
-    private int tripNumber;                     /* Numeber og trips in tripList, used for setting trip id */
-
+    private boolean isLogged;                   // Says if someone is logged in 
+    private String loggedUserEmail;             // String with currently logged user's email. Null if no one is logged in 
+    private Map<String, User> userList;         // Map with users, user's email (string) is the key to it's user 
+    private Map<String, Vehicle> vehicleList;   // Map with vehicles, vehicles's license plate (String) is the key to it's vehicle 
+    private Map<Integer, Trip> tripList;        // Map with trips, trip's id (int) is the key to it's trip 
+    private Map<String, String> driverVehicle;  // Map that associates a driver (email) with a vehicle (license plate) 
+    private int tripNumber;                     // Numeber og trips in tripList, used for setting trip id 
+    
     /** 
      * Empty UMeR Contstructor
      */
