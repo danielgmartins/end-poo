@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.io.FileWriter;
 import Exceptions.*;
 
 public class UMeR implements Serializable
@@ -129,7 +130,17 @@ public class UMeR implements Serializable
      * Prints UMeR string to comandline
      */
     public void printString(){
-        System.out.println(this.toString());
+        String aux = this.toString();
+        try{
+            FileWriter fw = new FileWriter("output.txt", false);
+            fw.write(aux);
+            fw.flush();
+            fw.close();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(aux);
     }
 
     //  ----------  GETTERS  -----------  //
