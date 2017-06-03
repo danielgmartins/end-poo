@@ -39,12 +39,22 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
                 \subsubsubsection{Alterar Disponibilidade}
                     A partir do  menu de condutor é possivel mudar a disponibilidade do condutor. Quando não está disponivel não será possivel fazer viagens com este condutor e o seu veiculo.
 
-                    // IMAGEM setLocation.png
+                    \begin{figure}
+                        \centering
+                            \includegraphics[width=80mm]{setLocation} 
+                        \caption{Informação sobre a localização}
+                        \label{fig:setLocation}
+                    \end{figure}
 
                 \subsubsubsection{Alterar Localização}
                     A partir do  menu de condutor é possivel mudar a localização atual do condutor\/veiculo.
 
-                    // IMAGEM  switchAvailability.png
+                    \begin{figure}
+                        \centering
+                            \includegraphics[width=80mm]{switchAvailability} 
+                        \caption{Mudança de disponibilidade}
+                        \label{fig:switchAvailability}
+                    \end{figure}
         
     \subsection{Iniciar Sessão de Utilizador}
 
@@ -88,7 +98,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
         \begin{figure}
             \centering
                 \includegraphics[width=80mm]{3.LoadSuccessful} 
-            \caption{Notifica��o de login com sucesso}
+            \caption{Notificação de login com sucesso}
             \label{fig:3.LoadSuccessful}
         \end{figure} 
 
