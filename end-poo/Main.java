@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import Exceptions.*;
-  
+
 public class Main implements Interface {
     //private static Console console = System.console();
     private static UMeR umer;
