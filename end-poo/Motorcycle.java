@@ -24,7 +24,7 @@ public class Motorcycle extends Vehicle implements Serializable {
      * Empty constructor
      */
     private Motorcycle (){
-        super("N/A", 4);
+        super("N/A", 1);
     }
 
     /**

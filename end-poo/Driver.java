@@ -228,20 +228,22 @@ public class Driver extends User implements Serializable {
      */
     public void addTripToHistory (Trip trip){
         long number_of_trips = this.countTrips();
+        
         super.addTripToHistory(trip);
         
         this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation()) 
                         + trip.getDestination().distance(trip.getClientLocation());
         
-        if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){
+        if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){ // bad trip
+
             if(number_of_trips == 0) this.performance = 50; 
-            this.performance -= (1/number_of_trips)*25;
+            else this.performance -= (50/(number_of_trips+1));
             if(this.performance < 0) this.performance = 0;
-        }else{
-            if(number_of_trips != 0){
-                this.performance += (1/number_of_trips)*50;
-                if(this.performance > 100) this.performance = 100;
-            }
+        }else{                                                          // good trip
+            if(number_of_trips == 0) this.performance = 50; 
+            else
+                this.performance += (50/(number_of_trips+1));
+            if(this.performance > 100) this.performance = 100;
         }
         this.availability = true;
     }
