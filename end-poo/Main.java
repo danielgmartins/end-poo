@@ -69,7 +69,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
             System.out.println("You must enter a number.");
         }
     }
@@ -96,7 +96,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
             System.out.println("You must enter a number.");
         }
     }
@@ -121,7 +121,7 @@ public class Main implements Interface
                 default: System.out.println("Invalid option, try again.");
             }
         }catch(NoSuchElementException | IllegalStateException e){
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
             System.out.println("You must enter a number.");
         }
     }
@@ -413,7 +413,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(true);
         }
         else if(umer.isDriver()){  // DRIVER PROFILE
@@ -437,7 +437,7 @@ public class Main implements Interface
                 }catch(NoSuchElementException | IllegalStateException e){
                     System.out.println("You must enter a number.");
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(true);
         }
     }
@@ -603,7 +603,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -630,7 +630,7 @@ public class Main implements Interface
                     e.getMessage();
                     System.out.println("You must enter a number.");
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(true);
         }
         }catch( UserIsNotDriverException | NoUserLoggedException e){ 
@@ -664,7 +664,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -697,7 +697,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("\nYou must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -727,7 +727,7 @@ public class Main implements Interface
                 e.getMessage();
                 System.out.println("\nYou must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
 
     }
@@ -883,23 +883,23 @@ public class Main implements Interface
                 try{
                     switch(sc.nextInt()){
                         case 1: // Requests closest Vehicle
-                            sc.nextLine();
+                            sc.nextLine().replaceAll("[\n\r]","");
                             driverEmail = requestClosestVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 2: 
-                            sc.nextLine();
+                            sc.nextLine().replaceAll("[\n\r]","");
                             driverEmail = requestSpecificVehicle();
                             if(driverEmail != null) validInput = true;
                             break;
                         case 0: return;
                         default:
-                            sc.nextLine();
+                            sc.nextLine().replaceAll("[\n\r]","");
                             System.out.println("Not a valid option");
                             break;
                     }
                 }catch(NoSuchElementException | IllegalStateException e){
-                    sc.nextLine();
+                    sc.nextLine().replaceAll("[\n\r]","");
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
@@ -982,7 +982,7 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
             validInput = true;
         }while(!validInput);
@@ -1025,7 +1025,7 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
             validInput= false;
 
@@ -1048,7 +1048,7 @@ public class Main implements Interface
                     System.out.println("You must enter a number.");
                     validInput = false;
                 }
-                sc.nextLine();
+                sc.nextLine().replaceAll("[\n\r]","");
             }while(!validInput);
             validInput= false;       
         }
@@ -1074,7 +1074,7 @@ public class Main implements Interface
                 System.out.println("You must enter a number.");
                 validInput = false;
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(!validInput);
 
         try{
@@ -1144,7 +1144,7 @@ public class Main implements Interface
                 System.out.println("requestClosestVehicle\n" + e.getMessage());
                 System.exit(1);
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(!validInput);
 
         return driverEmail;
@@ -1171,7 +1171,7 @@ public class Main implements Interface
             }
             System.out.println("0. Go Back");
             System.out.println("Write the email of the driver you want to request.");
-            driverEmail = sc.nextLine();
+            driverEmail = sc.nextLine().replaceAll("[\n\r]","");
             if(driverEmail.equals("0")) return null;
             try{
                 if(umer.isDriverAvailable(driverEmail) && umer.checkDriverHasVehicle(driverEmail))
@@ -1231,7 +1231,7 @@ public class Main implements Interface
             }catch(NoSuchElementException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -1306,7 +1306,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -1334,7 +1334,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 
@@ -1356,7 +1356,7 @@ public class Main implements Interface
             }catch(InputMismatchException | IllegalStateException e){
                 System.out.println("You must enter a number.");
             }
-            sc.nextLine();
+            sc.nextLine().replaceAll("[\n\r]","");
         }while(true);
     }
 

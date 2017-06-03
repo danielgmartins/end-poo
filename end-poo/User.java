@@ -51,7 +51,7 @@ public abstract class User implements Comparable<User>, Serializable {
      * @param password  User password
      * @param tripHistory    User trip history
      */
-    private User (String name, Address address, LocalDate birthday, String email, String password, List<Integer> history, double totalTripCost){
+    public User (String name, Address address, LocalDate birthday, String email, String password, List<Integer> history, double totalTripCost){
         this.setName(name);
         this.setAddress(address);
         this.setBirthday(birthday);
