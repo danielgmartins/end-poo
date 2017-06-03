@@ -155,6 +155,20 @@
 
 \begin{figure}
 	\centering
+		\includegraphics[width=80mm]{setLocation} 
+	\caption{Informação sobre a localização}
+	\label{fig:setLocation}
+\end{figure}
+
+\begin{figure}
+	\centering
+		\includegraphics[width=80mm]{switchAvailability} 
+	\caption{Mudança de disponibilidade}
+	\label{fig:switchAvailability}
+\end{figure}
+
+\begin{figure}
+	\centering
 		\includegraphics[width=80mm]{vehicleProfile} 
 	\caption{Perfil de um veículo}
 	\label{fig:vehicleProfile}

@@ -56,7 +56,7 @@ Serve o presente como relatório do projeto elaborado no âmbito da unidade curric
 
 
 \section{Introdução}
- Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando java, temos recorrido maioritariamente ao Atom como editor de texto e o Terminal como compilador, bem como o ***** e a consola do linux para windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
+Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando Java, temos recorrido maioritariamente ao Atom como editor de texto e ao Terminal como compilador, bem como o Visual Studio Code e a consola do linux para Windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
 
 \section{Tipos de dados usados}
 No geral, as estruturas de dados usadas para o armazenamento dos dados de clientes, veículos e viagens foram os \textit{Maps} - verificar, por exemplo, \textbf{Figura \ref{fig:mapUMeR}}. Dada a sua eficácia em termos de armazenamento ordenado de dados/rapidez na procura, à sua conveniência, uma vez que permite identificar cada objecto unicamente através de um dado único. Queríamos garantir a unicidade de dados, pois não haveria razão para termos duas entradas de registo para o mesmo utilizador, assim, usamos o email do mesmo como \textit{key} de identificação no \textit{Map} e assim garantimos que o mesmo \textit{User} não se regista duas vezes. Poupamos memória e reduzimos dados duplicados nas bases de dados da empresa. O mesmo se dá para os \textit{Vehicle}, \textit{Trips} e para a associação de \textit{Driver}/\textit{Vehicle}.
@@ -162,7 +162,10 @@ Quando abrimos a aplicação deparamo-nos com o \textbf{ecrã \ref{fig:hierarquia}}
 
 
 \section{Conclusões}
-Neste trabalho...
+Após a conclusão deste trabalho verificamos que do que ficou implementado, segundo os parâmetros apresentados, tudo aparenta estar a funcionar, recebendo apenas números quando deve receber números, rejeitando letras, rejeitando linhas em branco, efetuando transições adequadas entre menus, tal como solicitado pelo utilizador e executando as funcionalidades devidas de acordo com o pedido. Salvo algum caso não testado, no geral aparenta estar tudo operacional e consideravelmente robusto. No entanto, não conseguimos otimizar o código, nomeadamente em questões como métodos de pesquisa na classe UMeR, que poderiam estar mais concisos/eficientes e, possivelmente, até de mais fácil compreensão; os veículos poderiam ser mais diferenciados, sendo que neste momento são muito parecidos exceto apenas o numero de lugares e velocidade média atribuída pelo construtor mais usado.
+
+
+Seria dada mais liberdade aos utilizadores para alterarem os seus dados, bem como facilitar obter informação sobre veículos, mais especificamente, implementaríamos uma lista de favoritos para que o cliente pudesse guardar os seus motoristas preferidos; 
 
 
 \end{document}
