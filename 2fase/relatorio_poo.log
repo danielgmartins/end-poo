@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 17:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 18:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -453,7 +453,11 @@ File: ./images/typeAbstraction.png Graphic file (type png)
 Package pdftex.def Info: ./images/typeAbstraction.png used on input line 97.
 (pdftex.def)             Requested size: 227.62204pt x 80.44615pt.
  [2 <./images/mapUMeR.png>] [3 <./images/listUser.png> <./images/typeAbstractio
-n.png>] [4] [5] (./relatorio_poo.aux) ) 
+n.png>] [4] [5] [6] (./relatorio_poo.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  4050 strings out of 493014
  54387 string characters out of 6133352
@@ -462,16 +466,16 @@ Here is how much of TeX's memory you used:
  29924 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,7n,32p,1194b,247s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/font
-s/enc/dvips/base/8r.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/ut
-mb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio_poo.pdf (5 pages, 906264 bytes).
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/urw/times/utmri8a.pfb>
+Output written on relatorio_poo.pdf (6 pages, 907522 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
+ 54 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -234,16 +234,16 @@ public class Driver extends User implements Serializable {
 
         this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation())
                         + trip.getDestination().distance(trip.getClientLocation());
-        
+
         if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){ // bad trip
 
-            if(number_of_trips == 0) this.performance = 50; 
-            else this.performance -= (50/(number_of_trips+1));
+            if(numberOfTrips == 0) this.performance = 50; 
+            else this.performance -= (50/(numberOfTrips+1));
             if(this.performance < 0) this.performance = 0;
         }else{                                                          // good trip
-            if(number_of_trips == 0) this.performance = 50; 
+            if(numberOfTrips == 0) this.performance = 50;
             else
-                this.performance += (50/(number_of_trips+1));
+                this.performance += (50/(numberOfTrips+1));
             if(this.performance > 100) this.performance = 100;
         }
         this.availability = true;
