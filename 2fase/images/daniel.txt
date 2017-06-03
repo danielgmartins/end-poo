@@ -1,0 +1,133 @@
+\section{Manual de utilização}
+Ao longo da execução do programa, o prórprio programa vai indicando o Input que está à espera. Caso não seja um input valido o programa reconheçe como inválido e pede novamente input. A qualquer ponto da utilização é possivel voltar atraz e cancelar a operação do momento, excepto após uma viagem ter sido efetuada. Nesse caso é possivel voltar atraz apenas depois de dar classificação ao motorista.
+
+    \subsection{Menus}
+        
+        \subsubsection{Menu Sem Utilizador}
+
+            // IMAGEM   notLoggedMenu
+
+            Este menu é apresentado o utilizador não tem \textit{log in} feito. A partir deste menu é possivel: iniciar sessão \(1. Log In\); registar no serviço \(2. Sign up \); fazer load a partir de um ficheiro \(3. Load Session\); ver estatísticas \(4. View Statistics\) tais como, 10 clientes que mais gastaram e 5 condutores com mais desvios de tempo previsto nas viagens; e guardar para ficheiro a sessão \(5. Save Session\); sair da aplicação \(0. Exit\).
+        
+        \subsubsection{Menu de Cliente}
+
+            // IMAGEM LoggedInMenu
+
+            Este menu é apresentado quando um utilizador tem \textit{log in} feito como cliente. A partir deste menu é possivel: sair da sessão como utilizador \(1. Log Out\); efetuar uma viagem \(2. Request Trip\); ver o prefil de utilizador \(3. View Profile\); ver estatísticas \(4. View Statistics\); guardar sessão para ficheiro \(5. Save Session\); sair da aplicação \(0. Exit\).
+
+        \subsubsection{Menu de Condutor}
+
+            //IMAGEM driverLogin
+
+            Este menu é apresentado quando um utilizador tem \textit{log in} feito como condutor. A partir deste menu é possivel: sair da sessão como utilizador \(1. Log Out\); ver o prefil de utilizador e informação sobre veiculo \(2. View Profile\); registar um novo veiculo, caso ainda não tenha um associado, \(3. Register Vehicle\); mudar localização atual \(4. Set Location\); alterar a disponibilidade \(5. Switch Availability\); ver estatísticas \(6. View Statistics\); guardar sessão para ficheiro \(7. Save Session\); sair da aplicação \(0. Exit\).
+
+                \subsubsubsection{Alterar Disponibilidade}
+                    A partir do  menu de condutor é possivel mudar a disponibilidade do condutor. Quando não está disponivel não será possivel fazer viagens com este condutor e o seu veiculo.
+
+                    // IMAGEM setLocation.png
+
+                \subsubsubsection{Alterar Localização}
+                    A partir do  menu de condutor é possivel mudar a localização atual do condutor\/veiculo.
+
+                    // IMAGEM  switchAvailability.png
+        
+    \subsection{Iniciar Sessão de Utilizador}
+
+        No menu de \textit{log in} é pedido ao utilizador um email e password relativa à conta à qual está a tentar aceder. É apresentada uma opção para voltar atraz e cancelar a operação \(0. Go Back\).
+        Quando é introduzido o email, se o formato do email não for valido a aplicação indica o email como inválido e pede-o novamente.
+        Caso o \textit{log in} tenha ocorrido com sucesso é apresentado a seguinte mensagem:
+
+        // IMAGEM Successful.png
+
+        Caso contrário é pedido novamente a informação para \textit{log in}:
+
+        // IMAGEM LogInUnsuccessful.png
+
+    \subsection{Registar Utilizador}
+
+        No menu de \textit{Sign up}, é pedido ao utilizador para indicar se deseja se registar no serviço como cliente ou como condutor. Independentemente da escolha, os dados a serem pedidos sobre o utilizador são os mesmos. A aplicação vai validando o \textit{input} a cada passo pedindo esse pedaço de informação novamente caso o \textit{input} anterior não seja valido. A qualquer altura no processe de registo é possível cancelar a operação e voltar ao menu anterior \(0. Go Back\).
+
+        // IMAGEM SignUpUser.png
+
+        Uma vez que os dados introduzidos vão sendo validados ao longo do processo de registo é improvavel que o o registo ocorra sem sucesso, no entanto, nesse caso, os dados serão pedidos novamente, voltando ao inicio.
+    
+    \subsection{Carregar Sessão}
+
+        Caso tenha sido escolhida a opção de carregar uma sessão a partir do ficheiro, o programa sustituirá a informação da UMeR pelo que se encontra no ficheiro. É apenas apresentada uma mensagem a indicar se o \texit{load} foi efetuado com sucesso ou não.
+
+        \\ IMAGEM 3.LoadSuccessful
+
+    \subsection{Guardar Sessão}
+
+        Caso tenha sido escolhida a opção de guardar um sessão para um ficheiro. O programa escreve a informação sobre a UMeR e escreve para um ficheiro em binário. É apenas apresentada uma mensagem a indicar se o \textit{save} foi efetuado com sucesso ou não.
+        
+        \\ IMAGEM 5.Save 
+    
+    \subsection{Ver Estatisticas}
+
+        Neste menu é possivel ver estatísticas sobre a UMeR. Nomeadamente: 10 clientes que mais gastam em viagens e 5 condutores com mais desvio entre tempo esperado de uma viagem e tempo que realmente levou.
+
+        \\ IMAGEM 4Stats {menu}
+
+        \\ IMAGEM 4.1.Stats{10 clientes que mais gastam}
+
+        \\ IMAGEM 4.2.Stats{5 condutores com pior performance}
+
+    \subsection{Fechar sessão}
+
+        A opção \textit{log out} simplesmente sai do menu de utilizador, reinicializando as variaveis relativas ao \textit{log in} na UMeR e volta a o menu sem utilizador.
+
+    \subsection{Ver Prefil}
+
+        \subsubsection{Prefil de Cliente}
+            Quando um cliente escolhe a opção \textit{View Profile}, é apresentada varia informação sobre o seu prefil.
+            É aqui que é possivel alterar a password e ver o histórico de viagens
+
+            // IMAGEM viewProfile1.png
+
+        \subsubsection{Prefil de Condutor}
+            No prefil de Condutor é apresentada a mesma a informação sobre o utilizador que é apresentada no prefil de cliente. Para além disso é possivel ver a informação relativa ao veiculo ao qual o condutor está associado. A opção \(3. Vehicle Profile\) premite ver informação mais detalhada sobre o vehiculo e alterar alguma informação sobre o veiculo.
+
+            // IMAGEM driverProfile.png
+
+            // IMAGEM vehicleProfile.png
+
+        \subsubsection{Ver Histórico de Viagens}
+            A partir do prefil é possivel consultar ao histórico de viagens. É pedida uma data incial e uma data final que constinui o espaço de tempo sobre o qual queremos ver as viagens efetuadas.
+
+            // IMAGEM viewProfileTripHistory.png
+
+    \subsection{Efetuar Viagem}
+        A partir do menu de cliente é possivel efetuar uma viagem. Incialmente serão pedidas as coordenadas atuais do utilizador e as coordendas do seu destino.
+
+        // IMAGENS requestTrip1
+        
+        De seguida, o utilizador pode escolher entre simplesmente requisitar o veiculo mais proximo de sí ou requisitar um veiculo à sua escolha. 
+        
+        // IMAGEM requesTrip2
+
+        Caso o utilizador pretenda requisitar o veiculo mais proximo ser-lhe-à dada a escolha do tipo de veiculo.
+        
+        // IMAGEM requestTrip3
+
+        Caso o utilizador pretenda escolher um veiculo em especifico, será apresentada uma lista de condutores e veiculos por ordem decrescente de distância, finalmente deve escrever o email do condutor que quer requisitar.
+
+        // IMAGEM requestTripSpecific1
+
+        Após a escolha de veiculo será apresentado finalmente o pedido, com informação sobre condutor, veiculo, tempo e custo esperado para a viagem. Nesta altura o cliente pode escolher efetuar a viagem, ou cancelar o pedido, voltanto ao menu principal.
+        
+        // IMAGEM requestTrip4
+        
+        Caso tenha escolhido seguir com a viagem, a viagem é efetuada e o cliente é notificado sobre os dados da viagem. Se a viagem demorou perto do tempo esperado o cliente é simplesmente notificado do tempo real da viagem e do preço que terá de pagar. Caso a viagem tenha demorado mais que 125% do tempo esperado, será dada a possibilidade de negociar um preço a pagar.
+
+        // IMAGEM requestTrip5
+
+        Após efetuado o pagamente é pedido ao cliente dar uma classificação ao condutor, de 0 a 100.
+
+        // IMAGEM requestTrip6
+
+        Finalmente, o cliente volta ao menu principal.
+
+    \subsection{Sair da aplicação}
+
+        A opção \(0. Exit\), disponível nos menus principais, simplesmente termina a sessão. É importante ter em conta que esta opção termina o programa sem guardar qualquer informação que não tenha sido guardada anteriormente com a opção \textit{Save Session}.
