@@ -1,3 +1,0 @@
-ponto 4.2.
-	para que o cliente saiba o id do motorista desejado, podemos criar uma area de favoritos, que permita ter ate 10 favoritos
-	interface de apresentação favoritos pode ser o nome, o id, a pontuação como motorista 
