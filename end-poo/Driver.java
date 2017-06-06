@@ -1,7 +1,7 @@
 /**
- * Class Driver - Inherits class User
  *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * Class Driver - Inherits class User
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 14/04/2017
  */
 
@@ -13,34 +13,33 @@ import java.io.Serializable;
 
 public class Driver extends User implements Serializable {
 
+
     private int performance;
     private int classification;
     private int kmsDriven;
     private boolean availability;
-    
+
     /**
      * Empty constructor
      */
     private Driver (){
-        this(0,"N/A",null,null,"N/A","N/A");
+        this("N/A",null,null,"N/A","N/A");
     }
 
     /**
      * Constructor with every parameter for super class User
-     * @param id        User id
      * @param name      User name
      * @param Address   User address
      * @param birthday  User birthday
      * @param email     User email
      * @param password  User password
      */
-    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password){
-        this(id, name, address, birthday, email, password, new LinkedList<Trip>(), 100, 100, 0, true);
+    public Driver (String name, Address address, LocalDate birthday, String email, String password){
+        this(name, address, birthday, email, password, new LinkedList<Integer>(), 100, 100, 0, true);
     }
 
     /**
      * Constructor with every parameter for class Driver
-     * @param id             User id
      * @param name           User name
      * @param Address        User address
      * @param birthday       User birthday
@@ -52,8 +51,8 @@ public class Driver extends User implements Serializable {
      * @param kmsDriven      Driver kms driven
      * @param availability   Driver availability
      */
-    public Driver (int id, String name, Address address, LocalDate birthday, String email, String password, LinkedList<Trip> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
-        super(id, name, address, birthday, email, password, tripHistory);
+    public Driver (String name, Address address, LocalDate birthday, String email, String password, LinkedList<Integer> tripHistory, int performance, int classification, int kmsDriven, boolean availability){
+        super(name, address, birthday, email, password, tripHistory, 0);
         this.setPerformance(performance);
         this.setClassification(classification);
         this.setKmsDriven(kmsDriven);
@@ -201,6 +200,53 @@ public class Driver extends User implements Serializable {
      */
     public void switchAvailability(){
         this.availability = !this.availability;
+    }
+
+    //  ----------  Other Methods   ----------  //
+
+
+
+    /**
+     * Updates a driver's classification when given a new classification from a trip.
+     * This must be done ONLY after the trip has been added to this user's trip History.
+     * In case this is the first classification a driver receives, it replaces the previous classification
+     * @param classification    new classification given to driver.
+     */
+    public void addClassification(int classification){
+        long numberOfTrips = this.countTrips();
+
+        if(numberOfTrips == 0) this.setClassification(classification);
+        else this.setClassification( (int) ( ((long) ( numberOfTrips * this.classification + classification)) /  (numberOfTrips +1) ));
+    }
+
+    /**
+     * Adds new trip to trip history
+     * Updates totalTripCost
+     * Updates kmsDriven
+     * Updates performance
+     * @param trip Trip to be added to trip history
+     */
+    public void addTripToHistory (Trip trip){
+
+        long numberOfTrips = this.countTrips();
+
+        super.addTripToHistory(trip);
+
+        this.kmsDriven += trip.getClientLocation().distance(trip.getTaxiLocation())
+                        + trip.getDestination().distance(trip.getClientLocation());
+
+        if(trip.getEstimatedTripTime() < trip.getRealTripTime() * 0.25){ // bad trip
+
+            if(numberOfTrips == 0) this.performance = 50; 
+            else this.performance -= (50/(numberOfTrips+1));
+            if(this.performance < 0) this.performance = 0;
+        }else{                                                          // good trip
+            if(numberOfTrips == 0) this.performance = 50;
+            else
+                this.performance += (50/(numberOfTrips+1));
+            if(this.performance > 100) this.performance = 100;
+        }
+        this.availability = true;
     }
 
 }

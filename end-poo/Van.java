@@ -1,14 +1,15 @@
-
 /**
- * Class Van - Subclass of Vehicle with associated methods
  *
+ * Class Van - Subclass of Vehicle with associated methods
  * @author  a55617 Elisio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
 
+import java.util.Random;
 import java.lang.StringBuilder;
 import java.util.List;
-
+import java.util.LinkedList;
+import java.lang.Math;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.io.Serializable;
@@ -21,77 +22,40 @@ public class Van extends Vehicle implements Serializable {
      * Empty constructor
      */
     private Van (){
-        super("na", -1.0, -1.0, -1.0, false, -1, -1, -1, false, (List<Trip>) null);
+        super("N/A", 7);
+    }
+
+    /**
+     * Van constructor just receiveng a licence plate. Sets 6 seats as default
+     * @param licensePlate  String with license plate
+     */
+    public Van (String licensePlate){
+        super(licensePlate, 7);
+        this.setAverageSpeed(70);
     }
 
     /**
      * Constructor with indiviual parameters
+     * Sets Reliablity to 1 as default
      * @param licensePlate    License plate
      * @param averageSpeed    Average speed per km
+     * @param kmsTotal        Total of kms
      * @param fare            Fare per km
-     * @param availability    Availability
      * @param seats           Number of seats
      * @param x               x coordinate
      * @param y               y coordinate
-     * @param queue           Queue setting
-     * @param queueListIn     Queue list
      */
-    public Van (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, boolean queue, List<Trip> queueListIn){
+    public Van (String licensePlate, double averageSpeed, double kmsTotal, double fare, int seats, int x, int y){
         super(licensePlate,
               averageSpeed,
+              kmsTotal,
               fare,
-              availability,
+              1.0,
               seats,
               x,
-              y,
-              queue,
-              queueListIn);
+              y);
     }
 
-    /**
-     * Constructor with indiviual parameters
-     * @param licensePlate    License plate
-     * @param averageSpeed    Average speed per km
-     * @param fare            Fare per km
-     * @param availability    Availability
-     * @param seats           Number of seats
-     * @param x               x coordinate
-     * @param y               y coordinate
-     * @param queueListIn     Queue list
-     */
-    public Van (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y, List<Trip> queueListIn){
-        super(licensePlate,
-              averageSpeed,
-              fare,
-              availability,
-              seats,
-              x,
-              y,
-              true,
-              queueListIn);
-    }
-
-    /**
-     * Constructor with indiviual parameters
-     * @param licensePlate    License plate
-     * @param averageSpeed    Average speed per km
-     * @param fare            Fare per km
-     * @param availability    Availability
-     * @param seats           Number of seats
-     * @param x               x coordinate
-     * @param y               y coordinate
-     */
-    public Van (String licensePlate, double averageSpeed, double fare, boolean availability, int seats, int x, int y){
-        super(licensePlate,
-              averageSpeed,
-              fare,
-              availability,
-              seats,
-              x,
-              y,
-              false,
-              (List<Trip>) null);
-    }
     /**
      * Constructor with Van parameter
      * @param Van   Van object
@@ -99,20 +63,11 @@ public class Van extends Vehicle implements Serializable {
     public Van (Van c){
         super(c.getLicensePlate(),
               c.getAverageSpeed(),
+              c.getKmsTotal(),
               c.getFare(),
               c.getReliability(),
-              c.getAvailability(),
               c.getSeats(),
-              c.getLocation().getX(),
-              c.getLocation().getY(),
-              c.getQueueValue(),
-              c.getQueueList());
-
-        // if (this.getQueueValue()){
-        //     this.queueList = new LinkedList<Trip>();
-        //     this.queueList = c.getQueueList();
-        // }
-        // else this.queueList = null;
+              c.getLocation());
     }
 
     /**
@@ -128,7 +83,7 @@ public class Van extends Vehicle implements Serializable {
      * @return  Description of Van
      */
     public String toString (){
-        StringBuilder res = new StringBuilder("---\nVan\n");
+        StringBuilder res = new StringBuilder("\n---\nVan\n");
 
         res.append(super.toString());
 
@@ -148,6 +103,23 @@ public class Van extends Vehicle implements Serializable {
         return super.equals(c);
     }
 
+    /**
+     * Sets Van's reliability bearing in mind the randomability of weather, traffic conditions and the fact that a Van is pretty unreliable itself
+     */
+    public void setReliability (){
+        Random rand = new Random();
+        Random randWeather = new Random();
+        Random randTraffic = new Random();
+
+        double reliable = -1;
+
+        while(reliable < 0.5 || reliable > 1.75) {
+            reliable = ( rand.nextGaussian() * randWeather.nextGaussian() * randTraffic.nextGaussian())*2 + 1;
+            System.out.println(reliable);
+        }
+
+        super.setReliability(reliable);
+    }
 
 
 }

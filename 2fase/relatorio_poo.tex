@@ -1,0 +1,417 @@
+\documentclass{llncs}
+\usepackage[portuguese]{babel}
+\usepackage{times}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+% Comentar para not MAC Users
+\usepackage[applemac]{inputenc}
+
+\usepackage{a4}
+\usepackage[margin=3cm,nohead]{geometry}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\graphicspath{ {./images/}{./images/runningApp/} }
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{float}
+%\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+\mainmatter
+\title{Relatório do Trabalho Prático de\\Programação Orientada a Objetos\\Grupo11 POO2017}
+
+\titlerunning{Relatório do Trabalho TP de POO}
+
+\author{ {Elísio Freitas Fernandes \{$55617$\}}  \and {Daniel Gonçalves Martins \{$73175$\}} \and {Nuno José Ribeiro da Silva \{$78879$\}}}
+
+\authorrunning{Elísio Fernandes \{$55617$\} \and Daniel Martins \{$73175$\} \and Nuno Silva {$78879$\} } }
+
+\institute{
+Universidade do Minho, Departamento de Informática, 4710-057 Braga, Portugal\\
+e-mail: \{a$55617$, a$73175$, a$78879$\}@uminho.pt}
+
+\date{}
+\bibliographystyle{splncs}
+
+\maketitle
+\begin{figure}[!htb]
+	\minipage{0.31\textwidth}
+		\includegraphics[width=\linewidth]{daniel}
+		\begin{center}Daniel Gonçalves Martins \{$73175$\}\label{daniel} \end {center}
+	\endminipage\hfill
+\minipage{0.31\textwidth}
+	\includegraphics[width=\linewidth]{elisio}
+	\begin{center}Elísio Freitas Fernandes \{$55617$\}	\label{elisio} \end {center}
+\endminipage\hfill
+\minipage{0.29\textwidth}
+	\includegraphics[width=\linewidth]{nuno}
+	\begin{center}Nuno José R. da Silva \{$78879$\}\label{nuno}\end {center}
+\endminipage
+\end{figure}
+
+\begin{abstract}
+Serve o presente como relatório do projeto elaborado no âmbito da unidade curricular de Programação Orientada a Objetos. Projeto esse no qual se previa a elaboração de um programa para a empresa UMeR, o qual fosse capaz de garantir a prestação continua do seu serviço. Os requisitos de tal programa incluem a criação e manutenção da base de dados que inclui os dados dos clientes, bem como as informações dos seus colaboradores e das suas viaturas, utilizadas para a prestação do serviço em questão. Mais ainda, está incluída a criação de uma interface de interação com os utilizadores com várias opções, como: criação de conta; posterior acesso e atualização dos dados da conta; consulta de histórico de serviços requeridos/prestados.
+\end{abstract}
+
+
+
+\section{Introdução}
+Com o presente documento pretende-se apresentar resumidamente o trabalho prático elaborado pelo grupo, como proposta de resolução do enunciado apresentado, no seguimento da UC de programação Orientada aos Objetos. As necessidades da empresa UMeR foram abordadas e tratadas usando Java, temos recorrido maioritariamente ao Atom como editor de texto e ao Terminal como compilador, bem como o Visual Studio Code e a consola do linux para Windows. Irão ser apresentadas as classes elaboradas e a várias escolhas especificas feitas em cada uma delas, a sua hierarquia e sua razão de ser.
+
+\section{Tipos de dados usados}
+No geral, as estruturas de dados usadas para o armazenamento dos dados de clientes, veículos e viagens foram os \textit{Maps} - verificar, por exemplo, \textbf{Figura \ref{fig:mapUMeR}}. Dada a sua eficácia em termos de armazenamento ordenado de dados/rapidez na procura, à sua conveniência, uma vez que permite identificar cada objecto unicamente através de um dado único. Queríamos garantir a unicidade de dados, pois não haveria razão para termos duas entradas de registo para o mesmo utilizador, assim, usamos o email do mesmo como \textit{key} de identificação no \textit{Map} e assim garantimos que o mesmo \textit{User} não se regista duas vezes. Poupamos memória e reduzimos dados duplicados nas bases de dados da empresa. O mesmo se dá para os \textit{Vehicle}, \textit{Trips} e para a associação de \textit{Driver}/\textit{Vehicle}.
+
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{mapUMeR} 
+	\caption{Variáveis da classe UMeR}
+	\label{fig:mapUMeR}
+\end{figure} 
+Por outro lado, usamos também dados do tipo \textit{List} em situações como na classe \textit{User}, para guardar os ids das viagens efetuadas, uma vez que o tipo de dados é só um tipo de dados primitivo. 
+
+\subsection{Metodologias de implementação dos tipos de dados}
+A nível da declaração das variáveis de instância foi usado sempre um tipo de dados com um grande nível de generalização. Com tal pretendemos facilitar a alteração dos tipos de dados específicos usados. Por exemplo, ao usar a declaração do tipo \textit{Map} invés de \textit{HashMap} permitimos que no futuro fosse fácil alterar esse tipo para um \textit{TreeMap} por exemplo, mantendo no entanto a mesma intenção de permitir uma gestão eficiente e organizada da informação.
+\par Pela mesma razão declaramos as variáveis de instância como \textit{List}, permitindo depois a escolha do tipo específico de \textit{List} pretendida - verificar, por exemplo, \textbf{Figura \ref{fig:listUser}} .
+
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{listUser} 
+	\caption{Variáveis da classe User}
+	\label{fig:listUser}
+\end{figure} 
+
+Observando a \textbf{Figura \ref{fig:typeAbstraction}}, é visível a uniformização dos métodos das classes a esta metodologia de  abstração do tipo de dados.
+
+\begin{figure}
+	\centering
+		\includegraphics[width = 80mm]{typeAbstraction} 
+	\caption{Métodos com abstração de dados assegurada}
+	\label{fig:typeAbstraction}
+\end{figure} 
+
+\section{Métodos}
+Em cada classe existem métodos que permitem a interação da empresa com a mesma, permitindo a criação, de instâncias de classe, atribuição de valores ás várias variáveis através dos métodos \textit{set<nome da variável>}, bem como obtenção dos valores contidos nas mesmas, através dos métodos \textit{get<nome da variável>}.
+
+Cada classe tem em comum os métodos clone(), equals(), compareTo(), hashCode() e toString(). O método toString() e o equals() é definido na classe abstrata e redefinido nas subclasses. O método é definido na classe abstrata porque várias da variáveis são definidas nesta classe e, assim, evita-se a duplicação de código, no entanto, existem também variáveis declaradas na classe \textit{client}, pelo que é necessário chamar o \textit{super} da super classe para tratar da execução do método sobre as variáveis lá definidas e só depois é aplicado o código local ao resto das variáveis de instância. O método clone() é um método abstrato e, portanto, é totalmente definido em cada subclasse, uma vez que apenas a subclasse sabe como definir cada um dos parâmetros que compõe. O método compareTo() é o responsável pela "ordem natural" definida em cada classe para a ordenação das suas instâncias. Já o método hashCode() é um método que todas as classes têm apenas na sua superclasse abstrata, uma vez que é nela que se encontra o identificador único inerente a cada uma das subclasses que a ampliam. 
+\par Salienta-se o método \textit{setPassword (String password)} e \textit{public String getPassword ()} que na sua simplicidade, apenas guardam a password entregue pela empresa, sendo da responsabilidade e controlo da mesma garantir a segurança da mesma - nesta proposta tal método não foi implementado. Destacam-se também métodos construtores vazios da classe \textit{User}, \textit{Vehicle} e \textit{Trip} que são privados, uma vez que não pretendido que estes sejam criadas instâncias destas classes sem dados concretos. No entanto, dada a filosofia do Java, foi necessário criar os construtores, para que o Java em si não desse automaticamente essa possibilidade aos utilizadores.
+\par Para além destes métodos, cada classe dispõe dos seus métodos próprios, os quais podem ser consultados em anexo, necessários para efetuar as suas operações.
+
+
+\section{Expressão escrita}
+Ao longo do projeto foi usado um estilo restrito de regras para a criação dos seus ficheiros componentes. Para a declaração das variáveis foi definido que as mesmo deveriam ter nomes sugestivos que tornassem fácil compreender aquilo que as mesmas representavam. Mais ainda, para variáveis compostas por várias palavras, foi adotado o método lowerCamelCase, em que cada letra de cada palavra é iniciada por letra maiúscula. 
+
+
+\section{Arquitetura}
+Nesta proposta foram utilizados vários tipos de classes com diferentes atributos. Desde classes concretas a classes abstratas, classes com e sem implementações de interfaces e subclasses de classes abstratas.\\
+Por questões de necessidade de gravação do estado da aplicação, todas as classes tem em comum a implementação da interface \textit{Serializable}, oferecendo, assim, um método simples de gravação dos objetos com todos os seus estados atuais em ficheiro, para posterior consulta.
+
+	\subsection{Classe UMeR}
+Utiliza Maps, e tipos primitivos para guardar os seus dados. Possui um registo de toda a informação necessária para o bom funcionamento da empresa. Contém quatro estruturas de dados Map onde se encontram guardados os dados de: 1. User como \textit{value} e email como \textit{key}, para guardar todos os utilizadores registados na empresa, quer clientes, quer condutores ; 2. Vehicle como \textit{value} e licensePlate como \textit{key}, para guardar a informação da viaturas ao serviço da empresa; 3. Trip como \textit{value} e id de viagem como \textit{key}, para manter um histórico de todas as viagens efetuadas através da empresa; 4. Email como \textit{value} e licensePlate como \textit{key}, para manter um registo do veículo associado a cada condutor. Existe ainda a variável isLogged,  do tipo \textit{boolean}, que indica se existe um utilizador "logado". Se sim, então o seu e-mail estará presente na variável loggedUserEmail, do tipo \textit{String}. Por último, existe na classe uma variável tripNumber, do tipo \textit{Integer}, responsável por garantir a sequencialização dos identificadores únicos da viagem, utilizados no Map das Trips.
+
+Foram aglomerados todos os dados do tipo \textit{User}, respetivamente, todos os dados de tipo \textit{Trip} e \textit{Vehicle}, num só \textit{Map}, uma vez que eram compatíveis, de maneira a ser possível efetuar operações sobre todos os utilizadores de uma só vez, bem como facilitar a adição de novos tipo de utilizadores.
+
+	\subsection{User}
+Não são permitidas instanciações desta classe, uma vez que se trata duma classe abstrata, que implementa comparadores. Define os dados dos utilizadores que são comuns entre as suas subclasses  e pressupões a criação de subclasses que permitirão a instanciação de objetos deste tipo. Contém variáveis de tipos primitivos e uma \textit{List} para guardar os registos da viagens efetuadas pelo utilizador.
+		
+		\subsubsection{Client}
+A classe \textit{Client} é uma subclasse de \textit{User}, tem a particularidade de possuir uma variável do tipo personalizado \textit{Coordinates} que permite guardar a localização do cliente num plano cartesiano. Esta é atualizada após ter efetuado uma viagem. 
+		
+		\subsubsection{Driver}
+A classe \textit{Driver} é uma subclasse de \textit{User}, tem a particularidade de possuir variáveis referentes ao seu performance como motorista bem como um total de km já percorridos ao serviço da empresa e a indicação da sua disponibilidade atual para efetuar um serviço. A sua disponibilidade é alterada conforme o mesmo está ou não a efetuar uma viagem.
+\par A classificação do condutor é determinada pela média das suas classificações. A performance é um valor de 0 a 100. Este valor começa por ter valor 100, sendo que caso a sua primeira viagem tenha um desvio superior a 25\% do tempo estimado, ele passa automaticamente para 50. Após estas situações concretas, este valor é alterado segundo a subtração ou soma ao valor atual de 50 / (<numero de viagens efetuadas anteriormente> + 1), dependendo de a viagem efetuada ter ou não excedido 25\% do tempo estimado. Ou seja, a sua performance vai aumentado, ou diminuindo, um valor incrementalmente pequeno conforme faz mais viagens.
+
+	\subsection{Vehicle}
+Não são permitidas instanciações desta classe, uma vez que se trata duma classe abstrata, que implementa comparadores. Define os dados de utilização dos veículos utilizados ao serviço da empresa, bem como o custo da viagem por quilómetro, \textit{fare}, a fiabilidade, \textit{reliability}, e ainda a sua localização, \textit{location}, do tipo \textit{Coordinates}, que é atualizada no fim de cada viagem. Possui os métodos abstratos clone() e setReliability().
+		\subsubsection{Car, Motorcycle e Van}
+		Estas classes são subclasses de \textit{Vehicle}, são idênticas e não possuem variáveis próprias. Cada uma das classes possui ume definição dos métodos abstratos da sua superclasse.
+
+	\subsection{Trip}
+	A classe \textit{Trip} é a responsável pela definição do parâmetros das viagens efetuadas, incluindo: o id da viagem, o id do cliente e do condutor, a data em que foi efetuada, a matricula do carro que efetuou a viagem, a localização do veículo, do cliente e do destino, o custo/tempo estimado da viagem e o custo/tempo real da mesma. Esta classe possui também comparadores para que as viagens possam ser ordenadas segundo mais do que um critério.
+	\subsection{Coordinates}
+	A classe \textit{Coordinates} é a responsável pela definição da localização de algum objeto e tratamento de do cálculo da distância entre dois pontos.
+	\subsection{Address}
+	A classe \textit{Address} é a responsável pela definição da cidade e país de um dado utilizador, contendo apenas \textit{Strings}. Implementa exceções.
+	\subsection{EmailValidator}
+	Classe responsável por analisar o formato de um dado email, e verificar se tem um formato válido.
+	\subsection{Interface}
+	A classe \textit{Interface} é a responsável pela impressão dos menus no ecrã, contendo apenas métodos que imprimem conjuntos de \textit{Strings} no ecrã. Cada conjunto de \textit{Strings} imprimidas é diferente de acordo com o menu que se pretende imprimir.
+	\subsection{Main}
+	A classe \textit{Main} é a principal responsável pelo funcionamento da aplicação, uma vez que é ela que continuamente recebe, interpreta e valida os comandos introduzidos pelo utilizador, imprimindo os menus solicitados e chamando as funções da UMeR necessárias para efetuar as opções solicitadas. A classe Main, a classe UMeR e o utilizador têm uma relação de repetida comunicação para solicitar, obter, introduzir e validar dados. Acima de tudo, esta classe é a responsável pelo tratamento de erros.
+	\subsection{Comparadores}
+Para além das classes mencionadas, esta proposta dispõe também de um conjunto de comparadores, os quais podem ser usados para ordenar as listas e os maps por uma ordem diferente da ordem natural determinada pelo método compareTo().
+
+\section{Hierarquia}
+Podemos ver abaixo na \textbf{Figura \ref{fig:hierarquia}} a hierarquia das classes do projeto e a maneira como todas elas estão ligadas entre si. Podemos também verificar na \textbf{Figura \ref{fig:exceptions}} uma representação gráfica das exceções previstas no código. 
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=\textwidth]{hierarquia} 
+	\caption{Hierarquia  de classes na UMeR}
+	\label{fig:hierarquia}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=80mm]{exceptions} 
+	\caption{Exceções previstas no código}
+	\label{fig:exceptions}
+\end{figure} 
+
+%Inicio manual
+\section{Manual de utilização}
+Ao longo da execução do programa, o próprio programa vai indicando o Input que está à espera. Caso não seja um input valido o programa reconhece como inválido e pede novamente input. A qualquer ponto da utilização é possível voltar atrás e cancelar a operação do momento, excepto após uma viagem ter sido efetuada. Nesse caso é possível voltar atrás apenas depois de dar classificação ao motorista.
+
+    \subsection{Menus}
+        
+        \subsubsection{Menu Sem Utilizador}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{notLoggedMenu} 
+                \caption{Menu principal antes do login}
+                \label{fig:notLoggedMenu}
+            \end{figure}
+
+            Este menu é apresentado o utilizador não tem \textit{log in} feito. A partir deste menu é possível: iniciar sessão (1. Log In); registar no serviço (2. Sign up ); fazer load a partir de um ficheiro (3. Load Session); ver estatísticas (4. View Statistics) tais como, 10 clientes que mais gastaram e 5 condutores com mais desvios de tempo previsto nas viagens; e guardar para ficheiro a sessão (5. Save Session); sair da aplicação (0. Exit).
+        
+        \subsubsection{Menu de Cliente}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{LoggedInMenu} 
+                \caption{Menu principal de um cliente}
+                \label{fig:LoggedInMenu}
+            \end{figure}
+
+            Este menu é apresentado quando um utilizador tem \textit{log in} feito como cliente. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); efetuar uma viagem (2. Request Trip); ver o perfil de utilizador (3. View Profile); ver estatísticas (4. View Statistics); guardar sessão para ficheiro (5. Save Session); sair da aplicação (0. Exit).
+
+        \subsubsection{Menu de Condutor}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{driverLogin} 
+                \caption{Menu principal de um condutor}
+                \label{fig:driverLogin}
+            \end{figure}
+
+Este menu é apresentado quando um utilizador tem \textit{log in} feito como condutor. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); ver o perfil de utilizador e informação sobre veiculo (2. View Profile); registar um novo veiculo, caso ainda não tenha um associado, (3. Register Vehicle); mudar localização atual (4. Set Location); alterar a disponibilidade (5. Switch Availability); ver estatísticas (6. View Statistics); guardar sessão para ficheiro (7. Save Session); sair da aplicação (0. Exit).
+              %  \subsubsubsection{Alterar Disponibilidade}
+A partir do  menu de condutor é possível mudar a disponibilidade do condutor. Quando não está disponível não será possível fazer viagens com este condutor e o seu veiculo.
+                    \begin{figure}[H]
+                        \centering
+                            \includegraphics[width=80mm]{setLocation} 
+                        \caption{Informação sobre a localização}
+                        \label{fig:setLocation}
+                    \end{figure}
+           %     \subsubsubsection{Alterar Localização}
+A partir do  menu de condutor é possível mudar a localização atual do condutor\/veiculo.
+                    \begin{figure}[H]
+                        \centering
+                            \includegraphics[width=80mm]{switchAvailability} 
+                        \caption{Mudança de disponibilidade}
+                        \label{fig:switchAvailability}
+                    \end{figure}
+        
+    \subsection{Iniciar Sessão de Utilizador}
+
+        No menu de \textit{log in} é pedido ao utilizador um email e password relativa à conta à qual está a tentar aceder. É apresentada uma opção para voltar atrás e cancelar a operação (0. Go Back).
+        Quando é introduzido o email, se o formato do email não for valido a aplicação indica o email como inválido e pede-o novamente.
+        Caso o \textit{log in} tenha ocorrido com sucesso é apresentado a seguinte mensagem:
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Successful} 
+            \caption{Login com sucesso}
+            \label{fig:Successful}
+        \end{figure} 
+
+        Caso contrário é pedido novamente a informação para \textit{log in}:
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{LogInUnsuccessful} 
+            \caption{Tentativa falhada de login}
+            \label{fig:LogInUnsuccessful}
+        \end{figure} 
+
+    \subsection{Registar Utilizador}
+
+        No menu de \textit{Sign up}, é pedido ao utilizador para indicar se deseja se registar no serviço como cliente ou como condutor. Independentemente da escolha, os dados a serem pedidos sobre o utilizador são os mesmos. A aplicação vai validando o \textit{input} a cada passo pedindo esse pedaço de informação novamente caso o \textit{input} anterior não seja valido. A qualquer altura no processe de registo é possível cancelar a operação e voltar ao menu anterior (0. Go Back).
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{SignUpUser} 
+            \caption{Processo de login de um utilizador na plataforma}
+            \label{fig:SignUpUser}
+        \end{figure} 
+
+        Uma vez que os dados introduzidos vão sendo validados ao longo do processo de registo é improvável que o o registo ocorra sem sucesso, no entanto, nesse caso, os dados serão pedidos novamente, voltando ao inicio.
+    
+    \subsection{Carregar Sessão}
+
+        Caso tenha sido escolhida a opção de carregar uma sessão a partir do ficheiro, o programa substituirá a informação da UMeR pelo que se encontra no ficheiro. É apenas apresentada uma mensagem a indicar se o \textit{load} foi efetuado com sucesso ou não.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{LoadSuccessful} 
+            \caption{Notificação de login com sucesso}
+            \label{fig:LoadSuccessful}
+        \end{figure} 
+        
+    \subsection{Guardar Sessão}
+        Caso tenha sido escolhida a opção de guardar um sessão para um ficheiro. O programa escreve a informação sobre a UMeR e escreve para um ficheiro em binário. É apenas apresentada uma mensagem a indicar se o \textit{save} foi efetuado com sucesso ou não.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Save} 
+            \caption{Possibilidade de guardar a sessão atual}
+            \label{fig:Save}
+        \end{figure}
+    
+    \subsection{Ver Estatísticas}
+
+        Neste menu é possível ver estatísticas sobre a UMeR. Nomeadamente: 10 clientes que mais gastam em viagens e 5 condutores com mais desvio entre tempo esperado de uma viagem e tempo que realmente levou.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{4Stats} 
+            \caption{Consulta de estatísticas de clientes e condutores}
+            \label{fig:4Stats}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Stats} 
+            \caption{Visualização dos 10 clientes que mais gastam}
+            \label{fig:Stats}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{42Stats} 
+            \caption{Visualização dos perfis dos condutores e respetivos desvios}
+            \label{fig:42Stats}
+        \end{figure}
+
+    \subsection{Fechar sessão}
+
+        A opção \textit{log out} simplesmente sai do menu de utilizador, reinicializando as variáveis relativas ao \textit{log in} na UMeR e volta a o menu sem utilizador.
+
+    \subsection{Ver Perfil}
+
+        \subsubsection{Perfil de Cliente}
+            Quando um cliente escolhe a opção \textit{View Profile}, é apresentada varia informação sobre o seu perfil.
+            É aqui que é possível alterar a password e ver o histórico de viagens
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{viewProfile1} 
+                \caption{Perfil de um cliente}
+                \label{fig:viewProfile1}
+            \end{figure}
+
+        \subsubsection{Perfil de Condutor}
+            No perfil de Condutor é apresentada a mesma a informação sobre o utilizador que é apresentada no perfil de cliente. Para além disso é possível ver a informação relativa ao veiculo ao qual o condutor está associado. A opção (3. Vehicle Profile) permite ver informação mais detalhada sobre o veículo e alterar alguma informação sobre o veiculo.
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{driverProfile} 
+                \caption{Perfil pessoal de um condutor}
+                \label{fig:driverProfile}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{vehicleProfile} 
+                \caption{Perfil de um veículo}
+                \label{fig:vehicleProfile}
+            \end{figure}
+
+        \subsubsection{Ver Histórico de Viagens}
+            A partir do perfil é possível consultar ao histórico de viagens. É pedida uma data inicial e uma data final que constitui o espaço de tempo sobre o qual queremos ver as viagens efetuadas.
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{viewProfileTripHistory} 
+                \caption{Visualização das viagens feitas entre determinadas datas}
+                \label{fig:viewProfileTripHistory}
+            \end{figure}
+
+    \subsection{Efetuar Viagem}
+        A partir do menu de cliente é possível efetuar uma viagem. Inicialmente serão pedidas as coordenadas atuais do utilizador e as coordenadas do seu destino.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip1} 
+            \caption{Processo de pedido de uma viagem na aplicação - Localização e destino}
+            \label{fig:requestTrip1}
+        \end{figure}
+        
+        De seguida, o utilizador pode escolher entre simplesmente requisitar o veiculo mais proximo de si ou requisitar um veiculo à sua escolha. 
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip2} 
+            \caption{Processo de pedido de uma viagem na aplicação - Escolha do veículo}
+            \label{fig:requestTrip2}
+        \end{figure}
+
+        Caso o utilizador pretenda requisitar o veiculo mais proximo ser-lhe-à dada a escolha do tipo de veiculo.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip3} 
+            \caption{Processo de pedido de uma viagem na aplicação - Tipo de veículos disponíveis}
+            \label{fig:requestTrip3}
+        \end{figure}
+
+        Caso o utilizador pretenda escolher um veiculo em específico, será apresentada uma lista de condutores e veículos por ordem decrescente de distância, finalmente deve escrever o email do condutor que quer requisitar.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTripSpecific1} 
+            \caption{Possibilidade de escolha de condutor específico}
+            \label{fig:requestTripSpecific1}
+        \end{figure}
+
+        Após a escolha de veiculo será apresentado finalmente o pedido, com informação sobre condutor, veiculo, tempo e custo esperado para a viagem. Nesta altura o cliente pode escolher efetuar a viagem, ou cancelar o pedido, voltando ao menu principal.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip4} 
+            \caption{Processo de pedido de uma viagem na aplicação - Dados da viagem e confirmação final}
+            \label{fig:requestTrip4}
+        \end{figure}
+        
+        Caso tenha escolhido seguir com a viagem, a viagem é efetuada e o cliente é notificado sobre os dados da viagem. Se a viagem demorou perto do tempo esperado o cliente é simplesmente notificado do tempo real da viagem e do preço que terá de pagar. Caso a viagem tenha demorado mais que 125\% do tempo esperado, será dada a possibilidade de negociar um preço a pagar.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip5} 
+            \caption{Final de uma viagem}
+            \label{fig:requestTrip5}
+        \end{figure}
+
+        Após efetuado o pagamento é pedido ao cliente dar uma classificação ao condutor, de 0 a 100.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip6} 
+            \caption{Classificação do condutor}
+            \label{fig:requestTrip6}
+        \end{figure}
+
+        Finalmente, o cliente volta ao menu principal.
+
+    \subsection{Sair da aplicação}
+A opção (0. Exit), disponível nos menus principais, simplesmente termina a sessão. É importante ter em conta que esta opção termina o programa sem guardar qualquer informação que não tenha sido guardada anteriormente com a opção \textit{Save Session}.
+%fim manual
+
+\section{Conclusões}
+Após a conclusão deste trabalho verificamos que do que ficou implementado, segundo os parâmetros que apresentamos anteriormente, tudo aparenta estar a funcionar, recebendo apenas números quando deve receber números, rejeitando letras, rejeitando linhas em branco, efetuando transições adequadas entre menus, tal como solicitado pelo utilizador e executando as funcionalidades devidas de acordo com os pedido recebidos. Salvo algum caso não testado, no geral, a aplicação aparenta estar operacional e consideravelmente robusta. No entanto, não conseguimos otimizar o código, nomeadamente em questões como métodos de pesquisa na classe UMeR, que poderiam estar mais concisos/eficientes e, possivelmente, até de mais fácil compreensão; os veículos poderiam ser mais diferenciados, sendo que neste momento são muito parecidos exceto apenas o numero de lugares e velocidade média atribuída pelo construtor mais usado.
+
+Mais do que as melhorias indicadas, ficaram por implementar algumas funcionalidades avançadas. Questões como veículos com fila de espera poderiam ser implementadas criando novas classes, por exemplo CarWithQueue.java, para os mesmos que em tudo se assemelhariam ás classes existentes, sendo inclusive extensões das classes abstratas, no entanto, incluindo uma \textit{List}, possivelmente \textit{ArrayList} com um limite de 10, para garantir que existe uma fluidez no serviço e não existem tempos exagerados de espera. Juntamente á variável seriam necessários os métodos de verificação se um dado veículo é do tipo que suporta fila de espera, adição de clientes á fila de espera e remoção, caso fosse dada a possibilidade de desistir da reserva. Outra funcionalidade não implementada foi as Empresas de Taxis. Para estas, poderíamos implementar uma classe EmpresasTaxi.java, que teria apenas o nome da empresa, o seu NIF, lista dos seus veículos e lista de motoristas. Estas empresas iriam permitir que os motoristas trocassem de veículo, efetuando a troca da associação dos \textit{key} e \textit{values} do \textit{Map}, onde se encontram associados os veículos e os motoristas. Cada empresa constaria numa nova estrutura de dados da UMeR, para manter o registo das mesmas. 
+Externamente ás funcionalidades solicitadas pretenderíamos dar mais liberdade aos utilizadores para alterarem os seus dados, bem como facilitar obter informação sobre veículos, mais especificamente, implementaríamos uma lista de favoritos para que o cliente pudesse guardar os seus motoristas preferidos.
+
+\end{document}

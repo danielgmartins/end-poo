@@ -1,6 +1,7 @@
 /**
+ *
  * Class Coordinates is a 2D point system to map every object location and their moves through space.
- * @author Elisio Fernandes A55617 Daniel Martins A73175 Nuno Silva A78879
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 13/4/2017
  */
 
@@ -8,25 +9,33 @@ import java.lang.StringBuilder;
 import java.lang.Math;
 import java.io.Serializable;
 
-public  class Coordinates implements Serializable{
+public  class Coordinates implements Comparable<Coordinates>, Serializable {
     private int x;
     private int y;
 
     /**
-     * Constructors of class Coordinates (including empty and copy Constructors).
-     *
+     * Constructors from ints
+     * @param nx    int for x coordinate
+     * @param ny    int for y coordinate
      */
-
     public Coordinates(int nx,int ny){
         this.x = nx;
         this.y = ny;
     }
 
+    /**
+     * Empty constructor
+     * Sets coordinates to 0
+     */
     public Coordinates(){
         this.x = 0;
         this.y = 0;
     }
 
+    /**
+     * Constructor from object Coordinate
+     * @param ref   Coordinate to construct from
+     */
     public Coordinates(Coordinates ref){
         this.x = ref.getX();
         this.y = ref.getY();
@@ -40,7 +49,6 @@ public  class Coordinates implements Serializable{
      * @return A new object with the same instance variables
      *
      */
-
     public Coordinates clone (){
         Coordinates res = new Coordinates(this);
         return res;
@@ -52,7 +60,6 @@ public  class Coordinates implements Serializable{
      * @return       boolean true or false, if objects are equal or not.
      *
      */
-
     public boolean equals (Object ref){
         if (ref==this) return true;
         if ((ref==null)|| (ref.getClass()!=this.getClass())) return false;
@@ -65,7 +72,6 @@ public  class Coordinates implements Serializable{
      * @param obj    the Coordinates object we want to apply the ToString method;
      * @return       String containing the objects instance variables
      */
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(" X = ");
@@ -82,7 +88,6 @@ public  class Coordinates implements Serializable{
      *
      * @return   the x coordinate of the object
      */
-
     public int getX (){
         return this.x;
     }
@@ -92,7 +97,6 @@ public  class Coordinates implements Serializable{
      *
      * @return   the y coordinate of the object
      */
-
     public int getY() {
         return this.y;
     }
@@ -102,7 +106,6 @@ public  class Coordinates implements Serializable{
      * @param nx    the new x
      *
      */
-
     public void setX (int nx){
         this.x = nx;
     }
@@ -112,10 +115,10 @@ public  class Coordinates implements Serializable{
      * @param ny     the new y
      *
      */
-
     public void setY (int ny){
         this.y = ny;
     }
+
     /**
      *setCoordinates agreggates setX and setY methods.
      * @param x  the value for the x coordinate
@@ -135,9 +138,8 @@ public  class Coordinates implements Serializable{
      * @return       double containing the distance between the two objects.
      *
      */
-
     public double distance (Coordinates p1){
-        double squaredistance = Math.pow(this.x + p1.getX(),2) + Math.pow(this.y + p1.getY(),2);
+        double squaredistance = Math.pow(  Math.abs(this.x - p1.getX()) ,2) + Math.pow(Math.abs(this.y - p1.getY()),2);
         return Math.sqrt(squaredistance);
     }
     /**
@@ -145,10 +147,30 @@ public  class Coordinates implements Serializable{
      *@return    the Coordinates object that has the same instance variables.
      *
      */
-
     public Coordinates getCoordinates() {
         return this.clone();
     }
 
+    /**
+     * Hash Code of Coordinates
+     * @return int with code
+     */
+    public int hashCode(){
+        return this.x * 100000 + this.y;
+    }
 
+    /**
+     * Campares this to another coordenate
+     * Order will be from smallest x to highest x, then smallest y to highest y
+     * @param c Coordinates to be compared to
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo(Coordinates c){
+
+        if(this.x < c.getX()) return 1;
+        if(this.x > c.getX()) return -1;
+        if(this.y < c.getY()) return 1;
+        if(this.y > c.getY()) return -1;
+        else return 0;
+    }
 }

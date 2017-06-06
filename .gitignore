@@ -3,6 +3,11 @@ README.TXT
 *.ctxt
 *.bluej
 *.json
+Teste.*
 test.*
+input.txt
+output.txt
+inp2.txt
+*.pdf
 end-poo/doc/
 .DS_Store

@@ -1,14 +1,15 @@
 /**
+ * 
  * Class Address - Class to represent an Address with a country and a city
- *
- * @author a55617 Elísio Fernandes, a73175 Daniel Martins, aXXXXX Nuno Silva
+ * @author  a55617 Elísio Fernandes, a73175 Daniel Martins, a78879 Nuno Silva
  * @version 12/04/2017
  */
 
 import java.lang.StringBuilder;
 import java.io.Serializable;
+import Exceptions.*;
 
-public class Address implements Serializable {
+public class Address implements Comparable<Address>, Serializable {
     private String city;
     private String country;
 
@@ -74,7 +75,7 @@ public class Address implements Serializable {
         Address aux = (Address) o;
         return aux.getCity().equals(this.getCity())         &&
                aux.getCountry().equals(this.getCountry())   ;
-    }    
+    }
 
     // Getters
 
@@ -100,10 +101,10 @@ public class Address implements Serializable {
      * Change city in the address
      * @param city City for the address
      */
-    public void setCity (String city){
+    public void setCity (String city) throws NullPointerException, IllegalStateException {
         if (city == null)
             throw new NullPointerException("City can't be null");
-        if (city.trim() == "")
+        if (city.trim().equals(""))
             throw new IllegalStateException("City must have content");
 
         this.city = city;
@@ -113,13 +114,35 @@ public class Address implements Serializable {
      * Change country in the address
      * @param country Country for the adress
      */
-    public void setCountry (String country){
+    public void setCountry (String country) throws NullPointerException, IllegalStateException {
         if (country == null)
             throw new NullPointerException("Country can't be null");
-        if (country.trim() == "")
+        if (country.trim().equals(""))
             throw new IllegalStateException("Country must have content");
 
         this.country = country;
+    }
+
+    /**
+     * Compares address to another address
+     * Compares by city then by country
+     * @param ad    Address to be compared against
+     * @return  Returns -1 if lower, 0 if equal and 1 if higher
+     */
+    public int compareTo(Address ad){
+        int aux = this.city.compareTo(ad.getCity());
+        if(aux != 0) return aux;
+
+        aux = this.country.compareTo(ad.getCountry());
+        return aux;
+    }
+
+    /**
+     * Hash code
+     * @return int of code
+     */
+    public int hashCode(){
+        return this.city.hashCode() * 1000000000 + this.country.hashCode();
     }
 
 }
