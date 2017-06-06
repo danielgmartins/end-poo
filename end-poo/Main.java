@@ -617,6 +617,7 @@ public class Main implements Interface {
         // in case the driver does not have a vehicle
         try{
         if(!umer.hasVehicle()){
+            clean();
             System.out.println("You do not have a vehicle.");
             System.out.println("0. Go back");
             do{

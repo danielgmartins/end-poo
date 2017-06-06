@@ -445,7 +445,7 @@ public class UMeR implements Serializable
     public boolean hasVehicle() throws NoUserLoggedException, UserIsNotDriverException{
         if(this.loggedUserEmail == null)
             throw new NoUserLoggedException();
-        if(! this.driverVehicle.containsKey(this.loggedUserEmail))
+        if(! (this.userList.get(this.loggedUserEmail) instanceof Driver) )
             throw new UserIsNotDriverException();
 
         return this.driverVehicle.containsKey(this.loggedUserEmail);
