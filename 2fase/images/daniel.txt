@@ -1,5 +1,5 @@
 \section{Manual de utilização}
-Ao longo da execução do programa, o prórprio programa vai indicando o Input que está à espera. Caso não seja um input valido o programa reconheçe como inválido e pede novamente input. A qualquer ponto da utilização é possivel voltar atraz e cancelar a operação do momento, excepto após uma viagem ter sido efetuada. Nesse caso é possivel voltar atraz apenas depois de dar classificação ao motorista.
+Ao longo da execução do programa, o próprio programa vai indicando o Input que está à espera. Caso não seja um input valido o programa reconhece como inválido e pede novamente input. A qualquer ponto da utilização é possível voltar atrás e cancelar a operação do momento, excepto após uma viagem ter sido efetuada. Nesse caso é possível voltar atrás apenas depois de dar classificação ao motorista.
 
     \subsection{Menus}
         
@@ -12,7 +12,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
                 \label{fig:notLoggedMenu}
             \end{figure}
 
-            Este menu é apresentado o utilizador não tem \textit{log in} feito. A partir deste menu é possivel: iniciar sessão \(1. Log In\); registar no serviço \(2. Sign up \); fazer load a partir de um ficheiro \(3. Load Session\); ver estatísticas \(4. View Statistics\) tais como, 10 clientes que mais gastaram e 5 condutores com mais desvios de tempo previsto nas viagens; e guardar para ficheiro a sessão \(5. Save Session\); sair da aplicação \(0. Exit\).
+            Este menu é apresentado o utilizador não tem \textit{log in} feito. A partir deste menu é possível: iniciar sessão (1. Log In); registar no serviço (2. Sign up ); fazer load a partir de um ficheiro (3. Load Session); ver estatísticas (4. View Statistics) tais como, 10 clientes que mais gastaram e 5 condutores com mais desvios de tempo previsto nas viagens; e guardar para ficheiro a sessão (5. Save Session); sair da aplicação (0. Exit).
         
         \subsubsection{Menu de Cliente}
 
@@ -23,7 +23,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
                 \label{fig:LoggedInMenu}
             \end{figure}
 
-            Este menu é apresentado quando um utilizador tem \textit{log in} feito como cliente. A partir deste menu é possivel: sair da sessão como utilizador \(1. Log Out\); efetuar uma viagem \(2. Request Trip\); ver o prefil de utilizador \(3. View Profile\); ver estatísticas \(4. View Statistics\); guardar sessão para ficheiro \(5. Save Session\); sair da aplicação \(0. Exit\).
+            Este menu é apresentado quando um utilizador tem \textit{log in} feito como cliente. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); efetuar uma viagem (2. Request Trip); ver o perfil de utilizador (3. View Profile); ver estatísticas (4. View Statistics); guardar sessão para ficheiro (5. Save Session); sair da aplicação (0. Exit).
 
         \subsubsection{Menu de Condutor}
 
@@ -34,21 +34,17 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
                 \label{fig:driverLogin}
             \end{figure}
 
-            Este menu é apresentado quando um utilizador tem \textit{log in} feito como condutor. A partir deste menu é possivel: sair da sessão como utilizador \(1. Log Out\); ver o prefil de utilizador e informação sobre veiculo \(2. View Profile\); registar um novo veiculo, caso ainda não tenha um associado, \(3. Register Vehicle\); mudar localização atual \(4. Set Location\); alterar a disponibilidade \(5. Switch Availability\); ver estatísticas \(6. View Statistics\); guardar sessão para ficheiro \(7. Save Session\); sair da aplicação \(0. Exit\).
-
-                \subsubsubsection{Alterar Disponibilidade}
-                    A partir do  menu de condutor é possivel mudar a disponibilidade do condutor. Quando não está disponivel não será possivel fazer viagens com este condutor e o seu veiculo.
-
+Este menu é apresentado quando um utilizador tem \textit{log in} feito como condutor. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); ver o perfil de utilizador e informação sobre veiculo (2. View Profile); registar um novo veiculo, caso ainda não tenha um associado, (3. Register Vehicle); mudar localização atual (4. Set Location); alterar a disponibilidade (5. Switch Availability); ver estatísticas (6. View Statistics); guardar sessão para ficheiro (7. Save Session); sair da aplicação (0. Exit).
+              %  \subsubsubsection{Alterar Disponibilidade}
+A partir do  menu de condutor é possível mudar a disponibilidade do condutor. Quando não está disponível não será possível fazer viagens com este condutor e o seu veiculo.
                     \begin{figure}
                         \centering
                             \includegraphics[width=80mm]{setLocation} 
                         \caption{Informação sobre a localização}
                         \label{fig:setLocation}
                     \end{figure}
-
-                \subsubsubsection{Alterar Localização}
-                    A partir do  menu de condutor é possivel mudar a localização atual do condutor\/veiculo.
-
+           %     \subsubsubsection{Alterar Localização}
+A partir do  menu de condutor é possível mudar a localização atual do condutor\/veiculo.
                     \begin{figure}
                         \centering
                             \includegraphics[width=80mm]{switchAvailability} 
@@ -58,48 +54,48 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
         
     \subsection{Iniciar Sessão de Utilizador}
 
-        No menu de \textit{log in} é pedido ao utilizador um email e password relativa à conta à qual está a tentar aceder. É apresentada uma opção para voltar atraz e cancelar a operação \(0. Go Back\).
+        No menu de \textit{log in} é pedido ao utilizador um email e password relativa à conta à qual está a tentar aceder. É apresentada uma opção para voltar atrás e cancelar a operação (0. Go Back).
         Quando é introduzido o email, se o formato do email não for valido a aplicação indica o email como inválido e pede-o novamente.
         Caso o \textit{log in} tenha ocorrido com sucesso é apresentado a seguinte mensagem:
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{1.Successful} 
+                \includegraphics[width=80mm]{Successful} 
             \caption{Login com sucesso}
-            \label{fig:1.Successful}
+            \label{fig:Successful}
         \end{figure} 
 
         Caso contrário é pedido novamente a informação para \textit{log in}:
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{1.LogInUnsuccessful} 
+                \includegraphics[width=80mm]{LogInUnsuccessful} 
             \caption{Tentativa falhada de login}
-            \label{fig:1.LogInUnsuccessful}
+            \label{fig:LogInUnsuccessful}
         \end{figure} 
 
     \subsection{Registar Utilizador}
 
-        No menu de \textit{Sign up}, é pedido ao utilizador para indicar se deseja se registar no serviço como cliente ou como condutor. Independentemente da escolha, os dados a serem pedidos sobre o utilizador são os mesmos. A aplicação vai validando o \textit{input} a cada passo pedindo esse pedaço de informação novamente caso o \textit{input} anterior não seja valido. A qualquer altura no processe de registo é possível cancelar a operação e voltar ao menu anterior \(0. Go Back\).
+        No menu de \textit{Sign up}, é pedido ao utilizador para indicar se deseja se registar no serviço como cliente ou como condutor. Independentemente da escolha, os dados a serem pedidos sobre o utilizador são os mesmos. A aplicação vai validando o \textit{input} a cada passo pedindo esse pedaço de informação novamente caso o \textit{input} anterior não seja valido. A qualquer altura no processe de registo é possível cancelar a operação e voltar ao menu anterior (0. Go Back).
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{2.1.SignUpUser} 
+                \includegraphics[width=80mm]{SignUpUser} 
             \caption{Processo de login de um utilizador na plataforma}
-            \label{fig:2.1.SignUpUser}
+            \label{fig:SignUpUser}
         \end{figure} 
 
-        Uma vez que os dados introduzidos vão sendo validados ao longo do processo de registo é improvavel que o o registo ocorra sem sucesso, no entanto, nesse caso, os dados serão pedidos novamente, voltando ao inicio.
+        Uma vez que os dados introduzidos vão sendo validados ao longo do processo de registo é improvável que o o registo ocorra sem sucesso, no entanto, nesse caso, os dados serão pedidos novamente, voltando ao inicio.
     
     \subsection{Carregar Sessão}
 
-        Caso tenha sido escolhida a opção de carregar uma sessão a partir do ficheiro, o programa sustituirá a informação da UMeR pelo que se encontra no ficheiro. É apenas apresentada uma mensagem a indicar se o \texit{load} foi efetuado com sucesso ou não.
+        Caso tenha sido escolhida a opção de carregar uma sessão a partir do ficheiro, o programa substituirá a informação da UMeR pelo que se encontra no ficheiro. É apenas apresentada uma mensagem a indicar se o \textit{load} foi efetuado com sucesso ou não.
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{3.LoadSuccessful} 
+                \includegraphics[width=80mm]{LoadSuccessful} 
             \caption{Notificação de login com sucesso}
-            \label{fig:3.LoadSuccessful}
+            \label{fig:LoadSuccessful}
         \end{figure} 
 
     \subsection{Guardar Sessão}
@@ -108,45 +104,45 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
         
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{5.Save} 
+                \includegraphics[width=80mm]{Save} 
             \caption{Possibilidade de guardar a sessão atual}
-            \label{fig:5.Save}
+            \label{fig:Save}
         \end{figure}
     
-    \subsection{Ver Estatisticas}
+    \subsection{Ver Estatísticas}
 
-        Neste menu é possivel ver estatísticas sobre a UMeR. Nomeadamente: 10 clientes que mais gastam em viagens e 5 condutores com mais desvio entre tempo esperado de uma viagem e tempo que realmente levou.
+        Neste menu é possível ver estatísticas sobre a UMeR. Nomeadamente: 10 clientes que mais gastam em viagens e 5 condutores com mais desvio entre tempo esperado de uma viagem e tempo que realmente levou.
 
         \begin{figure}
             \centering
                 \includegraphics[width=80mm]{4Stats} 
-            \caption{Consulta de estatisticas de clientes e condutores}
+            \caption{Consulta de estatísticas de clientes e condutores}
             \label{fig:4Stats}
         \end{figure}
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{4.1.Stats} 
-            \caption{Visualizacao dos 10 clientes que mais gastam}
-            \label{fig:4.1.Stats}
+                \includegraphics[width=80mm]{Stats} 
+            \caption{Visualização dos 10 clientes que mais gastam}
+            \label{fig:Stats}
         \end{figure}
 
         \begin{figure}
             \centering
-                \includegraphics[width=80mm]{4.2.Stats} 
-            \caption{Visualizacao dos perfis dos condutores e respetivos desvios}
-            \label{fig:4.2.Stats}
+                \includegraphics[width=80mm]{42Stats} 
+            \caption{Visualização dos perfis dos condutores e respetivos desvios}
+            \label{fig:42Stats}
         \end{figure}
 
     \subsection{Fechar sessão}
 
-        A opção \textit{log out} simplesmente sai do menu de utilizador, reinicializando as variaveis relativas ao \textit{log in} na UMeR e volta a o menu sem utilizador.
+        A opção \textit{log out} simplesmente sai do menu de utilizador, reinicializando as variáveis relativas ao \textit{log in} na UMeR e volta a o menu sem utilizador.
 
-    \subsection{Ver Prefil}
+    \subsection{Ver Perfil}
 
-        \subsubsection{Prefil de Cliente}
-            Quando um cliente escolhe a opção \textit{View Profile}, é apresentada varia informação sobre o seu prefil.
-            É aqui que é possivel alterar a password e ver o histórico de viagens
+        \subsubsection{Perfil de Cliente}
+            Quando um cliente escolhe a opção \textit{View Profile}, é apresentada varia informação sobre o seu perfil.
+            É aqui que é possível alterar a password e ver o histórico de viagens
 
             \begin{figure}
                 \centering
@@ -155,8 +151,8 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
                 \label{fig:viewProfile1}
             \end{figure}
 
-        \subsubsection{Prefil de Condutor}
-            No prefil de Condutor é apresentada a mesma a informação sobre o utilizador que é apresentada no prefil de cliente. Para além disso é possivel ver a informação relativa ao veiculo ao qual o condutor está associado. A opção \(3. Vehicle Profile\) premite ver informação mais detalhada sobre o vehiculo e alterar alguma informação sobre o veiculo.
+        \subsubsection{Perfil de Condutor}
+            No perfil de Condutor é apresentada a mesma a informação sobre o utilizador que é apresentada no perfil de cliente. Para além disso é possível ver a informação relativa ao veiculo ao qual o condutor está associado. A opção (3. Vehicle Profile) permite ver informação mais detalhada sobre o veículo e alterar alguma informação sobre o veiculo.
 
             \begin{figure}
                 \centering
@@ -173,7 +169,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \end{figure}
 
         \subsubsection{Ver Histórico de Viagens}
-            A partir do prefil é possivel consultar ao histórico de viagens. É pedida uma data incial e uma data final que constinui o espaço de tempo sobre o qual queremos ver as viagens efetuadas.
+            A partir do perfil é possível consultar ao histórico de viagens. É pedida uma data inicial e uma data final que constitui o espaço de tempo sobre o qual queremos ver as viagens efetuadas.
 
             \begin{figure}
                 \centering
@@ -183,7 +179,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \end{figure}
 
     \subsection{Efetuar Viagem}
-        A partir do menu de cliente é possivel efetuar uma viagem. Incialmente serão pedidas as coordenadas atuais do utilizador e as coordendas do seu destino.
+        A partir do menu de cliente é possível efetuar uma viagem. Inicialmente serão pedidas as coordenadas atuais do utilizador e as coordenadas do seu destino.
 
         \begin{figure}
             \centering
@@ -192,12 +188,12 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \label{fig:requestTrip1}
         \end{figure}
         
-        De seguida, o utilizador pode escolher entre simplesmente requisitar o veiculo mais proximo de sí ou requisitar um veiculo à sua escolha. 
+        De seguida, o utilizador pode escolher entre simplesmente requisitar o veiculo mais proximo de si ou requisitar um veiculo à sua escolha. 
         
         \begin{figure}
             \centering
                 \includegraphics[width=80mm]{requestTrip2} 
-            \caption{Processo de pedido de uma viagem na aplicação - Escolha do ve�culo}
+            \caption{Processo de pedido de uma viagem na aplicação - Escolha do veículo}
             \label{fig:requestTrip2}
         \end{figure}
 
@@ -206,11 +202,11 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
         \begin{figure}
             \centering
                 \includegraphics[width=80mm]{requestTrip3} 
-            \caption{Processo de pedido de uma viagem na aplicação - Tipo de veiculos disponíveis}
+            \caption{Processo de pedido de uma viagem na aplicação - Tipo de veículos disponíveis}
             \label{fig:requestTrip3}
         \end{figure}
 
-        Caso o utilizador pretenda escolher um veiculo em específico, será apresentada uma lista de condutores e veiculos por ordem decrescente de distância, finalmente deve escrever o email do condutor que quer requisitar.
+        Caso o utilizador pretenda escolher um veiculo em específico, será apresentada uma lista de condutores e veículos por ordem decrescente de distância, finalmente deve escrever o email do condutor que quer requisitar.
 
         \begin{figure}
             \centering
@@ -219,7 +215,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \label{fig:requestTripSpecific1}
         \end{figure}
 
-        Após a escolha de veiculo será apresentado finalmente o pedido, com informação sobre condutor, veiculo, tempo e custo esperado para a viagem. Nesta altura o cliente pode escolher efetuar a viagem, ou cancelar o pedido, voltanto ao menu principal.
+        Após a escolha de veiculo será apresentado finalmente o pedido, com informação sobre condutor, veiculo, tempo e custo esperado para a viagem. Nesta altura o cliente pode escolher efetuar a viagem, ou cancelar o pedido, voltando ao menu principal.
         
         \begin{figure}
             \centering
@@ -228,7 +224,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \label{fig:requestTrip4}
         \end{figure}
         
-        Caso tenha escolhido seguir com a viagem, a viagem é efetuada e o cliente é notificado sobre os dados da viagem. Se a viagem demorou perto do tempo esperado o cliente é simplesmente notificado do tempo real da viagem e do preço que terá de pagar. Caso a viagem tenha demorado mais que 125% do tempo esperado, será dada a possibilidade de negociar um preço a pagar.
+        Caso tenha escolhido seguir com a viagem, a viagem é efetuada e o cliente é notificado sobre os dados da viagem. Se a viagem demorou perto do tempo esperado o cliente é simplesmente notificado do tempo real da viagem e do preço que terá de pagar. Caso a viagem tenha demorado mais que 125\% do tempo esperado, será dada a possibilidade de negociar um preço a pagar.
 
         \begin{figure}
             \centering
@@ -237,7 +233,7 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
             \label{fig:requestTrip5}
         \end{figure}
 
-        Após efetuado o pagamente é pedido ao cliente dar uma classificação ao condutor, de 0 a 100.
+        Após efetuado o pagamento é pedido ao cliente dar uma classificação ao condutor, de 0 a 100.
 
         \begin{figure}
             \centering
@@ -249,5 +245,4 @@ Ao longo da execução do programa, o prórprio programa vai indicando o Input q
         Finalmente, o cliente volta ao menu principal.
 
     \subsection{Sair da aplicação}
-
-        A opção \(0. Exit\), disponível nos menus principais, simplesmente termina a sessão. É importante ter em conta que esta opção termina o programa sem guardar qualquer informação que não tenha sido guardada anteriormente com a opção \textit{Save Session}.
+A opção (0. Exit), disponível nos menus principais, simplesmente termina a sessão. É importante ter em conta que esta opção termina o programa sem guardar qualquer informação que não tenha sido guardada anteriormente com a opção \textit{Save Session}.

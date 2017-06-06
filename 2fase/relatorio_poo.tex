@@ -4,6 +4,7 @@
 %\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+
 % Comentar para not MAC Users
 \usepackage[applemac]{inputenc}
 
@@ -11,9 +12,10 @@
 \usepackage[margin=3cm,nohead]{geometry}
 \usepackage{epstopdf}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/}{./images/runningApp/} }
 \usepackage{fancyvrb}
 \usepackage{amsmath}
+\usepackage{float}
 %\renewcommand{\baselinestretch}{1.5}
 
 \begin{document}
@@ -142,30 +144,274 @@ Para além das classes mencionadas, esta proposta dispõe também de um conjunto de
 
 \section{Hierarquia}
 Podemos ver abaixo na \textbf{Figura \ref{fig:hierarquia}} a hierarquia das classes do projeto e a maneira como todas elas estão ligadas entre si. Podemos também verificar na \textbf{Figura \ref{fig:exceptions}} uma representação gráfica das exceções previstas no código. 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 		\includegraphics[width=\textwidth]{hierarquia} 
 	\caption{Hierarquia  de classes na UMeR}
 	\label{fig:hierarquia}
 \end{figure} 
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 		\includegraphics[width=80mm]{exceptions} 
 	\caption{Exceções previstas no código}
 	\label{fig:exceptions}
 \end{figure} 
 
+%Inicio manual
 \section{Manual de utilização}
-Quando abrimos a aplicação deparamo-nos com o \textbf{ecrã \ref{fig:hierarquia}}
+Ao longo da execução do programa, o próprio programa vai indicando o Input que está à espera. Caso não seja um input valido o programa reconhece como inválido e pede novamente input. A qualquer ponto da utilização é possível voltar atrás e cancelar a operação do momento, excepto após uma viagem ter sido efetuada. Nesse caso é possível voltar atrás apenas depois de dar classificação ao motorista.
 
+    \subsection{Menus}
+        
+        \subsubsection{Menu Sem Utilizador}
 
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{notLoggedMenu} 
+                \caption{Menu principal antes do login}
+                \label{fig:notLoggedMenu}
+            \end{figure}
+
+            Este menu é apresentado o utilizador não tem \textit{log in} feito. A partir deste menu é possível: iniciar sessão (1. Log In); registar no serviço (2. Sign up ); fazer load a partir de um ficheiro (3. Load Session); ver estatísticas (4. View Statistics) tais como, 10 clientes que mais gastaram e 5 condutores com mais desvios de tempo previsto nas viagens; e guardar para ficheiro a sessão (5. Save Session); sair da aplicação (0. Exit).
+        
+        \subsubsection{Menu de Cliente}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{LoggedInMenu} 
+                \caption{Menu principal de um cliente}
+                \label{fig:LoggedInMenu}
+            \end{figure}
+
+            Este menu é apresentado quando um utilizador tem \textit{log in} feito como cliente. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); efetuar uma viagem (2. Request Trip); ver o perfil de utilizador (3. View Profile); ver estatísticas (4. View Statistics); guardar sessão para ficheiro (5. Save Session); sair da aplicação (0. Exit).
+
+        \subsubsection{Menu de Condutor}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{driverLogin} 
+                \caption{Menu principal de um condutor}
+                \label{fig:driverLogin}
+            \end{figure}
+
+Este menu é apresentado quando um utilizador tem \textit{log in} feito como condutor. A partir deste menu é possível: sair da sessão como utilizador (1. Log Out); ver o perfil de utilizador e informação sobre veiculo (2. View Profile); registar um novo veiculo, caso ainda não tenha um associado, (3. Register Vehicle); mudar localização atual (4. Set Location); alterar a disponibilidade (5. Switch Availability); ver estatísticas (6. View Statistics); guardar sessão para ficheiro (7. Save Session); sair da aplicação (0. Exit).
+              %  \subsubsubsection{Alterar Disponibilidade}
+A partir do  menu de condutor é possível mudar a disponibilidade do condutor. Quando não está disponível não será possível fazer viagens com este condutor e o seu veiculo.
+                    \begin{figure}[H]
+                        \centering
+                            \includegraphics[width=80mm]{setLocation} 
+                        \caption{Informação sobre a localização}
+                        \label{fig:setLocation}
+                    \end{figure}
+           %     \subsubsubsection{Alterar Localização}
+A partir do  menu de condutor é possível mudar a localização atual do condutor\/veiculo.
+                    \begin{figure}[H]
+                        \centering
+                            \includegraphics[width=80mm]{switchAvailability} 
+                        \caption{Mudança de disponibilidade}
+                        \label{fig:switchAvailability}
+                    \end{figure}
+        
+    \subsection{Iniciar Sessão de Utilizador}
+
+        No menu de \textit{log in} é pedido ao utilizador um email e password relativa à conta à qual está a tentar aceder. É apresentada uma opção para voltar atrás e cancelar a operação (0. Go Back).
+        Quando é introduzido o email, se o formato do email não for valido a aplicação indica o email como inválido e pede-o novamente.
+        Caso o \textit{log in} tenha ocorrido com sucesso é apresentado a seguinte mensagem:
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Successful} 
+            \caption{Login com sucesso}
+            \label{fig:Successful}
+        \end{figure} 
+
+        Caso contrário é pedido novamente a informação para \textit{log in}:
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{LogInUnsuccessful} 
+            \caption{Tentativa falhada de login}
+            \label{fig:LogInUnsuccessful}
+        \end{figure} 
+
+    \subsection{Registar Utilizador}
+
+        No menu de \textit{Sign up}, é pedido ao utilizador para indicar se deseja se registar no serviço como cliente ou como condutor. Independentemente da escolha, os dados a serem pedidos sobre o utilizador são os mesmos. A aplicação vai validando o \textit{input} a cada passo pedindo esse pedaço de informação novamente caso o \textit{input} anterior não seja valido. A qualquer altura no processe de registo é possível cancelar a operação e voltar ao menu anterior (0. Go Back).
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{SignUpUser} 
+            \caption{Processo de login de um utilizador na plataforma}
+            \label{fig:SignUpUser}
+        \end{figure} 
+
+        Uma vez que os dados introduzidos vão sendo validados ao longo do processo de registo é improvável que o o registo ocorra sem sucesso, no entanto, nesse caso, os dados serão pedidos novamente, voltando ao inicio.
+    
+    \subsection{Carregar Sessão}
+
+        Caso tenha sido escolhida a opção de carregar uma sessão a partir do ficheiro, o programa substituirá a informação da UMeR pelo que se encontra no ficheiro. É apenas apresentada uma mensagem a indicar se o \textit{load} foi efetuado com sucesso ou não.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{LoadSuccessful} 
+            \caption{Notificação de login com sucesso}
+            \label{fig:LoadSuccessful}
+        \end{figure} 
+        
+    \subsection{Guardar Sessão}
+        Caso tenha sido escolhida a opção de guardar um sessão para um ficheiro. O programa escreve a informação sobre a UMeR e escreve para um ficheiro em binário. É apenas apresentada uma mensagem a indicar se o \textit{save} foi efetuado com sucesso ou não.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Save} 
+            \caption{Possibilidade de guardar a sessão atual}
+            \label{fig:Save}
+        \end{figure}
+    
+    \subsection{Ver Estatísticas}
+
+        Neste menu é possível ver estatísticas sobre a UMeR. Nomeadamente: 10 clientes que mais gastam em viagens e 5 condutores com mais desvio entre tempo esperado de uma viagem e tempo que realmente levou.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{4Stats} 
+            \caption{Consulta de estatísticas de clientes e condutores}
+            \label{fig:4Stats}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{Stats} 
+            \caption{Visualização dos 10 clientes que mais gastam}
+            \label{fig:Stats}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{42Stats} 
+            \caption{Visualização dos perfis dos condutores e respetivos desvios}
+            \label{fig:42Stats}
+        \end{figure}
+
+    \subsection{Fechar sessão}
+
+        A opção \textit{log out} simplesmente sai do menu de utilizador, reinicializando as variáveis relativas ao \textit{log in} na UMeR e volta a o menu sem utilizador.
+
+    \subsection{Ver Perfil}
+
+        \subsubsection{Perfil de Cliente}
+            Quando um cliente escolhe a opção \textit{View Profile}, é apresentada varia informação sobre o seu perfil.
+            É aqui que é possível alterar a password e ver o histórico de viagens
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{viewProfile1} 
+                \caption{Perfil de um cliente}
+                \label{fig:viewProfile1}
+            \end{figure}
+
+        \subsubsection{Perfil de Condutor}
+            No perfil de Condutor é apresentada a mesma a informação sobre o utilizador que é apresentada no perfil de cliente. Para além disso é possível ver a informação relativa ao veiculo ao qual o condutor está associado. A opção (3. Vehicle Profile) permite ver informação mais detalhada sobre o veículo e alterar alguma informação sobre o veiculo.
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{driverProfile} 
+                \caption{Perfil pessoal de um condutor}
+                \label{fig:driverProfile}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{vehicleProfile} 
+                \caption{Perfil de um veículo}
+                \label{fig:vehicleProfile}
+            \end{figure}
+
+        \subsubsection{Ver Histórico de Viagens}
+            A partir do perfil é possível consultar ao histórico de viagens. É pedida uma data inicial e uma data final que constitui o espaço de tempo sobre o qual queremos ver as viagens efetuadas.
+
+            \begin{figure}[H]
+                \centering
+                    \includegraphics[width=80mm]{viewProfileTripHistory} 
+                \caption{Visualização das viagens feitas entre determinadas datas}
+                \label{fig:viewProfileTripHistory}
+            \end{figure}
+
+    \subsection{Efetuar Viagem}
+        A partir do menu de cliente é possível efetuar uma viagem. Inicialmente serão pedidas as coordenadas atuais do utilizador e as coordenadas do seu destino.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip1} 
+            \caption{Processo de pedido de uma viagem na aplicação - Localização e destino}
+            \label{fig:requestTrip1}
+        \end{figure}
+        
+        De seguida, o utilizador pode escolher entre simplesmente requisitar o veiculo mais proximo de si ou requisitar um veiculo à sua escolha. 
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip2} 
+            \caption{Processo de pedido de uma viagem na aplicação - Escolha do veículo}
+            \label{fig:requestTrip2}
+        \end{figure}
+
+        Caso o utilizador pretenda requisitar o veiculo mais proximo ser-lhe-à dada a escolha do tipo de veiculo.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip3} 
+            \caption{Processo de pedido de uma viagem na aplicação - Tipo de veículos disponíveis}
+            \label{fig:requestTrip3}
+        \end{figure}
+
+        Caso o utilizador pretenda escolher um veiculo em específico, será apresentada uma lista de condutores e veículos por ordem decrescente de distância, finalmente deve escrever o email do condutor que quer requisitar.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTripSpecific1} 
+            \caption{Possibilidade de escolha de condutor específico}
+            \label{fig:requestTripSpecific1}
+        \end{figure}
+
+        Após a escolha de veiculo será apresentado finalmente o pedido, com informação sobre condutor, veiculo, tempo e custo esperado para a viagem. Nesta altura o cliente pode escolher efetuar a viagem, ou cancelar o pedido, voltando ao menu principal.
+        
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip4} 
+            \caption{Processo de pedido de uma viagem na aplicação - Dados da viagem e confirmação final}
+            \label{fig:requestTrip4}
+        \end{figure}
+        
+        Caso tenha escolhido seguir com a viagem, a viagem é efetuada e o cliente é notificado sobre os dados da viagem. Se a viagem demorou perto do tempo esperado o cliente é simplesmente notificado do tempo real da viagem e do preço que terá de pagar. Caso a viagem tenha demorado mais que 125\% do tempo esperado, será dada a possibilidade de negociar um preço a pagar.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip5} 
+            \caption{Final de uma viagem}
+            \label{fig:requestTrip5}
+        \end{figure}
+
+        Após efetuado o pagamento é pedido ao cliente dar uma classificação ao condutor, de 0 a 100.
+
+        \begin{figure}[H]
+            \centering
+                \includegraphics[width=80mm]{requestTrip6} 
+            \caption{Classificação do condutor}
+            \label{fig:requestTrip6}
+        \end{figure}
+
+        Finalmente, o cliente volta ao menu principal.
+
+    \subsection{Sair da aplicação}
+A opção (0. Exit), disponível nos menus principais, simplesmente termina a sessão. É importante ter em conta que esta opção termina o programa sem guardar qualquer informação que não tenha sido guardada anteriormente com a opção \textit{Save Session}.
+%fim manual
 
 \section{Conclusões}
-Após a conclusão deste trabalho verificamos que do que ficou implementado, segundo os parâmetros apresentados, tudo aparenta estar a funcionar, recebendo apenas números quando deve receber números, rejeitando letras, rejeitando linhas em branco, efetuando transições adequadas entre menus, tal como solicitado pelo utilizador e executando as funcionalidades devidas de acordo com o pedido. Salvo algum caso não testado, no geral aparenta estar tudo operacional e consideravelmente robusto. No entanto, não conseguimos otimizar o código, nomeadamente em questões como métodos de pesquisa na classe UMeR, que poderiam estar mais concisos/eficientes e, possivelmente, até de mais fácil compreensão; os veículos poderiam ser mais diferenciados, sendo que neste momento são muito parecidos exceto apenas o numero de lugares e velocidade média atribuída pelo construtor mais usado.
+Após a conclusão deste trabalho verificamos que do que ficou implementado, segundo os parâmetros que apresentamos anteriormente, tudo aparenta estar a funcionar, recebendo apenas números quando deve receber números, rejeitando letras, rejeitando linhas em branco, efetuando transições adequadas entre menus, tal como solicitado pelo utilizador e executando as funcionalidades devidas de acordo com os pedido recebidos. Salvo algum caso não testado, no geral, a aplicação aparenta estar operacional e consideravelmente robusta. No entanto, não conseguimos otimizar o código, nomeadamente em questões como métodos de pesquisa na classe UMeR, que poderiam estar mais concisos/eficientes e, possivelmente, até de mais fácil compreensão; os veículos poderiam ser mais diferenciados, sendo que neste momento são muito parecidos exceto apenas o numero de lugares e velocidade média atribuída pelo construtor mais usado.
 
-
-Seria dada mais liberdade aos utilizadores para alterarem os seus dados, bem como facilitar obter informação sobre veículos, mais especificamente, implementaríamos uma lista de favoritos para que o cliente pudesse guardar os seus motoristas preferidos; 
-
+Mais do que as melhorias indicadas, ficaram por implementar algumas funcionalidades avançadas. Questões como veículos com fila de espera poderiam ser implementadas criando novas classes, por exemplo CarWithQueue.java, para os mesmos que em tudo se assemelhariam ás classes existentes, sendo inclusive extensões das classes abstratas, no entanto, incluindo uma \textit{List}, possivelmente \textit{ArrayList} com um limite de 10, para garantir que existe uma fluidez no serviço e não existem tempos exagerados de espera. Juntamente á variável seriam necessários os métodos de verificação se um dado veículo é do tipo que suporta fila de espera, adição de clientes á fila de espera e remoção, caso fosse dada a possibilidade de desistir da reserva. Outra funcionalidade não implementada foi as Empresas de Taxis. Para estas, poderíamos implementar uma classe EmpresasTaxi.java, que teria apenas o nome da empresa, o seu NIF, lista dos seus veículos e lista de motoristas. Estas empresas iriam permitir que os motoristas trocassem de veículo, efetuando a troca da associação dos \textit{key} e \textit{values} do \textit{Map}, onde se encontram associados os veículos e os motoristas. Cada empresa constaria numa nova estrutura de dados da UMeR, para manter o registo das mesmas. 
+Externamente ás funcionalidades solicitadas pretenderíamos dar mais liberdade aos utilizadores para alterarem os seus dados, bem como facilitar obter informação sobre veículos, mais especificamente, implementaríamos uma lista de favoritos para que o cliente pudesse guardar os seus motoristas preferidos.
 
 \end{document}

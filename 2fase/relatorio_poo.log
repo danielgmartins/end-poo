@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  3 JUN 2017 22:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.6)  4 JUN 2017 00:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -332,22 +332,30 @@ Package amsmath Warning: Unable to redefine math accent \vec.
 \mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
-) (./relatorio_poo.aux)
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count136
+\float@exts=\toks27
+\float@box=\box57
+\@float@everytoks=\toks28
+\@floatcapt=\box58
+)
+(./relatorio_poo.aux)
 \openout1 = `relatorio_poo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 21.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -388,107 +396,337 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count136
+\scratchcounter=\count137
 \scratchdimen=\dimen145
-\scratchbox=\box57
-\nofMPsegments=\count137
-\nofMParguments=\count138
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count139
+\scratchbox=\box59
+\nofMPsegments=\count138
+\nofMParguments=\count139
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count140
 \MPscratchDim=\dimen146
-\MPnumerator=\count140
-\makeMPintoPDFobject=\count141
-\everyMPtoPDFconversion=\toks28
+\MPnumerator=\count141
+\makeMPintoPDFobject=\count142
+\everyMPtoPDFconversion=\toks30
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 36.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 38.
  <./images/daniel.jpg, id=1, 293.095pt x 293.095pt>
 File: ./images/daniel.jpg Graphic file (type jpg)
  <use ./images/daniel.jpg>
-Package pdftex.def Info: ./images/daniel.jpg used on input line 39.
+Package pdftex.def Info: ./images/daniel.jpg used on input line 41.
 (pdftex.def)             Requested size: 137.50824pt x 137.50421pt.
 
 <./images/elisio.jpg, id=2, 1352.05125pt x 1352.05125pt>
 File: ./images/elisio.jpg Graphic file (type jpg)
 
 <use ./images/elisio.jpg>
-Package pdftex.def Info: ./images/elisio.jpg used on input line 43.
+Package pdftex.def Info: ./images/elisio.jpg used on input line 45.
 (pdftex.def)             Requested size: 137.50824pt x 137.50304pt.
  <./images/nuno.jpg, id=3, 344.28625pt x 344.28625pt>
 File: ./images/nuno.jpg Graphic file (type jpg)
 
 <use ./images/nuno.jpg>
-Package pdftex.def Info: ./images/nuno.jpg used on input line 47.
+Package pdftex.def Info: ./images/nuno.jpg used on input line 49.
 (pdftex.def)             Requested size: 128.63477pt x 128.63422pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 62.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 64.
  [1
 
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/daniel.jpg> <./images/elisio.jpg> <./images/nuno.jpg>] <./images/mapUMeR.png,
- id=14, 469.755pt x 229.85875pt>
-File: ./images/mapUMeR.png Graphic file (type png)
+s/daniel.jpg> <./images/elisio.jpg> <./images/nuno.jpg>] <./images/runningApp/m
+apUMeR.png, id=14, 469.755pt x 229.85875pt>
+File: ./images/runningApp/mapUMeR.png Graphic file (type png)
 
-<use ./images/mapUMeR.png>
-Package pdftex.def Info: ./images/mapUMeR.png used on input line 66.
+<use ./images/runningApp/mapUMeR.png>
+Package pdftex.def Info: ./images/runningApp/mapUMeR.png used on input line 68.
+
 (pdftex.def)             Requested size: 227.62204pt x 111.37964pt.
 
-<./images/listUser.png, id=16, 617.30624pt x 213.79875pt>
-File: ./images/listUser.png Graphic file (type png)
+<./images/runningApp/listUser.png, id=16, 617.30624pt x 213.79875pt>
+File: ./images/runningApp/listUser.png Graphic file (type png)
 
-<use ./images/listUser.png>
-Package pdftex.def Info: ./images/listUser.png used on input line 78.
+<use ./images/runningApp/listUser.png>
+Package pdftex.def Info: ./images/runningApp/listUser.png used on input line 80
+.
 (pdftex.def)             Requested size: 227.62204pt x 78.83351pt.
 
-<./images/typeAbstraction.png, id=17, 715.67375pt x 252.945pt>
-File: ./images/typeAbstraction.png Graphic file (type png)
+<./images/runningApp/typeAbstraction.png, id=17, 715.67375pt x 252.945pt>
+File: ./images/runningApp/typeAbstraction.png Graphic file (type png)
 
-<use ./images/typeAbstraction.png>
-Package pdftex.def Info: ./images/typeAbstraction.png used on input line 87.
+<use ./images/runningApp/typeAbstraction.png>
+Package pdftex.def Info: ./images/runningApp/typeAbstraction.png used on input 
+line 89.
 (pdftex.def)             Requested size: 227.62204pt x 80.44615pt.
- [2 <./images/mapUMeR.png> <./images/listUser.png>] [3 <./images/typeAbstractio
-n.png>] [4]
-<./images/hierarquia.png, id=30, 960.58875pt x 671.50874pt>
+ [2 <./images/runningApp/mapUMeR.png> <./images/runningApp/listUser.png>] [3 <.
+/images/runningApp/typeAbstraction.png>] [4] <./images/hierarquia.png, id=30, 9
+60.58875pt x 671.50874pt>
 File: ./images/hierarquia.png Graphic file (type png)
 
 <use ./images/hierarquia.png>
-Package pdftex.def Info: ./images/hierarquia.png used on input line 147.
+Package pdftex.def Info: ./images/hierarquia.png used on input line 149.
 (pdftex.def)             Requested size: 443.57848pt x 310.08635pt.
 
+Underfull \vbox (badness 1389) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./images/exceptions.png, id=31, 487.8225pt x 466.74374pt>
+ [5]
+<./images/exceptions.png, id=34, 487.8225pt x 466.74374pt>
 File: ./images/exceptions.png Graphic file (type png)
 
 <use ./images/exceptions.png>
-Package pdftex.def Info: ./images/exceptions.png used on input line 154.
+Package pdftex.def Info: ./images/exceptions.png used on input line 156.
 (pdftex.def)             Requested size: 227.62204pt x 217.78851pt.
- [5] [6 <./images/hierarquia.png> <./images/exceptions.png>] (./relatorio_poo.a
-ux) ) 
+ [6 <./images/hierarquia.png> <./images/exceptions.png>]
+<./images/runningApp/notLoggedMenu.png, id=40, 498.86375pt x 322.20375pt>
+File: ./images/runningApp/notLoggedMenu.png Graphic file (type png)
+
+<use ./images/runningApp/notLoggedMenu.png>
+Package pdftex.def Info: ./images/runningApp/notLoggedMenu.png used on input li
+ne 171.
+(pdftex.def)             Requested size: 227.62204pt x 147.01591pt.
+
+<./images/runningApp/LoggedInMenu.png, id=41, 500.87125pt x 322.20375pt>
+File: ./images/runningApp/LoggedInMenu.png Graphic file (type png)
+
+<use ./images/runningApp/LoggedInMenu.png>
+Package pdftex.def Info: ./images/runningApp/LoggedInMenu.png used on input lin
+e 182.
+(pdftex.def)             Requested size: 227.62204pt x 146.42593pt.
+ [7 <./images/runningApp/notLoggedMenu.png> <./images/runningApp/LoggedInMenu.p
+ng>]
+<./images/runningApp/driverLogin.png, id=48, 499.8675pt x 281.05pt>
+File: ./images/runningApp/driverLogin.png Graphic file (type png)
+
+<use ./images/runningApp/driverLogin.png>
+Package pdftex.def Info: ./images/runningApp/driverLogin.png used on input line
+ 193.
+(pdftex.def)             Requested size: 227.62204pt x 127.98087pt.
+
+<./images/runningApp/setLocation.png, id=49, 582.175pt x 347.2975pt>
+File: ./images/runningApp/setLocation.png Graphic file (type png)
+
+<use ./images/runningApp/setLocation.png>
+Package pdftex.def Info: ./images/runningApp/setLocation.png used on input line
+ 203.
+(pdftex.def)             Requested size: 227.62204pt x 135.78462pt.
+
+<./images/runningApp/switchAvailability.png, id=50, 582.175pt x 348.30125pt>
+File: ./images/runningApp/switchAvailability.png Graphic file (type png)
+
+<use ./images/runningApp/switchAvailability.png>
+Package pdftex.def Info: ./images/runningApp/switchAvailability.png used on inp
+ut line 211.
+(pdftex.def)             Requested size: 227.62204pt x 136.17708pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8 <./images/runningApp/driverLogin.png> <./images/runningApp/setLocation.png>
+]
+<./images/runningApp/Successful.png, id=56, 499.8675pt x 321.2pt>
+File: ./images/runningApp/Successful.png Graphic file (type png)
+
+<use ./images/runningApp/Successful.png>
+Package pdftex.def Info: ./images/runningApp/Successful.png used on input line 
+224.
+(pdftex.def)             Requested size: 227.62204pt x 146.26385pt.
+
+<./images/runningApp/LogInUnsuccessful.png, id=57, 495.8525pt x 321.2pt>
+File: ./images/runningApp/LogInUnsuccessful.png Graphic file (type png)
+
+<use ./images/runningApp/LogInUnsuccessful.png>
+Package pdftex.def Info: ./images/runningApp/LogInUnsuccessful.png used on inpu
+t line 233.
+(pdftex.def)             Requested size: 227.62204pt x 147.44502pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9 <./images/runningApp/switchAvailability.png> <./images/runningApp/Successfu
+l.png>]
+<./images/runningApp/SignUpUser.png, id=63, 498.86375pt x 321.2pt>
+File: ./images/runningApp/SignUpUser.png Graphic file (type png)
+
+<use ./images/runningApp/SignUpUser.png>
+Package pdftex.def Info: ./images/runningApp/SignUpUser.png used on input line 
+244.
+(pdftex.def)             Requested size: 227.62204pt x 146.55792pt.
+
+<./images/runningApp/LoadSuccessful.png, id=64, 497.86pt x 318.18875pt>
+File: ./images/runningApp/LoadSuccessful.png Graphic file (type png)
+
+<use ./images/runningApp/LoadSuccessful.png>
+Package pdftex.def Info: ./images/runningApp/LoadSuccessful.png used on input l
+ine 257.
+(pdftex.def)             Requested size: 227.62204pt x 145.48009pt.
+ [10 <./images/runningApp/LogInUnsuccessful.png> <./images/runningApp/SignUpUse
+r.png>]
+<./images/runningApp/Save.png, id=70, 497.86pt x 320.19624pt>
+File: ./images/runningApp/Save.png Graphic file (type png)
+
+<use ./images/runningApp/Save.png>
+Package pdftex.def Info: ./images/runningApp/Save.png used on input line 266.
+(pdftex.def)             Requested size: 227.62204pt x 146.39795pt.
+
+<./images/runningApp/4Stats.png, id=71, 498.86375pt x 320.19624pt>
+File: ./images/runningApp/4Stats.png Graphic file (type png)
+
+<use ./images/runningApp/4Stats.png>
+Package pdftex.def Info: ./images/runningApp/4Stats.png used on input line 277.
+
+(pdftex.def)             Requested size: 227.62204pt x 146.09991pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11 <./images/runningApp/LoadSuccessful.png> <./images/runningApp/Save.png>]
+<./images/runningApp/Stats.png, id=77, 499.8675pt x 323.2075pt>
+File: ./images/runningApp/Stats.png Graphic file (type png)
+
+<use ./images/runningApp/Stats.png>
+Package pdftex.def Info: ./images/runningApp/Stats.png used on input line 284.
+(pdftex.def)             Requested size: 227.62204pt x 147.178pt.
+
+<./images/runningApp/42Stats.png, id=78, 498.86375pt x 318.18875pt>
+File: ./images/runningApp/42Stats.png Graphic file (type png)
+
+<use ./images/runningApp/42Stats.png>
+Package pdftex.def Info: ./images/runningApp/42Stats.png used on input line 291
+.
+(pdftex.def)             Requested size: 227.62204pt x 145.18393pt.
+
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+ [12 <./images/runningApp/4Stats.png> <./images/runningApp/Stats.png> <./images
+/runningApp/42Stats.png>]
+<./images/runningApp/viewProfile1.png, id=85, 498.86375pt x 290.08376pt>
+File: ./images/runningApp/viewProfile1.png Graphic file (type png)
+
+<use ./images/runningApp/viewProfile1.png>
+Package pdftex.def Info: ./images/runningApp/viewProfile1.png used on input lin
+e 308.
+(pdftex.def)             Requested size: 227.62204pt x 132.36012pt.
+
+<./images/runningApp/driverProfile.png, id=86, 495.8525pt x 279.0425pt>
+File: ./images/runningApp/driverProfile.png Graphic file (type png)
+
+<use ./images/runningApp/driverProfile.png>
+Package pdftex.def Info: ./images/runningApp/driverProfile.png used on input li
+ne 318.
+(pdftex.def)             Requested size: 227.62204pt x 128.09285pt.
+
+<./images/runningApp/vehicleProfile.png, id=87, 583.17876pt x 349.305pt>
+File: ./images/runningApp/vehicleProfile.png Graphic file (type png)
+
+<use ./images/runningApp/vehicleProfile.png>
+Package pdftex.def Info: ./images/runningApp/vehicleProfile.png used on input l
+ine 325.
+(pdftex.def)             Requested size: 227.62204pt x 136.33499pt.
+
+Underfull \vbox (badness 7168) has occurred while \output is active []
+
+ [13 <./images/runningApp/viewProfile1.png> <./images/runningApp/driverProfile.
+png>]
+<./images/runningApp/viewProfileTripHistory.png, id=94, 499.8675pt x 457.71pt>
+File: ./images/runningApp/viewProfileTripHistory.png Graphic file (type png)
+
+<use ./images/runningApp/viewProfileTripHistory.png>
+Package pdftex.def Info: ./images/runningApp/viewProfileTripHistory.png used on
+ input line 335.
+(pdftex.def)             Requested size: 227.62204pt x 208.426pt.
+
+<./images/runningApp/requestTrip1.png, id=95, 500.87125pt x 323.2075pt>
+File: ./images/runningApp/requestTrip1.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip1.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip1.png used on input lin
+e 345.
+(pdftex.def)             Requested size: 227.62204pt x 146.8821pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14 <./images/runningApp/vehicleProfile.png> <./images/runningApp/viewProfileT
+ripHistory.png>]
+<./images/runningApp/requestTrip2.png, id=101, 500.87125pt x 322.20375pt>
+File: ./images/runningApp/requestTrip2.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip2.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip2.png used on input lin
+e 354.
+(pdftex.def)             Requested size: 227.62204pt x 146.42593pt.
+
+<./images/runningApp/requestTrip3.png, id=102, 496.85625pt x 322.20375pt>
+File: ./images/runningApp/requestTrip3.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip3.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip3.png used on input lin
+e 363.
+(pdftex.def)             Requested size: 227.62204pt x 147.6108pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15 <./images/runningApp/requestTrip1.png> <./images/runningApp/requestTrip2.p
+ng>]
+<./images/runningApp/requestTripSpecific1.png, id=108, 498.86375pt x 560.0925pt
+>
+File: ./images/runningApp/requestTripSpecific1.png Graphic file (type png)
+ <use ./images/runningApp/requestTripSpecific1.png>
+Package pdftex.def Info: ./images/runningApp/requestTripSpecific1.png used on i
+nput line 372.
+(pdftex.def)             Requested size: 227.62204pt x 255.56036pt.
+
+<./images/runningApp/requestTrip4.png, id=109, 497.86pt x 319.1925pt>
+File: ./images/runningApp/requestTrip4.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip4.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip4.png used on input lin
+e 381.
+(pdftex.def)             Requested size: 227.62204pt x 145.93903pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16 <./images/runningApp/requestTrip3.png> <./images/runningApp/requestTripSpe
+cific1.png>] <./images/runningApp/requestTrip5.png, id=115, 497.86pt x 321.2pt>
+File: ./images/runningApp/requestTrip5.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip5.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip5.png used on input lin
+e 390.
+(pdftex.def)             Requested size: 227.62204pt x 146.85689pt.
+
+<./images/runningApp/requestTrip6.png, id=116, 497.86pt x 323.2075pt>
+File: ./images/runningApp/requestTrip6.png Graphic file (type png)
+
+<use ./images/runningApp/requestTrip6.png>
+Package pdftex.def Info: ./images/runningApp/requestTrip6.png used on input lin
+e 399.
+(pdftex.def)             Requested size: 227.62204pt x 147.77473pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17 <./images/runningApp/requestTrip4.png> <./images/runningApp/requestTrip5.p
+ng>]
+[18 <./images/runningApp/requestTrip6.png>] (./relatorio_poo.aux) ) 
 Here is how much of TeX's memory you used:
- 4053 strings out of 493014
- 54564 string characters out of 6133352
- 138545 words of memory out of 5000000
- 7517 multiletter control sequences out of 15000+600000
+ 4257 strings out of 493014
+ 60246 string characters out of 6133352
+ 140169 words of memory out of 5000000
+ 7692 multiletter control sequences out of 15000+600000
  29924 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,7n,32p,1194b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio_poo.pdf (6 pages, 914515 bytes).
+ 42i,7n,32p,1311b,289s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/
+texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on relatorio_poo.pdf (18 pages, 1677325 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 
